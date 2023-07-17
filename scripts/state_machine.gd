@@ -21,8 +21,12 @@ func transition_to(target_state_name: String) -> void:
 #	saftey check
 	if not has_node(target_state_name):
 		return
+	if state == get_node(target_state_name):
+		return
 		
 	state.exit()
 	state = get_node(target_state_name)
 	state.enter()
 	emit_signal("transitioned", state.name)
+	
+	print(target_state_name)

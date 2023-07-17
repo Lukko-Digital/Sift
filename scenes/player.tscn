@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1oyqm"]
-[ext_resource type="Texture2D" uid="uid://d0juyhg8rq2ls" path="res://icon.svg" id="1_culm6"]
+[ext_resource type="Texture2D" uid="uid://bwyb8bhvk7xbt" path="res://icon.svg" id="1_culm6"]
 [ext_resource type="Script" path="res://scripts/player_state_machine.gd" id="3_0munm"]
 [ext_resource type="Script" path="res://scripts/idle.gd" id="4_xmrp6"]
 [ext_resource type="Script" path="res://scripts/run.gd" id="5_r25f1"]
@@ -33,3 +33,6 @@ script = ExtResource("5_r25f1")
 script = ExtResource("6_tw2ug")
 
 [node name="DashTimer" type="Timer" parent="StateMachine/Dash"]
+one_shot = true
+
+[connection signal="timeout" from="StateMachine/Dash/DashTimer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]

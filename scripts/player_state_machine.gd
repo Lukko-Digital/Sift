@@ -3,7 +3,7 @@ extends StateMachine
 @onready var dash_timer: Timer = $Dash/DashTimer
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("dash") and not dash_timer.is_stopped():
+	if Input.is_action_just_pressed("dash") or not dash_timer.is_stopped():
 		transition_to("Dash")
 	elif (
 		Input.is_action_pressed("up") or
