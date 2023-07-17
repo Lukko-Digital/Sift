@@ -1,7 +1,7 @@
 class_name State
 extends Node
 	
-@onready var character: CharacterBody2D = get_parent().get_parent()
+@export var character: CharacterBody2D
 	
 func enter():
 	pass

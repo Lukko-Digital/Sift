@@ -1,3 +1,4 @@
+class_name Run
 extends State
 
 #TODO: bug that we are still it run state if both A and D or W and S are pressed so we arent moving

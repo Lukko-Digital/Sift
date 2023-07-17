@@ -1,3 +1,4 @@
+class_name Dash
 extends State
 
 @onready var dash_timer: Timer = $DashTimer
