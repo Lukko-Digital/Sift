@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/run.gd" id="5_r25f1"]
 [ext_resource type="Script" path="res://scripts/dash.gd" id="6_tw2ug"]
 [ext_resource type="Script" path="res://scripts/HealthComponent.gd" id="7_s6p8h"]
-[ext_resource type="Script" path="res://scenes/HurtboxComponent.gd" id="8_c0h5d"]
+[ext_resource type="Script" path="res://scripts/HurtboxComponent.gd" id="8_uc2am"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfujg"]
 size = Vector2(122, 122)
@@ -44,7 +44,7 @@ one_shot = true
 script = ExtResource("7_s6p8h")
 
 [node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
-script = ExtResource("8_c0h5d")
+script = ExtResource("8_uc2am")
 health_component = NodePath("../HealthComponent")
 
 [connection signal="timeout" from="StateMachine/Dash/DashTimer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
