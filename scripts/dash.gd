@@ -14,8 +14,6 @@ func exit():
 
 func handle_physics(delta):
 	character.move_and_slide()
-	print(dash_timer.get_time_left())
 
 func _on_dash_timer_timeout():
-	print(1)
 	dash_timer.stop()
