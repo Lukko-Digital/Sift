@@ -1,10 +1,10 @@
 [gd_resource type="NoiseTexture2D" load_steps=2 format=3 uid="uid://cb686xgf4waln"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8n3l3"]
+frequency = 0.007
 fractal_type = 2
 fractal_octaves = 3
-fractal_gain = 0.7
-fractal_weighted_strength = 0.5
+fractal_gain = 1.0
 
 [resource]
 seamless = true

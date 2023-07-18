@@ -26,11 +26,12 @@ format = 2
 layer_0/tile_data = PackedInt32Array(2, 458752, 7, 65538, 393216, 6, 3, 458752, 8, 65539, 327680, 7)
 
 [node name="ColorRect" type="ColorRect" parent="Water_Tile"]
+z_index = 6
 material = SubResource("ShaderMaterial_443td")
 offset_left = -767.0
 offset_top = -676.0
 offset_right = 964.0
-offset_bottom = 715.0
+offset_bottom = 894.0
 
 [node name="Bg_Tile" type="TileMap" parent="."]
 visible = false

@@ -1,9 +1,9 @@
 [gd_scene load_steps=31 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
-[ext_resource type="Texture2D" uid="uid://ybx11vpq2jcf" path="res://assets/png/player-Sheet.png" id="2_624xq"]
+[ext_resource type="Texture2D" uid="uid://bfgm3k6v2eog7" path="res://assets/png/player-Sheet.png" id="2_624xq"]
 [ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
-[ext_resource type="Material" path="res://scripts/shaders/water_reflection_material.tres" id="3_u1am7"]
+[ext_resource type="Material" uid="uid://514kp5vypyi0" path="res://scripts/shaders/water_reflection_material.tres" id="3_u1am7"]
 [ext_resource type="Script" path="res://scripts/player/states/idle.gd" id="4_u1pwq"]
 [ext_resource type="Script" path="res://scripts/player/states/run.gd" id="5_cpovh"]
 [ext_resource type="Script" path="res://scripts/player/states/dash.gd" id="6_b1dw8"]
