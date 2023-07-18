@@ -12,6 +12,6 @@ shader_parameter/light_start = 0.0
 shader_parameter/light_end = 0.0
 shader_parameter/top_color = Color(0, 0, 0, 0)
 shader_parameter/view_to_local = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-shader_parameter/transparency = Color(0.341176, 1, 1, 0.4)
+shader_parameter/transparency = Color(0.654902, 1, 1, 0.694118)
 shader_parameter/noise1 = ExtResource("2_hpl2i")
 shader_parameter/noise2 = ExtResource("2_hpl2i")
