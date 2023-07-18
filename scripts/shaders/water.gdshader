@@ -10,6 +10,8 @@ uniform mat4 view_to_local;
 
 varying vec2 local;
 
+uniform vec4 transparency: source_color;
+
 void vertex()
 {
     local = (view_to_local * MODEL_MATRIX * vec4(VERTEX, 0.0, 1.0)).xy;
@@ -24,5 +26,5 @@ void fragment()
 	
 	vec4 screen_color = texture(TEXTURE, distortion_uv);
 	
-	COLOR = screen_color;
+	COLOR = screen_color * transparency;
 }

@@ -12,6 +12,7 @@ noise = SubResource("FastNoiseLite_qftfn")
 [resource]
 shader = ExtResource("1_agdo8")
 shader_parameter/scroll = Vector2(0.07, 0)
-shader_parameter/distortion_strength = 0.0076
+shader_parameter/distortion_strength = 0.008
 shader_parameter/view_to_local = Projection(4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1)
+shader_parameter/transparency = Color(1, 1, 1, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_13xlq")
