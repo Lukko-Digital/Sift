@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://514kp5vypyi0"]
+
+[ext_resource type="Shader" path="res://scripts/shaders/water.gdshader" id="1_oqx83"]
+[ext_resource type="Texture2D" uid="uid://cx6iaww7cirnc" path="res://scripts/shaders/water_noise_texture_2d.tres" id="2_hpl2i"]
+
+[resource]
+shader = ExtResource("1_oqx83")
+shader_parameter/scroll1 = Vector2(0.02, 0)
+shader_parameter/scroll2 = Vector2(-0.05, 0.02)
+shader_parameter/distortion_strength = 0.0003
+shader_parameter/light_start = 0.0
+shader_parameter/light_end = 0.0
+shader_parameter/top_color = Color(0, 0, 0, 0)
+shader_parameter/view_to_local = Projection(4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1)
+shader_parameter/transparency = Color(0.341176, 1, 1, 0.4)
+shader_parameter/noise1 = ExtResource("2_hpl2i")
+shader_parameter/noise2 = ExtResource("2_hpl2i")
