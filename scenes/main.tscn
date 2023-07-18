@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8md8ehlk518q"]
+[gd_scene load_steps=11 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
 [ext_resource type="Texture2D" uid="uid://bwyb8bhvk7xbt" path="res://icon.svg" id="2_c03wn"]
-[ext_resource type="Material" uid="uid://cskcaxcflismo" path="res://scripts/shaders/water_shader_material.tres" id="3_dj2jj"]
 [ext_resource type="Texture2D" uid="uid://5c1t1nh02458" path="res://assets/png/tilemap.png" id="3_dlybt"]
 [ext_resource type="PackedScene" uid="uid://bg1eq3h13qdyu" path="res://scenes/water.tscn" id="3_qumnr"]
 [ext_resource type="Shader" path="res://scripts/shaders/pixelate.gdshader" id="4_3x6ol"]
@@ -110,9 +109,8 @@ layer_0/tile_data = PackedInt32Array(-1310744, 131072, 1, -1245208, 131072, 1, -
 
 [node name="water" parent="." instance=ExtResource("3_qumnr")]
 z_index = -20
-material = ExtResource("3_dj2jj")
 tile_set = SubResource("TileSet_vdpqf")
-layer_0/tile_data = PackedInt32Array(-65533, 720896, 5, 3, 720896, 4, -65532, 1114112, 3, 4, 1114112, 4, -65531, 1179648, 3, 5, 1179648, 4, -65530, 1245184, 3, 6, 1245184, 4, -65529, 1310720, 3, 7, 1310720, 4, -65528, 655360, 5, 8, 655360, 4, 65543, 1310720, 5, 131079, 1310720, 6, 65544, 655360, 5, 131080, 655360, 4, 65541, 1179648, 5, 131077, 1179648, 6, 65542, 1245184, 5, 131078, 1245184, 6, 65539, 720896, 5, 131075, 720896, 4, 65540, 1114112, 5, 131076, 1114112, 6, 131074, 655360, 4, 196610, 655360, 5, 196611, 720896, 5, 2, 655360, 4, 65538, 655360, 5, -131070, 655360, 4, -65534, 655360, 5, -131069, 720896, 4, -131068, 655360, 4, -131067, 720896, 4, -131066, 655360, 4, -131065, 720896, 4, -131064, 655360, 4, -131063, 720896, 4, -65527, 720896, 5, 9, 720896, 4, 65545, 720896, 5, 196616, 655360, 5, 131081, 720896, 4, 196617, 720896, 5, 196614, 655360, 5, 196615, 720896, 5, 196612, 655360, 5, 196613, 720896, 5)
+layer_0/tile_data = PackedInt32Array(-131068, 1048576, 2, -65532, 1048576, 3, 4, 1048576, 4, 65540, 1048576, 5, 131076, 1048576, 6, 196612, 1048576, 7, -131067, 1114112, 2, -65531, 1114112, 3, 5, 1114112, 4, 65541, 1114112, 5, 131077, 1114112, 6, 196613, 1114112, 7, -131066, 1179648, 2, -65530, 1179648, 3, 6, 1179648, 4, 65542, 1179648, 5, 131078, 1179648, 6, 196614, 1179648, 7, -131065, 1245184, 2, -65529, 1245184, 3, 7, 1245184, 4, 65543, 1245184, 5, 131079, 1245184, 6, 196615, 1245184, 7, -131064, 1310720, 2, -65528, 1310720, 3, 8, 1310720, 4, 65544, 1310720, 5, 131080, 1310720, 6, 196616, 1310720, 7, -131063, 1376256, 2, -65527, 1376256, 3, 9, 1376256, 4, 65545, 1376256, 5, 131081, 1376256, 6, 196617, 1376256, 7, -131069, 1048576, 2, -65533, 1048576, 3, 3, 1048576, 4, 65539, 1048576, 5, 131075, 1048576, 6, 196611, 1048576, 7, -131070, 1048576, 2, -65534, 1048576, 3, 2, 1048576, 4, 65538, 1048576, 5, 131074, 1048576, 6, 196610, 1048576, 7)
 
 [node name="Sprite2D2" type="Sprite2D" parent="water"]
 z_index = 6
@@ -121,6 +119,7 @@ position = Vector2(96, 17)
 texture = ExtResource("2_c03wn")
 
 [node name="player" parent="." instance=ExtResource("1_6t2e7")]
+position = Vector2(-182, 5)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 zoom = Vector2(4.165, 4.165)
