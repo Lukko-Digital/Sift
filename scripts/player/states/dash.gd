@@ -3,18 +3,15 @@ extends State
 
 @onready var dash_timer: Timer = $DashTimer
 
-const DASH_TIME: float = 0.1
-const DASH_DIST: float = 200
+@onready var dash_mode: ModeState = get_node(character.mode)
 
 func enter():
-	dash_timer.start(DASH_TIME)
-	character.velocity = character.velocity.normalized() * DASH_DIST / DASH_TIME
-	
-func exit():
-	character.velocity = Vector2.ZERO
+	dash_mode = get_node(character.mode + "Dash")
+	dash_mode.enter()
+	dash_timer.start(dash_mode.time)
 
 func handle_physics(delta):
-	character.move_and_slide()
+	dash_mode.handle_physics(delta)
 
 func _on_dash_timer_timeout():
 	dash_timer.stop()

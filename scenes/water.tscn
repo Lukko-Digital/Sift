@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bg1eq3h13qdyu"]
+[gd_scene load_steps=2 format=3 uid="uid://5k3ssdql1lhr"]
 
-[ext_resource type="Material" uid="uid://cskcaxcflismo" path="res://scripts/shaders/water_shader_material.tres" id="1_4mugh"]
+[ext_resource type="Material" uid="uid://cuo8oe7uaeecu" path="res://scripts/shaders/water_shader_material.tres" id="1_4mugh"]
 
 [node name="water" type="TileMap"]
 material = ExtResource("1_4mugh")
