@@ -3,7 +3,7 @@ extends State
 
 #TODO: bug that we are still it run state if both A and D or W and S are pressed so we arent moving
 
-const RUN_SPEED = 150.0
+const RUN_SPEED = 130.0
 const RUN_ACCEL = 1000.0
 
 func enter():
