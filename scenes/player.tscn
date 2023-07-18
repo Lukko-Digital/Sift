@@ -1,13 +1,13 @@
 [gd_scene load_steps=126 format=3 uid="uid://btje8wwp2nhiu"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_1oyqm"]
-[ext_resource type="Texture2D" uid="uid://bfgm3k6v2eog7" path="res://assets/png/player-Sheet.png" id="2_624xq"]
-[ext_resource type="Script" path="res://scripts/player_state_machine.gd" id="3_0munm"]
-[ext_resource type="Script" path="res://scripts/idle.gd" id="4_xmrp6"]
-[ext_resource type="Script" path="res://scripts/run.gd" id="5_r25f1"]
-[ext_resource type="Script" path="res://scripts/dash.gd" id="6_tw2ug"]
-[ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/health_component.tscn" id="7_imtti"]
-[ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/hurtbox_component.tscn" id="8_ad61v"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
+[ext_resource type="Texture2D" uid="uid://cxtfdeh8wnlgh" path="res://assets/png/player-Sheet.png" id="2_624xq"]
+[ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
+[ext_resource type="Script" path="res://scripts/player/states/idle.gd" id="4_u1pwq"]
+[ext_resource type="Script" path="res://scripts/player/states/run.gd" id="5_cpovh"]
+[ext_resource type="Script" path="res://scripts/player/states/dash.gd" id="6_b1dw8"]
+[ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="7_imtti"]
+[ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="8_ad61v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0rvei"]
 atlas = ExtResource("2_624xq")
@@ -1015,7 +1015,7 @@ radius = 2.0
 height = 10.0
 
 [node name="player" type="CharacterBody2D"]
-script = ExtResource("1_1oyqm")
+script = ExtResource("1_81117")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2sehi")
@@ -1040,21 +1040,21 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jc72j")
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource("3_0munm")
+script = ExtResource("3_keldo")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "animation_tree")]
-script = ExtResource("4_xmrp6")
+script = ExtResource("4_u1pwq")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 
 [node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "animation_tree")]
-script = ExtResource("5_r25f1")
+script = ExtResource("5_cpovh")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 
 [node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "animation_tree")]
-script = ExtResource("6_tw2ug")
+script = ExtResource("6_b1dw8")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 
@@ -1063,7 +1063,6 @@ one_shot = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_imtti")]
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_ad61v")]
-health_component = NodePath("../HealthComponent")
+[node name="HurtboxComponent" parent="." instance=ExtResource("8_ad61v")]
 
 [connection signal="timeout" from="StateMachine/Dash/DashTimer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
