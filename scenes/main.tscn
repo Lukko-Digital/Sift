@@ -66,6 +66,8 @@ layer_0/tile_data = PackedInt32Array(-1310744, 131072, 1, -1245208, 131072, 1, -
 
 [node name="water" parent="." instance=ExtResource("3_qumnr")]
 material = SubResource("ShaderMaterial_lb5i6")
+position = Vector2(14, 16)
+scale = Vector2(2.78125, 0.835938)
 texture = ExtResource("2_c03wn")
 
 [node name="player" parent="." instance=ExtResource("1_6t2e7")]

@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform sampler2D screen_texture: hint_screen_texture, filter_linear_mipmap;
 
-uniform int pixelSize: hint_range(1, 16, 1) = 6;
+uniform int pixelSize: hint_range(1, 16, 1) = 4;
  
 void fragment()
 {

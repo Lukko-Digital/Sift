@@ -5,7 +5,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rqhd2"]
 shader = ExtResource("1_g6dpq")
-shader_parameter/pixelSize = 8
+shader_parameter/pixelSize = 4
 
 [node name="water" type="Sprite2D"]
 
