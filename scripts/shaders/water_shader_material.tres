@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cskcaxcflismo"]
+
+[ext_resource type="Shader" path="res://scripts/shaders/water.gdshader" id="1_agdo8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qftfn"]
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_13xlq"]
+seamless = true
+noise = SubResource("FastNoiseLite_qftfn")
+
+[resource]
+shader = ExtResource("1_agdo8")
+shader_parameter/scroll = Vector2(0.07, 0)
+shader_parameter/distortion_strength = 0.0076
+shader_parameter/view_to_local = Projection(4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1)
+shader_parameter/noise = SubResource("NoiseTexture2D_13xlq")
