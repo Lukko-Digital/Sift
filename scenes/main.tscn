@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8md8ehlk518q"]
+[gd_scene load_steps=15 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
 [ext_resource type="Texture2D" uid="uid://bwyb8bhvk7xbt" path="res://icon.svg" id="2_c03wn"]
 [ext_resource type="Texture2D" uid="uid://5c1t1nh02458" path="res://assets/png/tilemap.png" id="3_dlybt"]
 [ext_resource type="PackedScene" uid="uid://bg1eq3h13qdyu" path="res://scenes/water.tscn" id="3_qumnr"]
+[ext_resource type="Shader" path="res://scripts/shaders/pixelate.gdshader" id="4_3x6ol"]
 [ext_resource type="Shader" path="res://scripts/shaders/water.gdshader" id="4_iyusw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vgbxw"]
@@ -37,23 +38,82 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_vgbxw")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qftfn"]
-noise_type = 0
+noise_type = 5
 frequency = 0.1
 fractal_type = 2
 fractal_weighted_strength = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_13xlq"]
-width = 64
-height = 64
 seamless = true
 noise = SubResource("FastNoiseLite_qftfn")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lb5i6"]
 shader = ExtResource("4_iyusw")
-shader_parameter/scroll = Vector2(0.05, 0.05)
-shader_parameter/distortion_strength = 0.02
-shader_parameter/tone_color = Color(0.6, 0.901961, 1, 1)
+shader_parameter/scroll = Vector2(0.02, 0)
+shader_parameter/distortion_strength = 0.0043
 shader_parameter/noise = SubResource("NoiseTexture2D_13xlq")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3kv7c"]
+texture = ExtResource("3_dlybt")
+9:3/0 = 0
+9:4/0 = 0
+9:5/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+12:5/0 = 0
+12:4/0 = 0
+12:3/0 = 0
+11:3/0 = 0
+10:3/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+18:2/0 = 0
+19:2/0 = 0
+20:2/0 = 0
+21:2/0 = 0
+21:3/0 = 0
+21:4/0 = 0
+21:5/0 = 0
+21:6/0 = 0
+21:7/0 = 0
+20:7/0 = 0
+19:7/0 = 0
+18:7/0 = 0
+17:7/0 = 0
+16:7/0 = 0
+16:6/0 = 0
+16:5/0 = 0
+16:4/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+17:4/0 = 0
+17:5/0 = 0
+17:6/0 = 0
+18:4/0 = 0
+18:3/0 = 0
+19:4/0 = 0
+18:5/0 = 0
+18:6/0 = 0
+19:5/0 = 0
+19:6/0 = 0
+20:4/0 = 0
+20:3/0 = 0
+20:5/0 = 0
+20:6/0 = 0
+19:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_vdpqf"]
+sources/0 = SubResource("TileSetAtlasSource_3kv7c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yibg5"]
+shader = ExtResource("4_3x6ol")
+shader_parameter/pixelSize = 4
 
 [node name="main" type="Node2D"]
 
@@ -66,8 +126,13 @@ layer_0/tile_data = PackedInt32Array(-1310744, 131072, 1, -1245208, 131072, 1, -
 
 [node name="water" parent="." instance=ExtResource("3_qumnr")]
 material = SubResource("ShaderMaterial_lb5i6")
-position = Vector2(14, 16)
-scale = Vector2(2.78125, 0.835938)
+tile_set = SubResource("TileSet_vdpqf")
+layer_0/tile_data = PackedInt32Array(-65533, 1048576, 3, 3, 1048576, 4, 65539, 1048576, 5, 131075, 1048576, 6, -65532, 1114112, 3, 4, 1114112, 4, 65540, 1114112, 5, 131076, 1114112, 6, -65531, 1179648, 3, 5, 1179648, 4, 65541, 1179648, 5, 131077, 1179648, 6, -65530, 1245184, 3, 6, 1245184, 4, 65542, 1245184, 5, 131078, 1245184, 6, -131069, 1048576, 2, 196611, 1048576, 7, -131068, 1114112, 2, 196612, 1114112, 7, -131067, 1179648, 2, 196613, 1179648, 7, -131066, 1245184, 2, 196614, 1245184, 7, -131065, 1310720, 2, -65529, 1310720, 3, 7, 1310720, 4, 65543, 1310720, 5, 131079, 1310720, 6, 196615, 1310720, 7, -131064, 1376256, 2, -65528, 1376256, 3, 8, 1376256, 4, 65544, 1376256, 5, 131080, 1376256, 6, 196616, 1376256, 7, -196606, 589824, 3, -196605, 655360, 3, -196604, 720896, 3, -131070, 589824, 4, -65534, 589824, 5, 2, 589824, 4, 65538, 589824, 5, 131074, 589824, 4, 196610, 589824, 5, 262146, 589824, 6, 262147, 655360, 6, 262148, 720896, 6, 262149, 655360, 6, 262150, 720896, 6, 262151, 655360, 6, 262152, 720896, 6, 262153, 786432, 6, 131081, 786432, 4, 196617, 786432, 5, 9, 786432, 4, 65545, 786432, 5, -131063, 786432, 4, -65527, 786432, 5, -196599, 786432, 3, -196601, 655360, 3, -196600, 720896, 3, -196603, 655360, 3, -196602, 720896, 3)
+
+[node name="Sprite2D2" type="Sprite2D" parent="water"]
+material = SubResource("ShaderMaterial_yibg5")
+position = Vector2(94.5, 15.5)
+scale = Vector2(1.00781, 0.992188)
 texture = ExtResource("2_c03wn")
 
 [node name="player" parent="." instance=ExtResource("1_6t2e7")]
