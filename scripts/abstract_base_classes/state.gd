@@ -2,7 +2,8 @@ class_name State
 extends Node
 	
 @export var character: CharacterBody2D
-	
+@export var animation_tree: AnimationTree
+
 func enter():
 	pass
 	
