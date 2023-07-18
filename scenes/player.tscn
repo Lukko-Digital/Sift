@@ -323,7 +323,7 @@ libraries = {
 [node name="Reflection" type="Sprite2D" parent="."]
 z_index = -15
 material = ExtResource("3_u1am7")
-position = Vector2(0, 32)
+position = Vector2(0, 31)
 texture = ExtResource("2_624xq")
 flip_v = true
 hframes = 163
