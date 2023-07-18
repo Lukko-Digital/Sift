@@ -1,9 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://btje8wwp2nhiu"]
+[gd_scene load_steps=31 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
 [ext_resource type="Texture2D" uid="uid://bfgm3k6v2eog7" path="res://assets/png/player-Sheet.png" id="2_624xq"]
-[ext_resource type="Shader" path="res://scripts/shaders/water.gdshader" id="3_2707y"]
 [ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
+[ext_resource type="Material" uid="uid://514kp5vypyi0" path="res://scripts/shaders/water_reflection_material.tres" id="3_u1am7"]
 [ext_resource type="Script" path="res://scripts/player/states/idle.gd" id="4_u1pwq"]
 [ext_resource type="Script" path="res://scripts/player/states/run.gd" id="5_cpovh"]
 [ext_resource type="Script" path="res://scripts/player/states/dash.gd" id="6_b1dw8"]
@@ -254,20 +254,6 @@ _data = {
 "walk_up": SubResource("Animation_3wnlr")
 }
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_rbmge"]
-fractal_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_112ru"]
-noise = SubResource("FastNoiseLite_rbmge")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ne857"]
-shader = ExtResource("3_2707y")
-shader_parameter/scroll = Vector2(0.06, 0)
-shader_parameter/distortion_strength = 0.0001
-shader_parameter/view_to_local = Projection(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1)
-shader_parameter/transparency = Color(0.341176, 1, 1, 0.454902)
-shader_parameter/noise = SubResource("NoiseTexture2D_112ru")
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kndy2"]
 animation = &"idle_left"
 
@@ -336,7 +322,7 @@ libraries = {
 
 [node name="Reflection" type="Sprite2D" parent="."]
 z_index = -15
-material = SubResource("ShaderMaterial_ne857")
+material = ExtResource("3_u1am7")
 position = Vector2(0, 32)
 texture = ExtResource("2_624xq")
 flip_v = true
