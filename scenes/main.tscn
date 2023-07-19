@@ -74,5 +74,3 @@ zoom = Vector2(4.525, 4.525)
 position = Vector2(-52, 1)
 
 [node name="dialogue_ui" parent="." instance=ExtResource("6_gxuwn")]
-
-[connection signal="alert_dialogue" from="player" to="dialogue_ui" method="_on_player_alert_dialogue"]
