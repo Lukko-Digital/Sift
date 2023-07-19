@@ -20,9 +20,9 @@ func enter():
 	else:
 		animation_tree["parameters/SandDash/blend_position"] = Vector2(0, character.velocity.y / abs(character.velocity.y) + 0.1)
 		if character.velocity.y > 0:
-			dig_direction = 2
-		else:
 			dig_direction = 1
+		else:
+			dig_direction = 2
  
 func handle_physics(delta):
 	if parent_state.dash_timer.time_left < time - START_LAG:
