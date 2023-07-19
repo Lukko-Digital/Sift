@@ -12,3 +12,6 @@ func _process(delta):
 
 func _on_player_alert_dialogue():
 	pass
+
+func _on_player_idle_dialogue():
+	pass
