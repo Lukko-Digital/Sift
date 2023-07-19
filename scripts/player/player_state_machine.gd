@@ -8,7 +8,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
 		print('a')
 		if not in_dialogue:
-			for area in get_parent().get_node("NPCDialogueCollider").get_overlapping_area():
+			for area in get_parent().get_node("NPCDialogueCollider").get_overlapping_areas():
 				if area.is_in_group("npc"):
 					Events.emit_signal("enter_dialogue", area)
 					print(area.name)
