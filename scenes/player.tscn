@@ -1,7 +1,7 @@
 [gd_scene load_steps=44 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
-[ext_resource type="Texture2D" uid="uid://ybx11vpq2jcf" path="res://assets/png/player-Sheet.png" id="2_624xq"]
+[ext_resource type="Texture2D" uid="uid://c57e6it22arfd" path="res://assets/png/player-Sheet-2.png" id="2_mi7hx"]
 [ext_resource type="PackedScene" path="res://scenes/componenets/reflection_component.tscn" id="3_gdfiv"]
 [ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
 [ext_resource type="Script" path="res://scripts/player/states/idle.gd" id="4_u1pwq"]
@@ -317,7 +317,8 @@ radius = 2.0
 script = ExtResource("1_81117")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_624xq")
+position = Vector2(0.54, 5.77)
+texture = ExtResource("2_mi7hx")
 hframes = 163
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
@@ -376,8 +377,8 @@ position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_2cqq2")
 
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
-position = Vector2(0, 31)
-texture = ExtResource("2_624xq")
+position = Vector2(0.52, 25.045)
+texture = ExtResource("2_mi7hx")
 hframes = 163
 sprite_to_reflect = NodePath("../Sprite2D")
 
