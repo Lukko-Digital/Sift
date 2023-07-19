@@ -2,9 +2,6 @@ extends CharacterBody2D
 
 @onready var mode: String = "Sand"
 
-signal alert_dialogue
-signal idle_dialogue
-
 func _on_mode_checker_body_entered(body):
 	mode = "Sand" 
 
