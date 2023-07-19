@@ -21,7 +21,13 @@ func _physics_process(delta: float) -> void:
 		Input.is_action_pressed("left") or
 		Input.is_action_pressed("right")
 	):
-		transition_to("Run")
+		var direction = Vector2(
+			Input.get_axis("left", "right"), Input.get_axis("up", "down")
+		)
+		if direction.length() > 0.1:
+			transition_to("Run")
+		else:
+			transition_to("Idle")
 	else:
 		transition_to("Idle")
 		
