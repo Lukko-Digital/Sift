@@ -14,13 +14,13 @@ func _process(delta):
 	pass
 
 func _on_alert_dialogue():
-	print('alert')
+	pass
 
 func _on_idle_dialogue():
-	print('idle')
+	pass
 
 func _on_enter_dialogue(npc_node):
-	print('enter')
+	pass
 
 func _on_advance_dialogue():
-	print('advance')
+	pass
