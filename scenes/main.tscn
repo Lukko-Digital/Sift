@@ -69,6 +69,7 @@ position = Vector2(92, 3)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 zoom = Vector2(4.525, 4.525)
+process_callback = 0
 position_smoothing_enabled = true
 
 [node name="npc" parent="." instance=ExtResource("5_ao8yv")]
