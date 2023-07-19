@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://dbphmdyb62ibx"]
+[gd_scene load_steps=2 format=3 uid="uid://dbphmdyb62ibx"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_ui.gd" id="1_crsnp"]
 
 [node name="dialogue_ui" type="CanvasLayer"]
+script = ExtResource("1_crsnp")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchors_preset = 15

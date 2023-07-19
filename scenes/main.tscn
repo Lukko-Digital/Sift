@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8md8ehlk518q"]
+[gd_scene load_steps=8 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
 [ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
 [ext_resource type="Material" uid="uid://cuo8oe7uaeecu" path="res://scripts/shaders/water_shader_material.tres" id="2_w6ycg"]
 [ext_resource type="Shader" path="res://scripts/shaders/pixelate.gdshader" id="4_3x6ol"]
+[ext_resource type="PackedScene" uid="uid://ci6g6b1e53iui" path="res://scenes/npc.tscn" id="5_ao8yv"]
+[ext_resource type="PackedScene" uid="uid://dbphmdyb62ibx" path="res://scenes/dialogue_ui.tscn" id="6_gxuwn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_443td"]
 shader = ExtResource("4_3x6ol")
@@ -67,3 +69,11 @@ position = Vector2(92, 3)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 zoom = Vector2(4.525, 4.525)
+
+[node name="npc" parent="." instance=ExtResource("5_ao8yv")]
+position = Vector2(-52, 1)
+
+[node name="dialogue_ui" parent="." instance=ExtResource("6_gxuwn")]
+
+[connection signal="alert_dialogue" from="player" to="dialogue_ui" method="_on_player_alert_dialogue"]
+[connection signal="idle_dialogue" from="player" to="dialogue_ui" method="_on_player_idle_dialogue"]
