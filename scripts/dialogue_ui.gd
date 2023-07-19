@@ -11,4 +11,4 @@ func _process(delta):
 	pass
 
 func _on_player_alert_dialogue():
-	print('c')
+	pass

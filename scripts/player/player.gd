@@ -13,10 +13,8 @@ func _on_mode_checker_body_exited(body):
 
 
 func _on_npc_dialogue_collider_area_entered(area):
-	print(area.name)
 	if area.is_in_group("npc"):
 		emit_signal("alert_dialogue")
-		print('b')
 
 
 func _on_npc_dialogue_collider_area_exited(area):
