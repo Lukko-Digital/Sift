@@ -7,10 +7,11 @@ const RUN_ACCEL = 1000
 
 func _on_mode_checker_body_entered(body):
 	mode = "Sand" 
+	print(mode)
 
 func _on_mode_checker_body_exited(body):
 	mode = "Water" 
-
+	print(mode)
 
 func _on_npc_dialogue_collider_area_entered(area):
 	if area.is_in_group("npc"):

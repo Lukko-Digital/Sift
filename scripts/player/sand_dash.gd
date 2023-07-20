@@ -1,6 +1,6 @@
 extends ModeState
 
-@onready var dash_speed: float = character.RUN_SPEED * 1.5
+@onready var dash_speed: float = character.RUN_SPEED * 1.2
 @onready var dash_end_speed: float = character.RUN_SPEED
 
 const DASH_SIDE_ACCEL = 120
@@ -26,7 +26,7 @@ func enter():
 			dig_direction = 1
 		else:
 			dig_direction = 2
- 
+
 func handle_physics(delta):
 	var direction = Vector2(
 		Input.get_axis("left", "right"), Input.get_axis("up", "down")
@@ -42,10 +42,9 @@ func handle_physics(delta):
 			animation_tree["parameters/SandDash/" + str(dig_direction) + "/playback"].travel("end")
 		
 		character.velocity =  character.velocity.move_toward(direction * character.RUN_SPEED, DASH_SIDE_ACCEL*delta)
-		
+	
 	if parent_state.dash_timer.time_left <= END_LAG:
 		character.velocity = character.velocity.normalized() * dash_end_speed
 		character.velocity = character.velocity.move_toward(direction * dash_end_speed, character.RUN_ACCEL*delta)
 	
 	character.move_and_slide()
-
