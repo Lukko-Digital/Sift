@@ -4,6 +4,10 @@ extends StateMachine
 
 var in_dialogue = false
 
+func _ready():
+	state.enter()
+	Events.idle_dialogue.connect(_on_idle_dialogue)
+
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
 		if not in_dialogue:
@@ -32,3 +36,6 @@ func _physics_process(delta: float) -> void:
 		transition_to("Idle")
 		
 	state.handle_physics(delta)
+
+func _on_idle_dialogue():
+	in_dialogue = false

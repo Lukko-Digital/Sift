@@ -1,0 +1,90 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccs3flkclj740"]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_ui_state_machine.gd" id="1_k7p84"]
+[ext_resource type="Script" path="res://scripts/ui/states/Idle.gd" id="2_cpfha"]
+[ext_resource type="Script" path="res://scripts/ui/states/Alert.gd" id="3_ni75i"]
+[ext_resource type="Script" path="res://scripts/ui/states/Dialogue.gd" id="4_utkvm"]
+
+[node name="dialogue_ui" type="CanvasLayer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(1200, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+
+[node name="InteractPrompt" type="Control" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer2/InteractPrompt"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.5
+offset_top = -13.0
+offset_right = 75.5
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "press [E] to interact"
+
+[node name="DialogueBox" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Dialogue" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+autowrap_mode = 2
+clip_text = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("1_k7p84")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("interact_prompt", "dialogue_box")]
+script = ExtResource("2_cpfha")
+interact_prompt = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/InteractPrompt")
+dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox")
+
+[node name="Alert" type="Node" parent="StateMachine" node_paths=PackedStringArray("interact_prompt")]
+script = ExtResource("3_ni75i")
+interact_prompt = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/InteractPrompt")
+
+[node name="Dialogue" type="Node" parent="StateMachine" node_paths=PackedStringArray("dialogue_box")]
+script = ExtResource("4_utkvm")
+dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox")
