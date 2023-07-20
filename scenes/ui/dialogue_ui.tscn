@@ -43,6 +43,7 @@ size_flags_horizontal = 3
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("1_ubxc4")
+initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("2_er1h2")
