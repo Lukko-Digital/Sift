@@ -30,4 +30,5 @@ func _on_advance_dialogue():
 		current_dialogue_display = current_dialogue_tree[next_dialogue_id]
 		dialogue_label.text = current_dialogue_display["text"]
 	else:
-		Events.emit_signal("idle_dialogue")
+		Events.emit_signal("dialogue_complete", current_npc)
+		Events.emit_signal("alert_dialogue")
