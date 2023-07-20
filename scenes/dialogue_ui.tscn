@@ -1,9 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbphmdyb62ibx"]
+[gd_scene load_steps=2 format=3 uid="uid://ccs3flkclj740"]
 
-[ext_resource type="Script" path="res://scripts/ui/dialogue_ui.gd" id="1_htlhl"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_ui_state_machine.gd" id="1_ubxc4"]
 
 [node name="dialogue_ui" type="CanvasLayer"]
-script = ExtResource("1_htlhl")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchors_preset = 15
@@ -38,3 +37,12 @@ size_flags_vertical = 3
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("1_ubxc4")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+
+[node name="Alert" type="Node" parent="StateMachine"]
+
+[node name="Dialogue" type="Node" parent="StateMachine"]
