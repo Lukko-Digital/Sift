@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://ccs3flkclj740"]
 
-[ext_resource type="Script" path="res://scripts/ui/dialogue_ui_state_machine.gd" id="1_ubxc4"]
-[ext_resource type="Script" path="res://scripts/ui/states/Idle.gd" id="2_er1h2"]
-[ext_resource type="Script" path="res://scripts/ui/states/Alert.gd" id="3_0l5f1"]
-[ext_resource type="Script" path="res://scripts/ui/states/Dialogue.gd" id="4_355qv"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_ui_state_machine.gd" id="1_k7p84"]
+[ext_resource type="Script" path="res://scripts/ui/states/Idle.gd" id="2_cpfha"]
+[ext_resource type="Script" path="res://scripts/ui/states/Alert.gd" id="3_ni75i"]
+[ext_resource type="Script" path="res://scripts/ui/states/Dialogue.gd" id="4_utkvm"]
 
 [node name="dialogue_ui" type="CanvasLayer"]
 
@@ -73,18 +73,18 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource("1_ubxc4")
+script = ExtResource("1_k7p84")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("interact_prompt", "dialogue_box")]
-script = ExtResource("2_er1h2")
+script = ExtResource("2_cpfha")
 interact_prompt = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/InteractPrompt")
 dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox")
 
 [node name="Alert" type="Node" parent="StateMachine" node_paths=PackedStringArray("interact_prompt")]
-script = ExtResource("3_0l5f1")
+script = ExtResource("3_ni75i")
 interact_prompt = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/InteractPrompt")
 
 [node name="Dialogue" type="Node" parent="StateMachine" node_paths=PackedStringArray("dialogue_box")]
-script = ExtResource("4_355qv")
+script = ExtResource("4_utkvm")
 dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox")
