@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var mode: String = "Sand"
+var mode: String = "Sand"
 
 const RUN_SPEED = 80
 const RUN_ACCEL = 1000

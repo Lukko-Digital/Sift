@@ -3,10 +3,14 @@ extends State
 
 @onready var dash_timer: Timer = $DashTimer
 
-@onready var dash_mode: ModeState = get_node(character.mode)
+@onready var dash_mode: ModeState = get_node(character.mode + "Dash")
 
 func enter():
 	dash_mode = get_node(character.mode + "Dash")
+	
+	if character.velocity.length() < 0.1:
+		character.velocity = animation_tree["parameters/Idle/blend_position"]
+	
 	dash_mode.enter()
 	dash_timer.start(dash_mode.time)
 

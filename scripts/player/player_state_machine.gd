@@ -5,7 +5,7 @@ extends StateMachine
 var in_dialogue = false
 
 func _ready():
-	state.enter()
+	transition_to("Idle")
 	Events.idle_dialogue.connect(_on_idle_dialogue)
 
 func _physics_process(delta: float) -> void:
