@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccs3flkclj740"]
+[gd_scene load_steps=5 format=3 uid="uid://ccs3flkclj740"]
 
 [ext_resource type="Script" path="res://scripts/ui/dialogue_ui_state_machine.gd" id="1_ubxc4"]
+[ext_resource type="Script" path="res://scripts/ui/states/Idle.gd" id="2_er1h2"]
+[ext_resource type="Script" path="res://scripts/ui/states/Alert.gd" id="3_0l5f1"]
+[ext_resource type="Script" path="res://scripts/ui/states/Dialogue.gd" id="4_355qv"]
 
 [node name="dialogue_ui" type="CanvasLayer"]
 
@@ -42,7 +45,10 @@ size_flags_horizontal = 3
 script = ExtResource("1_ubxc4")
 
 [node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("2_er1h2")
 
 [node name="Alert" type="Node" parent="StateMachine"]
+script = ExtResource("3_0l5f1")
 
 [node name="Dialogue" type="Node" parent="StateMachine"]
+script = ExtResource("4_355qv")
