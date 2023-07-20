@@ -45,3 +45,8 @@ func handle_physics(delta):
 #		character.velocity =  character.velocity.move_toward(direction * character.RUN_SPEED, DASH_SIDE_ACCEL*delta)
 
 	character.move_and_slide()
+
+func _on_player_mode_switch(_mode):
+	if _mode == "Sand":
+		character.velocity = character.velocity.normalized() * character.RUN_SPEED / 2
+		parent_state.dash_timer.stop()

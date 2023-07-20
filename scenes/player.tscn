@@ -626,7 +626,7 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ModeChecker"]
-position = Vector2(0, 14)
+position = Vector2(0, 11)
 shape = SubResource("CircleShape2D_8c008")
 
 [node name="NPCDialogueCollider" type="Area2D" parent="."]
@@ -636,6 +636,8 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPCDialogueCollider"]
 shape = SubResource("CircleShape2D_0hunl")
 
+[connection signal="mode_switch" from="." to="StateMachine/Dash/SandDash" method="_on_player_mode_switch"]
+[connection signal="mode_switch" from="." to="StateMachine/Dash/WaterDash" method="_on_player_mode_switch"]
 [connection signal="timeout" from="StateMachine/Dash/DashTimer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
 [connection signal="body_entered" from="ModeChecker" to="." method="_on_mode_checker_body_entered"]
 [connection signal="body_exited" from="ModeChecker" to="." method="_on_mode_checker_body_exited"]
