@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b6wdlj0183mmi"]
 
-[ext_resource type="Material" uid="uid://514kp5vypyi0" path="res://scripts/shaders/water_reflection_material.tres" id="1_xkdme"]
+[ext_resource type="Material" uid="uid://vjfgcrg416av" path="res://scripts/shaders/water_reflection_material.tres" id="1_xkdme"]
 [ext_resource type="Script" path="res://scripts/components/ReflectionComponent.gd" id="3_p0bhq"]
 
 [node name="ReflectionComponent" type="Sprite2D"]

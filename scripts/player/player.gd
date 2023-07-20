@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 @onready var mode: String = "Sand"
 
+const RUN_SPEED = 80
+const RUN_ACCEL = 1000
+
 func _on_mode_checker_body_entered(body):
 	mode = "Sand" 
 

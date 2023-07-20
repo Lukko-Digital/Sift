@@ -1,8 +1,8 @@
 [gd_scene load_steps=77 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
-[ext_resource type="Texture2D" uid="uid://c57e6it22arfd" path="res://assets/png/player-Sheet-2.png" id="2_mi7hx"]
-[ext_resource type="PackedScene" path="res://scenes/componenets/reflection_component.tscn" id="3_gdfiv"]
+[ext_resource type="Texture2D" uid="uid://ckcl3lrfyy55h" path="res://assets/png/player-Sheet-2.png" id="2_mi7hx"]
+[ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_gdfiv"]
 [ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
 [ext_resource type="Script" path="res://scripts/player/states/idle.gd" id="4_u1pwq"]
 [ext_resource type="Script" path="res://scripts/player/states/run.gd" id="5_cpovh"]
@@ -596,8 +596,10 @@ animation_tree = NodePath("../../AnimationTree")
 [node name="DashTimer" type="Timer" parent="StateMachine/Dash"]
 one_shot = true
 
-[node name="SandDash" type="Node" parent="StateMachine/Dash"]
+[node name="SandDash" type="Node" parent="StateMachine/Dash" node_paths=PackedStringArray("character", "animation_tree")]
 script = ExtResource("7_pko6c")
+character = NodePath("../../..")
+animation_tree = NodePath("../../../AnimationTree")
 
 [node name="WaterDash" type="Node" parent="StateMachine/Dash"]
 script = ExtResource("8_1rdr2")

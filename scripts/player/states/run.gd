@@ -3,9 +3,6 @@ extends State
 
 #TODO: bug that we are still it run state if both A and D or W and S are pressed so we arent moving
 
-const RUN_SPEED = 90.0
-const RUN_ACCEL = 1000.0
-
 func enter():
 	animation_tree["parameters/playback"].travel("Walk")
 
@@ -19,5 +16,5 @@ func handle_physics(delta: float):
 	else:
 		animation_tree["parameters/Walk/blend_position"] = Vector2(0, direction.y / abs(direction.y))
 	
-	character.velocity = character.velocity.move_toward(direction*RUN_SPEED, RUN_ACCEL*delta)
+	character.velocity = character.velocity.move_toward(direction*character.RUN_SPEED, character.RUN_ACCEL*delta)
 	character.move_and_slide()
