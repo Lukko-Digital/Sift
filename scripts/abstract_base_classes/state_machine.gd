@@ -7,7 +7,6 @@ signal transitioned(state_name)
 
 @onready var state: State = get_node(initial_state)
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	state.enter()
 	

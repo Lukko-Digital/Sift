@@ -1,13 +1,19 @@
 extends CharacterBody2D
 
-@onready var mode: String = "Sand"
+var mode: String = "Sand"
+
+const RUN_SPEED = 80
+const RUN_ACCEL = 1000
+
+signal mode_switch(_mode: String)
 
 func _on_mode_checker_body_entered(body):
 	mode = "Sand" 
+	emit_signal("mode_switch", mode)
 
 func _on_mode_checker_body_exited(body):
 	mode = "Water" 
-
+	emit_signal("mode_switch", mode)
 
 func _on_npc_dialogue_collider_area_entered(area):
 	if area.is_in_group("npc"):
