@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://cuo8oe7uaeecu" path="res://scripts/shaders/water_shader_material.tres" id="2_w6ycg"]
 [ext_resource type="Shader" path="res://scripts/shaders/pixelate.gdshader" id="4_3x6ol"]
 [ext_resource type="PackedScene" uid="uid://ci6g6b1e53iui" path="res://scenes/npc.tscn" id="5_ao8yv"]
-[ext_resource type="PackedScene" uid="uid://dbphmdyb62ibx" path="res://scenes/dialogue_ui.tscn" id="6_gxuwn"]
+[ext_resource type="PackedScene" uid="uid://ccs3flkclj740" path="res://scenes/ui/dialogue_ui.tscn" id="6_lu7ra"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_443td"]
 shader = ExtResource("4_3x6ol")
@@ -75,4 +75,4 @@ position_smoothing_enabled = true
 [node name="npc" parent="." instance=ExtResource("5_ao8yv")]
 position = Vector2(-52, 1)
 
-[node name="dialogue_ui" parent="." instance=ExtResource("6_gxuwn")]
+[node name="dialogue_ui" parent="." instance=ExtResource("6_lu7ra")]
