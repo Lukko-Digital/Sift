@@ -6,6 +6,8 @@ extends Area2D
 var interaction_count: Dictionary
 
 func _ready():
+	Events.interaction_complete.connect(_on_interaction_complete)
+	
 	var dialogue_path = "res://assets/dialogue/%s" % DIALOGUE_FILE
 	assert(FileAccess.file_exists(dialogue_path), "Dialog file at %s does not exist" % dialogue_path)
 	for branch in JSON.parse_string(
@@ -14,3 +16,6 @@ func _ready():
 		).get_as_text()
 	)["branches"]:
 		interaction_count[branch] = 0
+
+func _on_interaction_complete(npc_node, branch):
+	pass

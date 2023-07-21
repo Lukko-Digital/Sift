@@ -28,6 +28,9 @@ func _on_enter_dialogue(npc_node):
 	current_npc = npc_node
 
 func _on_advance_dialogue():
+	if "branch_end" in current_dialogue_display:
+		Events.emit_signal("interaction_complete", current_npc, current_dialogue_display["branch_end"])
+	
 	var next_dialogue_id = current_dialogue_display["next"]
 	if next_dialogue_id != "EXIT":
 		current_dialogue_display = current_dialogue_tree[next_dialogue_id]
