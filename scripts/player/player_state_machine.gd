@@ -10,6 +10,9 @@ func _ready():
 	Events.dialogue_complete.connect(_on_exit_dialogue)
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("escape") and in_dialogue:
+		Events.emit_signal("idle_dialogue")
+		
 	if Input.is_action_just_pressed("interact"):
 		if not in_dialogue:
 			for area in get_parent().get_node("NPCDialogueCollider").get_overlapping_areas():
