@@ -18,13 +18,22 @@ func _physics_process(delta: float) -> void:
 					in_dialogue = true
 		else:
 			Events.emit_signal("advance_dialogue")
-	elif Input.is_action_just_pressed("dash") or not dash_timer.is_stopped():
+	elif (
+		(
+			Input.is_action_just_pressed("dash") or
+			not dash_timer.is_stopped()
+		) and
+		not in_dialogue
+	):
 		transition_to("Dash")
 	elif (
-		Input.is_action_pressed("up") or
-		Input.is_action_pressed("down") or
-		Input.is_action_pressed("left") or
-		Input.is_action_pressed("right")
+		(
+			Input.is_action_pressed("up") or
+			Input.is_action_pressed("down") or
+			Input.is_action_pressed("left") or
+			Input.is_action_pressed("right")
+		) and
+		not in_dialogue
 	):
 		var direction = Vector2(
 			Input.get_axis("left", "right"), Input.get_axis("up", "down")
