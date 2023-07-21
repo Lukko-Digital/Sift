@@ -15,7 +15,7 @@ func enter():
 	dialogue_box.show()
 	var dialogue_path = "res://assets/dialogue/%s" % current_npc.DIALOGUE_FILE
 	current_dialogue_tree = JSON.parse_string(FileAccess.open(dialogue_path, FileAccess.READ).get_as_text())
-	current_dialogue_display = current_dialogue_tree["O0.0"]
+	current_dialogue_display = current_dialogue_tree["O.0.0"]
 	dialogue_label.text = current_dialogue_display["text"]
 
 func exit():
