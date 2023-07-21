@@ -16,13 +16,7 @@ func enter():
 	var dialogue_path = "res://assets/dialogue/%s" % current_npc.DIALOGUE_FILE
 	current_dialogue_tree = JSON.parse_string(FileAccess.open(dialogue_path, FileAccess.READ).get_as_text())
 	
-	var origin_limits = current_npc.branch_interaction_limits["O"].duplicate()
-	origin_limits.reverse()
-	var interaction_level
-	for limit in origin_limits:
-		if current_npc.interaction_count["O"] >= limit:
-			interaction_level = limit
-			break
+	var interaction_level = get_interaction_level("O")
 			
 	current_dialogue_display = current_dialogue_tree["O.%s.0" % interaction_level]
 	dialogue_label.text = current_dialogue_display["text"]
@@ -32,6 +26,13 @@ func exit():
 	current_npc = null
 	current_dialogue_tree = Dictionary()
 	current_dialogue_display = Dictionary()
+	
+func get_interaction_level(branch_id):
+	var origin_limits = current_npc.branch_interaction_limits[branch_id].duplicate()
+	origin_limits.reverse()
+	for limit in origin_limits:
+		if current_npc.interaction_count[branch_id] >= limit:
+			return limit
 
 func _on_enter_dialogue(npc_node):
 	current_npc = npc_node
