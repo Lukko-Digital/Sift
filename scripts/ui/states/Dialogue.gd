@@ -20,6 +20,9 @@ func enter():
 
 func exit():
 	dialogue_box.hide()
+	current_npc = null
+	current_dialogue_tree = Dictionary()
+	current_dialogue_display = Dictionary()
 
 func _on_enter_dialogue(npc_node):
 	current_npc = npc_node
