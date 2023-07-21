@@ -17,9 +17,8 @@ func enter():
 	current_dialogue_tree = JSON.parse_string(FileAccess.open(dialogue_path, FileAccess.READ).get_as_text())
 	
 	var interaction_level = get_interaction_level("O")
-			
-	current_dialogue_display = current_dialogue_tree["O.%s.0" % interaction_level]
-	dialogue_label.text = current_dialogue_display["text"]
+	
+	update_dialogue_display("O.%s.0" % interaction_level)
 
 func exit():
 	dialogue_box.hide()
@@ -33,6 +32,10 @@ func get_interaction_level(branch_id):
 	for limit in origin_limits:
 		if current_npc.interaction_count[branch_id] >= limit:
 			return limit
+			
+func update_dialogue_display(dialogue_id):
+	current_dialogue_display = current_dialogue_tree[dialogue_id]
+	dialogue_label.text = current_dialogue_display["text"]
 
 func _on_enter_dialogue(npc_node):
 	current_npc = npc_node
@@ -43,8 +46,7 @@ func _on_advance_dialogue():
 	
 	var next_dialogue_id = current_dialogue_display["next"]
 	if next_dialogue_id != "EXIT":
-		current_dialogue_display = current_dialogue_tree[next_dialogue_id]
-		dialogue_label.text = current_dialogue_display["text"]
+		update_dialogue_display(next_dialogue_id)
 	else:
 		Events.emit_signal("dialogue_complete")
 		Events.emit_signal("alert_dialogue")
