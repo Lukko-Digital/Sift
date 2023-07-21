@@ -6,8 +6,8 @@ var in_dialogue = false
 
 func _ready():
 	transition_to("Idle")
-	Events.idle_dialogue.connect(_on_idle_dialogue)
-	Events.dialogue_complete.connect(_on_dialogue_complete)
+	Events.idle_dialogue.connect(_on_exit_dialogue)
+	Events.dialogue_complete.connect(_on_exit_dialogue)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
@@ -38,8 +38,5 @@ func _physics_process(delta: float) -> void:
 		
 	state.handle_physics(delta)
 
-func _on_idle_dialogue():
-	in_dialogue = false
-
-func _on_dialogue_complete(_npc_node):
+func _on_exit_dialogue():
 	in_dialogue = false
