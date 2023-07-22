@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxblb7s0p3c5n"]
+
+[ext_resource type="Texture2D" uid="uid://ckx4275f744f6" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2f18y"]
+size = Vector2(24, 8)
+
+[node name="crab" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_65ej8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2f18y")
