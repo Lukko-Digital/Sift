@@ -36,6 +36,8 @@ func enter():
 			dig_direction = 2
 
 func handle_physics(delta):
+	shore_checker.target_position = character.velocity.normalized() * 50
+	
 	var direction = Vector2(
 		Input.get_axis("left", "right"), Input.get_axis("up", "down")
 	).normalized()
@@ -70,5 +72,3 @@ func handle_physics(delta):
 	
 	character.move_and_slide()
 	
-func _physics_process(delta):
-	shore_checker.target_position = character.velocity.normalized() * 50

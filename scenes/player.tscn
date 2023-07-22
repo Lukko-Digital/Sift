@@ -552,7 +552,7 @@ script = ExtResource("1_81117")
 position = Vector2(0.54, 5.77)
 texture = ExtResource("2_mi7hx")
 hframes = 163
-frame = 43
+frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -601,48 +601,47 @@ shore_checker = NodePath("../../../ShoreChecker")
 character = NodePath("../../..")
 animation_tree = NodePath("../../../AnimationTree")
 
-[node name="WaterDash" type="Node" parent="StateMachine/Dash" node_paths=PackedStringArray("character", "animation_tree")]
+[node name="WaterDash" type="Node" parent="StateMachine/Dash" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
 script = ExtResource("8_1rdr2")
+shore_checker = NodePath("../../../ShoreChecker")
 character = NodePath("../../..")
 animation_tree = NodePath("../../../AnimationTree")
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_imtti")]
 
 [node name="ShoreChecker" type="RayCast2D" parent="."]
-position = Vector2(0, 12)
+position = Vector2(0, 15)
 target_position = Vector2(0, 25)
 collision_mask = 32
 hit_from_inside = true
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("8_ad61v")]
-visible = false
 position = Vector2(0, 14)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_2cqq2")
 
-[node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
-position = Vector2(0, 25)
-texture = ExtResource("2_mi7hx")
-hframes = 163
-sprite_to_reflect = NodePath("../Sprite2D")
-
 [node name="ModeChecker" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ModeChecker"]
-position = Vector2(0, 14)
+position = Vector2(0, 15)
 shape = SubResource("CircleShape2D_8c008")
 
 [node name="NPCDialogueCollider" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPCDialogueCollider"]
 shape = SubResource("CircleShape2D_0hunl")
+
+[node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
+position = Vector2(0, 25)
+texture = ExtResource("2_mi7hx")
+hframes = 163
+sprite_to_reflect = NodePath("../Sprite2D")
 
 [connection signal="mode_switch" from="." to="StateMachine/Dash/SandDash" method="_on_player_mode_switch"]
 [connection signal="mode_switch" from="." to="StateMachine/Dash/WaterDash" method="_on_player_mode_switch"]
