@@ -1,9 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxblb7s0p3c5n"]
+[gd_scene load_steps=9 format=3 uid="uid://dxblb7s0p3c5n"]
 
 [ext_resource type="Texture2D" uid="uid://ckx4275f744f6" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/crab_state_machine.gd" id="2_ka2el"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/idle.gd" id="3_7bnq2"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/track.gd" id="4_dlb10"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/attack.gd" id="5_qmlcd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2f18y"]
 size = Vector2(24, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_knnf7"]
+radius = 123.037
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fqnng"]
+radius = 19.0
 
 [node name="crab" type="CharacterBody2D"]
 
@@ -11,5 +21,28 @@ size = Vector2(24, 8)
 position = Vector2(0, -8)
 texture = ExtResource("1_65ej8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2f18y")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_ka2el")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_7bnq2")
+
+[node name="Track" type="Node" parent="StateMachine"]
+script = ExtResource("4_dlb10")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("5_qmlcd")
+
+[node name="AggroRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
+shape = SubResource("CircleShape2D_knnf7")
+
+[node name="Attack Radius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Radius"]
+shape = SubResource("CircleShape2D_fqnng")

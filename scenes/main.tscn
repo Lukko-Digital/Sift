@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8md8ehlk518q"]
+[gd_scene load_steps=10 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
 [ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://cboo0limr35vs" path="res://assets/tilemaps/water.tres" id="3_ibx68"]
 [ext_resource type="PackedScene" uid="uid://ci6g6b1e53iui" path="res://scenes/npc.tscn" id="5_ao8yv"]
 [ext_resource type="PackedScene" uid="uid://ccs3flkclj740" path="res://scenes/ui/dialogue_ui.tscn" id="6_lu7ra"]
+[ext_resource type="PackedScene" uid="uid://dxblb7s0p3c5n" path="res://scenes/enemies/crab.tscn" id="8_a7cgk"]
 
 [node name="main" type="Node2D"]
 
@@ -64,3 +65,6 @@ position_smoothing_enabled = true
 position = Vector2(-52, 1)
 
 [node name="dialogue_ui" parent="." instance=ExtResource("6_lu7ra")]
+
+[node name="crab" parent="." instance=ExtResource("8_a7cgk")]
+position = Vector2(284, -23)
