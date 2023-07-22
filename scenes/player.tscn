@@ -531,6 +531,9 @@ states/Walk/node = SubResource("AnimationNodeBlendSpace2D_rw12e")
 states/Walk/position = Vector2(576, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_yf6bb")]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0hunl"]
+radius = 22.0227
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jc72j"]
 radius = 2.0
 height = 10.0
@@ -541,9 +544,6 @@ height = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8c008"]
 radius = 1.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_0hunl"]
-radius = 22.0227
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_81117")
@@ -566,11 +566,6 @@ active = true
 parameters/Idle/blend_position = Vector2(0, 1)
 parameters/SandDash/blend_position = Vector2(0.00109768, 1.00805)
 parameters/Walk/blend_position = Vector2(0, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 14)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_jc72j")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_keldo")
@@ -615,6 +610,18 @@ target_position = Vector2(0, 25)
 collision_mask = 32
 hit_from_inside = true
 
+[node name="NPCDialogueCollider" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCDialogueCollider"]
+shape = SubResource("CircleShape2D_0hunl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_jc72j")
+
 [node name="HurtboxComponent" parent="." instance=ExtResource("8_ad61v")]
 position = Vector2(0, 14)
 
@@ -630,13 +637,6 @@ collision_mask = 16
 position = Vector2(0, 15)
 shape = SubResource("CircleShape2D_8c008")
 
-[node name="NPCDialogueCollider" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCDialogueCollider"]
-shape = SubResource("CircleShape2D_0hunl")
-
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
 position = Vector2(0, 25)
 texture = ExtResource("2_mi7hx")
@@ -646,7 +646,7 @@ sprite_to_reflect = NodePath("../Sprite2D")
 [connection signal="mode_switch" from="." to="StateMachine/Dash/SandDash" method="_on_player_mode_switch"]
 [connection signal="mode_switch" from="." to="StateMachine/Dash/WaterDash" method="_on_player_mode_switch"]
 [connection signal="timeout" from="StateMachine/Dash/DashTimer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
-[connection signal="body_entered" from="ModeChecker" to="." method="_on_mode_checker_body_entered"]
-[connection signal="body_exited" from="ModeChecker" to="." method="_on_mode_checker_body_exited"]
 [connection signal="area_entered" from="NPCDialogueCollider" to="." method="_on_npc_dialogue_collider_area_entered"]
 [connection signal="area_exited" from="NPCDialogueCollider" to="." method="_on_npc_dialogue_collider_area_exited"]
+[connection signal="body_entered" from="ModeChecker" to="." method="_on_mode_checker_body_entered"]
+[connection signal="body_exited" from="ModeChecker" to="." method="_on_mode_checker_body_exited"]

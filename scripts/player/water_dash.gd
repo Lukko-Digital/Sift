@@ -1,11 +1,11 @@
 extends ModeState
 
 @onready var dash_speed: float = character.RUN_SPEED * 3
-@onready var dash_end_decel: float = character.RUN_ACCEL / 2
+@onready var dash_end_decel: float = character.RUN_ACCEL * 2/3
 
 #const DASH_SIDE_ACCEL = 120
 const START_LAG = 0
-const END_LAG = 0.3
+const END_LAG = 0.35
 #const END_FRAMES = 0
 
 @export var shore_checker: RayCast2D
