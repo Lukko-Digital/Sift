@@ -399,19 +399,17 @@ animation = &"dig_left_end"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_10g3q"]
-switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8edv1"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_04lb2"]
-states/dig_left/node = SubResource("AnimationNodeAnimation_w5dog")
-states/dig_left/position = Vector2(553, 100)
+states/dig/node = SubResource("AnimationNodeAnimation_w5dog")
+states/dig/position = Vector2(553, 100)
 states/dig_left_start/node = SubResource("AnimationNodeAnimation_degho")
 states/dig_left_start/position = Vector2(376, 108)
 states/end/node = SubResource("AnimationNodeAnimation_2vpp5")
 states/end/position = Vector2(727, 86)
-transitions = ["Start", "dig_left_start", SubResource("AnimationNodeStateMachineTransition_1xpfr"), "dig_left_start", "dig_left", SubResource("AnimationNodeStateMachineTransition_10g3q"), "dig_left", "end", SubResource("AnimationNodeStateMachineTransition_8edv1")]
+transitions = ["Start", "dig_left_start", SubResource("AnimationNodeStateMachineTransition_1xpfr"), "dig_left_start", "dig", SubResource("AnimationNodeStateMachineTransition_10g3q"), "dig", "end", SubResource("AnimationNodeStateMachineTransition_8edv1")]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_daq7u"]
 animation = &"dig_down"
@@ -426,19 +424,17 @@ animation = &"dig_down_end"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p8wrt"]
-switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_og5u5"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_526t5"]
-states/dig_down/node = SubResource("AnimationNodeAnimation_daq7u")
-states/dig_down/position = Vector2(512, 137)
+states/dig/node = SubResource("AnimationNodeAnimation_daq7u")
+states/dig/position = Vector2(512, 137)
 states/dig_down_start/node = SubResource("AnimationNodeAnimation_r1x1c")
 states/dig_down_start/position = Vector2(341, 98)
 states/end/node = SubResource("AnimationNodeAnimation_2400d")
 states/end/position = Vector2(689, 69)
-transitions = ["Start", "dig_down_start", SubResource("AnimationNodeStateMachineTransition_3t7pw"), "dig_down_start", "dig_down", SubResource("AnimationNodeStateMachineTransition_p8wrt"), "dig_down", "end", SubResource("AnimationNodeStateMachineTransition_og5u5")]
+transitions = ["Start", "dig_down_start", SubResource("AnimationNodeStateMachineTransition_3t7pw"), "dig_down_start", "dig", SubResource("AnimationNodeStateMachineTransition_p8wrt"), "dig", "end", SubResource("AnimationNodeStateMachineTransition_og5u5")]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vwpe2"]
 animation = &"dig_up"
@@ -453,19 +449,17 @@ animation = &"dig_up_end"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8of5k"]
-switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jaow2"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7dl56"]
-states/dig_up/node = SubResource("AnimationNodeAnimation_vwpe2")
-states/dig_up/position = Vector2(584, 100)
+states/dig/node = SubResource("AnimationNodeAnimation_vwpe2")
+states/dig/position = Vector2(584, 100)
 states/dig_up_start/node = SubResource("AnimationNodeAnimation_3c1mt")
 states/dig_up_start/position = Vector2(372, 112)
 states/end/node = SubResource("AnimationNodeAnimation_lr652")
 states/end/position = Vector2(754, 100)
-transitions = ["Start", "dig_up_start", SubResource("AnimationNodeStateMachineTransition_8k2tv"), "dig_up_start", "dig_up", SubResource("AnimationNodeStateMachineTransition_8of5k"), "dig_up", "end", SubResource("AnimationNodeStateMachineTransition_jaow2")]
+transitions = ["Start", "dig_up_start", SubResource("AnimationNodeStateMachineTransition_8k2tv"), "dig_up_start", "dig", SubResource("AnimationNodeStateMachineTransition_8of5k"), "dig", "end", SubResource("AnimationNodeStateMachineTransition_jaow2")]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7h2y8"]
 animation = &"dig_right"
@@ -480,19 +474,17 @@ animation = &"dig_right_end"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3rf34"]
-switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mwtd3"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_h3ous"]
-states/dig_right/node = SubResource("AnimationNodeAnimation_7h2y8")
-states/dig_right/position = Vector2(520, 107)
+states/dig/node = SubResource("AnimationNodeAnimation_7h2y8")
+states/dig/position = Vector2(520, 107)
 states/dig_right_start/node = SubResource("AnimationNodeAnimation_gwrpm")
 states/dig_right_start/position = Vector2(311, 79)
 states/end/node = SubResource("AnimationNodeAnimation_n5psj")
 states/end/position = Vector2(714, 118)
-transitions = ["Start", "dig_right_start", SubResource("AnimationNodeStateMachineTransition_mrxsj"), "dig_right_start", "dig_right", SubResource("AnimationNodeStateMachineTransition_3rf34"), "dig_right", "end", SubResource("AnimationNodeStateMachineTransition_mwtd3")]
+transitions = ["Start", "dig_right_start", SubResource("AnimationNodeStateMachineTransition_mrxsj"), "dig_right_start", "dig", SubResource("AnimationNodeStateMachineTransition_3rf34"), "dig", "end", SubResource("AnimationNodeStateMachineTransition_mwtd3")]
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_vo0da"]
 blend_point_0/node = SubResource("AnimationNodeStateMachine_04lb2")
@@ -548,7 +540,7 @@ radius = 5.0
 height = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8c008"]
-radius = 2.0
+radius = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0hunl"]
 radius = 22.0227
@@ -560,7 +552,7 @@ script = ExtResource("1_81117")
 position = Vector2(0.54, 5.77)
 texture = ExtResource("2_mi7hx")
 hframes = 163
-frame = 39
+frame = 43
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -572,7 +564,7 @@ tree_root = SubResource("AnimationNodeStateMachine_hp0up")
 anim_player = NodePath("../Sprite2D/AnimationPlayer")
 active = true
 parameters/Idle/blend_position = Vector2(0, 1)
-parameters/SandDash/blend_position = Vector2(0, 1)
+parameters/SandDash/blend_position = Vector2(0.00109768, 1.00805)
 parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -594,16 +586,18 @@ script = ExtResource("5_cpovh")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 
-[node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "animation_tree")]
+[node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
 script = ExtResource("6_b1dw8")
+shore_checker = NodePath("../../ShoreChecker")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 
 [node name="DashTimer" type="Timer" parent="StateMachine/Dash"]
 one_shot = true
 
-[node name="SandDash" type="Node" parent="StateMachine/Dash" node_paths=PackedStringArray("character", "animation_tree")]
+[node name="SandDash" type="Node" parent="StateMachine/Dash" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
 script = ExtResource("7_pko6c")
+shore_checker = NodePath("../../../ShoreChecker")
 character = NodePath("../../..")
 animation_tree = NodePath("../../../AnimationTree")
 
@@ -614,7 +608,14 @@ animation_tree = NodePath("../../../AnimationTree")
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_imtti")]
 
+[node name="ShoreChecker" type="RayCast2D" parent="."]
+position = Vector2(0, 12)
+target_position = Vector2(0, 25)
+collision_mask = 32
+hit_from_inside = true
+
 [node name="HurtboxComponent" parent="." instance=ExtResource("8_ad61v")]
+visible = false
 position = Vector2(0, 14)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
@@ -622,7 +623,7 @@ position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_2cqq2")
 
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
-position = Vector2(0.52, 25.045)
+position = Vector2(0, 25)
 texture = ExtResource("2_mi7hx")
 hframes = 163
 sprite_to_reflect = NodePath("../Sprite2D")
@@ -632,10 +633,11 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ModeChecker"]
-position = Vector2(0, 11)
+position = Vector2(0, 14)
 shape = SubResource("CircleShape2D_8c008")
 
 [node name="NPCDialogueCollider" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 

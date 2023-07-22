@@ -2,7 +2,8 @@ extends StateMachine
 
 @onready var dash_timer: Timer = $Dash/DashTimer
 
-var in_dialogue = false
+var in_dialogue: bool = false
+var buffer_dash: bool = false
 
 func _ready():
 	transition_to("Idle")
@@ -21,13 +22,13 @@ func _physics_process(delta: float) -> void:
 					in_dialogue = true
 		else:
 			Events.emit_signal("advance_dialogue")
-	elif (
-		(
-			Input.is_action_just_pressed("dash") or
-			not dash_timer.is_stopped()
-		) and
-		not in_dialogue
-	):
+	elif Input.is_action_just_pressed("dash"):# and not in_dialogue:
+		if dash_timer.time_left < 0.25:
+			buffer_dash = true
+		transition_to("Dash")
+	elif not dash_timer.is_stopped() or (buffer_dash and not state == get_node("Dash")):
+		if dash_timer.time_left > 0.25:
+			buffer_dash = false
 		transition_to("Dash")
 	elif (
 		(
