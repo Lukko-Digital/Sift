@@ -23,11 +23,11 @@ func _physics_process(delta: float) -> void:
 		else:
 			Events.emit_signal("advance_dialogue")
 	elif Input.is_action_just_pressed("dash"):# and not in_dialogue:
-		if dash_timer.time_left < 0.25:
+		if dash_timer.time_left < 0.15:
 			buffer_dash = true
 		transition_to("Dash")
 	elif not dash_timer.is_stopped() or (buffer_dash and not state == get_node("Dash")):
-		if dash_timer.time_left > 0.25:
+		if dash_timer.time_left > 0.15:
 			buffer_dash = false
 		transition_to("Dash")
 	elif (

@@ -5,7 +5,7 @@ extends ModeState
 
 @export var shore_checker: RayCast2D
 
-const DASH_SIDE_ACCEL = 120
+const DASH_SIDE_ACCEL = 100
 const START_LAG = 0.15
 const START_FRAMES = 0.4
 const END_LAG = 0.2
@@ -19,7 +19,7 @@ func enter():
 	stopped = false
 	buffer_stop = false
 	
-	time = 1.5
+	time = 1.3
 	animation_tree["parameters/playback"].travel("SandDash")
 	
 	if abs(character.velocity.x) > abs(character.velocity.y):
@@ -51,7 +51,7 @@ func handle_physics(delta):
 			buffer_stop = true
 		
 	elif shore_checker.is_colliding() and parent_state.dash_timer.time_left > END_FRAMES:
-		character.velocity = (shore_checker.get_collision_point() - shore_checker.global_position) * 1.6
+		character.velocity = (shore_checker.get_collision_point() - shore_checker.global_position) * 1.8
 		stopped = true
 		animation_tree["parameters/SandDash/" + str(dig_direction) + "/playback"].travel("end")
 		parent_state.dash_timer.start(END_FRAMES)

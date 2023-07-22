@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 var mode: String = "Sand"
 
-const RUN_SPEED = 80
-const RUN_ACCEL = 500
+const RUN_SPEED = 100
+const RUN_ACCEL = 700
 
 signal mode_switch(_mode: String)
 
