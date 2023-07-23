@@ -39,11 +39,13 @@ script = ExtResource("4_dlb10")
 script = ExtResource("5_qmlcd")
 
 [node name="AggroRadius" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
 shape = SubResource("CircleShape2D_knnf7")
 
 [node name="AttackRadius" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRadius"]
 shape = SubResource("CircleShape2D_fqnng")
