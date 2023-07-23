@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dxblb7s0p3c5n" path="res://scenes/enemies/crab.tscn" id="8_a7cgk"]
 
 [node name="main" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Main_Tile" type="TileMap" parent="."]
 z_index = -10
