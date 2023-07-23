@@ -1,7 +1,7 @@
 [gd_scene load_steps=78 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
-[ext_resource type="Texture2D" uid="uid://ckcl3lrfyy55h" path="res://assets/png/player-Sheet-2.png" id="2_mi7hx"]
+[ext_resource type="Texture2D" uid="uid://igy0xxypg5ix" path="res://assets/png/player-Sheet-2.png" id="2_mi7hx"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_gdfiv"]
 [ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
 [ext_resource type="Script" path="res://scripts/player/states/idle.gd" id="4_u1pwq"]
@@ -552,7 +552,7 @@ script = ExtResource("1_81117")
 position = Vector2(0.54, 5.77)
 texture = ExtResource("2_mi7hx")
 hframes = 163
-frame = 5
+frame = 51
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {

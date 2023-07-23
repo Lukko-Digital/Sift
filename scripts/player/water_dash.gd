@@ -12,6 +12,7 @@ var stopping: bool = false
 func enter():
 	time = 0.3
 	stopping = false
+	
 	character.velocity = character.velocity.normalized() * dash_speed
 #	animation_tree["parameters/playback"].travel("WaterDash")
 

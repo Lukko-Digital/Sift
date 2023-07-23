@@ -4,14 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
 [ext_resource type="Material" uid="uid://cuo8oe7uaeecu" path="res://scripts/shaders/water_shader_material.tres" id="2_w6ycg"]
 [ext_resource type="TileSet" uid="uid://cboo0limr35vs" path="res://assets/tilemaps/water.tres" id="3_ibx68"]
-[ext_resource type="Shader" path="res://scripts/shaders/pixelate.gdshader" id="4_3x6ol"]
 [ext_resource type="PackedScene" uid="uid://ci6g6b1e53iui" path="res://scenes/npc.tscn" id="5_ao8yv"]
 [ext_resource type="PackedScene" uid="uid://ccs3flkclj740" path="res://scenes/ui/dialogue_ui.tscn" id="6_lu7ra"]
 [ext_resource type="PackedScene" uid="uid://dxblb7s0p3c5n" path="res://scenes/enemies/crab.tscn" id="8_a7cgk"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_443td"]
-shader = ExtResource("4_3x6ol")
-shader_parameter/pixelSize = 4
 
 [node name="main" type="Node2D"]
 
@@ -50,14 +45,6 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(65542, 131073, 8, 5, 393217, 4, 6, 131073, 7, 65541, 458753, 2, 7, 196609, 7, 8, 393217, 4, 65544, 196609, 1, 65543, 196609, 8, -131066, 131073, 7, -65530, 131073, 8, -131065, 196609, 7, -65529, 196609, 8, 3, 131073, 7, 65539, 131073, 8, 4, 196609, 7, 65540, 196609, 8, 9, 131073, 7, 65545, 131073, 8, 10, 196609, 7, 65546, 196609, 8, 131077, 131073, 7, 196613, 131073, 8, 131078, 196609, 7, 196614, 196609, 8, -131064, 131073, 7, -65528, 131073, 8, -131063, 196609, 7, -65527, 196609, 8, -131068, 131073, 7, -65532, 131073, 8, -131067, 196609, 7, -65531, 196609, 8)
-
-[node name="ColorRect" type="ColorRect" parent="Water_Tile"]
-z_index = 6
-material = SubResource("ShaderMaterial_443td")
-offset_left = -767.0
-offset_top = -676.0
-offset_right = 964.0
-offset_bottom = 894.0
 
 [node name="Bg_Tile" type="TileMap" parent="."]
 z_index = -30
