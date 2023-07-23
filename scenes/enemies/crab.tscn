@@ -26,6 +26,11 @@ texture = ExtResource("1_65ej8")
 [node name="HitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2f18y")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
+
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_ka2el")
 initial_state = NodePath("Idle")

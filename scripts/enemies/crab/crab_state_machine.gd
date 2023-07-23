@@ -10,3 +10,5 @@ func _physics_process(delta: float) -> void:
 		transition_to("Track")
 	else:
 		transition_to("Idle")
+	
+	state.handle_physics(delta)	
