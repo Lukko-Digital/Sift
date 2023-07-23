@@ -30,7 +30,6 @@ texture = ExtResource("1_65ej8")
 shape = SubResource("RectangleShape2D_2f18y")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
 
