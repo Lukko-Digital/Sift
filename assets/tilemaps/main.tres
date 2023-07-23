@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=29 format=3 uid="uid://lopijjupr2li"]
 
-[ext_resource type="Texture2D" uid="uid://ugf5j7lg67ts" path="res://assets/png/tilemap.png" id="1_vkfkd"]
+[ext_resource type="Texture2D" uid="uid://b267ks1n0yqqw" path="res://assets/png/tilemap.png" id="1_vkfkd"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2xoht"]
 vertices = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
@@ -1980,6 +1980,13 @@ texture_region_size = Vector2i(32, 32)
 19:21/0/physics_layer_1/angular_velocity = 0.0
 19:21/0/physics_layer_2/linear_velocity = Vector2(0, 0)
 19:21/0/physics_layer_2/angular_velocity = 0.0
+15:8/0 = 0
+15:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+15:8/0/physics_layer_0/angular_velocity = 0.0
+15:8/0/physics_layer_1/linear_velocity = Vector2(0, 0)
+15:8/0/physics_layer_1/angular_velocity = 0.0
+15:8/0/physics_layer_2/linear_velocity = Vector2(0, 0)
+15:8/0/physics_layer_2/angular_velocity = 0.0
 
 [resource]
 tile_size = Vector2i(32, 32)

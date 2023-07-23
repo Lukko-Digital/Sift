@@ -1,7 +1,7 @@
 [gd_scene load_steps=78 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
-[ext_resource type="Texture2D" uid="uid://5c8gvj7o6l44" path="res://assets/png/player-Sheet-2.png" id="2_mi7hx"]
+[ext_resource type="Texture2D" uid="uid://bf3itrdweokga" path="res://assets/png/player-Sheet-4.png" id="2_g1nij"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_gdfiv"]
 [ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
 [ext_resource type="Script" path="res://scripts/player/states/idle.gd" id="4_u1pwq"]
@@ -648,9 +648,9 @@ script = ExtResource("1_81117")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0.540001, -6)
-texture = ExtResource("2_mi7hx")
-hframes = 163
-frame = 27
+texture = ExtResource("2_g1nij")
+hframes = 187
+frame = 17
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -739,8 +739,8 @@ shape = SubResource("CircleShape2D_8c008")
 
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
 position = Vector2(0, 13.23)
-texture = ExtResource("2_mi7hx")
-hframes = 163
+texture = ExtResource("2_g1nij")
+hframes = 187
 sprite_to_reflect = NodePath("../Sprite2D")
 
 [connection signal="mode_switch" from="." to="StateMachine/Dash/SandDash" method="_on_player_mode_switch"]
