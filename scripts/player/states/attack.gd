@@ -1,4 +1,4 @@
 class_name Attack
-extends Node
+extends State
 
 var damage: float

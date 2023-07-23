@@ -5,7 +5,9 @@ const DECEL = 1000.0
 
 func enter():
 	animation_tree["parameters/playback"].travel("Idle")
-	if abs(character.velocity.x) > abs(character.velocity.y):
+	if character.velocity.length() == 0:
+		pass
+	elif abs(character.velocity.x) > abs(character.velocity.y):
 		animation_tree["parameters/Idle/blend_position"] = Vector2(character.velocity.x / abs(character.velocity.x), 0)
 	else:
 		animation_tree["parameters/Idle/blend_position"] = Vector2(0, character.velocity.y / abs(character.velocity.y))

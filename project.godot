@@ -65,6 +65,9 @@ escape={
 
 [layer_names]
 
+2d_physics/layer_1="PLAYER"
+2d_physics/layer_2="TERRAIN"
+2d_physics/layer_3="ENEMIES"
 2d_physics/layer_4="NPC"
 2d_physics/layer_5="SAND"
 2d_physics/layer_6="SHORE"
