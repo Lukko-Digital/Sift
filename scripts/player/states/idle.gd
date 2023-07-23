@@ -4,7 +4,6 @@ extends State
 const DECEL = 1000.0
 
 func enter():
-	print(2)
 	animation_tree["parameters/playback"].travel("Idle")
 	if character.velocity.length() == 0:
 		pass
