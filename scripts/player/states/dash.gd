@@ -1,7 +1,7 @@
 class_name Dash
 extends State
 
-@onready var dash_timer: Timer = $DashTimer
+@onready var dash_timer: Timer = get_node("../Timer")
 
 @onready var dash_mode: ModeState = get_node(character.mode + "Dash")
 @export var shore_checker: RayCast2D

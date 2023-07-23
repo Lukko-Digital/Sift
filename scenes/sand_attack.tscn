@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://g7406ub7xvv"]
+
+[ext_resource type="Texture2D" uid="uid://ds8yxk5si4gin" path="res://assets/png/sand_attack-Sheet.png" id="1_wcllv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jn418"]
+radius = 28.0713
+
+[node name="SandAttack" type="Sprite2D"]
+position = Vector2(0, -12)
+texture = ExtResource("1_wcllv")
+hframes = 24
+frame = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(29, 3)
+shape = SubResource("CircleShape2D_jn418")
