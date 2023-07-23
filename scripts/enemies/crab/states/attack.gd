@@ -12,14 +12,16 @@ const END_LAG = 0.8
 var selected_attack_box: Area2D
 
 func enter():
+	selected_attack_box = get_attack_direction()
+	attack_timer.start(WIND_UP_TIME + ATTACK_TIME + END_LAG)
+
+func get_attack_direction() -> Area2D:
 	var vec_to_player: Vector2 = (player.global_position-crab.global_position).normalized()
 	if abs(vec_to_player.x) > abs(vec_to_player.y):
 		if vec_to_player.x > 0:
-			selected_attack_box = attack_boxes.get_node("RightAttackBox")
-		else:
-			selected_attack_box = attack_boxes.get_node("LeftAttackBox")
+			return attack_boxes.get_node("RightAttackBox")
+		return attack_boxes.get_node("LeftAttackBox")
 	else:
 		if vec_to_player.y > 0:
-			selected_attack_box = attack_boxes.get_node("DownAttackBox")
-		else:
-			selected_attack_box = attack_boxes.get_node("UpAttackBox")
+			return attack_boxes.get_node("DownAttackBox")
+		return attack_boxes.get_node("UpAttackBox")
