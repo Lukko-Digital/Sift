@@ -1,7 +1,7 @@
 [gd_scene load_steps=78 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
-[ext_resource type="Texture2D" uid="uid://igy0xxypg5ix" path="res://assets/png/player-Sheet-2.png" id="2_mi7hx"]
+[ext_resource type="Texture2D" uid="uid://5c8gvj7o6l44" path="res://assets/png/player-Sheet-2.png" id="2_mi7hx"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_gdfiv"]
 [ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
 [ext_resource type="Script" path="res://scripts/player/states/idle.gd" id="4_u1pwq"]
@@ -632,7 +632,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 radius = 22.0227
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jc72j"]
-radius = 2.0
+radius = 4.77
 height = 10.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2cqq2"]
@@ -647,10 +647,10 @@ collision_mask = 6
 script = ExtResource("1_81117")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0.54, 5.77)
+position = Vector2(0.540001, -6)
 texture = ExtResource("2_mi7hx")
 hframes = 163
-frame = 51
+frame = 27
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -703,12 +703,13 @@ animation_tree = NodePath("../../../AnimationTree")
 [node name="HealthComponent" parent="." instance=ExtResource("7_imtti")]
 
 [node name="ShoreChecker" type="RayCast2D" parent="."]
-position = Vector2(0, 15)
+position = Vector2(0, 3.23)
 target_position = Vector2(0, 25)
 collision_mask = 32
 hit_from_inside = true
 
 [node name="NPCDialogueCollider" type="Area2D" parent="."]
+position = Vector2(0, -11.77)
 collision_layer = 0
 collision_mask = 8
 
@@ -716,18 +717,19 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_0hunl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 14)
+position = Vector2(0, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jc72j")
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("8_ad61v")]
-position = Vector2(0, 14)
+position = Vector2(0, 2.23)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_2cqq2")
 
 [node name="ModeChecker" type="Area2D" parent="."]
+position = Vector2(0, -11.77)
 collision_layer = 0
 collision_mask = 16
 
@@ -736,7 +738,7 @@ position = Vector2(0, 15)
 shape = SubResource("CircleShape2D_8c008")
 
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
-position = Vector2(0, 25)
+position = Vector2(0, 13.23)
 texture = ExtResource("2_mi7hx")
 hframes = 163
 sprite_to_reflect = NodePath("../Sprite2D")
