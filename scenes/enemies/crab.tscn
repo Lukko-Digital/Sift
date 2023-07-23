@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxblb7s0p3c5n"]
+[gd_scene load_steps=11 format=3 uid="uid://dxblb7s0p3c5n"]
 
 [ext_resource type="Texture2D" uid="uid://ckx4275f744f6" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/crab_state_machine.gd" id="2_ka2el"]
@@ -17,6 +17,9 @@ radius = 277.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqnng"]
 radius = 19.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7hgp"]
+size = Vector2(23, 20)
 
 [node name="crab" type="CharacterBody2D"]
 collision_layer = 4
@@ -48,19 +51,50 @@ script = ExtResource("4_dlb10")
 script = ExtResource("5_qmlcd")
 
 [node name="AggroRadius" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
 shape = SubResource("CircleShape2D_knnf7")
 
 [node name="TrackingRadius" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TrackingRadius"]
 shape = SubResource("CircleShape2D_0ufsb")
 
 [node name="AttackRadius" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRadius"]
 shape = SubResource("CircleShape2D_fqnng")
+
+[node name="AttackBoxes" type="Node2D" parent="."]
+
+[node name="LeftAttackBox" type="Area2D" parent="AttackBoxes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBoxes/LeftAttackBox"]
+position = Vector2(-23.5, 0)
+shape = SubResource("RectangleShape2D_d7hgp")
+
+[node name="RightAttackBox" type="Area2D" parent="AttackBoxes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBoxes/RightAttackBox"]
+position = Vector2(24, 0)
+shape = SubResource("RectangleShape2D_d7hgp")
+
+[node name="UpAttackBox" type="Area2D" parent="AttackBoxes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBoxes/UpAttackBox"]
+position = Vector2(0, -16)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_d7hgp")
+
+[node name="DownAttackBox" type="Area2D" parent="AttackBoxes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBoxes/DownAttackBox"]
+position = Vector2(0, 16)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_d7hgp")
