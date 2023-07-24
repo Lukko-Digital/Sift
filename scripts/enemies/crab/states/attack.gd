@@ -13,7 +13,19 @@ var selected_attack_box: Area2D
 
 func enter():
 	selected_attack_box = get_attack_direction()
+	attack_timer.one_shot = true
 	attack_timer.start(WIND_UP_TIME + ATTACK_TIME + END_LAG)
+
+func handle_physics(delta: float):
+	if attack_timer.time_left > ATTACK_TIME + END_LAG:
+		crab.modulate = Color(1,0,0)
+	elif attack_timer.time_left > END_LAG:
+		crab.modulate = Color(0,1,0)
+	else:
+		crab.modulate = Color(0,0,1)
+		
+func exit():
+	crab.modulate = Color(1,1,1)
 
 func get_attack_direction() -> Area2D:
 	var vec_to_player: Vector2 = (player.global_position-crab.global_position).normalized()
