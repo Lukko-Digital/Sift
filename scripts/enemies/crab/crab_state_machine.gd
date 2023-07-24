@@ -11,8 +11,11 @@ func _physics_process(delta: float) -> void:
 		not attack_timer.is_stopped()
 	):
 		transition_to("Attack")
-	elif not aggro_radius.get_overlapping_bodies().is_empty() or (
-		state.name == "Track" and not tracking_radius.get_overlapping_bodies().is_empty()
+	elif (
+		not aggro_radius.get_overlapping_bodies().is_empty() or (
+			state.name in ["Track", "Attack"] and
+			not tracking_radius.get_overlapping_bodies().is_empty()
+		)
 	):
 		transition_to("Track")
 	else:
