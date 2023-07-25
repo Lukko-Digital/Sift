@@ -18,3 +18,6 @@ func handle_physics(delta: float):
 	
 	character.velocity = character.velocity.move_toward(direction*character.RUN_SPEED, character.RUN_ACCEL*delta)
 	character.move_and_slide()
+
+func exit():
+	animation_tree["parameters/Idle/blend_position"] = animation_tree["parameters/Walk/blend_position"]
