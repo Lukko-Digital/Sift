@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=3 uid="uid://dxblb7s0p3c5n"]
+
+[ext_resource type="Texture2D" uid="uid://ckx4275f744f6" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/crab_state_machine.gd" id="2_ka2el"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/idle.gd" id="3_7bnq2"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/track.gd" id="4_dlb10"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/attack.gd" id="5_qmlcd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2f18y"]
+size = Vector2(24, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7hgp"]
+size = Vector2(23, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_knnf7"]
+radius = 123.037
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ufsb"]
+radius = 277.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fqnng"]
+radius = 19.0
+
+[node name="crab" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_65ej8")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2f18y")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_ka2el")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_7bnq2")
+
+[node name="Track" type="Node" parent="StateMachine"]
+script = ExtResource("4_dlb10")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("5_qmlcd")
+
+[node name="AttackBoxes" type="Node2D" parent="StateMachine/Attack"]
+
+[node name="LeftAttackBox" type="Area2D" parent="StateMachine/Attack/AttackBoxes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBoxes/LeftAttackBox"]
+position = Vector2(-23.5, 0)
+shape = SubResource("RectangleShape2D_d7hgp")
+
+[node name="RightAttackBox" type="Area2D" parent="StateMachine/Attack/AttackBoxes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBoxes/RightAttackBox"]
+position = Vector2(24, 0)
+shape = SubResource("RectangleShape2D_d7hgp")
+
+[node name="UpAttackBox" type="Area2D" parent="StateMachine/Attack/AttackBoxes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBoxes/UpAttackBox"]
+position = Vector2(0, -16)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_d7hgp")
+
+[node name="DownAttackBox" type="Area2D" parent="StateMachine/Attack/AttackBoxes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBoxes/DownAttackBox"]
+position = Vector2(0, 16)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_d7hgp")
+
+[node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
+
+[node name="AggroRadius" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
+shape = SubResource("CircleShape2D_knnf7")
+
+[node name="TrackingRadius" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrackingRadius"]
+shape = SubResource("CircleShape2D_0ufsb")
+
+[node name="AttackRadius" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRadius"]
+shape = SubResource("CircleShape2D_fqnng")

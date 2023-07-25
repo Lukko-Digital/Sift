@@ -1,52 +1,59 @@
 extends ModeState
 
-@onready var dash_speed: float = character.RUN_SPEED * 3
+@onready var dash_speed: float = character.RUN_SPEED * 2.5
 @onready var dash_end_decel: float = character.RUN_ACCEL / 2
 
-#const DASH_SIDE_ACCEL = 120
-const START_LAG = 0
-const END_LAG = 0.25
-#const END_FRAMES = 0
+@export var shore_checker: RayCast2D
+
+var stopping: bool = false
 
 #var dig_direction: int
 
 func enter():
-	time = 0.4
-#	animation_tree["parameters/playback"].travel("SandDash")
+	time = 0.3
+	stopping = false
+	
+	character.velocity = character.velocity.normalized() * dash_speed
+#	animation_tree["parameters/playback"].travel("WaterDash")
 
 #	if abs(character.velocity.x) > abs(character.velocity.y):
-#		animation_tree["parameters/SandDash/blend_position"] = Vector2(character.velocity.x / abs(character.velocity.x), 0)
+#		animation_tree["parameters/WaterDash/blend_position"] = Vector2(character.velocity.x / abs(character.velocity.x), 0)
 #		if character.velocity.x > 0:
 #			dig_direction = 3
 #		else:
 #			dig_direction = 0
 #	else:
-#		animation_tree["parameters/SandDash/blend_position"] = Vector2(0, character.velocity.y / abs(character.velocity.y) + 0.1)
+#		animation_tree["parameters/WaterDash/blend_position"] = Vector2(0, character.velocity.y / abs(character.velocity.y) + 0.1)
 #		if character.velocity.y > 0:
 #			dig_direction = 1
 #		else:
-#			dig_direction = 2
+#			dig_direction- = 2
 
 func handle_physics(delta):
-#	var direction = Vector2(
-#		Input.get_axis("left", "right"), Input.get_axis("up", "down")
-#	).normalized()
-	if parent_state.dash_timer.time_left <= END_LAG:
-		character.velocity = character.velocity.move_toward(Vector2.ZERO, dash_end_decel*delta)
-	elif parent_state.dash_timer.time_left < time - START_LAG:
-		character.velocity = character.velocity.normalized() * dash_speed
-
-#		if Input.is_action_just_pressed("dash") and parent_state.dash_timer.time_left > END_FRAMES:
-#			animation_tree["parameters/SandDash/" + str(dig_direction) + "/playback"].travel("end")
-#			parent_state.dash_timer.start(END_FRAMES)
-#		elif abs(parent_state.dash_timer.time_left - END_FRAMES) <= 0.01:
-#			animation_tree["parameters/SandDash/" + str(dig_direction) + "/playback"].travel("end")
-
-#		character.velocity =  character.velocity.move_toward(direction * character.RUN_SPEED, DASH_SIDE_ACCEL*delta)
-
-	character.move_and_slide()
-
-func _on_player_mode_switch(_mode):
-	if _mode == "Sand":
-		character.velocity = character.velocity.normalized() * character.RUN_SPEED / 2
+	shore_checker.target_position = character.velocity.normalized() * 10
+	
+	var direction = Vector2(
+		Input.get_axis("left", "right"), Input.get_axis("up", "down")
+	).normalized()
+	
+	if abs(direction.x) > abs(direction.y):
+		animation_tree["parameters/Walk/blend_position"] = Vector2(direction.x / abs(direction.x), 0)
+	else:
+		animation_tree["parameters/Walk/blend_position"] = Vector2(0, direction.y / abs(direction.y))
+	
+	if (Input.is_action_just_pressed("dash") or character.velocity.length() < character.RUN_SPEED) and parent_state.dash_timer.time_left <= 0.2:
+		stopping = true
+	
+	if shore_checker.is_colliding():
+		character.velocity = character.velocity.normalized() * character.RUN_SPEED / 1.5
+		stopping = true
+		parent_state.dash_timer.start(0.3)
 		parent_state.dash_timer.stop()
+	
+	if stopping:
+		character.velocity = character.velocity.move_toward(direction*character.RUN_SPEED, character.RUN_ACCEL*delta)
+	elif parent_state.dash_timer.time_left < 0.2:
+		parent_state.dash_timer.start(0.2)
+		character.velocity = character.velocity.move_toward(direction*dash_speed, dash_end_decel*delta)
+	
+	character.move_and_slide()
