@@ -15,7 +15,7 @@ func enter():
 	
 	animation_tree["parameters/playback"].travel("SandAttack")
 	
-	direction = get_global_mouse_position() - character.global_position
+	direction = (get_global_mouse_position() - character.global_position).normalized()
 	var anim_name: String
 	
 	if abs(direction.x) > abs(direction.y):
@@ -32,13 +32,12 @@ func enter():
 			anim_name = "up"
 	
 	var instance = sand_attack_scene.instantiate()
-	instance.start(global_position + Vector2(0, -12), anim_name)
+	instance.start(global_position + Vector2(0, -12) - direction * 5, anim_name)
 	get_tree().root.add_child(instance)
 	
 func handle_physics(delta):
 	if time - timer.time_left > START_LAG and timer.time_left > END_LAG:
-		print(1)
-		character.velocity = direction.normalized() * character.RUN_SPEED * 1.5
+		character.velocity = -direction.normalized() * character.RUN_SPEED * 1.5
 	else:
 		character.velocity = Vector2.ZERO
 	
