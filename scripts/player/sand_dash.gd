@@ -82,7 +82,7 @@ func handle_physics(delta):
 		character.velocity = character.velocity.move_toward(direction * dash_end_speed, character.RUN_ACCEL*delta)
 	
 	character.move_and_slide()
-	
+
 func end_animation():
 	var direction = Vector2(
 		Input.get_axis("left", "right"), Input.get_axis("up", "down")

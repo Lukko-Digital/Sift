@@ -70,6 +70,7 @@ process_callback = 0
 position_smoothing_enabled = true
 
 [node name="npc" parent="." instance=ExtResource("5_ao8yv")]
+visible = false
 position = Vector2(-52, 1)
 
 [node name="dialogue_ui" parent="." instance=ExtResource("6_lu7ra")]
