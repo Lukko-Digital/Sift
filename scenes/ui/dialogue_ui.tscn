@@ -112,19 +112,19 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("1_k7p84")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("interact_prompt", "dialogue_box")]
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("interact_prompt", "dialogue_box")]
 script = ExtResource("2_cpfha")
 interact_prompt = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/InteractPrompt")
 dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox")
 
-[node name="Alert" type="Node" parent="StateMachine" node_paths=PackedStringArray("interact_prompt")]
+[node name="Alert" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("interact_prompt")]
 script = ExtResource("3_ni75i")
 interact_prompt = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/InteractPrompt")
 
-[node name="Dialogue" type="Node" parent="StateMachine" node_paths=PackedStringArray("dialogue_box")]
+[node name="Dialogue" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_box")]
 script = ExtResource("4_utkvm")
 dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox")

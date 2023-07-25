@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 		if timer.time_left < 0.15 and state == get_node("Dash"):
 			buffer_dash = true
 		transition_to("Dash")
-	elif not timer.is_stopped() or (buffer_dash and not state == get_node("Dash")):
+	elif (state == get_node("SandDash") and not timer.is_stopped()) or (buffer_dash and not state == get_node("Dash")):
 		if timer.time_left > 0.15:
 			buffer_dash = false
 		transition_to("Dash")

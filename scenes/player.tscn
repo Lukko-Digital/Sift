@@ -1,6 +1,7 @@
-[gd_scene load_steps=77 format=3 uid="uid://btje8wwp2nhiu"]
+[gd_scene load_steps=86 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
+[ext_resource type="Texture2D" uid="uid://c777p6ds3sfbm" path="res://assets/png/player-Sheet-4.png" id="2_hpmy3"]
 [ext_resource type="Texture2D" uid="uid://igy0xxypg5ix" path="res://assets/png/player-Sheet-2.png" id="2_mi7hx"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_gdfiv"]
 [ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
@@ -436,9 +437,9 @@ tracks/0/keys = {
 "values": [67, 74]
 }
 
-[sub_resource type="Animation" id="Animation_vvxtw"]
-resource_name = "sand_attack_down"
-length = 0.8
+[sub_resource type="Animation" id="Animation_s4bjf"]
+resource_name = "sand_attack_right"
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -446,10 +447,58 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [162]
+"values": [163, 168]
+}
+
+[sub_resource type="Animation" id="Animation_vvxtw"]
+resource_name = "sand_attack_left"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [169, 174]
+}
+
+[sub_resource type="Animation" id="Animation_q83ep"]
+resource_name = "sand_attack_down"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [175, 180]
+}
+
+[sub_resource type="Animation" id="Animation_f6wn8"]
+resource_name = "sand_attack_up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [183, 186]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ld84v"]
@@ -470,7 +519,10 @@ _data = {
 "idle_left": SubResource("Animation_q61v3"),
 "idle_right": SubResource("Animation_ci3mu"),
 "idle_up": SubResource("Animation_sy537"),
-"sand_attack_down": SubResource("Animation_vvxtw"),
+"sand_attack_down": SubResource("Animation_q83ep"),
+"sand_attack_left": SubResource("Animation_vvxtw"),
+"sand_attack_right": SubResource("Animation_s4bjf"),
+"sand_attack_up": SubResource("Animation_f6wn8"),
 "walk_down": SubResource("Animation_imr2k"),
 "walk_left": SubResource("Animation_nw3u2"),
 "walk_right": SubResource("Animation_flfuo"),
@@ -498,6 +550,28 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_55hf1")
 blend_point_2/pos = Vector2(0, 1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_f318h")
 blend_point_3/pos = Vector2(1, 0)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vwc0m"]
+animation = &"sand_attack_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8xq6n"]
+animation = &"sand_attack_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ed2wi"]
+animation = &"sand_attack_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mm3gm"]
+animation = &"sand_attack_down"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_jna0d"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_vwc0m")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_8xq6n")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_ed2wi")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_mm3gm")
+blend_point_3/pos = Vector2(0, 1)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w5dog"]
 animation = &"dig_left"
@@ -637,6 +711,8 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hp0up"]
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_qv8qx")
 states/Idle/position = Vector2(381, 92)
+states/SandAttack/node = SubResource("AnimationNodeBlendSpace2D_jna0d")
+states/SandAttack/position = Vector2(697, 167)
 states/SandDash/node = SubResource("AnimationNodeBlendSpace2D_vo0da")
 states/SandDash/position = Vector2(504, 179)
 states/Start/position = Vector2(176, 100)
@@ -660,9 +736,9 @@ script = ExtResource("1_81117")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0.540001, -6)
-texture = ExtResource("2_mi7hx")
-hframes = 163
-frame = 46
+texture = ExtResource("2_hpmy3")
+hframes = 187
+frame = 29
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -674,43 +750,46 @@ tree_root = SubResource("AnimationNodeStateMachine_hp0up")
 anim_player = NodePath("../Sprite2D/AnimationPlayer")
 active = true
 parameters/Idle/blend_position = Vector2(0, 1)
+parameters/SandAttack/blend_position = Vector2(0, -0.973799)
 parameters/SandDash/blend_position = Vector2(0, 1)
 parameters/Walk/blend_position = Vector2(0, 0)
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("3_keldo")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "animation_tree")]
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character", "animation_tree")]
 script = ExtResource("4_u1pwq")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 
-[node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "animation_tree")]
+[node name="Run" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character", "animation_tree")]
 script = ExtResource("5_cpovh")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 
-[node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
+[node name="Dash" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
 script = ExtResource("6_b1dw8")
 shore_checker = NodePath("../../ShoreChecker")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 
-[node name="SandDash" type="Node" parent="StateMachine/Dash" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
+[node name="SandDash" type="Node2D" parent="StateMachine/Dash" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
 script = ExtResource("7_pko6c")
 shore_checker = NodePath("../../../ShoreChecker")
 character = NodePath("../../..")
 animation_tree = NodePath("../../../AnimationTree")
 
-[node name="WaterDash" type="Node" parent="StateMachine/Dash" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
+[node name="WaterDash" type="Node2D" parent="StateMachine/Dash" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
 script = ExtResource("8_1rdr2")
 shore_checker = NodePath("../../../ShoreChecker")
 character = NodePath("../../..")
 animation_tree = NodePath("../../../AnimationTree")
 
-[node name="SandAttack" type="Node" parent="StateMachine"]
+[node name="SandAttack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character", "animation_tree")]
 script = ExtResource("9_1pxfy")
+character = NodePath("../..")
+animation_tree = NodePath("../../AnimationTree")
 
 [node name="Timer" type="Timer" parent="StateMachine"]
 one_shot = true
@@ -749,8 +828,6 @@ texture = ExtResource("2_mi7hx")
 hframes = 163
 sprite_to_reflect = NodePath("../Sprite2D")
 
-[connection signal="mode_switch" from="." to="StateMachine/Dash/SandDash" method="_on_player_mode_switch"]
-[connection signal="mode_switch" from="." to="StateMachine/Dash/WaterDash" method="_on_player_mode_switch"]
 [connection signal="timeout" from="StateMachine/Timer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
 [connection signal="area_entered" from="NPCDialogueCollider" to="." method="_on_npc_dialogue_collider_area_entered"]
 [connection signal="area_exited" from="NPCDialogueCollider" to="." method="_on_npc_dialogue_collider_area_exited"]

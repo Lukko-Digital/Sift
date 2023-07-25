@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dxblb7s0p3c5n"]
 
-[ext_resource type="Texture2D" uid="uid://ckx4275f744f6" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
+[ext_resource type="Texture2D" uid="uid://cw3stq5y10gc4" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/crab_state_machine.gd" id="2_ka2el"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/idle.gd" id="3_7bnq2"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/track.gd" id="4_dlb10"]
@@ -37,17 +37,17 @@ debug_enabled = true
 
 [node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("2_ka2el")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node2D" parent="StateMachine"]
 script = ExtResource("3_7bnq2")
 
-[node name="Track" type="Node" parent="StateMachine"]
+[node name="Track" type="Node2D" parent="StateMachine"]
 script = ExtResource("4_dlb10")
 
-[node name="Attack" type="Node" parent="StateMachine"]
+[node name="Attack" type="Node2D" parent="StateMachine"]
 script = ExtResource("5_qmlcd")
 
 [node name="AggroRadius" type="Area2D" parent="."]
