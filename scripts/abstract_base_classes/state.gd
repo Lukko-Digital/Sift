@@ -1,5 +1,5 @@
 class_name State
-extends Node
+extends Node2D
 	
 @export var character: CharacterBody2D
 @export var animation_tree: AnimationTree
