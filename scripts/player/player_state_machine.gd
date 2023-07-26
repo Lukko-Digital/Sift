@@ -1,6 +1,7 @@
 extends StateMachine
 
-@onready var dash_timer: Timer = $Dash/DashTimer
+@onready var timer: Timer = $Timer
+@onready var player: Player = get_parent()
 
 var in_dialogue: bool = false
 var buffer_dash: bool = false
@@ -23,13 +24,15 @@ func _physics_process(delta: float) -> void:
 		else:
 			Events.emit_signal("advance_dialogue")
 	elif Input.is_action_just_pressed("dash"):# and not in_dialogue:
-		if dash_timer.time_left < 0.15:
+		if timer.time_left < 0.15 and state == get_node("Dash"):
 			buffer_dash = true
 		transition_to("Dash")
-	elif not dash_timer.is_stopped() or (buffer_dash and not state == get_node("Dash")):
-		if dash_timer.time_left > 0.15:
+	elif (state == get_node("Dash") and not timer.is_stopped()) or (buffer_dash and not state == get_node("Dash")):
+		if timer.time_left > 0.15:
 			buffer_dash = false
 		transition_to("Dash")
+	elif (Input.is_action_just_pressed("attack") and player.mode == "Sand") or (state == get_node("SandAttack") and not timer.is_stopped()):
+		transition_to("SandAttack")
 	elif (
 		(
 			Input.is_action_pressed("up") or

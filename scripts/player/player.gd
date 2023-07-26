@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 var mode: String = "Sand"
