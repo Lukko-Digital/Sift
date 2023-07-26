@@ -617,7 +617,7 @@ advance_mode = 2
 states/dig/node = SubResource("AnimationNodeAnimation_daq7u")
 states/dig/position = Vector2(512, 137)
 states/dig_down_start/node = SubResource("AnimationNodeAnimation_r1x1c")
-states/dig_down_start/position = Vector2(341, 98)
+states/dig_down_start/position = Vector2(399, 69)
 states/end/node = SubResource("AnimationNodeAnimation_2400d")
 states/end/position = Vector2(689, 69)
 transitions = ["Start", "dig_down_start", SubResource("AnimationNodeStateMachineTransition_3t7pw"), "dig_down_start", "dig", SubResource("AnimationNodeStateMachineTransition_p8wrt"), "dig", "end", SubResource("AnimationNodeStateMachineTransition_og5u5")]
@@ -659,18 +659,18 @@ animation = &"dig_right_end"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mrxsj"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3rf34"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xjlhi"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mwtd3"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_go25l"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_h3ous"]
 states/dig/node = SubResource("AnimationNodeAnimation_7h2y8")
 states/dig/position = Vector2(520, 107)
 states/dig_right_start/node = SubResource("AnimationNodeAnimation_gwrpm")
-states/dig_right_start/position = Vector2(311, 79)
+states/dig_right_start/position = Vector2(352, 168)
 states/end/node = SubResource("AnimationNodeAnimation_n5psj")
 states/end/position = Vector2(714, 118)
-transitions = ["Start", "dig_right_start", SubResource("AnimationNodeStateMachineTransition_mrxsj"), "dig_right_start", "dig", SubResource("AnimationNodeStateMachineTransition_3rf34"), "dig", "end", SubResource("AnimationNodeStateMachineTransition_mwtd3")]
+transitions = ["Start", "dig_right_start", SubResource("AnimationNodeStateMachineTransition_mrxsj"), "dig_right_start", "dig", SubResource("AnimationNodeStateMachineTransition_xjlhi"), "dig", "end", SubResource("AnimationNodeStateMachineTransition_go25l")]
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_vo0da"]
 blend_point_0/node = SubResource("AnimationNodeStateMachine_04lb2")
@@ -737,7 +737,7 @@ script = ExtResource("1_81117")
 position = Vector2(0, -6)
 texture = ExtResource("2_g1nij")
 hframes = 187
-frame = 35
+frame = 9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {

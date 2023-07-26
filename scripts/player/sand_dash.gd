@@ -88,17 +88,23 @@ func end_animation():
 		Input.get_axis("left", "right"), Input.get_axis("up", "down")
 	).normalized()
 	
-	if abs(direction.x) > abs(direction.y):
-		animation_tree["parameters/SandDash/blend_position"] = Vector2(direction.x / abs(direction.x), 0)
-		if direction.x > 0:
-			dig_direction = 3
+	if not direction.is_zero_approx():
+		if abs(direction.x) > abs(direction.y):
+			animation_tree["parameters/SandDash/blend_position"] = Vector2(direction.x / abs(direction.x), 0)
+			if direction.x > 0:
+				dig_direction = 3
+			else:
+				dig_direction = 0
 		else:
-			dig_direction = 0
-	else:
-		animation_tree["parameters/SandDash/blend_position"] = Vector2(0, direction.y / abs(direction.y) + 0.1)
-		if direction.y > 0:
-			dig_direction = 1
-		else:
-			dig_direction = 2
+			animation_tree["parameters/SandDash/blend_position"] = Vector2(0, direction.y / abs(direction.y))
+			if direction.y > 0:
+				dig_direction = 1
+			else:
+				dig_direction = 2
+	
+	animation_tree["parameters/SandDash/" + str(dig_direction) + "/playback"].travel("dig")
 	
 	animation_tree["parameters/SandDash/" + str(dig_direction) + "/playback"].travel("end")
+	
+func exit():
+	animation_tree["parameters/Idle/blend_position"] = animation_tree["parameters/SandDash/blend_position"]

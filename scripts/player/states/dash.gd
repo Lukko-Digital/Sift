@@ -7,10 +7,7 @@ extends State
 @export var shore_checker: RayCast2D
 
 func enter():
-	if (shore_checker.get_collision_point() - shore_checker.global_position).length() < 1:
-		dash_mode = get_node("WaterDash")
-	else:
-		dash_mode = get_node(character.mode + "Dash")
+	dash_mode = get_node(character.mode + "Dash")
 	
 	if character.velocity.length() < 0.1:
 		character.velocity = animation_tree["parameters/Idle/blend_position"]
