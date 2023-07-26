@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ci6g6b1e53iui"]
 
-[ext_resource type="Texture2D" uid="uid://8aw2vv4p3oab" path="res://icon.svg" id="1_5tpay"]
+[ext_resource type="Texture2D" uid="uid://d0juyhg8rq2ls" path="res://icon.svg" id="1_5tpay"]
 [ext_resource type="Script" path="res://scripts/npcs/npc.gd" id="1_onvek"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_syfi1"]
