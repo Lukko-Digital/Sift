@@ -1,0 +1,71 @@
+{
+    "branches": ["O"],
+    "O.0.0": {
+        "name": "Guy",
+        "image": "guy.png",
+        "text": "oh hi im guy",
+        "next": "O.0.1"
+        
+    },
+    "O.0.1": {
+        "name": "Guy",
+        "image": "guy.png",
+        "text": "bye",
+        "responses": {
+            "1": {
+                "text": "wait who are you again?",
+                "next": "A"
+            },
+            "2": {
+                "text": "what am i doing here?",
+                "next": "B"
+            },
+            "3": {
+                "text": "ja ne",
+                "next": "E"
+            }
+        },
+        "branch_end": "O"
+    },
+    "R.0.0": {
+        "name": "Guy",
+        "image": "guy.png",
+        "text": "anything else?",
+        "responses": {
+            "1": {
+                "text": "wait who are you again?",
+                "next": "A"
+            },
+            "2": {
+                "text": "what am i doing here?",
+                "next": "B"
+            },
+            "3": {
+                "text": "ja ne",
+                "next": "E"
+            }
+        },
+        
+    },
+    "A.0.0": {
+        "name": "Guy",
+        "image": "guy.png",
+        "text": "oh hi im guy",
+        "next": "O.0.1"
+        
+    },
+    // "O.1.0": {
+    //     "name": "Guy",
+    //     "image": "guy.png",
+    //     "text": "you already know who i am",
+    //     "next": "O.1.1"
+        
+    // },
+    // "O.1.1": {
+    //     "name": "Guy",
+    //     "image": "guy.png",
+    //     "text": "bye bye",
+    //     "next": "EXIT",
+    //     "branch_end": "O"
+    // }
+}
