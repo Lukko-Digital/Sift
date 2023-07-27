@@ -5,6 +5,9 @@ extends StateMachine
 @onready var attack_radius: Area2D = get_node("../AttackRadius")
 @onready var attack_timer: Timer = $Attack/AttackTimer
 
+func _ready():
+	attack_timer.connect("timeout", _on_attack_finished)
+
 func _physics_process(delta: float) -> void:
 	if (
 		not attack_radius.get_overlapping_bodies().is_empty() or 
@@ -22,3 +25,6 @@ func _physics_process(delta: float) -> void:
 		transition_to("Idle")
 
 	state.handle_physics(delta)	
+
+func _on_attack_finished():
+	transition_to("Idle")
