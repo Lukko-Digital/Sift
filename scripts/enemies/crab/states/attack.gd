@@ -11,6 +11,8 @@ const END_LAG = 0.8
 
 var selected_attack_box: Area2D
 
+var crab_attack: Attack = Attack.new("crab slam", 1)
+
 func enter():
 	selected_attack_box = get_attack_direction()
 	selected_attack_box.get_child(0).disabled = false
@@ -26,7 +28,7 @@ func handle_physics(delta: float):
 		crab.modulate = Color(0,1,0)
 		for area in selected_attack_box.get_overlapping_areas():
 			if area.name == "HurtboxComponent":
-				print('ouch')
+				area.damage(crab_attack)
 				selected_attack_box.get_child(0).disabled = true
 	else:
 		# end lag
