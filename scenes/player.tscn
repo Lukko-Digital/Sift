@@ -737,7 +737,7 @@ script = ExtResource("1_81117")
 position = Vector2(0, -6)
 texture = ExtResource("2_g1nij")
 hframes = 187
-frame = 40
+frame = 16
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {

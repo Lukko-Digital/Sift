@@ -14,6 +14,7 @@ const END_FRAMES = 0.5
 var dig_direction: int
 var stopped: bool = false
 var buffer_stop: bool = false
+var dash_velocity: Vector2
 
 func enter():
 	stopped = false
@@ -21,29 +22,29 @@ func enter():
 	
 	time = 1.3
 	
-	character.velocity = Vector2(
+	dash_velocity = Vector2(
 		Input.get_axis("left", "right"), Input.get_axis("up", "down")
 	).normalized()
 	
 	animation_tree["parameters/playback"].travel("SandDash")
-	if character.velocity.is_zero_approx():
-		character.velocity = animation_tree["parameters/Walk/blend_position"]
+	if dash_velocity.is_zero_approx():
+		dash_velocity = animation_tree["parameters/Walk/blend_position"]
 	
-	if abs(character.velocity.x) > abs(character.velocity.y):
-		animation_tree["parameters/SandDash/blend_position"] = Vector2(character.velocity.x / abs(character.velocity.x), 0)
+	if abs(dash_velocity.x) > abs(dash_velocity.y):
+		animation_tree["parameters/SandDash/blend_position"] = Vector2(dash_velocity.x / abs(dash_velocity.x), 0)
 		if character.velocity.x > 0:
 			dig_direction = 3
 		else:
 			dig_direction = 0
 	else:
-		animation_tree["parameters/SandDash/blend_position"] = Vector2(0, character.velocity.y / abs(character.velocity.y) + 0.1)
-		if character.velocity.y > 0:
+		animation_tree["parameters/SandDash/blend_position"] = Vector2(0, dash_velocity.y / abs(dash_velocity.y) + 0.1)
+		if dash_velocity.y > 0:
 			dig_direction = 1
 		else:
 			dig_direction = 2
 
 func handle_physics(delta):
-	shore_checker.target_position = character.velocity.normalized() * 50
+	shore_checker.target_position = dash_velocity.normalized() * 50
 	
 	var direction = Vector2(
 		Input.get_axis("left", "right"), Input.get_axis("up", "down")
@@ -60,7 +61,7 @@ func handle_physics(delta):
 	
 	#Entering shore
 	elif shore_checker.is_colliding() and parent_state.dash_timer.time_left > END_FRAMES:
-		character.velocity = (shore_checker.get_collision_point() - shore_checker.global_position) * 1.8
+		dash_velocity = (shore_checker.get_collision_point() - shore_checker.global_position) * 1.8
 		stopped = true
 		end_animation()
 		parent_state.dash_timer.start(END_FRAMES)
@@ -73,13 +74,16 @@ func handle_physics(delta):
 	elif abs(time - START_FRAMES - parent_state.dash_timer.time_left) <= 0.01:
 		animation_tree["parameters/SandDash/" + str(dig_direction) + "/playback"].travel("dig")
 	
+	
 	if parent_state.dash_timer.time_left < time and not stopped:
-		character.velocity = character.velocity.normalized() * dash_speed
-		character.velocity = character.velocity.move_toward(direction * character.RUN_SPEED, DASH_SIDE_ACCEL*delta)
+		dash_velocity = dash_velocity.normalized() * dash_speed
+		dash_velocity = dash_velocity.move_toward(direction * character.RUN_SPEED, DASH_SIDE_ACCEL*delta)
 	
 	if parent_state.dash_timer.time_left <= END_LAG and not stopped:
-		character.velocity = character.velocity.normalized() * dash_end_speed
-		character.velocity = character.velocity.move_toward(direction * dash_end_speed, character.RUN_ACCEL*delta)
+		dash_velocity = dash_velocity.normalized() * dash_end_speed
+		dash_velocity = dash_velocity.move_toward(direction * dash_end_speed, character.RUN_ACCEL*delta)
+	
+	character.velocity = dash_velocity
 	
 	character.move_and_slide()
 
