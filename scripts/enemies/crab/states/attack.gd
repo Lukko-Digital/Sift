@@ -11,17 +11,27 @@ const END_LAG = 0.8
 
 var selected_attack_box: Area2D
 
+var crab_attack: Attack = Attack.new("crab slam", 1)
+
 func enter():
 	selected_attack_box = get_attack_direction()
+	selected_attack_box.get_child(0).disabled = false
 	attack_timer.one_shot = true
 	attack_timer.start(WIND_UP_TIME + ATTACK_TIME + END_LAG)
 
 func handle_physics(delta: float):
 	if attack_timer.time_left > ATTACK_TIME + END_LAG:
+		# windup
 		crab.modulate = Color(1,0,0)
 	elif attack_timer.time_left > END_LAG:
+		# attack
 		crab.modulate = Color(0,1,0)
+		for area in selected_attack_box.get_overlapping_areas():
+			if area.name == "HurtboxComponent":
+				area.damage(crab_attack)
+				selected_attack_box.get_child(0).disabled = true
 	else:
+		# end lag
 		crab.modulate = Color(0,0,1)
 		
 func exit():

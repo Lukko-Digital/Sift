@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqs20fa3do0x7"]
+[gd_scene load_steps=3 format=3 uid="uid://dyntgekv1adag"]
 
-[ext_resource type="Texture2D" uid="uid://dumfppj8f3148" path="res://assets/png/tilemap.png" id="1_b2tp0"]
+[ext_resource type="Texture2D" uid="uid://db3stpms1pd3u" path="res://assets/png/tilemap.png" id="1_b2tp0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8s6c5"]
 radius = 6.0
