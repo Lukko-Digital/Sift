@@ -6,9 +6,9 @@
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/track.gd" id="4_dlb10"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/attack.gd" id="5_qmlcd"]
 
-[sub_resource type="Animation" id="Animation_t3wjl"]
-resource_name = "Idle_front"
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_eth1l"]
+resource_name = "Attack_front"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -19,7 +19,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0, 1]
+"values": [8, 11]
 }
 
 [sub_resource type="Animation" id="Animation_dkcx4"]
@@ -38,8 +38,8 @@ tracks/0/keys = {
 "values": [2, 3]
 }
 
-[sub_resource type="Animation" id="Animation_fced2"]
-resource_name = "Run_front"
+[sub_resource type="Animation" id="Animation_t3wjl"]
+resource_name = "Idle_front"
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -51,7 +51,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [4, 5]
+"values": [0, 1]
 }
 
 [sub_resource type="Animation" id="Animation_afljr"]
@@ -70,8 +70,8 @@ tracks/0/keys = {
 "values": [6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_eth1l"]
-resource_name = "Attack_front"
+[sub_resource type="Animation" id="Animation_fced2"]
+resource_name = "Run_front"
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -83,7 +83,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [8, 11]
+"values": [4, 5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_du8fy"]
@@ -98,9 +98,6 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2f18y"]
 size = Vector2(24, 8)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7hgp"]
-size = Vector2(23, 20)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_knnf7"]
 radius = 123.037
 
@@ -110,14 +107,18 @@ radius = 277.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqnng"]
 radius = 19.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7hgp"]
+size = Vector2(23, 20)
+
 [node name="crab" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -3)
 texture = ExtResource("1_65ej8")
 hframes = 12
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -140,59 +141,40 @@ initial_state = NodePath("Idle")
 script = ExtResource("3_7bnq2")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 
-[node name="Track" type="Node2D" parent="StateMachine"]
+[node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+visible = false
 script = ExtResource("4_dlb10")
+animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 
-[node name="Attack" type="Node2D" parent="StateMachine"]
+[node name="AggroRadius" type="Area2D" parent="StateMachine/Track"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Track/AggroRadius"]
+shape = SubResource("CircleShape2D_knnf7")
+
+[node name="TrackingRadius" type="Area2D" parent="StateMachine/Track"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Track/TrackingRadius"]
+shape = SubResource("CircleShape2D_0ufsb")
+
+[node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
 script = ExtResource("5_qmlcd")
+animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+character = NodePath("../..")
 
-[node name="AttackBoxes" type="Node2D" parent="StateMachine/Attack"]
+[node name="AttackRadius" type="Area2D" parent="StateMachine/Attack"]
+visible = false
+collision_layer = 0
 
-[node name="LeftAttackBox" type="Area2D" parent="StateMachine/Attack/AttackBoxes"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]
+shape = SubResource("CircleShape2D_fqnng")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBoxes/LeftAttackBox"]
+[node name="AttackBox" type="Area2D" parent="StateMachine/Attack"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBox"]
 position = Vector2(-23.5, 0)
 shape = SubResource("RectangleShape2D_d7hgp")
 
-[node name="RightAttackBox" type="Area2D" parent="StateMachine/Attack/AttackBoxes"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBoxes/RightAttackBox"]
-position = Vector2(24, 0)
-shape = SubResource("RectangleShape2D_d7hgp")
-
-[node name="UpAttackBox" type="Area2D" parent="StateMachine/Attack/AttackBoxes"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBoxes/UpAttackBox"]
-position = Vector2(0, -16)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_d7hgp")
-
-[node name="DownAttackBox" type="Area2D" parent="StateMachine/Attack/AttackBoxes"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBoxes/DownAttackBox"]
-position = Vector2(0, 16)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_d7hgp")
-
 [node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
-
-[node name="AggroRadius" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRadius"]
-shape = SubResource("CircleShape2D_knnf7")
-
-[node name="TrackingRadius" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TrackingRadius"]
-shape = SubResource("CircleShape2D_0ufsb")
-
-[node name="AttackRadius" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRadius"]
-shape = SubResource("CircleShape2D_fqnng")
+one_shot = true

@@ -3,6 +3,9 @@ extends State
 const SPEED = 50
 const RE_NAV_TIME = 0.5
 
+@export var animation_player: AnimationPlayer
+
+@onready var state_machine: StateMachine = get_parent()
 @onready var player: CharacterBody2D = get_node("/root/main/player")
 @onready var crab: CharacterBody2D = get_node("../../")
 @onready var nav_agent: NavigationAgent2D = get_node("../../NavigationAgent2D")
@@ -19,11 +22,20 @@ func handle_physics(delta: float):
 	crab.velocity = direction * SPEED
 	crab.move_and_slide()
 	
+	handle_animation()
+	state_machine.facing_direction = direction
+	
 func exit():
 	re_nav_timer.stop()
 	
 func find_path():
 	nav_agent.target_position = player.global_position
+	
+func handle_animation():
+	if state_machine.facing_direction.y > 0:
+		animation_player.play("Run_front")
+	else:
+		animation_player.play("Run_back")
 
 func _on_timer_timeout():
 	find_path()
