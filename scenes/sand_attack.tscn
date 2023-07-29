@@ -184,8 +184,9 @@ script = ExtResource("2_7c25b")
 animation_player = NodePath("AnimationPlayer")
 
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_cxjsa")]
-position = Vector2(0, 28)
+position = Vector2(0, 7)
 texture = ExtResource("1_wcllv")
+flip_v = false
 hframes = 24
 frame = 4
 sprite_to_reflect = NodePath("..")
