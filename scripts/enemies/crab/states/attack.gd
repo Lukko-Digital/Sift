@@ -6,16 +6,19 @@ const WIND_UP_TIME = 0.2
 @onready var ATTACK_TIME = animation_player.get_animation("Attack_front").length
 const END_LAG = 0.8
 
+const HORIZONTAL_ATTACK_PLACEMENT = 23.5
+const VERTICAL_ATTACK_PLACEMENT = 15.5
+
 @onready var attack_radius: Area2D = $AttackRadius
 @onready var attack_timer: Timer = $AttackTimer
-@onready var attack_boxes = $AttackBoxes
+@onready var attack_box: Area2D = $AttackBox
+@onready var attack_collider: CollisionShape2D = $AttackBox/CollisionShape2D
 
-var selected_attack_box: Area2D
 var crab_attack: Attack = Attack.new("crab slam", 1)
 
 func enter():
-	selected_attack_box = get_attack_direction()
-	selected_attack_box.get_child(0).disabled = false
+	place_attack_box()
+	attack_collider.disabled = false
 	attack_timer.one_shot = true
 	attack_timer.start(WIND_UP_TIME + ATTACK_TIME + END_LAG)
 
@@ -27,10 +30,10 @@ func handle_physics(delta: float):
 		# attack
 		animation_player.play("Attack_front")
 		character.modulate = Color(0,1,0)
-		for area in selected_attack_box.get_overlapping_areas():
+		for area in attack_box.get_overlapping_areas():
 			if area.name == "HurtboxComponent":
 				area.damage(crab_attack)
-				selected_attack_box.get_child(0).disabled = true
+				attack_collider.disabled = true
 	else:
 		# end lag
 		character.modulate = Color(0,0,1)
@@ -43,13 +46,13 @@ func get_direction_to_player():
 		if body.name == "player":
 			return (body.global_position - character.global_position).normalized()
 
-func get_attack_direction() -> Area2D:
+func place_attack_box():
 	var vec_to_player: Vector2 = get_direction_to_player()
+	var pos: Vector2
 	if abs(vec_to_player.x) > abs(vec_to_player.y):
-		if vec_to_player.x > 0:
-			return attack_boxes.get_node("RightAttackBox")
-		return attack_boxes.get_node("LeftAttackBox")
+		# Left Right
+		pos = Vector2(sign(vec_to_player.x)*HORIZONTAL_ATTACK_PLACEMENT, 0)
 	else:
-		if vec_to_player.y > 0:
-			return attack_boxes.get_node("DownAttackBox")
-		return attack_boxes.get_node("UpAttackBox")
+		# Up Down
+		pos = Vector2(0, sign(vec_to_player.y)*VERTICAL_ATTACK_PLACEMENT)
+	attack_collider.position = pos
