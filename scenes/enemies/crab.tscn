@@ -157,9 +157,10 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Track/TrackingRadius"]
 shape = SubResource("CircleShape2D_0ufsb")
 
-[node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+[node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
 script = ExtResource("5_qmlcd")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+character = NodePath("../..")
 
 [node name="AttackRadius" type="Area2D" parent="StateMachine/Attack"]
 collision_layer = 0

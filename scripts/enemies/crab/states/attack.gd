@@ -9,7 +9,6 @@ const END_LAG = 0.8
 @onready var attack_timer: Timer = $AttackTimer
 @onready var attack_boxes = $AttackBoxes
 @onready var player: CharacterBody2D = get_node("/root/main/player")
-@onready var crab: CharacterBody2D = get_node("../../")
 
 var selected_attack_box: Area2D
 
@@ -24,24 +23,24 @@ func enter():
 func handle_physics(delta: float):
 	if attack_timer.time_left > ATTACK_TIME + END_LAG:
 		# windup
-		crab.modulate = Color(1,0,0)
+		character.modulate = Color(1,0,0)
 	elif attack_timer.time_left > END_LAG:
 		# attack
 		animation_player.play("Attack_front")
-		crab.modulate = Color(0,1,0)
+		character.modulate = Color(0,1,0)
 		for area in selected_attack_box.get_overlapping_areas():
 			if area.name == "HurtboxComponent":
 				area.damage(crab_attack)
 				selected_attack_box.get_child(0).disabled = true
 	else:
 		# end lag
-		crab.modulate = Color(0,0,1)
+		character.modulate = Color(0,0,1)
 		
 func exit():
-	crab.modulate = Color(1,1,1)
+	character.modulate = Color(1,1,1)
 
 func get_attack_direction() -> Area2D:
-	var vec_to_player: Vector2 = (player.global_position-crab.global_position).normalized()
+	var vec_to_player: Vector2 = (player.global_position-character.global_position).normalized()
 	if abs(vec_to_player.x) > abs(vec_to_player.y):
 		if vec_to_player.x > 0:
 			return attack_boxes.get_node("RightAttackBox")
