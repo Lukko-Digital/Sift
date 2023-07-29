@@ -6,6 +6,7 @@ extends StateMachine
 @onready var attack_timer: Timer = $Attack/AttackTimer
 
 func _ready():
+	super._ready()
 	attack_timer.connect("timeout", _on_attack_finished)
 
 func _physics_process(delta: float) -> void:
