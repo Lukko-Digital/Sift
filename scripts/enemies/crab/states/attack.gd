@@ -25,18 +25,17 @@ func enter():
 func handle_physics(delta: float):
 	if attack_timer.time_left > ATTACK_TIME + END_LAG:
 		# windup
-		character.modulate = Color(1,0,0)
+		pass
 	elif attack_timer.time_left > END_LAG:
 		# attack
 		animation_player.play("Attack_front")
-		character.modulate = Color(0,1,0)
 		for area in attack_box.get_overlapping_areas():
 			if area.name == "HurtboxComponent":
 				area.damage(crab_attack)
 				attack_collider.disabled = true
 	else:
 		# end lag
-		character.modulate = Color(0,0,1)
+		pass
 		
 func exit():
 	character.modulate = Color(1,1,1)
