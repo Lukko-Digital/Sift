@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8md8ehlk518q"]
+[gd_scene load_steps=10 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
 [ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
@@ -6,7 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://bqs20fa3do0x7" path="res://scenes/tree.tscn" id="6_535dw"]
 [ext_resource type="PackedScene" uid="uid://ccs3flkclj740" path="res://scenes/ui/dialogue_ui.tscn" id="6_lu7ra"]
 [ext_resource type="PackedScene" uid="uid://dm2qby2s4o0by" path="res://scenes/bush.tscn" id="7_v5wfo"]
+[ext_resource type="Shader" path="res://scripts/shaders/chromatic_abberation.gdshader" id="8_3owxf"]
 [ext_resource type="PackedScene" uid="uid://dxblb7s0p3c5n" path="res://scenes/enemies/crab.tscn" id="8_a7cgk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fieh2"]
+shader = ExtResource("8_3owxf")
+shader_parameter/r_displacement = Vector2(1, 0)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(-1, 0)
 
 [node name="main" type="Node2D"]
 y_sort_enabled = true
@@ -98,3 +105,11 @@ position = Vector2(-253, -101)
 
 [node name="Tree3" parent="." instance=ExtResource("6_535dw")]
 position = Vector2(80, 177)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 100
+material = SubResource("ShaderMaterial_fieh2")
+offset_left = -1793.0
+offset_top = -1377.0
+offset_right = 2124.0
+offset_bottom = 1219.0
