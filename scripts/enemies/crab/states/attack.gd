@@ -1,7 +1,9 @@
 extends State
 
+@export var animation_player: AnimationPlayer
+
 const WIND_UP_TIME = 0.2
-const ATTACK_TIME = 0.2
+@onready var ATTACK_TIME = animation_player.get_animation("Attack_front").length
 const END_LAG = 0.8
 
 @onready var attack_timer: Timer = $AttackTimer
@@ -25,6 +27,7 @@ func handle_physics(delta: float):
 		crab.modulate = Color(1,0,0)
 	elif attack_timer.time_left > END_LAG:
 		# attack
+		animation_player.play("Attack_front")
 		crab.modulate = Color(0,1,0)
 		for area in selected_attack_box.get_overlapping_areas():
 			if area.name == "HurtboxComponent":
