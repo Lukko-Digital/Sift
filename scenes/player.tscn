@@ -1,7 +1,7 @@
-[gd_scene load_steps=88 format=3 uid="uid://btje8wwp2nhiu"]
+[gd_scene load_steps=85 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
-[ext_resource type="Texture2D" uid="uid://ct4k1r2u175lr" path="res://assets/png/player-Sheet-4.png" id="2_g1nij"]
+[ext_resource type="Texture2D" uid="uid://d0w1cc1agncq5" path="res://assets/png/player-Sheet-4.png" id="2_g1nij"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_gdfiv"]
 [ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
 [ext_resource type="Script" path="res://scripts/player/states/idle.gd" id="4_u1pwq"]
@@ -10,8 +10,6 @@
 [ext_resource type="Script" path="res://scripts/player/sand_dash.gd" id="7_pko6c"]
 [ext_resource type="Script" path="res://scripts/player/water_dash.gd" id="8_1rdr2"]
 [ext_resource type="Script" path="res://scripts/player/states/sand_attack.gd" id="9_1pxfy"]
-[ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="11_873gg"]
-[ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="12_1olgs"]
 
 [sub_resource type="Animation" id="Animation_86qvn"]
 resource_name = "dig_down"
@@ -731,10 +729,6 @@ height = 10.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_8c008"]
 radius = 1.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eorya"]
-radius = 6.0
-height = 32.0
-
 [node name="player" type="CharacterBody2D"]
 collision_mask = 70
 script = ExtResource("1_81117")
@@ -743,7 +737,7 @@ script = ExtResource("1_81117")
 position = Vector2(0, -6)
 texture = ExtResource("2_g1nij")
 hframes = 187
-frame = 52
+frame = 40
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -829,19 +823,11 @@ position = Vector2(0, 15)
 shape = SubResource("CircleShape2D_8c008")
 
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
-z_index = -20
+z_index = -11
 position = Vector2(0, 13.23)
 texture = ExtResource("2_g1nij")
 hframes = 187
 sprite_to_reflect = NodePath("../Sprite2D")
-
-[node name="HurtboxComponent" parent="." instance=ExtResource("11_873gg")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-position = Vector2(0, -12)
-shape = SubResource("CapsuleShape2D_eorya")
-
-[node name="HealthComponent" parent="." instance=ExtResource("12_1olgs")]
 
 [connection signal="timeout" from="StateMachine/Timer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
 [connection signal="area_entered" from="NPCDialogueCollider" to="." method="_on_npc_dialogue_collider_area_entered"]
