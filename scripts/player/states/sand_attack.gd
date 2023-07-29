@@ -37,12 +37,12 @@ func enter():
 	
 func handle_physics(delta):
 	if time - timer.time_left > START_LAG and timer.time_left > END_LAG:
-		character.velocity = -animation_tree["parameters/SandAttack/blend_position"] * character.RUN_SPEED * 1.5
+		character.velocity = -animation_tree["parameters/SandAttack/blend_position"] * character.RUN_SPEED
 	elif timer.time_left < END_LAG - 0.05:
 		var direction = Vector2(
 			Input.get_axis("left", "right"), Input.get_axis("up", "down")
 		).normalized()
-		character.velocity = character.velocity.move_toward(direction*character.RUN_SPEED, character.RUN_ACCEL*delta)
+		character.velocity = character.velocity.move_toward(direction*character.RUN_SPEED * 0.5, character.RUN_ACCEL*delta)
 #	else:
 #		character.velocity = Vector2.ZERO
 	

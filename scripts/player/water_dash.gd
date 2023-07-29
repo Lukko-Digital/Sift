@@ -44,8 +44,11 @@ func handle_physics(delta):
 	else:
 		animation_tree["parameters/Walk/blend_position"] = Vector2(0, direction.y / abs(direction.y))
 	
-	if (Input.is_action_just_pressed("dash") or character.velocity.length() < character.RUN_SPEED) and parent_state.dash_timer.time_left <= 0.2:
+	if character.velocity.length() < character.RUN_SPEED and parent_state.dash_timer.time_left <= 0.2:
 		stopping = true
+	
+	if Input.is_action_just_pressed("dash") and parent_state.dash_timer.time_left <= 0.2:
+		character.velocity = direction*dash_speed
 	
 	if shore_checker.is_colliding():
 		character.velocity = character.velocity.normalized() * character.RUN_SPEED / 1.5
