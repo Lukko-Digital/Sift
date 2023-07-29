@@ -6,12 +6,11 @@ const WIND_UP_TIME = 0.2
 @onready var ATTACK_TIME = animation_player.get_animation("Attack_front").length
 const END_LAG = 0.8
 
+@onready var attack_radius: Area2D = $AttackRadius
 @onready var attack_timer: Timer = $AttackTimer
 @onready var attack_boxes = $AttackBoxes
-@onready var player: CharacterBody2D = get_node("/root/main/player")
 
 var selected_attack_box: Area2D
-
 var crab_attack: Attack = Attack.new("crab slam", 1)
 
 func enter():
@@ -38,9 +37,14 @@ func handle_physics(delta: float):
 		
 func exit():
 	character.modulate = Color(1,1,1)
+	
+func get_direction_to_player():
+	for body in attack_radius.get_overlapping_bodies():
+		if body.name == "player":
+			return (body.global_position - character.global_position).normalized()
 
 func get_attack_direction() -> Area2D:
-	var vec_to_player: Vector2 = (player.global_position-character.global_position).normalized()
+	var vec_to_player: Vector2 = get_direction_to_player()
 	if abs(vec_to_player.x) > abs(vec_to_player.y):
 		if vec_to_player.x > 0:
 			return attack_boxes.get_node("RightAttackBox")
