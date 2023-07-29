@@ -62,6 +62,7 @@ func handle_physics(delta):
 	#Entering shore
 	elif shore_checker.is_colliding() and parent_state.dash_timer.time_left > END_FRAMES:
 		dash_velocity = (shore_checker.get_collision_point() - shore_checker.global_position) * 1.8
+		
 		stopped = true
 		end_animation()
 		parent_state.dash_timer.start(END_FRAMES)

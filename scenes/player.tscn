@@ -737,7 +737,7 @@ script = ExtResource("1_81117")
 position = Vector2(0, -6)
 texture = ExtResource("2_g1nij")
 hframes = 187
-frame = 16
+frame = 48
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -797,7 +797,6 @@ one_shot = true
 position = Vector2(0, 3.23)
 target_position = Vector2(0, 25)
 collision_mask = 32
-hit_from_inside = true
 
 [node name="NPCDialogueCollider" type="Area2D" parent="."]
 position = Vector2(0, -11.77)
