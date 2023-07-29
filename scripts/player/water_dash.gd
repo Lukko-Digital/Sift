@@ -14,6 +14,9 @@ func enter():
 	stopping = false
 	
 	character.velocity = character.velocity.normalized() * dash_speed
+	
+	if character.velocity.is_zero_approx():
+		character.velocity = animation_tree["parameters/Walk/blend_position"]
 #	animation_tree["parameters/playback"].travel("WaterDash")
 
 #	if abs(character.velocity.x) > abs(character.velocity.y):

@@ -5,6 +5,7 @@ extends StateMachine
 
 var in_dialogue: bool = false
 var buffer_dash: bool = false
+var buffer_attack: bool = false
 
 func _ready():
 	transition_to("Idle")
@@ -31,7 +32,13 @@ func _physics_process(delta: float) -> void:
 		if timer.time_left > 0.15:
 			buffer_dash = false
 		transition_to("Dash")
-	elif (Input.is_action_just_pressed("attack") and player.mode == "Sand") or (state == get_node("SandAttack") and not timer.is_stopped()):
+	elif (Input.is_action_just_pressed("attack") and player.mode == "Sand"):
+		if timer.time_left < 0.15 and state == get_node("SandAttack"):
+			buffer_attack = true
+		transition_to("SandAttack")
+	elif (state == get_node("SandAttack") and not timer.is_stopped()) or (buffer_attack and not state == get_node("SandAttack")):
+		if timer.time_left > 0.15:
+			buffer_attack = false
 		transition_to("SandAttack")
 	elif (
 		(
