@@ -142,11 +142,13 @@ initial_state = NodePath("Idle")
 script = ExtResource("3_7bnq2")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 
-[node name="Track" type="Node2D" parent="StateMachine"]
+[node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_dlb10")
+animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 
-[node name="Attack" type="Node2D" parent="StateMachine"]
+[node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("5_qmlcd")
+animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 
 [node name="AttackBoxes" type="Node2D" parent="StateMachine/Attack"]
 
