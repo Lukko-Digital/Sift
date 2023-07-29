@@ -115,7 +115,7 @@ collision_layer = 4
 collision_mask = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -3)
 texture = ExtResource("1_65ej8")
 hframes = 12
 frame = 8
