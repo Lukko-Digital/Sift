@@ -1,8 +1,8 @@
 extends StateMachine
 
-@onready var aggro_radius: Area2D = get_node("../AggroRadius")
-@onready var tracking_radius: Area2D = get_node("../TrackingRadius")
-@onready var attack_radius: Area2D = get_node("../AttackRadius")
+@onready var aggro_radius: Area2D = $Track/AggroRadius
+@onready var tracking_radius: Area2D = $Track/TrackingRadius
+@onready var attack_radius: Area2D = $Attack/AttackRadius
 @onready var attack_timer: Timer = $Attack/AttackTimer
 
 var facing_direction: Vector2 = Vector2(0, 1)
