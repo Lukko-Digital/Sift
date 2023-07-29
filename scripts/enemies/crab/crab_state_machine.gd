@@ -5,7 +5,10 @@ extends StateMachine
 @onready var attack_radius: Area2D = get_node("../AttackRadius")
 @onready var attack_timer: Timer = $Attack/AttackTimer
 
+var facing_direction: Vector2 = Vector2(0, 1)
+
 func _ready():
+	super._ready()
 	attack_timer.connect("timeout", _on_attack_finished)
 
 func _physics_process(delta: float) -> void:
@@ -24,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		transition_to("Idle")
 
-	state.handle_physics(delta)	
+	state.handle_physics(delta)
 
 func _on_attack_finished():
 	transition_to("Idle")

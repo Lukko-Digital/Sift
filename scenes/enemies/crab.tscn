@@ -118,7 +118,6 @@ collision_mask = 7
 position = Vector2(0, -8)
 texture = ExtResource("1_65ej8")
 hframes = 12
-frame = 11
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -134,12 +133,12 @@ debug_enabled = true
 [node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
 
 [node name="StateMachine" type="Node2D" parent="."]
-visible = false
 script = ExtResource("2_ka2el")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node2D" parent="StateMachine"]
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("3_7bnq2")
+animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 
 [node name="Track" type="Node2D" parent="StateMachine"]
 script = ExtResource("4_dlb10")
