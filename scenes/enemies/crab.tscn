@@ -142,6 +142,7 @@ script = ExtResource("3_7bnq2")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 
 [node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+visible = false
 script = ExtResource("4_dlb10")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 
@@ -163,37 +164,17 @@ animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
 [node name="AttackRadius" type="Area2D" parent="StateMachine/Attack"]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]
 shape = SubResource("CircleShape2D_fqnng")
 
-[node name="AttackBoxes" type="Node2D" parent="StateMachine/Attack"]
+[node name="AttackBox" type="Area2D" parent="StateMachine/Attack"]
 
-[node name="LeftAttackBox" type="Area2D" parent="StateMachine/Attack/AttackBoxes"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBoxes/LeftAttackBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBox"]
 position = Vector2(-23.5, 0)
 shape = SubResource("RectangleShape2D_d7hgp")
 
-[node name="RightAttackBox" type="Area2D" parent="StateMachine/Attack/AttackBoxes"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBoxes/RightAttackBox"]
-position = Vector2(24, 0)
-shape = SubResource("RectangleShape2D_d7hgp")
-
-[node name="UpAttackBox" type="Area2D" parent="StateMachine/Attack/AttackBoxes"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBoxes/UpAttackBox"]
-position = Vector2(0, -16)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_d7hgp")
-
-[node name="DownAttackBox" type="Area2D" parent="StateMachine/Attack/AttackBoxes"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBoxes/DownAttackBox"]
-position = Vector2(0, 16)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_d7hgp")
-
 [node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
+one_shot = true

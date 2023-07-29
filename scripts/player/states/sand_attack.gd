@@ -43,8 +43,8 @@ func handle_physics(delta):
 			Input.get_axis("left", "right"), Input.get_axis("up", "down")
 		).normalized()
 		character.velocity = character.velocity.move_toward(direction*character.RUN_SPEED, character.RUN_ACCEL*delta)
-	else:
-		character.velocity = Vector2.ZERO
+#	else:
+#		character.velocity = Vector2.ZERO
 	
 	character.move_and_slide()
 	
