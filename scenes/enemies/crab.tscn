@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://dxblb7s0p3c5n"]
+[gd_scene load_steps=18 format=3 uid="uid://dxblb7s0p3c5n"]
 
 [ext_resource type="Texture2D" uid="uid://in1qktimkaap" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/crab_state_machine.gd" id="2_ka2el"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/idle.gd" id="3_7bnq2"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/track.gd" id="4_dlb10"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/attack.gd" id="5_qmlcd"]
+[ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="6_76mvh"]
 
 [sub_resource type="Animation" id="Animation_eth1l"]
 resource_name = "Attack_front"
@@ -124,7 +125,6 @@ collision_mask = 7
 position = Vector2(0, -3)
 texture = ExtResource("1_65ej8")
 hframes = 12
-frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -184,3 +184,9 @@ shape = SubResource("RectangleShape2D_d7hgp")
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
 one_shot = true
+
+[node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("6_76mvh")]
+position = Vector2(0, 13)
+texture = ExtResource("1_65ej8")
+hframes = 12
+sprite_to_reflect = NodePath("../Sprite2D")
