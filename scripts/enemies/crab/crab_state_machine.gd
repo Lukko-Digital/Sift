@@ -4,15 +4,19 @@ extends StateMachine
 @onready var tracking_radius: Area2D = $Track/TrackingRadius
 @onready var attack_radius: Area2D = $Attack/AttackRadius
 @onready var attack_timer: Timer = $Attack/AttackTimer
+@onready var health_component: HealthComponent = get_node("../HealthComponent")
 
 var facing_direction: Vector2 = Vector2(0, 1)
 
 func _ready():
 	super._ready()
 	attack_timer.connect("timeout", _on_attack_finished)
+	health_component.connect("died", _on_death)
 
 func _physics_process(delta: float) -> void:
-	if (
+	if state.name == "Dead":
+		transition_to("Dead")
+	elif (
 		not attack_radius.get_overlapping_bodies().is_empty() or 
 		not attack_timer.is_stopped()
 	):
@@ -31,3 +35,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_attack_finished():
 	transition_to("Idle")
+
+func _on_death():
+	transition_to("Dead")
