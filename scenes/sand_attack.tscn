@@ -193,6 +193,8 @@ sprite_to_reflect = NodePath("..")
 
 [node name="HitBox" type="Area2D" parent="."]
 rotation = 1.5708
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(37.3125, 1.13687e-13)
