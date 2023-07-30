@@ -16,6 +16,8 @@ var stopped: bool = false
 var buffer_stop: bool = false
 var dash_velocity: Vector2
 
+var popup_attack: Attack = Attack.new("Pop Up Attack", 1)
+
 func enter():
 	stopped = false
 	buffer_stop = false
@@ -114,3 +116,9 @@ func end_animation():
 	
 func exit():
 	animation_tree["parameters/Idle/blend_position"] = animation_tree["parameters/SandDash/blend_position"]
+
+
+func _on_pop_up_hitbox_area_entered(area):
+	if area.is_in_group("enemy_hurtbox"):
+		area.damage(popup_attack)
+

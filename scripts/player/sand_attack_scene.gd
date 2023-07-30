@@ -9,7 +9,6 @@ var sand_attack: Attack = Attack.new("Sand Attack", 1)
 func _ready():
 	hit_box.area_entered.connect(_on_hit)
 	
-
 func start(start_position: Vector2, anim_name: String):
 	global_position = start_position
 	animation_player.play(anim_name)
