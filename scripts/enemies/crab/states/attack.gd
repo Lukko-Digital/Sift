@@ -18,7 +18,6 @@ var crab_attack: Attack = Attack.new("crab slam", 1)
 
 func enter():
 	place_attack_box()
-	attack_collider.disabled = false
 	attack_timer.one_shot = true
 	attack_timer.start(WIND_UP_TIME + ATTACK_TIME + END_LAG)
 
@@ -32,7 +31,7 @@ func handle_physics(delta: float):
 		for area in attack_box.get_overlapping_areas():
 			if area.name == "HurtboxComponent":
 				area.damage(crab_attack)
-				attack_collider.disabled = true
+				print('ouch')
 	else:
 		# end lag
 		pass
