@@ -8,3 +8,6 @@ func enter():
 		animation_player.play("Idle_front")
 	else:
 		animation_player.play("Idle_back")
+
+func exit():
+	animation_player.stop()

@@ -36,7 +36,7 @@ func handle_physics(delta: float):
 		pass
 		
 func exit():
-	character.modulate = Color(1,1,1)
+	animation_player.stop()
 	
 func get_direction_to_player():
 	for body in attack_radius.get_overlapping_bodies():

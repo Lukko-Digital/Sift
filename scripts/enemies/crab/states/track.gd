@@ -27,6 +27,7 @@ func handle_physics(delta: float):
 	
 func exit():
 	re_nav_timer.stop()
+	animation_player.stop()
 	
 func find_path():
 	nav_agent.target_position = player.global_position
