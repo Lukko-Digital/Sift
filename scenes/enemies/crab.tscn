@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://dxblb7s0p3c5n"]
+[gd_scene load_steps=22 format=3 uid="uid://dxblb7s0p3c5n"]
 
 [ext_resource type="Texture2D" uid="uid://in1qktimkaap" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/crab_state_machine.gd" id="2_ka2el"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/idle.gd" id="3_7bnq2"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/track.gd" id="4_dlb10"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/attack.gd" id="5_qmlcd"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/dead.gd" id="6_0obea"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="6_76mvh"]
 [ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="7_0uixo"]
 [ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="8_hofra"]
@@ -203,6 +204,10 @@ disabled = true
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
 one_shot = true
+
+[node name="Dead" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("6_0obea")
+character = NodePath("../..")
 
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("6_76mvh")]
 position = Vector2(0, 13)
