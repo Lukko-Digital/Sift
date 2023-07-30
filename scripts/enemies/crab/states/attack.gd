@@ -31,7 +31,6 @@ func handle_physics(delta: float):
 		for area in attack_box.get_overlapping_areas():
 			if area.name == "HurtboxComponent":
 				area.damage(crab_attack)
-				print('ouch')
 	else:
 		# end lag
 		pass
