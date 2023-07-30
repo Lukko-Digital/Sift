@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dxblb7s0p3c5n"]
+[gd_scene load_steps=21 format=3 uid="uid://dxblb7s0p3c5n"]
 
 [ext_resource type="Texture2D" uid="uid://in1qktimkaap" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/crab_state_machine.gd" id="2_ka2el"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/track.gd" id="4_dlb10"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/attack.gd" id="5_qmlcd"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="6_76mvh"]
+[ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="7_0uixo"]
+[ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="8_hofra"]
 
 [sub_resource type="Animation" id="Animation_eth1l"]
 resource_name = "Attack_front"
@@ -129,6 +131,9 @@ radius = 19.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7hgp"]
 size = Vector2(23, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5nh7s"]
+size = Vector2(24, 8)
+
 [node name="crab" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 7
@@ -204,3 +209,11 @@ position = Vector2(0, 13)
 texture = ExtResource("1_65ej8")
 hframes = 12
 sprite_to_reflect = NodePath("../Sprite2D")
+
+[node name="HealthComponent" parent="." instance=ExtResource("7_0uixo")]
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["enemy_hurtbox"] instance=ExtResource("8_hofra")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_5nh7s")
