@@ -16,6 +16,9 @@ const VERTICAL_ATTACK_PLACEMENT = 15.5
 
 var crab_attack: Attack = Attack.new("crab slam", 1)
 
+func _ready():
+	attack_box.area_entered.connect(_on_hit)
+
 func enter():
 	place_attack_box()
 	attack_timer.one_shot = true
@@ -28,9 +31,6 @@ func handle_physics(delta: float):
 	elif attack_timer.time_left > END_LAG:
 		# attack
 		animation_player.play("Attack_front")
-		for area in attack_box.get_overlapping_areas():
-			if area.name == "HurtboxComponent":
-				area.damage(crab_attack)
 	else:
 		# end lag
 		pass
@@ -53,3 +53,7 @@ func place_attack_box():
 		# Up Down
 		pos = Vector2(0, sign(vec_to_player.y)*VERTICAL_ATTACK_PLACEMENT)
 	attack_collider.position = pos
+
+func _on_hit(area):
+	if area.is_in_group("player_hurtbox"):
+		area.damage(crab_attack)
