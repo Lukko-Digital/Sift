@@ -219,7 +219,11 @@ sprite_to_reflect = NodePath("../Sprite2D")
 max_health = 2.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["enemy_hurtbox"] instance=ExtResource("8_hofra")]
+collision_layer = 4
+collision_mask = 0
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("RectangleShape2D_5nh7s")
+
+[connection signal="died" from="HealthComponent" to="StateMachine" method="_on_health_component_died"]
