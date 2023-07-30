@@ -7,6 +7,7 @@ extends StateMachine
 @onready var health_component: HealthComponent = get_node("../HealthComponent")
 
 var facing_direction: Vector2 = Vector2(0, 1)
+var is_dead = false
 
 func _ready():
 	super._ready()
@@ -14,7 +15,7 @@ func _ready():
 	health_component.connect("died", _on_death)
 
 func _physics_process(delta: float) -> void:
-	if state.name == "Dead":
+	if is_dead:
 		transition_to("Dead")
 	elif (
 		not attack_radius.get_overlapping_bodies().is_empty() or 
@@ -37,4 +38,4 @@ func _on_attack_finished():
 	transition_to("Idle")
 
 func _on_death():
-	transition_to("Dead")
+	is_dead = true
