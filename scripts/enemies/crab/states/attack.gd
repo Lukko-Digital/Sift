@@ -42,6 +42,7 @@ func get_direction_to_player():
 	for body in attack_radius.get_overlapping_bodies():
 		if body.name == "player":
 			return (body.global_position - character.global_position).normalized()
+	return Vector2.ZERO
 
 func place_attack_box():
 	var vec_to_player: Vector2 = get_direction_to_player()

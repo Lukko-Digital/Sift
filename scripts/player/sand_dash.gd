@@ -16,7 +16,7 @@ var stopped: bool = false
 var buffer_stop: bool = false
 var dash_velocity: Vector2
 
-var popup_attack: Attack = Attack.new("Pop Up Attack", 1)
+var popup_attack: Attack = Attack.new("Pop Up Attack", 1, "knocked_up")
 
 func enter():
 	stopped = false

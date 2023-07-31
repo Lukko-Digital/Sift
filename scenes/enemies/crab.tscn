@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dxblb7s0p3c5n"]
+[gd_scene load_steps=24 format=3 uid="uid://dxblb7s0p3c5n"]
 
 [ext_resource type="Texture2D" uid="uid://in1qktimkaap" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/crab_state_machine.gd" id="2_ka2el"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/dead.gd" id="6_0obea"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="6_76mvh"]
 [ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="7_0uixo"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/knocked_up.gd" id="7_6j2xk"]
 [ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="8_hofra"]
 
 [sub_resource type="Animation" id="Animation_eth1l"]
@@ -108,13 +109,42 @@ tracks/0/keys = {
 "values": [4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_pypln"]
+resource_name = "knocked_up"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -3), Vector2(0, -15), Vector2(0, -3)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_du8fy"]
 _data = {
 "Attack_front": SubResource("Animation_eth1l"),
 "Idle_back": SubResource("Animation_dkcx4"),
 "Idle_front": SubResource("Animation_t3wjl"),
 "Run_back": SubResource("Animation_afljr"),
-"Run_front": SubResource("Animation_fced2")
+"Run_front": SubResource("Animation_fced2"),
+"knocked_up": SubResource("Animation_pypln")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2f18y"]
@@ -143,7 +173,7 @@ collision_mask = 7
 position = Vector2(0, -3)
 texture = ExtResource("1_65ej8")
 hframes = 12
-frame = 8
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -208,6 +238,11 @@ one_shot = true
 script = ExtResource("6_0obea")
 character = NodePath("../..")
 
+[node name="KnockedUp" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
+script = ExtResource("7_6j2xk")
+animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+character = NodePath("../..")
+
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("6_76mvh")]
 position = Vector2(0, 13)
 texture = ExtResource("1_65ej8")
@@ -215,7 +250,7 @@ hframes = 12
 sprite_to_reflect = NodePath("../Sprite2D")
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_0uixo")]
-max_health = 2.0
+max_health = 10.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["enemy_hurtbox"] instance=ExtResource("8_hofra")]
 collision_layer = 4
@@ -225,4 +260,6 @@ health_component = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("RectangleShape2D_5nh7s")
 
+[connection signal="animation_finished" from="Sprite2D/AnimationPlayer" to="StateMachine" method="_on_animation_player_animation_finished"]
 [connection signal="died" from="HealthComponent" to="StateMachine" method="_on_health_component_died"]
+[connection signal="effect_applied" from="HurtboxComponent" to="StateMachine" method="_on_hurtbox_component_effect_applied"]

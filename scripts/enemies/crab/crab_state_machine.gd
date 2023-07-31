@@ -17,6 +17,8 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		transition_to("Dead")
+	elif state.name == "KnockedUp":
+		transition_to("KnockedUp")
 	elif (
 		not attack_radius.get_overlapping_bodies().is_empty() or 
 		not attack_timer.is_stopped()
@@ -39,3 +41,12 @@ func _on_attack_finished():
 
 func _on_death():
 	is_dead = true
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "knocked_up":
+		transition_to("Idle")
+
+
+func _on_hurtbox_component_effect_applied(effect):
+	if effect == "knocked_up":
+		transition_to("KnockedUp")
