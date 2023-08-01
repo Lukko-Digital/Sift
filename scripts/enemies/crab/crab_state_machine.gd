@@ -1,5 +1,7 @@
 extends StateMachine
 
+@export var animation_player: AnimationPlayer
+
 @onready var aggro_radius: Area2D = $Track/AggroRadius
 @onready var tracking_radius: Area2D = $Track/TrackingRadius
 @onready var attack_radius: Area2D = $Attack/AttackRadius
@@ -15,6 +17,7 @@ func _ready():
 	attack_timer.timeout.connect(_on_attack_finished)
 	health_component.died.connect(_on_death)
 	hurtbox_component.effect_applied.connect(_on_effect_applied)
+	animation_player.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -44,7 +47,7 @@ func _on_attack_finished():
 func _on_death():
 	is_dead = true
 
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_finished(anim_name):
 	if anim_name == "knocked_up":
 		transition_to("Idle")
 

@@ -187,8 +187,9 @@ shape = SubResource("RectangleShape2D_2f18y")
 
 [node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
 
-[node name="StateMachine" type="Node2D" parent="."]
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("animation_player")]
 script = ExtResource("2_ka2el")
+animation_player = NodePath("../Sprite2D/AnimationPlayer")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
