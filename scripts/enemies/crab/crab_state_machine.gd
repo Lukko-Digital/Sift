@@ -12,8 +12,8 @@ var is_dead = false
 
 func _ready():
 	super._ready()
-	attack_timer.connect("timeout", _on_attack_finished)
-	health_component.connect("died", _on_death)
+	attack_timer.timeout.connect(_on_attack_finished)
+	health_component.died.connect(_on_death)
 	hurtbox_component.effect_applied.connect(_on_effect_applied)
 
 func _physics_process(delta: float) -> void:
