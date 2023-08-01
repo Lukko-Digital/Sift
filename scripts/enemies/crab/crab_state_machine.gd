@@ -5,6 +5,7 @@ extends StateMachine
 @onready var attack_radius: Area2D = $Attack/AttackRadius
 @onready var attack_timer: Timer = $Attack/AttackTimer
 @onready var health_component: HealthComponent = get_node("../HealthComponent")
+@onready var hurtbox_component: HurtboxComponent = get_node("../HurtboxComponent")
 
 var facing_direction: Vector2 = Vector2(0, 1)
 var is_dead = false
@@ -13,6 +14,7 @@ func _ready():
 	super._ready()
 	attack_timer.connect("timeout", _on_attack_finished)
 	health_component.connect("died", _on_death)
+	hurtbox_component.effect_applied.connect(_on_effect_applied)
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -46,7 +48,7 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "knocked_up":
 		transition_to("Idle")
 
-
-func _on_hurtbox_component_effect_applied(effect):
-	if effect == "knocked_up":
-		transition_to("KnockedUp")
+func _on_effect_applied(effects):
+	for effect in effects:
+		if effect.name == Effect.EffectName.KNOCKED_UP:
+			transition_to("KnockedUp")
