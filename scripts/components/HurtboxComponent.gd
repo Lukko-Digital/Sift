@@ -7,5 +7,5 @@ signal effect_applied
 func damage(attack: Attack):
 	if health_component:
 		health_component.damage(attack)
-		if not attack.effect == "":
-			emit_signal("effect_applied", attack.effect)
+		if not attack.effects.is_empty():
+			emit_signal("effect_applied", attack.effects)
