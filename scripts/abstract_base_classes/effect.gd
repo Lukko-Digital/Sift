@@ -1,13 +1,13 @@
 class_name Effect
 
-enum EffectNames {
+enum EffectName {
 	KNOCKED_BACK,
 	KNOCKED_UP
 }
 
-var name: EffectNames
+var name: EffectName
 var value: float
 
-func _init(name: EffectNames, value: float = 0):
+func _init(name: EffectName, value: float = 0):
 	self.name = name
 	self.value = value
