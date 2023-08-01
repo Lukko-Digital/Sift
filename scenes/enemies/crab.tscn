@@ -173,7 +173,7 @@ collision_mask = 7
 position = Vector2(0, -3)
 texture = ExtResource("1_65ej8")
 hframes = 12
-frame = 1
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -261,5 +261,4 @@ health_component = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("RectangleShape2D_5nh7s")
 
-[connection signal="animation_finished" from="Sprite2D/AnimationPlayer" to="StateMachine" method="_on_animation_player_animation_finished"]
 [connection signal="died" from="HealthComponent" to="StateMachine" method="_on_health_component_died"]
