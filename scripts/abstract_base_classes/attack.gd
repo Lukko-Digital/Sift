@@ -2,9 +2,9 @@ class_name Attack
 
 var name: String
 var damage: int
-var effect: String
+var effects: Array[Effect]
 
-func _init(name: String, damage: int, effect: String = ""):
+func _init(name: String, damage: int, effects: Array[Effect] = []):
 	self.name = name
 	self.damage = damage
-	self.effect = effect
+	self.effects = effects
