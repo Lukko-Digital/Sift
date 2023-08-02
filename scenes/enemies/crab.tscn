@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dxblb7s0p3c5n"]
+[gd_scene load_steps=25 format=3 uid="uid://dxblb7s0p3c5n"]
 
 [ext_resource type="Texture2D" uid="uid://in1qktimkaap" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/crab_state_machine.gd" id="2_ka2el"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="7_0uixo"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/knocked_up.gd" id="7_6j2xk"]
 [ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="8_hofra"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/knocked_back.gd" id="8_vu64y"]
 
 [sub_resource type="Animation" id="Animation_eth1l"]
 resource_name = "Attack_front"
@@ -243,6 +244,11 @@ character = NodePath("../..")
 script = ExtResource("7_6j2xk")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
+
+[node name="KnockedBack" type="Node2D" parent="StateMachine"]
+script = ExtResource("8_vu64y")
+
+[node name="KnockBackTimer" type="Timer" parent="StateMachine/KnockedBack"]
 
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("6_76mvh")]
 position = Vector2(0, 13)
