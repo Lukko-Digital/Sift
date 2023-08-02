@@ -5,9 +5,9 @@ enum EffectName {
 	KNOCKED_UP
 }
 
-var name: EffectName
+var effect_name: EffectName
 var value: float
 
-func _init(name: EffectName, value: float = 0):
-	self.name = name
+func _init(effect_name: EffectName, value: float = 0):
+	self.effect_name = effect_name
 	self.value = value

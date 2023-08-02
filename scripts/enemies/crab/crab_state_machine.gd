@@ -53,5 +53,5 @@ func _on_animation_finished(anim_name):
 
 func _on_effect_applied(effects):
 	for effect in effects:
-		if effect.name == Effect.EffectName.KNOCKED_UP:
+		if effect.effect_name == Effect.EffectName.KNOCKED_UP:
 			transition_to("KnockedUp")
