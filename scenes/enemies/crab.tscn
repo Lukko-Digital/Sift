@@ -197,10 +197,11 @@ initial_state = NodePath("Idle")
 script = ExtResource("3_7bnq2")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 
-[node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+[node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
 visible = false
 script = ExtResource("4_dlb10")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+character = NodePath("../..")
 
 [node name="AggroRadius" type="Area2D" parent="StateMachine/Track"]
 collision_layer = 0
@@ -250,6 +251,7 @@ script = ExtResource("8_vu64y")
 character = NodePath("../..")
 
 [node name="KnockBackTimer" type="Timer" parent="StateMachine/KnockedBack"]
+one_shot = true
 
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("6_76mvh")]
 position = Vector2(0, 13)
