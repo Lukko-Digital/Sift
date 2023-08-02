@@ -18,4 +18,5 @@ func _on_animation_player_animation_finished(anim_name):
 
 func _on_hit(area):
 	if area.is_in_group("enemy_hurtbox"):
+		sand_attack.effects = [KnockedBackEffect.new(0.2, Vector2(1,0))]
 		area.damage(sand_attack)
