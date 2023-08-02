@@ -15,3 +15,4 @@ func enter():
 
 func handle_physics(delta: float):
 	character.velocity = KnockedBackEffect.KNOCK_BACK_SPEED * direction.normalized()
+	character.move_and_slide()
