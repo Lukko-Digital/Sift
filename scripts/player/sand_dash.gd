@@ -16,7 +16,7 @@ var stopped: bool = false
 var buffer_stop: bool = false
 var dash_velocity: Vector2
 
-var popup_attack: Attack = Attack.new("Pop Up Attack", 1, [Effect.new(Effect.EffectName.KNOCKED_UP, 50)])
+var popup_attack: Attack = Attack.new("Pop Up Attack", 1, [KnockedUpEffect.new(0.5)])
 
 func enter():
 	stopped = false

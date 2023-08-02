@@ -6,8 +6,6 @@ enum EffectName {
 }
 
 var effect_name: EffectName
-var value: float
 
-func _init(effect_name: EffectName, value: float = 0):
+func _init(effect_name: EffectName):
 	self.effect_name = effect_name
-	self.value = value
