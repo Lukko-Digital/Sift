@@ -245,8 +245,9 @@ script = ExtResource("7_6j2xk")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
-[node name="KnockedBack" type="Node2D" parent="StateMachine"]
+[node name="KnockedBack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
 script = ExtResource("8_vu64y")
+character = NodePath("../..")
 
 [node name="KnockBackTimer" type="Timer" parent="StateMachine/KnockedBack"]
 
