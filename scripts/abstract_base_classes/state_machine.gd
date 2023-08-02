@@ -25,6 +25,6 @@ func transition_to(target_state_name: String, args = null) -> void:
 		
 	state.exit()
 	state = get_node(target_state_name)
-	state.enter()
 	state.recieve_args(args)
+	state.enter()
 	emit_signal("transitioned", state.name)

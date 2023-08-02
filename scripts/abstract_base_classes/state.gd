@@ -4,10 +4,10 @@ extends Node2D
 @export var character: CharacterBody2D
 @export var animation_tree: AnimationTree
 
-func enter():
+func recieve_args(args):
 	pass
 
-func recieve_args(args):
+func enter():
 	pass
 
 func exit():
