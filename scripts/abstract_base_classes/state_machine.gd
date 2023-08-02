@@ -16,7 +16,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	state.handle_physics(delta)
 
-func transition_to(target_state_name: String) -> void:
+func transition_to(target_state_name: String, args = null) -> void:
 #	saftey check
 	if not has_node(target_state_name):
 		return
@@ -26,4 +26,5 @@ func transition_to(target_state_name: String) -> void:
 	state.exit()
 	state = get_node(target_state_name)
 	state.enter()
+	state.recieve_args(args)
 	emit_signal("transitioned", state.name)

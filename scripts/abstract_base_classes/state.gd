@@ -6,10 +6,13 @@ extends Node2D
 
 func enter():
 	pass
-	
+
+func recieve_args(args):
+	pass
+
 func exit():
 	pass
-	
+
 func handle_input(event: InputEvent):
 	pass
 
