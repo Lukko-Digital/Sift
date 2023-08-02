@@ -22,7 +22,6 @@ func _ready():
 	knockback_timer.timeout.connect(_return_to_idle)
 
 func _physics_process(delta: float) -> void:
-	print(state)
 	if is_dead:
 		transition_to("Dead")
 	elif state.name == "KnockedUp":
