@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://btje8wwp2nhiu"]
+[gd_scene load_steps=90 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
 [ext_resource type="Texture2D" uid="uid://dgyosk8b1sq5p" path="res://assets/png/player-Sheet-4.png" id="2_g1nij"]
@@ -10,6 +10,9 @@
 [ext_resource type="Script" path="res://scripts/player/sand_dash.gd" id="7_pko6c"]
 [ext_resource type="Script" path="res://scripts/player/water_dash.gd" id="8_1rdr2"]
 [ext_resource type="Script" path="res://scripts/player/states/sand_attack.gd" id="9_1pxfy"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/knocked_back.gd" id="10_hkhio"]
+[ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="11_mf8l8"]
+[ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="12_nrhlb"]
 
 [sub_resource type="Animation" id="Animation_86qvn"]
 resource_name = "dig_down"
@@ -54,6 +57,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [70]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Dash/SandDash/PopUpHitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_cblxp"]
@@ -127,6 +142,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [70]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Dash/SandDash/PopUpHitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_un4cl"]
 resource_name = "dig_left_start"
@@ -199,6 +226,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [70]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Dash/SandDash/PopUpHitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_8wl5f"]
 resource_name = "dig_right_start"
@@ -270,6 +309,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [70]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Dash/SandDash/PopUpHitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_7xy02"]
@@ -719,6 +770,9 @@ states/Walk/node = SubResource("AnimationNodeBlendSpace2D_rw12e")
 states/Walk/position = Vector2(576, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_yf6bb")]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_pkaem"]
+radius = 19.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_0hunl"]
 radius = 22.0227
 
@@ -729,6 +783,10 @@ height = 10.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_8c008"]
 radius = 1.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cqtmw"]
+radius = 5.0
+height = 32.0
+
 [node name="player" type="CharacterBody2D"]
 collision_mask = 70
 script = ExtResource("1_81117")
@@ -737,7 +795,7 @@ script = ExtResource("1_81117")
 position = Vector2(0, -6)
 texture = ExtResource("2_g1nij")
 hframes = 187
-frame = 31
+frame = 48
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -779,6 +837,15 @@ shore_checker = NodePath("../../../ShoreChecker")
 character = NodePath("../../..")
 animation_tree = NodePath("../../../AnimationTree")
 
+[node name="PopUpHitbox" type="Area2D" parent="StateMachine/Dash/SandDash"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Dash/SandDash/PopUpHitbox"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_pkaem")
+disabled = true
+
 [node name="WaterDash" type="Node2D" parent="StateMachine/Dash" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
 script = ExtResource("8_1rdr2")
 shore_checker = NodePath("../../../ShoreChecker")
@@ -789,6 +856,13 @@ animation_tree = NodePath("../../../AnimationTree")
 script = ExtResource("9_1pxfy")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
+
+[node name="KnockedBack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("10_hkhio")
+character = NodePath("../..")
+
+[node name="KnockBackTimer" type="Timer" parent="StateMachine/KnockedBack"]
+one_shot = true
 
 [node name="Timer" type="Timer" parent="StateMachine"]
 one_shot = true
@@ -822,12 +896,22 @@ position = Vector2(0, 15)
 shape = SubResource("CircleShape2D_8c008")
 
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
-z_index = -11
 position = Vector2(0, 13.23)
 texture = ExtResource("2_g1nij")
 hframes = 187
 sprite_to_reflect = NodePath("../Sprite2D")
 
+[node name="HealthComponent" parent="." instance=ExtResource("11_mf8l8")]
+max_health = 5.0
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["player_hurtbox"] instance=ExtResource("12_nrhlb")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -12)
+shape = SubResource("CapsuleShape2D_cqtmw")
+
+[connection signal="area_entered" from="StateMachine/Dash/SandDash/PopUpHitbox" to="StateMachine/Dash/SandDash" method="_on_pop_up_hitbox_area_entered"]
 [connection signal="timeout" from="StateMachine/Timer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
 [connection signal="area_entered" from="NPCDialogueCollider" to="." method="_on_npc_dialogue_collider_area_entered"]
 [connection signal="area_exited" from="NPCDialogueCollider" to="." method="_on_npc_dialogue_collider_area_exited"]

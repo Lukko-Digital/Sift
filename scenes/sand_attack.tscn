@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://g7406ub7xvv"]
+[gd_scene load_steps=10 format=3 uid="uid://cng7ubenq2o6u"]
 
-[ext_resource type="Texture2D" uid="uid://dak6kc3mpiui2" path="res://assets/png/sand_attack-Sheet.png" id="1_wcllv"]
+[ext_resource type="Texture2D" uid="uid://b7hw7x4xbwh8l" path="res://assets/png/sand_attack-Sheet.png" id="1_wcllv"]
 [ext_resource type="Script" path="res://scripts/player/sand_attack_scene.gd" id="2_7c25b"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_cxjsa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4fgb"]
-size = Vector2(29.375, 55.75)
+size = Vector2(40, 55.75)
 
 [sub_resource type="Animation" id="Animation_e47jn"]
 resource_name = "down"
@@ -25,7 +25,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D:rotation")
+tracks/1/path = NodePath("HitBox:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -37,7 +37,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D/CollisionShape2D2:disabled")
+tracks/2/path = NodePath("HitBox/CollisionShape2D2:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -65,7 +65,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D:rotation")
+tracks/1/path = NodePath("HitBox:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -77,7 +77,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D/CollisionShape2D2:disabled")
+tracks/2/path = NodePath("HitBox/CollisionShape2D2:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -105,7 +105,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D:rotation")
+tracks/1/path = NodePath("HitBox:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -117,7 +117,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D/CollisionShape2D2:disabled")
+tracks/2/path = NodePath("HitBox/CollisionShape2D2:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -145,7 +145,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D:rotation")
+tracks/1/path = NodePath("HitBox:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -157,7 +157,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D/CollisionShape2D2:disabled")
+tracks/2/path = NodePath("HitBox/CollisionShape2D2:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -179,7 +179,7 @@ _data = {
 position = Vector2(0, -12)
 texture = ExtResource("1_wcllv")
 hframes = 24
-frame = 4
+frame = 6
 script = ExtResource("2_7c25b")
 animation_player = NodePath("AnimationPlayer")
 
@@ -191,16 +191,20 @@ hframes = 24
 frame = 4
 sprite_to_reflect = NodePath("..")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="."]
 rotation = 1.5708
+collision_layer = 0
+collision_mask = 4
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(37.3125, 1.13687e-13)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(32, 0)
 shape = SubResource("RectangleShape2D_v4fgb")
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_g1om1")
 }
 
+[connection signal="body_entered" from="HitBox" to="." method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

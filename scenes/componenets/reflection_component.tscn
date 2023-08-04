@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/components/ReflectionComponent.gd" id="3_p0bhq"]
 
 [node name="ReflectionComponent" type="Sprite2D"]
-z_index = -15
+z_index = -11
 material = ExtResource("1_xkdme")
 flip_v = true
 script = ExtResource("3_p0bhq")

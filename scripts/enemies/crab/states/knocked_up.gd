@@ -1,13 +1,12 @@
+class_name KnockedUp
 extends State
 
 @export var animation_player: AnimationPlayer
 @onready var state_machine: StateMachine = get_parent()
 
 func enter():
-	if state_machine.facing_direction.y > 0:
-		animation_player.play("Idle_front")
-	else:
-		animation_player.play("Idle_back")
+	animation_player.play("knocked_up")
 
 func exit():
 	animation_player.stop()
+

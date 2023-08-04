@@ -1,10 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://dxblb7s0p3c5n"]
+[gd_scene load_steps=26 format=3 uid="uid://dxblb7s0p3c5n"]
 
 [ext_resource type="Texture2D" uid="uid://in1qktimkaap" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/crab_state_machine.gd" id="2_ka2el"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/idle.gd" id="3_7bnq2"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/track.gd" id="4_dlb10"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/attack.gd" id="5_qmlcd"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/dead.gd" id="6_0obea"]
+[ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="6_76mvh"]
+[ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="7_0uixo"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/knocked_up.gd" id="7_6j2xk"]
+[ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="8_hofra"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/knocked_back.gd" id="8_vu64y"]
 
 [sub_resource type="Animation" id="Animation_eth1l"]
 resource_name = "Attack_front"
@@ -20,6 +26,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [8, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/Attack/AttackBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Attack/CircleAttackBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_dkcx4"]
@@ -92,13 +122,42 @@ tracks/0/keys = {
 "values": [4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_pypln"]
+resource_name = "knocked_up"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -3), Vector2(0, -15), Vector2(0, -3)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_du8fy"]
 _data = {
 "Attack_front": SubResource("Animation_eth1l"),
 "Idle_back": SubResource("Animation_dkcx4"),
 "Idle_front": SubResource("Animation_t3wjl"),
 "Run_back": SubResource("Animation_afljr"),
-"Run_front": SubResource("Animation_fced2")
+"Run_front": SubResource("Animation_fced2"),
+"knocked_up": SubResource("Animation_pypln")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2f18y"]
@@ -116,7 +175,13 @@ radius = 19.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7hgp"]
 size = Vector2(23, 20)
 
-[node name="crab" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_1lor6"]
+radius = 23.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5nh7s"]
+size = Vector2(24, 8)
+
+[node name="crab" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 7
 
@@ -124,7 +189,7 @@ collision_mask = 7
 position = Vector2(0, -3)
 texture = ExtResource("1_65ej8")
 hframes = 12
-frame = 8
+frame = 11
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -135,22 +200,23 @@ libraries = {
 shape = SubResource("RectangleShape2D_2f18y")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
 
-[node name="StateMachine" type="Node2D" parent="."]
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("animation_player")]
 script = ExtResource("2_ka2el")
+animation_player = NodePath("../Sprite2D/AnimationPlayer")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("3_7bnq2")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 
-[node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+[node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
 visible = false
 script = ExtResource("4_dlb10")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+character = NodePath("../..")
 
 [node name="AggroRadius" type="Area2D" parent="StateMachine/Track"]
 collision_layer = 0
@@ -170,17 +236,59 @@ animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
 [node name="AttackRadius" type="Area2D" parent="StateMachine/Attack"]
-visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]
 shape = SubResource("CircleShape2D_fqnng")
 
 [node name="AttackBox" type="Area2D" parent="StateMachine/Attack"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBox"]
 position = Vector2(-23.5, 0)
 shape = SubResource("RectangleShape2D_d7hgp")
+disabled = true
+
+[node name="CircleAttackBox" type="Area2D" parent="StateMachine/Attack"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/CircleAttackBox"]
+shape = SubResource("CircleShape2D_1lor6")
+disabled = true
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
 one_shot = true
+
+[node name="Dead" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("6_0obea")
+character = NodePath("../..")
+
+[node name="KnockedUp" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
+script = ExtResource("7_6j2xk")
+animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+character = NodePath("../..")
+
+[node name="KnockedBack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("8_vu64y")
+character = NodePath("../..")
+
+[node name="KnockBackTimer" type="Timer" parent="StateMachine/KnockedBack"]
+one_shot = true
+
+[node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("6_76mvh")]
+position = Vector2(0, 13)
+texture = ExtResource("1_65ej8")
+hframes = 12
+sprite_to_reflect = NodePath("../Sprite2D")
+
+[node name="HealthComponent" parent="." instance=ExtResource("7_0uixo")]
+max_health = 10.0
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["enemy_hurtbox"] instance=ExtResource("8_hofra")]
+collision_layer = 4
+collision_mask = 0
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_5nh7s")
+
+[connection signal="died" from="HealthComponent" to="StateMachine" method="_on_health_component_died"]

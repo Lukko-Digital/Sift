@@ -12,13 +12,15 @@ const VERTICAL_ATTACK_PLACEMENT = 15.5
 @onready var attack_radius: Area2D = $AttackRadius
 @onready var attack_timer: Timer = $AttackTimer
 @onready var attack_box: Area2D = $AttackBox
+@onready var circle_attack_box: Area2D = $CircleAttackBox
 @onready var attack_collider: CollisionShape2D = $AttackBox/CollisionShape2D
 
 var crab_attack: Attack = Attack.new("crab slam", 1)
 
+func _ready():
+	circle_attack_box.area_entered.connect(_on_hit)
+
 func enter():
-	place_attack_box()
-	attack_collider.disabled = false
 	attack_timer.one_shot = true
 	attack_timer.start(WIND_UP_TIME + ATTACK_TIME + END_LAG)
 
@@ -29,23 +31,21 @@ func handle_physics(delta: float):
 	elif attack_timer.time_left > END_LAG:
 		# attack
 		animation_player.play("Attack_front")
-		for area in attack_box.get_overlapping_areas():
-			if area.name == "HurtboxComponent":
-				area.damage(crab_attack)
-				attack_collider.disabled = true
 	else:
 		# end lag
 		pass
 		
 func exit():
-	character.modulate = Color(1,1,1)
+	animation_player.stop()
 	
 func get_direction_to_player():
 	for body in attack_radius.get_overlapping_bodies():
 		if body.name == "player":
 			return (body.global_position - character.global_position).normalized()
+	return Vector2.ZERO
 
 func place_attack_box():
+	# place attack box for directional attack
 	var vec_to_player: Vector2 = get_direction_to_player()
 	var pos: Vector2
 	if abs(vec_to_player.x) > abs(vec_to_player.y):
@@ -55,3 +55,8 @@ func place_attack_box():
 		# Up Down
 		pos = Vector2(0, sign(vec_to_player.y)*VERTICAL_ATTACK_PLACEMENT)
 	attack_collider.position = pos
+
+func _on_hit(area):
+	if area.is_in_group("player_hurtbox"):
+		crab_attack.effects = [KnockedBackEffect.new(0.05, area.global_position-self.global_position)]
+		area.damage(crab_attack)

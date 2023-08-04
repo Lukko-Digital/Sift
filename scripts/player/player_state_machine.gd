@@ -2,6 +2,8 @@ extends StateMachine
 
 @onready var timer: Timer = $Timer
 @onready var player: Player = get_parent()
+@onready var hurtbox_component: HurtboxComponent = get_node("../HurtboxComponent")
+@onready var knockback_timer: Timer = $KnockedBack/KnockBackTimer
 
 var in_dialogue: bool = false
 var buffer_dash: bool = false
@@ -11,12 +13,16 @@ func _ready():
 	transition_to("Idle")
 	Events.idle_dialogue.connect(_on_exit_dialogue)
 	Events.dialogue_complete.connect(_on_exit_dialogue)
+	hurtbox_component.effect_applied.connect(_on_effect_applied)
+	knockback_timer.timeout.connect(_return_to_idle)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("escape") and in_dialogue:
 		Events.emit_signal("idle_dialogue")
-		
-	if Input.is_action_just_pressed("interact"):
+	
+	if state.name == "KnockedBack":
+		transition_to("KnockedBack")
+	elif Input.is_action_just_pressed("interact"):
 		if not in_dialogue:
 			for area in get_parent().get_node("NPCDialogueCollider").get_overlapping_areas():
 				if area.is_in_group("npc"):
@@ -63,3 +69,11 @@ func _physics_process(delta: float) -> void:
 
 func _on_exit_dialogue():
 	in_dialogue = false
+	
+func _return_to_idle():
+	transition_to("Idle")
+
+func _on_effect_applied(effects):
+	for effect in effects:
+		if effect.effect_name == Effect.EffectName.KNOCKED_BACK:
+			transition_to("KnockedBack", effect)
