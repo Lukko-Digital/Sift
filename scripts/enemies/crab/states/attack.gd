@@ -12,15 +12,15 @@ const VERTICAL_ATTACK_PLACEMENT = 15.5
 @onready var attack_radius: Area2D = $AttackRadius
 @onready var attack_timer: Timer = $AttackTimer
 @onready var attack_box: Area2D = $AttackBox
+@onready var circle_attack_box: Area2D = $CircleAttackBox
 @onready var attack_collider: CollisionShape2D = $AttackBox/CollisionShape2D
 
 var crab_attack: Attack = Attack.new("crab slam", 1)
 
 func _ready():
-	attack_box.area_entered.connect(_on_hit)
+	circle_attack_box.area_entered.connect(_on_hit)
 
 func enter():
-	place_attack_box()
 	attack_timer.one_shot = true
 	attack_timer.start(WIND_UP_TIME + ATTACK_TIME + END_LAG)
 
@@ -45,6 +45,7 @@ func get_direction_to_player():
 	return Vector2.ZERO
 
 func place_attack_box():
+	# place attack box for directional attack
 	var vec_to_player: Vector2 = get_direction_to_player()
 	var pos: Vector2
 	if abs(vec_to_player.x) > abs(vec_to_player.y):
@@ -57,4 +58,5 @@ func place_attack_box():
 
 func _on_hit(area):
 	if area.is_in_group("player_hurtbox"):
+		crab_attack.effects = [KnockedBackEffect.new(0.05, area.global_position-self.global_position)]
 		area.damage(crab_attack)
