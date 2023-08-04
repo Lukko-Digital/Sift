@@ -189,7 +189,7 @@ collision_mask = 7
 position = Vector2(0, -3)
 texture = ExtResource("1_65ej8")
 hframes = 12
-frame = 9
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -247,11 +247,13 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBox"]
 position = Vector2(-23.5, 0)
 shape = SubResource("RectangleShape2D_d7hgp")
+disabled = true
 
 [node name="CircleAttackBox" type="Area2D" parent="StateMachine/Attack"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/CircleAttackBox"]
 shape = SubResource("CircleShape2D_1lor6")
+disabled = true
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
 one_shot = true
