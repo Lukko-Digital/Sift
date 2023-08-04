@@ -795,6 +795,7 @@ script = ExtResource("1_81117")
 position = Vector2(0, -6)
 texture = ExtResource("2_g1nij")
 hframes = 187
+frame = 48
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -856,8 +857,12 @@ script = ExtResource("9_1pxfy")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 
-[node name="KnockedBack" type="Node2D" parent="StateMachine"]
+[node name="KnockedBack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
 script = ExtResource("10_hkhio")
+character = NodePath("../..")
+
+[node name="KnockBackTimer" type="Timer" parent="StateMachine/KnockedBack"]
+one_shot = true
 
 [node name="Timer" type="Timer" parent="StateMachine"]
 one_shot = true
