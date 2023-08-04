@@ -1,7 +1,7 @@
 class_name KnockedBackEffect
 extends Effect
 
-const KNOCK_BACK_SPEED = 50
+const KNOCK_BACK_SPEED = 200
 
 var duration: float
 var direction: Vector2
