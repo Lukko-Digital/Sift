@@ -169,14 +169,16 @@ radius = 123.037
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ufsb"]
 radius = 277.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fqnng"]
-radius = 19.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h26ny"]
+radius = 8.0
+height = 32.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7hgp"]
 size = Vector2(23, 20)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1lor6"]
-radius = 23.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5it8r"]
+radius = 11.0
+height = 44.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nh7s"]
 size = Vector2(24, 8)
@@ -186,10 +188,10 @@ collision_layer = 4
 collision_mask = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, -2)
 texture = ExtResource("1_65ej8")
 hframes = 12
-frame = 8
+frame = 11
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -239,7 +241,8 @@ character = NodePath("../..")
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]
-shape = SubResource("CircleShape2D_fqnng")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_h26ny")
 
 [node name="AttackBox" type="Area2D" parent="StateMachine/Attack"]
 visible = false
@@ -252,7 +255,8 @@ disabled = true
 [node name="CircleAttackBox" type="Area2D" parent="StateMachine/Attack"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/CircleAttackBox"]
-shape = SubResource("CircleShape2D_1lor6")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_5it8r")
 disabled = true
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
