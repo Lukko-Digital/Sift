@@ -3,9 +3,9 @@
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
 [ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
 [ext_resource type="PackedScene" uid="uid://ci6g6b1e53iui" path="res://scenes/npc.tscn" id="5_ao8yv"]
-[ext_resource type="PackedScene" uid="uid://bqs20fa3do0x7" path="res://scenes/tree.tscn" id="6_535dw"]
+[ext_resource type="PackedScene" uid="uid://dyntgekv1adag" path="res://scenes/tree.tscn" id="6_535dw"]
 [ext_resource type="PackedScene" uid="uid://ccs3flkclj740" path="res://scenes/ui/dialogue_ui.tscn" id="6_lu7ra"]
-[ext_resource type="PackedScene" uid="uid://dm2qby2s4o0by" path="res://scenes/bush.tscn" id="7_v5wfo"]
+[ext_resource type="PackedScene" path="res://scenes/bush.tscn" id="7_v5wfo"]
 [ext_resource type="Shader" path="res://scripts/shaders/chromatic_abberation.gdshader" id="8_3owxf"]
 [ext_resource type="PackedScene" uid="uid://dxblb7s0p3c5n" path="res://scenes/enemies/crab.tscn" id="8_a7cgk"]
 
@@ -113,3 +113,15 @@ offset_left = -1793.0
 offset_top = -1377.0
 offset_right = 2124.0
 offset_bottom = 1219.0
+
+[node name="crab2" parent="." instance=ExtResource("8_a7cgk")]
+position = Vector2(-68, -188)
+
+[node name="crab3" parent="." instance=ExtResource("8_a7cgk")]
+position = Vector2(-189, -118)
+
+[node name="crab4" parent="." instance=ExtResource("8_a7cgk")]
+position = Vector2(-124, -152)
+
+[node name="crab5" parent="." instance=ExtResource("8_a7cgk")]
+position = Vector2(6, -175)
