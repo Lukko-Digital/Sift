@@ -794,8 +794,8 @@ script = ExtResource("1_81117")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -6)
 texture = ExtResource("2_g1nij")
-hframes = 187
-frame = 48
+hframes = 207
+frame = 47
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -898,7 +898,7 @@ shape = SubResource("CircleShape2D_8c008")
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
 position = Vector2(0, 13.23)
 texture = ExtResource("2_g1nij")
-hframes = 187
+hframes = 207
 sprite_to_reflect = NodePath("../Sprite2D")
 
 [node name="HealthComponent" parent="." instance=ExtResource("11_mf8l8")]
