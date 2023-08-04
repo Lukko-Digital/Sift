@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://cng7ubenq2o6u"]
 
-[ext_resource type="Texture2D" uid="uid://dak6kc3mpiui2" path="res://assets/png/sand_attack-Sheet.png" id="1_wcllv"]
+[ext_resource type="Texture2D" uid="uid://b7hw7x4xbwh8l" path="res://assets/png/sand_attack-Sheet.png" id="1_wcllv"]
 [ext_resource type="Script" path="res://scripts/player/sand_attack_scene.gd" id="2_7c25b"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_cxjsa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4fgb"]
-size = Vector2(29.375, 55.75)
+size = Vector2(40, 55.75)
 
 [sub_resource type="Animation" id="Animation_e47jn"]
 resource_name = "down"
@@ -197,7 +197,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(37.3125, 1.13687e-13)
+position = Vector2(32, 0)
 shape = SubResource("RectangleShape2D_v4fgb")
 disabled = true
 
