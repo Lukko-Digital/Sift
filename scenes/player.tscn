@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://btje8wwp2nhiu"]
+[gd_scene load_steps=90 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
 [ext_resource type="Texture2D" uid="uid://dgyosk8b1sq5p" path="res://assets/png/player-Sheet-4.png" id="2_g1nij"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/player/sand_dash.gd" id="7_pko6c"]
 [ext_resource type="Script" path="res://scripts/player/water_dash.gd" id="8_1rdr2"]
 [ext_resource type="Script" path="res://scripts/player/states/sand_attack.gd" id="9_1pxfy"]
+[ext_resource type="Script" path="res://scripts/enemies/crab/states/knocked_back.gd" id="10_hkhio"]
 [ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="11_mf8l8"]
 [ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="12_nrhlb"]
 
@@ -794,7 +795,6 @@ script = ExtResource("1_81117")
 position = Vector2(0, -6)
 texture = ExtResource("2_g1nij")
 hframes = 187
-frame = 15
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -855,6 +855,9 @@ animation_tree = NodePath("../../../AnimationTree")
 script = ExtResource("9_1pxfy")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
+
+[node name="KnockedBack" type="Node2D" parent="StateMachine"]
+script = ExtResource("10_hkhio")
 
 [node name="Timer" type="Timer" parent="StateMachine"]
 one_shot = true
