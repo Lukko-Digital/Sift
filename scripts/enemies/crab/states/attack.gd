@@ -2,9 +2,6 @@ extends State
 
 @export var animation_player: AnimationPlayer
 
-#const WIND_UP_TIME = 0.2
-@onready var WIND_UP_TIME = animation_player.get_animation("Attack_windup").length
-@onready var ATTACK_TIME = animation_player.get_animation("Attack_front").length
 const END_LAG = 0.8
 
 const HORIZONTAL_ATTACK_PLACEMENT = 23.5
@@ -20,23 +17,19 @@ var crab_attack: Attack = Attack.new("crab slam", 1)
 
 func _ready():
 	circle_attack_box.area_entered.connect(_on_hit)
+	animation_player.animation_finished.connect(_on_animation_end)
 
 func enter():
 	attack_timer.one_shot = true
-	attack_timer.start(WIND_UP_TIME + ATTACK_TIME + END_LAG)
+	animation_player.play("Attack_windup")
 
-func handle_physics(delta: float):
-	if attack_timer.time_left > ATTACK_TIME + END_LAG:
-		# windup
-		animation_player.play("Attack_windup")
-	elif attack_timer.time_left > END_LAG:
-		# attack
+func _on_animation_end(anim_name: StringName):
+	if anim_name == "Attack_windup":
 		animation_player.play("Attack_front")
-	else:
-		# end lag
+	elif anim_name == "Attack_front":
 		animation_player.play("Idle_front")
-		pass
-		
+		attack_timer.start(END_LAG)
+
 func exit():
 	animation_player.stop()
 	
