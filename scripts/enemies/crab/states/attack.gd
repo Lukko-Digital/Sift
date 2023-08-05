@@ -2,7 +2,8 @@ extends State
 
 @export var animation_player: AnimationPlayer
 
-const WIND_UP_TIME = 0.2
+#const WIND_UP_TIME = 0.2
+@onready var WIND_UP_TIME = animation_player.get_animation("Attack_windup").length
 @onready var ATTACK_TIME = animation_player.get_animation("Attack_front").length
 const END_LAG = 0.8
 
@@ -27,7 +28,7 @@ func enter():
 func handle_physics(delta: float):
 	if attack_timer.time_left > ATTACK_TIME + END_LAG:
 		# windup
-		pass
+		animation_player.play("Attack_windup")
 	elif attack_timer.time_left > END_LAG:
 		# attack
 		animation_player.play("Attack_front")
