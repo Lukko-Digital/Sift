@@ -33,6 +33,7 @@ func handle_physics(delta: float):
 		animation_player.play("Attack_front")
 	else:
 		# end lag
+		animation_player.play("Idle_front")
 		pass
 		
 func exit():
