@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 		transition_to("KnockedBack")
 	elif (
 		not attack_radius.get_overlapping_bodies().is_empty() or 
-		animation_player.current_animation in ["Attack_windup", "Attack_front"] or
+		animation_player.current_animation == "Attack_front" or
 		not attack_timer.is_stopped()
 	):
 		transition_to("Attack")

@@ -21,17 +21,15 @@ func _ready():
 
 func enter():
 	attack_timer.one_shot = true
-	animation_player.play("Attack_windup")
-
-func _on_animation_end(anim_name: StringName):
-	if anim_name == "Attack_windup":
-		animation_player.play("Attack_front")
-	elif anim_name == "Attack_front":
-		animation_player.play("Idle_front")
-		attack_timer.start(END_LAG)
+	animation_player.play("Attack_front")
 
 func exit():
 	animation_player.stop()
+
+func _on_animation_end(anim_name: StringName):
+	if anim_name == "Attack_front":
+		animation_player.play("Idle_front")
+		attack_timer.start(END_LAG)
 	
 func get_direction_to_player():
 	for body in attack_radius.get_overlapping_bodies():
