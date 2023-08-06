@@ -8,6 +8,7 @@ extends State
 var current_npc
 var current_dialogue_tree: Dictionary
 var current_dialogue_display: Dictionary
+var awaiting_response: bool = false
 
 func _ready():
 	Events.enter_dialogue.connect(_on_enter_dialogue)
@@ -42,6 +43,10 @@ func update_dialogue_display(dialogue_id):
 		handle_responses()
 
 func handle_responses():
+	spawn_buttons()
+	awaiting_response = true
+
+func spawn_buttons():
 	for response in current_dialogue_display["responses"].values():
 		var button_instance: ResponseButton = response_button_scene.instantiate()
 		button_instance.text = response["text"]
@@ -53,6 +58,9 @@ func _on_enter_dialogue(npc_node):
 	current_npc = npc_node
 
 func _on_advance_dialogue():
+	if awaiting_response:
+		return
+	
 	if "branch_end" in current_dialogue_display:
 		Events.emit_signal("interaction_complete", current_npc, current_dialogue_display["branch_end"])
 	
