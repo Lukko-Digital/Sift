@@ -26,7 +26,11 @@ func exit():
 	current_npc = null
 	current_dialogue_tree = Dictionary()
 	current_dialogue_display = Dictionary()
-	
+
+func load_branch(branch_id):
+	var interaction_level = get_interaction_level("%s" % branch_id)
+	update_dialogue_display("%s.%s.0" % [branch_id, interaction_level])
+
 func get_interaction_level(branch_id):
 	var origin_limits = current_npc.branch_interaction_limits[branch_id].duplicate()
 	origin_limits.reverse()
@@ -40,10 +44,6 @@ func update_dialogue_display(dialogue_id):
 	if "responses" in current_dialogue_display:
 		handle_responses()
 
-func load_branch(branch_id):
-	var interaction_level = get_interaction_level("%s" % branch_id)
-	update_dialogue_display("%s.%s.0" % [branch_id, interaction_level])
-
 func handle_responses():
 	spawn_buttons()
 	awaiting_response = true
@@ -56,6 +56,9 @@ func spawn_buttons():
 		button_instance.response_pressed.connect(_on_response_pressed)
 		response_buttons.add_child(button_instance)
 
+func exit_branch():
+	Events.emit_signal("interaction_complete", current_npc, current_dialogue_display["branch_end"])
+
 func _on_enter_dialogue(npc_node):
 	current_npc = npc_node
 
@@ -64,7 +67,7 @@ func _on_advance_dialogue():
 		return
 	
 	if "branch_end" in current_dialogue_display:
-		Events.emit_signal("interaction_complete", current_npc, current_dialogue_display["branch_end"])
+		exit_branch()
 	
 	var next_dialogue_id = current_dialogue_display["next"]
 	if next_dialogue_id != "EXIT":
