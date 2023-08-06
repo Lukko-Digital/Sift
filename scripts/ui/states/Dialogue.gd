@@ -19,9 +19,7 @@ func enter():
 	var dialogue_path = "res://assets/dialogue/%s" % current_npc.DIALOGUE_FILE
 	current_dialogue_tree = JSON.parse_string(FileAccess.open(dialogue_path, FileAccess.READ).get_as_text())
 	
-	var interaction_level = get_interaction_level("O")
-	
-	update_dialogue_display("O.%s.0" % interaction_level)
+	load_branch("O")
 
 func exit():
 	dialogue_box.hide()
@@ -35,12 +33,16 @@ func get_interaction_level(branch_id):
 	for limit in origin_limits:
 		if current_npc.interaction_count[branch_id] >= limit:
 			return limit
-			
+
 func update_dialogue_display(dialogue_id):
 	current_dialogue_display = current_dialogue_tree[dialogue_id]
 	dialogue_label.text = current_dialogue_display["text"]
 	if "responses" in current_dialogue_display:
 		handle_responses()
+
+func load_branch(branch_id):
+	var interaction_level = get_interaction_level("%s" % branch_id)
+	update_dialogue_display("%s.%s.0" % [branch_id, interaction_level])
 
 func handle_responses():
 	spawn_buttons()
@@ -72,4 +74,7 @@ func _on_advance_dialogue():
 		Events.emit_signal("alert_dialogue")
 
 func _on_response_pressed(destination_branch):
-	print(destination_branch)
+	load_branch(destination_branch)
+	for button in response_buttons.get_children():
+		button.queue_free()
+	awaiting_response = false
