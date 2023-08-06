@@ -2,6 +2,8 @@ extends State
 
 @export var dialogue_box: NinePatchRect
 @onready var dialogue_label = dialogue_box.get_node("Dialogue")
+@onready var response_buttons: VBoxContainer = dialogue_box.get_node("ResponseButtons")
+@onready var response_button_scene = preload("res://scenes/ui/response_button.tscn")
 
 var current_npc
 var current_dialogue_tree: Dictionary
@@ -36,6 +38,16 @@ func get_interaction_level(branch_id):
 func update_dialogue_display(dialogue_id):
 	current_dialogue_display = current_dialogue_tree[dialogue_id]
 	dialogue_label.text = current_dialogue_display["text"]
+	if "responses" in current_dialogue_display:
+		handle_responses()
+
+func handle_responses():
+	for response in current_dialogue_display["responses"].values():
+		var button_instance: ResponseButton = response_button_scene.instantiate()
+		button_instance.text = response["text"]
+		button_instance.destination_branch = response["next"]
+		button_instance.response_pressed.connect(_on_response_pressed)
+		response_buttons.add_child(button_instance)
 
 func _on_enter_dialogue(npc_node):
 	current_npc = npc_node
@@ -50,3 +62,6 @@ func _on_advance_dialogue():
 	else:
 		Events.emit_signal("dialogue_complete")
 		Events.emit_signal("alert_dialogue")
+
+func _on_response_pressed(destination_branch):
+	print(destination_branch)
