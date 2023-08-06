@@ -9,13 +9,13 @@ const VERTICAL_ATTACK_PLACEMENT = 15.5
 
 @onready var attack_radius: Area2D = $AttackRadius
 @onready var attack_timer: Timer = $AttackTimer
-@onready var circle_attack_box: Area2D = $CircleAttackBox
+@onready var attack_box: Area2D = $AttackBox
 @onready var attack_collider: CollisionShape2D
 
 var crab_attack: Attack = Attack.new("crab slam", 1)
 
 func _ready():
-	circle_attack_box.area_entered.connect(_on_hit)
+	attack_box.area_entered.connect(_on_hit)
 	animation_player.animation_finished.connect(_on_animation_end)
 
 func enter():
