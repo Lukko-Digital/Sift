@@ -30,26 +30,26 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../StateMachine/Attack/CircleAttackBox/CollisionShape2D:disabled")
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0.1, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Attack/AttackBox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
 }
 
 [sub_resource type="Animation" id="Animation_dkcx4"]
@@ -225,6 +225,7 @@ shape = SubResource("CircleShape2D_knnf7")
 
 [node name="TrackingRadius" type="Area2D" parent="StateMachine/Track"]
 collision_layer = 0
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Track/TrackingRadius"]
 shape = SubResource("CircleShape2D_0ufsb")
@@ -241,12 +242,12 @@ collision_layer = 0
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_h26ny")
 
-[node name="CircleAttackBox" type="Area2D" parent="StateMachine/Attack"]
+[node name="AttackBox" type="Area2D" parent="StateMachine/Attack"]
+monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/CircleAttackBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBox"]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_5it8r")
-disabled = true
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
 one_shot = true
