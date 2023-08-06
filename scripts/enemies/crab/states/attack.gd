@@ -9,9 +9,8 @@ const VERTICAL_ATTACK_PLACEMENT = 15.5
 
 @onready var attack_radius: Area2D = $AttackRadius
 @onready var attack_timer: Timer = $AttackTimer
-@onready var attack_box: Area2D = $AttackBox
 @onready var circle_attack_box: Area2D = $CircleAttackBox
-@onready var attack_collider: CollisionShape2D = $AttackBox/CollisionShape2D
+@onready var attack_collider: CollisionShape2D
 
 var crab_attack: Attack = Attack.new("crab slam", 1)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dxblb7s0p3c5n"]
+[gd_scene load_steps=25 format=3 uid="uid://dxblb7s0p3c5n"]
 
 [ext_resource type="Texture2D" uid="uid://in1qktimkaap" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/crab_state_machine.gd" id="2_ka2el"]
@@ -173,9 +173,6 @@ radius = 277.0
 radius = 8.0
 height = 32.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7hgp"]
-size = Vector2(23, 20)
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5it8r"]
 radius = 11.0
 height = 44.0
@@ -243,13 +240,6 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_h26ny")
-
-[node name="AttackBox" type="Area2D" parent="StateMachine/Attack"]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBox"]
-position = Vector2(-23.5, 0)
-shape = SubResource("RectangleShape2D_d7hgp")
 
 [node name="CircleAttackBox" type="Area2D" parent="StateMachine/Attack"]
 
