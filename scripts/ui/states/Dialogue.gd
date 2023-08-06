@@ -77,6 +77,7 @@ func _on_advance_dialogue():
 		Events.emit_signal("alert_dialogue")
 
 func _on_response_pressed(destination_branch):
+	exit_branch()
 	load_branch(destination_branch)
 	for button in response_buttons.get_children():
 		button.queue_free()
