@@ -82,8 +82,8 @@ script = ExtResource("3_cktdi")
 one_shot = true
 
 [node name="npc" parent="." instance=ExtResource("5_ao8yv")]
-visible = false
 position = Vector2(-52, 1)
+DIALOGUE_FILE = "test2.json"
 
 [node name="dialogue_ui" parent="." instance=ExtResource("6_lu7ra")]
 
