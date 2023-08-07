@@ -104,22 +104,26 @@ func exit_branch():
 ## Advances dialogue when E is pressed. Does nothing if awaiting response, exits dialogue when
 ## EXIT flag is shown in dialogue tree
 func _on_advance_dialogue():
+	# display all characters if display in progress
 	if display_in_progress:
 		dialogue_label.visible_characters = len(dialogue_label.text)
-		return
-	
-	if awaiting_response:
-		return
-	
-	if "branch_end" in current_dialogue_display:
-		exit_branch()
-	
-	var next_dialogue_id = current_dialogue_display["next"]
-	if next_dialogue_id != "EXIT":
-		update_dialogue_display(next_dialogue_id)
+	# do nothing if waiting for player to respond
+	elif awaiting_response:
+		pass
+	# advance to next dialogue
 	else:
-		Events.emit_signal("dialogue_complete")
-		Events.emit_signal("alert_dialogue")
+		# signal branch end if applicable
+		if "branch_end" in current_dialogue_display:
+			exit_branch()
+		# check next dialogue id
+		var next_dialogue_id = current_dialogue_display["next"]
+		# if not exiting, display next dialogue
+		if next_dialogue_id != "EXIT":
+			update_dialogue_display(next_dialogue_id)
+		# exit dialogue
+		else:
+			Events.emit_signal("dialogue_complete")
+			Events.emit_signal("alert_dialogue")
 
 ## Handles response button being pressed
 func _on_response_pressed(destination_branch):
