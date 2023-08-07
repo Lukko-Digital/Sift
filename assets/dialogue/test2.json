@@ -51,7 +51,8 @@
                 "text": "ja ne",
                 "next": "E"
             }
-        }
+        },
+        "branch_end": "R"
     },
     "A.0.0": {
         "name": "Guy",
