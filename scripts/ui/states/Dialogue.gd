@@ -12,8 +12,11 @@ var awaiting_response: bool = false
 
 ## Connect signals
 func _ready():
-	Events.enter_dialogue.connect(_on_enter_dialogue)
 	Events.advance_dialogue.connect(_on_advance_dialogue)
+
+## Recieves current NPC when dialogue entered
+func recieve_args(npc_node):
+	current_npc = npc_node
 
 ## Load dialogue file and enter origin (O) branch
 func enter():
@@ -79,10 +82,6 @@ func spawn_buttons():
 ## Signals to NPC to log a completed interaction for the current branch
 func exit_branch():
 	Events.emit_signal("interaction_complete", current_npc, current_dialogue_display["branch_end"])
-
-## Recieves current NPC when dialogue entered
-func _on_enter_dialogue(npc_node):
-	current_npc = npc_node
 
 ## Advances dialogue when E is pressed. Does nothing if awaiting response, exits dialogue when
 ## EXIT flag is shown in dialogue tree
