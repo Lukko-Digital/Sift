@@ -4,15 +4,20 @@ extends State
 @onready var dialogue_label = dialogue_box.get_node("Dialogue")
 @onready var response_buttons: VBoxContainer = dialogue_box.get_node("ResponseButtons")
 @onready var response_button_scene = preload("res://scenes/ui/response_button.tscn")
+@onready var text_timer: Timer = $TextTimer
 
 var current_npc
 var current_dialogue_tree: Dictionary
 var current_dialogue_display: Dictionary
 var awaiting_response: bool = false
+var display_in_progress: bool = false
+
+const TEXT_SPEED = 0.03
 
 ## Connect signals
 func _ready():
 	Events.advance_dialogue.connect(_on_advance_dialogue)
+	text_timer.wait_time = TEXT_SPEED
 
 ## Recieves current NPC when dialogue entered
 func recieve_args(npc_node):
@@ -62,8 +67,21 @@ func get_interaction_level(branch_id):
 func update_dialogue_display(dialogue_id):
 	current_dialogue_display = current_dialogue_tree[dialogue_id]
 	dialogue_label.text = current_dialogue_display["text"]
+	await animate_display()
 	if "responses" in current_dialogue_display:
 		handle_responses()
+
+## Display characters one by one
+func animate_display():
+	dialogue_label.visible_characters = 0
+	display_in_progress = true
+	
+	while dialogue_label.visible_characters < len(dialogue_label.text):
+		dialogue_label.visible_characters += 1
+		text_timer.start()
+		await text_timer.timeout
+	
+	display_in_progress = false
 
 ## Displays responses for player to select and awaits selection
 func handle_responses():
@@ -86,6 +104,10 @@ func exit_branch():
 ## Advances dialogue when E is pressed. Does nothing if awaiting response, exits dialogue when
 ## EXIT flag is shown in dialogue tree
 func _on_advance_dialogue():
+	if display_in_progress:
+		dialogue_label.visible_characters = len(dialogue_label.text)
+		return
+	
 	if awaiting_response:
 		return
 	

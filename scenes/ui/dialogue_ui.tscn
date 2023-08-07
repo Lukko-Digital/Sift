@@ -95,3 +95,5 @@ interact_prompt = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/I
 [node name="Dialogue" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_box")]
 script = ExtResource("4_utkvm")
 dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox")
+
+[node name="TextTimer" type="Timer" parent="StateMachine/Dialogue"]
