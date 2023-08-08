@@ -13,4 +13,4 @@ func _on_idle_dialogue():
 	transition_to("Idle")
 
 func _on_enter_dialogue(npc_node):
-	transition_to("Dialogue")
+	transition_to("Dialogue", npc_node)

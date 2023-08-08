@@ -17,7 +17,7 @@ func _ready():
 	super._ready()
 	attack_timer.timeout.connect(_return_to_idle)
 	health_component.died.connect(_on_death)
-	hurtbox_component.effect_applied.connect(_on_effect_applied)
+	hurtbox_component.damage_taken.connect(_on_damage_taken)
 	animation_player.animation_finished.connect(_on_animation_finished)
 	knockback_timer.timeout.connect(_return_to_idle)
 
@@ -30,6 +30,7 @@ func _physics_process(delta: float) -> void:
 		transition_to("KnockedBack")
 	elif (
 		not attack_radius.get_overlapping_bodies().is_empty() or 
+		animation_player.current_animation == "Attack_front" or
 		not attack_timer.is_stopped()
 	):
 		transition_to("Attack")
@@ -55,7 +56,7 @@ func _on_animation_finished(anim_name):
 	if anim_name == "knocked_up":
 		transition_to("Idle")
 
-func _on_effect_applied(effects):
+func _on_damage_taken(effects):
 	for effect in effects:
 		if effect.effect_name == Effect.EffectName.KNOCKED_UP:
 			transition_to("KnockedUp")

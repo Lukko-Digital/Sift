@@ -11,14 +11,15 @@ var buffer_attack: bool = false
 
 func _ready():
 	transition_to("Idle")
-	Events.idle_dialogue.connect(_on_exit_dialogue)
-	Events.dialogue_complete.connect(_on_exit_dialogue)
-	hurtbox_component.effect_applied.connect(_on_effect_applied)
+	Events.idle_dialogue.connect(exit_dialogue)
+	Events.dialogue_complete.connect(exit_dialogue)
+	hurtbox_component.damage_taken.connect(_on_damage_taken)
 	knockback_timer.timeout.connect(_return_to_idle)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("escape") and in_dialogue:
-		Events.emit_signal("idle_dialogue")
+		Events.emit_signal("alert_dialogue")
+		exit_dialogue()
 	
 	if state.name == "KnockedBack":
 		transition_to("KnockedBack")
@@ -67,13 +68,14 @@ func _physics_process(delta: float) -> void:
 		
 	state.handle_physics(delta)
 
-func _on_exit_dialogue():
+func exit_dialogue():
 	in_dialogue = false
 	
 func _return_to_idle():
 	transition_to("Idle")
 
-func _on_effect_applied(effects):
+func _on_damage_taken(effects):
+	Global.camera.shake(0.1, 3)
 	for effect in effects:
 		if effect.effect_name == Effect.EffectName.KNOCKED_BACK:
 			transition_to("KnockedBack", effect)

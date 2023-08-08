@@ -64,54 +64,12 @@ text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
 autowrap_mode = 2
 clip_text = true
 
-[node name="ResponseButtons" type="Control" parent="HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Response1" type="Button" parent="HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox/ResponseButtons"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = 179.0
-offset_right = 93.0
-offset_bottom = 210.0
-grow_vertical = 0
-scale = Vector2(2, 2)
-text = "response 1"
-
-[node name="Response2" type="Button" parent="HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox/ResponseButtons"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 533.5
-offset_top = 179.0
-offset_right = 626.5
-offset_bottom = 210.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(2, 2)
-text = "response 2"
-
-[node name="Response3" type="Button" parent="HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox/ResponseButtons"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1067.0
-offset_top = 179.0
-offset_right = 1160.0
-offset_bottom = 210.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(2, 2)
-text = "response 3"
+[node name="ResponseButtons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox"]
+layout_mode = 2
+offset_top = 149.0
+offset_right = 1200.0
+offset_bottom = 250.0
+size_flags_vertical = 8
 
 [node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -137,3 +95,5 @@ interact_prompt = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/I
 [node name="Dialogue" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_box")]
 script = ExtResource("4_utkvm")
 dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox")
+
+[node name="TextTimer" type="Timer" parent="StateMachine/Dialogue"]

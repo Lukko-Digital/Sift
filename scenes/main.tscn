@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8md8ehlk518q"]
+[gd_scene load_steps=11 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
 [ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
+[ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="3_cktdi"]
 [ext_resource type="PackedScene" uid="uid://ci6g6b1e53iui" path="res://scenes/npc.tscn" id="5_ao8yv"]
 [ext_resource type="PackedScene" uid="uid://dyntgekv1adag" path="res://scenes/tree.tscn" id="6_535dw"]
 [ext_resource type="PackedScene" uid="uid://ccs3flkclj740" path="res://scenes/ui/dialogue_ui.tscn" id="6_lu7ra"]
@@ -75,10 +76,14 @@ position = Vector2(92, 3)
 zoom = Vector2(5, 5)
 process_callback = 0
 position_smoothing_enabled = true
+script = ExtResource("3_cktdi")
+
+[node name="ShakeTimer" type="Timer" parent="player/Camera2D"]
+one_shot = true
 
 [node name="npc" parent="." instance=ExtResource("5_ao8yv")]
-visible = false
 position = Vector2(-52, 1)
+DIALOGUE_FILE = "test2.json"
 
 [node name="dialogue_ui" parent="." instance=ExtResource("6_lu7ra")]
 

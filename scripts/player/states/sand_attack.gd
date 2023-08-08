@@ -34,6 +34,7 @@ func enter():
 	var instance = sand_attack_scene.instantiate()
 	instance.start(global_position + Vector2(0, -12) - direction * 5, anim_name)
 	get_tree().root.add_child(instance)
+	Global.camera.shake(0.1, 1)
 	
 func handle_physics(delta):
 	if time - timer.time_left > START_LAG and timer.time_left > END_LAG:

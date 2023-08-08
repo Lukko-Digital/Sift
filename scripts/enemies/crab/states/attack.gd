@@ -2,8 +2,6 @@ extends State
 
 @export var animation_player: AnimationPlayer
 
-const WIND_UP_TIME = 0.2
-@onready var ATTACK_TIME = animation_player.get_animation("Attack_front").length
 const END_LAG = 0.8
 
 const HORIZONTAL_ATTACK_PLACEMENT = 23.5
@@ -12,31 +10,25 @@ const VERTICAL_ATTACK_PLACEMENT = 15.5
 @onready var attack_radius: Area2D = $AttackRadius
 @onready var attack_timer: Timer = $AttackTimer
 @onready var attack_box: Area2D = $AttackBox
-@onready var circle_attack_box: Area2D = $CircleAttackBox
-@onready var attack_collider: CollisionShape2D = $AttackBox/CollisionShape2D
+@onready var attack_collider: CollisionShape2D
 
 var crab_attack: Attack = Attack.new("crab slam", 1)
 
 func _ready():
-	circle_attack_box.area_entered.connect(_on_hit)
+	attack_box.area_entered.connect(_on_hit)
+	animation_player.animation_finished.connect(_on_animation_end)
 
 func enter():
 	attack_timer.one_shot = true
-	attack_timer.start(WIND_UP_TIME + ATTACK_TIME + END_LAG)
+	animation_player.play("Attack_front")
 
-func handle_physics(delta: float):
-	if attack_timer.time_left > ATTACK_TIME + END_LAG:
-		# windup
-		pass
-	elif attack_timer.time_left > END_LAG:
-		# attack
-		animation_player.play("Attack_front")
-	else:
-		# end lag
-		pass
-		
 func exit():
 	animation_player.stop()
+
+func _on_animation_end(anim_name: StringName):
+	if anim_name == "Attack_front":
+		animation_player.play("Idle_front")
+		attack_timer.start(END_LAG)
 	
 func get_direction_to_player():
 	for body in attack_radius.get_overlapping_bodies():
