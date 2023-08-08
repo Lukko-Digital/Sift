@@ -19,14 +19,13 @@ func _ready():
 	health_component.died.connect(_on_death)
 	hurtbox_component.damage_taken.connect(_on_damage_taken)
 	animation_player.animation_finished.connect(_on_animation_finished)
-	knockback_timer.timeout.connect(_return_to_idle)
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		transition_to("Dead")
 	elif state.name == "KnockedUp":
 		transition_to("KnockedUp")
-	elif state.name == "KnockedBack":
+	elif not knockback_timer.is_stopped():
 		transition_to("KnockedBack")
 	elif (
 		not attack_radius.get_overlapping_bodies().is_empty() or 
