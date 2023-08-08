@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dxblb7s0p3c5n"]
+[gd_scene load_steps=32 format=3 uid="uid://dxblb7s0p3c5n"]
 
 [ext_resource type="Texture2D" uid="uid://in1qktimkaap" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/crab_state_machine.gd" id="2_ka2el"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/knocked_up.gd" id="7_6j2xk"]
 [ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="8_hofra"]
 [ext_resource type="Script" path="res://scripts/enemies/crab/states/knocked_back.gd" id="8_vu64y"]
+[ext_resource type="Script" path="res://scripts/player/states/hit.gd" id="9_7qexf"]
 
 [sub_resource type="Animation" id="Animation_eth1l"]
 resource_name = "Attack_front"
@@ -393,6 +394,9 @@ one_shot = true
 
 [node name="StunTimer" type="Timer" parent="StateMachine"]
 one_shot = true
+
+[node name="Hit" type="Node2D" parent="StateMachine"]
+script = ExtResource("9_7qexf")
 
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("6_76mvh")]
 position = Vector2(0, 13)
