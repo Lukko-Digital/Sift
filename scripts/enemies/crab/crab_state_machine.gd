@@ -1,6 +1,7 @@
 extends StateMachine
 
 @export var animation_player: AnimationPlayer
+@export var color_animation_player: AnimationPlayer
 
 @onready var aggro_radius: Area2D = $Track/AggroRadius
 @onready var tracking_radius: Area2D = $Track/TrackingRadius
@@ -66,3 +67,9 @@ func _on_damage_taken(effects):
 			transition_to("KnockedBack", effect)
 		elif effect.effect_name == Effect.EffectName.STUNNED:
 			stun_timer.start(effect.duration)
+	on_hit_animation()
+
+func on_hit_animation():
+	color_animation_player.queue("On_hit_white")
+	for i in range(5):
+		color_animation_player.queue("On_hit_red_flash")
