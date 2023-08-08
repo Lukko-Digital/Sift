@@ -182,7 +182,7 @@ size = Vector2(24, 8)
 
 [node name="crab" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
-collision_mask = 7
+collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -2)
