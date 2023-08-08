@@ -30,9 +30,11 @@ func enter():
 			anim_name = "down"
 		else:
 			anim_name = "up"
+			
+	direction = animation_tree["parameters/SandAttack/blend_position"]
 	
 	var instance = sand_attack_scene.instantiate()
-	instance.start(global_position + Vector2(0, -12) - direction * 5, anim_name)
+	instance.start(global_position + Vector2(0, -12) - direction * 20, anim_name)
 	get_tree().root.add_child(instance)
 	Global.camera.shake(0.1, 1)
 	
