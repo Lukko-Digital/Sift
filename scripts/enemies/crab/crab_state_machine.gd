@@ -23,12 +23,12 @@ func _ready():
 	animation_player.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
-	if is_dead:
-		transition_to("Dead")
-	elif state.name == "KnockedUp":
+	if state.name == "KnockedUp":
 		transition_to("KnockedUp")
 	elif not knockback_timer.is_stopped():
 		transition_to("KnockedBack")
+	elif is_dead:
+		transition_to("Dead")
 	elif not stun_timer.is_stopped():
 		transition_to("Idle")
 	elif (
