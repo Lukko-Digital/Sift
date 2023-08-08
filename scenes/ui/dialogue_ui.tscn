@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccs3flkclj740"]
+[gd_scene load_steps=7 format=3 uid="uid://ccs3flkclj740"]
 
+[ext_resource type="Texture2D" uid="uid://bvaqvk5trrvei" path="res://assets/portraits/player.png" id="1_d0d21"]
 [ext_resource type="Script" path="res://scripts/ui/dialogue_ui_state_machine.gd" id="1_k7p84"]
 [ext_resource type="Script" path="res://scripts/ui/states/Idle.gd" id="2_cpfha"]
+[ext_resource type="Texture2D" uid="uid://xfi7lhln2g3i" path="res://assets/png/dialogue_box.png" id="2_oxx8b"]
 [ext_resource type="Script" path="res://scripts/ui/states/Alert.gd" id="3_ni75i"]
 [ext_resource type="Script" path="res://scripts/ui/states/Dialogue.gd" id="4_utkvm"]
 
@@ -23,14 +25,15 @@ custom_minimum_size = Vector2(1200, 0)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 
 [node name="InteractPrompt" type="Control" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer2/InteractPrompt"]
@@ -49,22 +52,51 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "press [E] to interact"
 
-[node name="DialogueBox" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="Dialogue" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/MarginContainer2/PanelContainer"]
+z_index = 10
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_d0d21")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="HSplitContainer" type="HSplitContainer" parent="HBoxContainer/VBoxContainer/MarginContainer2/PanelContainer"]
+layout_mode = 2
+split_offset = 125
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/MarginContainer2/PanelContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="DialogueBox" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/MarginContainer2/PanelContainer/HSplitContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_oxx8b")
+patch_margin_left = 60
+patch_margin_top = 60
+patch_margin_right = 60
+patch_margin_bottom = 60
+
+[node name="Dialogue" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer2/PanelContainer/HSplitContainer/DialogueBox"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 130.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+text = "Lorem ipsum dolor sit amet"
 autowrap_mode = 2
-clip_text = true
 
-[node name="ResponseButtons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox"]
+[node name="ResponseButtons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer2/PanelContainer/HSplitContainer/DialogueBox"]
 layout_mode = 2
 offset_top = 149.0
 offset_right = 1200.0
@@ -72,8 +104,8 @@ offset_bottom = 250.0
 size_flags_vertical = 8
 
 [node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -86,7 +118,7 @@ initial_state = NodePath("Idle")
 [node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("interact_prompt", "dialogue_box")]
 script = ExtResource("2_cpfha")
 interact_prompt = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/InteractPrompt")
-dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox")
+dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/PanelContainer/HSplitContainer/DialogueBox")
 
 [node name="Alert" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("interact_prompt")]
 script = ExtResource("3_ni75i")
@@ -94,6 +126,6 @@ interact_prompt = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/I
 
 [node name="Dialogue" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_box")]
 script = ExtResource("4_utkvm")
-dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox")
+dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/PanelContainer/HSplitContainer/DialogueBox")
 
 [node name="TextTimer" type="Timer" parent="StateMachine/Dialogue"]
