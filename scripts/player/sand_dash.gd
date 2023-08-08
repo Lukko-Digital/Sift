@@ -120,5 +120,6 @@ func exit():
 
 func _on_pop_up_hitbox_area_entered(area):
 	if area.is_in_group("enemy_hurtbox"):
+		Global.camera.shake(0.1, 3)
 		area.damage(popup_attack)
 
