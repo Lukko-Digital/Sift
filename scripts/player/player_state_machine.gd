@@ -75,7 +75,7 @@ func _return_to_idle():
 	transition_to("Idle")
 
 func _on_damage_taken(effects):
-	Global.camera.shake(0.1, 3)
+	Global.camera.shake(0.1, 5)
 	for effect in effects:
 		if effect.effect_name == Effect.EffectName.KNOCKED_BACK:
 			transition_to("KnockedBack", effect)
