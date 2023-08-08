@@ -1,0 +1,82 @@
+{
+    "O": {
+        "0": [
+            {"text": "oh hi im guy"},
+            {
+                "text": "any questions comments concerns?",
+                "responses": {
+                    "1": {
+                        "text": "wait who are you again?",
+                        "next": "A"
+                    },
+                    "2": {
+                        "text": "what am i doing here?",
+                        "next": "B"
+                    },
+                    "3": {
+                        "text": "ja ne",
+                        "next": "E"
+                    }
+                }
+            }
+        ],
+        "1": [
+            {"text": "oh its you again"},
+            {
+                "text": "any questions comments concerns?",
+                "responses": {
+                    "1": {
+                        "text": "wait who are you again?",
+                        "next": "A"
+                    },
+                    "2": {
+                        "text": "what am i doing here?",
+                        "next": "B"
+                    },
+                    "3": {
+                        "text": "ja ne",
+                        "next": "E"
+                    }
+                }
+            }
+        ]
+    },
+    "A": {
+        "0": [
+            {"text": "im guy", "next": "R"}
+        ],
+        "1": [
+            {"text": "cmon you know already", "next": "R"}
+        ]
+    },
+    "B": {
+        "0": [
+            {"text": "your guess is as good as mine", "next": "R"}
+        ],
+        "1": [
+            {"text": "*shrugs*", "next": "R"}
+        ]
+    },
+    "E": {
+        "0": [{"text": "mata ne", "next": "EXIT"}]
+    },
+    "R": {
+        "0": [{
+            "text": "anything else?",
+            "responses": {
+                "1": {
+                    "text": "wait who are you again?",
+                    "next": "A"
+                },
+                "2": {
+                    "text": "what am i doing here?",
+                    "next": "B"
+                },
+                "3": {
+                    "text": "ja ne",
+                    "next": "E"
+                }
+            }
+        }]
+    }
+}
