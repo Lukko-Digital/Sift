@@ -56,6 +56,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_1jrft"]
 resource_name = "Dead_1"
 length = 0.1
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -67,18 +68,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [13]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.8)]
 }
 
 [sub_resource type="Animation" id="Animation_ok4x2"]
@@ -95,18 +84,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [14]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.8)]
 }
 
 [sub_resource type="Animation" id="Animation_dkcx4"]
@@ -219,21 +196,20 @@ _data = {
 "knocked_up": SubResource("Animation_pypln")
 }
 
-[sub_resource type="Animation" id="Animation_qfwdw"]
-resource_name = "On_hit"
-length = 0.264
-step = 0.01
+[sub_resource type="Animation" id="Animation_vpurs"]
+resource_name = "Dead_transparent"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 0
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22, 0.24),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(10, 10, 10, 1), Color(10, 0, 0, 1), Color(1, 1, 1, 1), Color(10, 0, 0, 1), Color(1, 1, 1, 1), Color(10, 0, 0, 1), Color(1, 1, 1, 1), Color(10, 0, 0, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0.6)]
 }
 
 [sub_resource type="Animation" id="Animation_87a45"]
@@ -271,7 +247,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5yxb6"]
 _data = {
-"On_hit": SubResource("Animation_qfwdw"),
+"Dead_transparent": SubResource("Animation_vpurs"),
 "On_hit_red_flash": SubResource("Animation_87a45"),
 "On_hit_white": SubResource("Animation_tuuhe")
 }
@@ -301,11 +277,10 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.8)
 position = Vector2(0, -2)
 texture = ExtResource("1_65ej8")
 hframes = 15
-frame = 13
+frame = 14
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -325,6 +300,7 @@ shape = SubResource("RectangleShape2D_2f18y")
 [node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "color_animation_player")]
+visible = false
 script = ExtResource("2_ka2el")
 animation_player = NodePath("../Sprite2D/AnimationPlayer")
 color_animation_player = NodePath("../Sprite2D/ColorAnimationPlayer")
@@ -375,9 +351,10 @@ shape = SubResource("CapsuleShape2D_5it8r")
 [node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
 one_shot = true
 
-[node name="Dead" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
+[node name="Dead" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "color_animation_player", "character")]
 script = ExtResource("6_0obea")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+color_animation_player = NodePath("../../Sprite2D/ColorAnimationPlayer")
 character = NodePath("../..")
 
 [node name="KnockedUp" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
