@@ -96,6 +96,7 @@ func spawn_buttons():
 		button_instance.destination_branch = response["next"]
 		button_instance.response_pressed.connect(_on_response_pressed)
 		response_buttons.add_child(button_instance)
+	response_buttons.get_child(0).grab_focus()
 
 ## Signals to NPC to log a completed interaction for the current branch
 func exit_branch():
