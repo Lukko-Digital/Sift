@@ -1,6 +1,7 @@
 extends State
 
 @export var animation_player: AnimationPlayer
+@export var color_animation_player: AnimationPlayer
 
 const NUM_DEAD_ANIMATIONS = 2
 
@@ -11,3 +12,5 @@ func enter():
 	hurtbox.monitorable = false
 	var anim_idx = randi() % NUM_DEAD_ANIMATIONS + 1
 	animation_player.play("Dead_%s" % anim_idx)
+	color_animation_player.play("On_hit_white")
+	color_animation_player.queue("Dead_transparent")
