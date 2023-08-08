@@ -25,7 +25,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [8, 8, 11]
+"values": [8, 8, 12]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -187,8 +187,8 @@ collision_mask = 3
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -2)
 texture = ExtResource("1_65ej8")
-hframes = 12
-frame = 8
+hframes = 15
+frame = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -274,7 +274,7 @@ one_shot = true
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("6_76mvh")]
 position = Vector2(0, 13)
 texture = ExtResource("1_65ej8")
-hframes = 12
+hframes = 15
 sprite_to_reflect = NodePath("../Sprite2D")
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_0uixo")]
