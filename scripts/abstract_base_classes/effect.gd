@@ -2,7 +2,8 @@ class_name Effect
 
 enum EffectName {
 	KNOCKED_BACK,
-	KNOCKED_UP
+	KNOCKED_UP,
+	STUNNED
 }
 
 var effect_name: EffectName
