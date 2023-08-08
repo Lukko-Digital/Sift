@@ -268,6 +268,9 @@ character = NodePath("../..")
 [node name="KnockBackTimer" type="Timer" parent="StateMachine/KnockedBack"]
 one_shot = true
 
+[node name="StunTimer" type="Timer" parent="StateMachine"]
+one_shot = true
+
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("6_76mvh")]
 position = Vector2(0, 13)
 texture = ExtResource("1_65ej8")
