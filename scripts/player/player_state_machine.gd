@@ -72,6 +72,7 @@ func exit_dialogue():
 	
 func _on_damage_taken(attack: Attack):
 	Global.camera.shake(0.1, 5)
+	Events.emit_signal("player_damaged", attack.damage)
 	transition_to("Hit", attack.effects)
 
 func _on_hit_return_to_idle():
