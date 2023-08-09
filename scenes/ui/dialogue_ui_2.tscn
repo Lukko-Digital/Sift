@@ -124,8 +124,9 @@ script = ExtResource("4_koium")
 dialogue_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer")
 interact_prompt_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/InteractPromptContainer")
 
-[node name="Alert" type="Node2D" parent="StateMachine"]
+[node name="Alert" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("interact_prompt_container")]
 script = ExtResource("5_tdsby")
+interact_prompt_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/InteractPromptContainer")
 
 [node name="Dialogue" type="Node2D" parent="StateMachine"]
 script = ExtResource("6_hd7jg")

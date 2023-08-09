@@ -1,9 +1,9 @@
 extends State
 
-@export var interact_prompt: Control
+@export var interact_prompt_container: MarginContainer
 
 func enter():
-	interact_prompt.show()
+	interact_prompt_container.show()
 	
 func exit():
-	interact_prompt.hide()
+	interact_prompt_container.hide()
