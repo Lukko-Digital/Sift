@@ -1,12 +1,35 @@
-[gd_scene load_steps=8 format=3 uid="uid://c83lh8olstfpw"]
+[gd_scene load_steps=11 format=3 uid="uid://c83lh8olstfpw"]
 
 [ext_resource type="Texture2D" uid="uid://bvaqvk5trrvei" path="res://assets/portraits/player.png" id="1_3asfl"]
 [ext_resource type="Texture2D" uid="uid://xfi7lhln2g3i" path="res://assets/png/dialogue_box.png" id="2_6oq5h"]
 [ext_resource type="Script" path="res://scripts/ui/dialogue_ui_state_machine.gd" id="3_7yrsa"]
 [ext_resource type="PackedScene" uid="uid://cxuxdp2fuyfpx" path="res://scenes/ui/response_button.tscn" id="3_yglai"]
 [ext_resource type="Script" path="res://scripts/ui/states/Idle.gd" id="4_koium"]
+[ext_resource type="Texture2D" uid="uid://dx32mor4tsly1" path="res://assets/png/dialogue_arrow.png" id="4_lj0l7"]
 [ext_resource type="Script" path="res://scripts/ui/states/Alert.gd" id="5_tdsby"]
 [ext_resource type="Script" path="res://scripts/ui/states/Dialogue.gd" id="6_hd7jg"]
+
+[sub_resource type="Animation" id="Animation_7v4p2"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow:offset")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0nx3x"]
+_data = {
+"idle": SubResource("Animation_7v4p2")
+}
 
 [node name="dialogue_ui" type="CanvasLayer"]
 
@@ -68,38 +91,63 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.309804, 0.0745098, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "Name"
 
-[node name="Dialogue" type="Label" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer"]
+[node name="Dialogue" type="Label" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.309804, 0.0745098, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "a a a a a a a a a a a a a a a a a a a a a a a a a a a "
 autowrap_mode = 3
 
-[node name="ResponseButtonContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer"]
+[node name="ResponseButtonContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ResponseButton" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
+[node name="ResponseButton" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
 layout_mode = 2
 text = "response 1"
 
-[node name="ResponseButton2" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
+[node name="ResponseButton2" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
 layout_mode = 2
 text = "response 2"
 
-[node name="ResponseButton3" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
+[node name="ResponseButton3" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
 layout_mode = 2
 text = "response 3"
 
+[node name="ArrowMargin" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ArrowContainer" type="Control" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/ArrowMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Arrow" type="Sprite2D" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/ArrowMargin/ArrowContainer"]
+position = Vector2(0, -30)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_lj0l7")
+
+[node name="ArrowAnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/ArrowMargin/ArrowContainer"]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_0nx3x")
+}
+
 [node name="InteractPromptContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox"]
+visible = false
 layout_mode = 2
 
 [node name="InteractPrompt" type="Label" parent="HBoxContainer/VBoxContainer/ActiveBox/InteractPromptContainer"]
@@ -133,7 +181,7 @@ interact_prompt_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBo
 [node name="Dialogue" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_container", "dialogue_label", "response_button_container")]
 script = ExtResource("6_hd7jg")
 dialogue_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer")
-dialogue_label = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer/Dialogue")
-response_button_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtonContainer")
+dialogue_label = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/Dialogue")
+response_button_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponseButtonContainer")
 
 [node name="TextTimer" type="Timer" parent="StateMachine/Dialogue"]
