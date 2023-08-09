@@ -1044,7 +1044,7 @@ hframes = 207
 sprite_to_reflect = NodePath("../Sprite2D")
 
 [node name="HealthComponent" parent="." instance=ExtResource("11_mf8l8")]
-max_health = 5.0
+max_health = 3.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["player_hurtbox"] instance=ExtResource("12_nrhlb")]
 health_component = NodePath("../HealthComponent")
