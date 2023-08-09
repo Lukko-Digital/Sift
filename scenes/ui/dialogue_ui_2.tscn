@@ -119,8 +119,10 @@ size_flags_horizontal = 3
 script = ExtResource("3_7yrsa")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node2D" parent="StateMachine"]
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_container", "interact_prompt_container")]
 script = ExtResource("4_koium")
+dialogue_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer")
+interact_prompt_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/InteractPromptContainer")
 
 [node name="Alert" type="Node2D" parent="StateMachine"]
 script = ExtResource("5_tdsby")
