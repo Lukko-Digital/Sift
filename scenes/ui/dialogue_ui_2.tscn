@@ -83,18 +83,18 @@ theme_override_font_sizes/font_size = 40
 text = "a a a a a a a a a a a a a a a a a a a a a a a a a a a "
 autowrap_mode = 3
 
-[node name="ResponseButtons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer"]
+[node name="ResponseButtonContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ResponseButton" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtons" instance=ExtResource("3_yglai")]
+[node name="ResponseButton" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
 layout_mode = 2
 text = "response 1"
 
-[node name="ResponseButton2" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtons" instance=ExtResource("3_yglai")]
+[node name="ResponseButton2" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
 layout_mode = 2
 text = "response 2"
 
-[node name="ResponseButton3" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtons" instance=ExtResource("3_yglai")]
+[node name="ResponseButton3" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
 layout_mode = 2
 text = "response 3"
 
@@ -128,7 +128,10 @@ interact_prompt_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBo
 script = ExtResource("5_tdsby")
 interact_prompt_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/InteractPromptContainer")
 
-[node name="Dialogue" type="Node2D" parent="StateMachine"]
+[node name="Dialogue" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_container", "dialogue_label", "response_button_container")]
 script = ExtResource("6_hd7jg")
+dialogue_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer")
+dialogue_label = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer/Dialogue")
+response_button_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtonContainer")
 
 [node name="TextTimer" type="Timer" parent="StateMachine/Dialogue"]
