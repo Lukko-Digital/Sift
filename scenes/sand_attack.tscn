@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_cxjsa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4fgb"]
-size = Vector2(40, 55.75)
+size = Vector2(63, 68.0003)
 
 [sub_resource type="Animation" id="Animation_e47jn"]
 resource_name = "down"
@@ -179,7 +179,7 @@ _data = {
 position = Vector2(0, -12)
 texture = ExtResource("1_wcllv")
 hframes = 24
-frame = 8
+frame = 7
 script = ExtResource("2_7c25b")
 animation_player = NodePath("AnimationPlayer")
 
@@ -197,9 +197,8 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(32, 0)
+position = Vector2(43.5, 2.18279e-11)
 shape = SubResource("RectangleShape2D_v4fgb")
-disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
