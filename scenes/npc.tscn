@@ -38,6 +38,7 @@ DIALOGUE_FILE = "test.json"
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_uldmk")
 hframes = 4
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_syfi1")
