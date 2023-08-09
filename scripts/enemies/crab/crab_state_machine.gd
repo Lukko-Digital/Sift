@@ -59,10 +59,10 @@ func _on_animation_finished(anim_name):
 	if anim_name == "knocked_up":
 		transition_to("Idle")
 
-func _on_damage_taken(effects):
+func _on_damage_taken(attack: Attack):
 	if not is_dead:
 		on_hit_animation()
-	for effect in effects:
+	for effect in attack.effects:
 		if effect.effect_name == Effect.EffectName.KNOCKED_UP:
 			transition_to("KnockedUp")
 		elif effect.effect_name == Effect.EffectName.KNOCKED_BACK:

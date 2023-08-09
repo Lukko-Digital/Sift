@@ -8,4 +8,4 @@ func damage(attack: Attack):
 	if health_component:
 		health_component.damage(attack)
 		var effects = attack.effects if not attack.effects.is_empty() else null
-		emit_signal("damage_taken", attack.effects)
+		emit_signal("damage_taken", attack)
