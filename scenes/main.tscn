@@ -3,10 +3,10 @@
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
 [ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="3_cktdi"]
+[ext_resource type="PackedScene" uid="uid://c83lh8olstfpw" path="res://scenes/ui/dialogue_ui_2.tscn" id="5_36d1q"]
 [ext_resource type="PackedScene" uid="uid://ci6g6b1e53iui" path="res://scenes/npc.tscn" id="5_ao8yv"]
 [ext_resource type="PackedScene" uid="uid://dyntgekv1adag" path="res://scenes/tree.tscn" id="6_535dw"]
-[ext_resource type="PackedScene" uid="uid://ccs3flkclj740" path="res://scenes/ui/dialogue_ui.tscn" id="6_lu7ra"]
-[ext_resource type="PackedScene" path="res://scenes/bush.tscn" id="7_v5wfo"]
+[ext_resource type="PackedScene" uid="uid://dm2qby2s4o0by" path="res://scenes/bush.tscn" id="7_v5wfo"]
 [ext_resource type="Shader" path="res://scripts/shaders/chromatic_abberation.gdshader" id="8_3owxf"]
 [ext_resource type="PackedScene" uid="uid://dxblb7s0p3c5n" path="res://scenes/enemies/crab.tscn" id="8_a7cgk"]
 
@@ -85,7 +85,7 @@ one_shot = true
 position = Vector2(-52, 1)
 DIALOGUE_FILE = "test2.json"
 
-[node name="dialogue_ui" parent="." instance=ExtResource("6_lu7ra")]
+[node name="dialogue_ui2" parent="." instance=ExtResource("5_36d1q")]
 
 [node name="crab" parent="." instance=ExtResource("8_a7cgk")]
 position = Vector2(-184, -182)
