@@ -5,4 +5,6 @@
 [node name="ResponseButton" type="Button"]
 offset_right = 8.0
 offset_bottom = 8.0
+theme_override_font_sizes/font_size = 32
+alignment = 0
 script = ExtResource("1_iwuks")
