@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb3q3qfbatogk"]
+
+[ext_resource type="Texture2D" uid="uid://dgre2hq2wfv0p" path="res://assets/png/player_heart_empty.png" id="1_ohfhr"]
+[ext_resource type="Texture2D" uid="uid://dm6gbqtfdmoy5" path="res://assets/png/player_heart_full.png" id="2_i6p0v"]
+
+[node name="combat_ui" type="CanvasLayer"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 50.0
+offset_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+
+[node name="Hearts" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="EmptyHearts" type="TextureRect" parent="MarginContainer/Hearts"]
+offset_right = 918.0
+offset_bottom = 218.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_ohfhr")
+stretch_mode = 1
+
+[node name="FullHearts" type="TextureRect" parent="MarginContainer/Hearts"]
+layout_mode = 2
+offset_right = 918.0
+offset_bottom = 218.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_i6p0v")
+expand_mode = 1
+stretch_mode = 1
