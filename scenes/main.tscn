@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="3_cktdi"]
 [ext_resource type="PackedScene" uid="uid://c83lh8olstfpw" path="res://scenes/ui/dialogue_ui.tscn" id="5_36d1q"]
-[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_ui_2.tscn" id="5_36d1q"]
 [ext_resource type="PackedScene" uid="uid://ci6g6b1e53iui" path="res://scenes/npc.tscn" id="5_ao8yv"]
 [ext_resource type="PackedScene" uid="uid://dyntgekv1adag" path="res://scenes/tree.tscn" id="6_535dw"]
 [ext_resource type="PackedScene" uid="uid://dm2qby2s4o0by" path="res://scenes/bush.tscn" id="7_v5wfo"]
