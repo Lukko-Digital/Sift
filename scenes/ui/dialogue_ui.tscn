@@ -61,7 +61,7 @@ layout_mode = 2
 [node name="PortraitContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
+size_flags_vertical = 8
 
 [node name="Portrait" type="TextureRect" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/PortraitContainer"]
 z_index = 10
@@ -73,8 +73,9 @@ stretch_mode = 4
 
 [node name="TextboxContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer"]
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_vertical = 8
 theme_override_constants/margin_left = 150
+theme_override_constants/margin_bottom = 30
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer"]
 layout_mode = 2
