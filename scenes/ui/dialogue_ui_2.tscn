@@ -27,16 +27,16 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="ActiveBox" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1200, 200)
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
+[node name="PortraitContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer2"]
+[node name="Portrait" type="TextureRect" parent="HBoxContainer/VBoxContainer/ActiveBox/PortraitContainer"]
 z_index = 10
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
@@ -44,12 +44,12 @@ texture = ExtResource("1_3asfl")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
+[node name="TextboxContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/margin_left = 150
 
-[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/ActiveBox/TextboxContainer"]
 layout_mode = 2
 texture = ExtResource("2_6oq5h")
 patch_margin_left = 40
@@ -57,10 +57,25 @@ patch_margin_top = 40
 patch_margin_right = 40
 patch_margin_bottom = 40
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/TextboxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/TextboxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer/ActiveBox/TextboxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a "
+text = "Name"
+
+[node name="Dialogue" type="Label" parent="HBoxContainer/VBoxContainer/ActiveBox/TextboxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "a a a a a a a a a a a a a a a a a a a a a a a a a a a "
 autowrap_mode = 3
 
 [node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
