@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c83lh8olstfpw"]
+[gd_scene load_steps=8 format=3 uid="uid://c83lh8olstfpw"]
 
 [ext_resource type="Texture2D" uid="uid://bvaqvk5trrvei" path="res://assets/portraits/player.png" id="1_3asfl"]
 [ext_resource type="Texture2D" uid="uid://xfi7lhln2g3i" path="res://assets/png/dialogue_box.png" id="2_6oq5h"]
 [ext_resource type="Script" path="res://scripts/ui/dialogue_ui_state_machine.gd" id="3_7yrsa"]
+[ext_resource type="PackedScene" uid="uid://cxuxdp2fuyfpx" path="res://scenes/ui/response_button.tscn" id="3_yglai"]
 [ext_resource type="Script" path="res://scripts/ui/states/Idle.gd" id="4_koium"]
 [ext_resource type="Script" path="res://scripts/ui/states/Alert.gd" id="5_tdsby"]
 [ext_resource type="Script" path="res://scripts/ui/states/Dialogue.gd" id="6_hd7jg"]
@@ -78,6 +79,21 @@ theme_override_font_sizes/font_size = 40
 text = "a a a a a a a a a a a a a a a a a a a a a a a a a a a "
 autowrap_mode = 3
 
+[node name="ResponseButtons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/TextboxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResponseButton" parent="HBoxContainer/VBoxContainer/ActiveBox/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtons" instance=ExtResource("3_yglai")]
+layout_mode = 2
+text = "response 1"
+
+[node name="ResponseButton2" parent="HBoxContainer/VBoxContainer/ActiveBox/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtons" instance=ExtResource("3_yglai")]
+layout_mode = 2
+text = "response 2"
+
+[node name="ResponseButton3" parent="HBoxContainer/VBoxContainer/ActiveBox/TextboxContainer/MarginContainer/VBoxContainer/ResponseButtons" instance=ExtResource("3_yglai")]
+layout_mode = 2
+text = "response 3"
+
 [node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
@@ -90,17 +106,13 @@ size_flags_horizontal = 3
 script = ExtResource("3_7yrsa")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("interact_prompt", "dialogue_box")]
+[node name="Idle" type="Node2D" parent="StateMachine"]
 script = ExtResource("4_koium")
-interact_prompt = NodePath("")
-dialogue_box = NodePath("")
 
-[node name="Alert" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("interact_prompt")]
+[node name="Alert" type="Node2D" parent="StateMachine"]
 script = ExtResource("5_tdsby")
-interact_prompt = NodePath("")
 
-[node name="Dialogue" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_box")]
+[node name="Dialogue" type="Node2D" parent="StateMachine"]
 script = ExtResource("6_hd7jg")
-dialogue_box = NodePath("")
 
 [node name="TextTimer" type="Timer" parent="StateMachine/Dialogue"]
