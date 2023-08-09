@@ -68,9 +68,9 @@ func get_interaction_level(branch_id):
 func update_dialogue_display(dialogue_id):
 	current_dialogue_display = current_dialogue_tree[dialogue_id]
 	dialogue_label.text = current_dialogue_display["text"]
-	await animate_display()
 	if "responses" in current_dialogue_display:
 		handle_responses()
+	await animate_display()
 
 ## Display characters one by one
 func animate_display():
