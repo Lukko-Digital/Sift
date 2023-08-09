@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://c83lh8olstfpw"]
+
+[ext_resource type="Texture2D" uid="uid://bvaqvk5trrvei" path="res://assets/portraits/player.png" id="1_3asfl"]
+[ext_resource type="Texture2D" uid="uid://xfi7lhln2g3i" path="res://assets/png/dialogue_box.png" id="2_6oq5h"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_ui_state_machine.gd" id="3_7yrsa"]
+[ext_resource type="Script" path="res://scripts/ui/states/Idle.gd" id="4_koium"]
+[ext_resource type="Script" path="res://scripts/ui/states/Alert.gd" id="5_tdsby"]
+[ext_resource type="Script" path="res://scripts/ui/states/Dialogue.gd" id="6_hd7jg"]
+
+[node name="dialogue_ui" type="CanvasLayer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1200, 200)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer2"]
+z_index = 10
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+texture = ExtResource("1_3asfl")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 150
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_6oq5h")
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a "
+autowrap_mode = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StateMachine" type="Node2D" parent="."]
+script = ExtResource("3_7yrsa")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("interact_prompt", "dialogue_box")]
+script = ExtResource("4_koium")
+interact_prompt = NodePath("")
+dialogue_box = NodePath("")
+
+[node name="Alert" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("interact_prompt")]
+script = ExtResource("5_tdsby")
+interact_prompt = NodePath("")
+
+[node name="Dialogue" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_box")]
+script = ExtResource("6_hd7jg")
+dialogue_box = NodePath("")
+
+[node name="TextTimer" type="Timer" parent="StateMachine/Dialogue"]
