@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bb3q3qfbatogk"]
+[gd_scene load_steps=4 format=3 uid="uid://bb3q3qfbatogk"]
 
+[ext_resource type="Script" path="res://scripts/ui/combat_ui.gd" id="1_jhqvg"]
 [ext_resource type="Texture2D" uid="uid://dgre2hq2wfv0p" path="res://assets/png/player_heart_empty.png" id="1_ohfhr"]
 [ext_resource type="Texture2D" uid="uid://dm6gbqtfdmoy5" path="res://assets/png/player_heart_full.png" id="2_i6p0v"]
 
 [node name="combat_ui" type="CanvasLayer"]
+script = ExtResource("1_jhqvg")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_right = 50.0
