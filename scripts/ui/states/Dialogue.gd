@@ -1,8 +1,8 @@
 extends State
 
-@export var dialogue_box: NinePatchRect
-@onready var dialogue_label = dialogue_box.get_node("Dialogue")
-@onready var response_buttons: VBoxContainer = dialogue_box.get_node("ResponseButtons")
+@export var dialogue_container: MarginContainer
+@export var dialogue_label: Label
+@export var response_button_container: VBoxContainer
 @onready var response_button_scene = preload("res://scenes/ui/response_button.tscn")
 @onready var text_timer: Timer = $TextTimer
 
@@ -25,7 +25,8 @@ func recieve_args(npc_node):
 
 ## Load dialogue file and enter origin (O) branch
 func enter():
-	dialogue_box.show()
+	dialogue_container.show()
+	despawn_buttons()
 	var dialogue_path = "res://assets/dialogue/%s" % current_npc.DIALOGUE_FILE
 	current_dialogue_tree = JSON.parse_string(FileAccess.open(dialogue_path, FileAccess.READ).get_as_text())
 	
@@ -33,7 +34,7 @@ func enter():
 
 ## Hide dialogue box and reset internal variables
 func exit():
-	dialogue_box.hide()
+	dialogue_container.hide()
 	current_npc = null
 	current_dialogue_tree = Dictionary()
 	current_dialogue_display = Dictionary()
@@ -67,9 +68,9 @@ func get_interaction_level(branch_id):
 func update_dialogue_display(dialogue_id):
 	current_dialogue_display = current_dialogue_tree[dialogue_id]
 	dialogue_label.text = current_dialogue_display["text"]
-	await animate_display()
 	if "responses" in current_dialogue_display:
 		handle_responses()
+	await animate_display()
 
 ## Display characters one by one
 func animate_display():
@@ -95,8 +96,13 @@ func spawn_buttons():
 		button_instance.text = response["text"]
 		button_instance.destination_branch = response["next"]
 		button_instance.response_pressed.connect(_on_response_pressed)
-		response_buttons.add_child(button_instance)
-	response_buttons.get_child(0).grab_focus()
+		response_button_container.add_child(button_instance)
+	response_button_container.get_child(0).grab_focus()
+
+## Removes all buttons from ResponseButtonContainer
+func despawn_buttons():
+	for button in response_button_container.get_children():
+		button.queue_free()
 
 ## Signals to NPC to log a completed interaction for the current branch
 func exit_branch():
@@ -130,6 +136,5 @@ func _on_advance_dialogue():
 func _on_response_pressed(destination_branch):
 	exit_branch()
 	load_branch(destination_branch)
-	for button in response_buttons.get_children():
-		button.queue_free()
+	despawn_buttons()
 	awaiting_response = false

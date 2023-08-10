@@ -1,10 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://ci6g6b1e53iui"]
+[gd_scene load_steps=6 format=3 uid="uid://ci6g6b1e53iui"]
 
-[ext_resource type="Texture2D" uid="uid://d0juyhg8rq2ls" path="res://icon.svg" id="1_5tpay"]
 [ext_resource type="Script" path="res://scripts/npcs/npc.gd" id="1_onvek"]
+[ext_resource type="Texture2D" uid="uid://yanr3vhemsyg" path="res://assets/png/weapondude_npc-Sheet.png" id="2_uldmk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_syfi1"]
-size = Vector2(12, 32)
+size = Vector2(14, 36)
+
+[sub_resource type="Animation" id="Animation_nhfsk"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6xmam"]
+_data = {
+"idle": SubResource("Animation_nhfsk")
+}
 
 [node name="npc" type="Area2D" groups=["npc"]]
 collision_layer = 8
@@ -14,8 +36,15 @@ NPC_NAME = "Guy"
 DIALOGUE_FILE = "test.json"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.25)
-texture = ExtResource("1_5tpay")
+texture = ExtResource("2_uldmk")
+hframes = 4
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_syfi1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_6xmam")
+}

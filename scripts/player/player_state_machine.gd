@@ -70,9 +70,10 @@ func _physics_process(delta: float) -> void:
 func exit_dialogue():
 	in_dialogue = false
 	
-func _on_damage_taken(effects):
+func _on_damage_taken(attack: Attack):
 	Global.camera.shake(0.1, 5)
-	transition_to("Hit", effects)
+	Events.emit_signal("player_damaged", attack.damage)
+	transition_to("Hit", attack.effects)
 
 func _on_hit_return_to_idle():
 	transition_to("Idle")

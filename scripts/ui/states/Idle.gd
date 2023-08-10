@@ -1,8 +1,8 @@
 extends State
 
-@export var interact_prompt: Control
-@export var dialogue_box: NinePatchRect
+@export var dialogue_container: MarginContainer
+@export var interact_prompt_container: MarginContainer
 
 func enter():
-	interact_prompt.hide()
-	dialogue_box.hide()
+	dialogue_container.hide()
+	interact_prompt_container.hide()
