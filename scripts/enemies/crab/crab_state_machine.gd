@@ -62,13 +62,15 @@ func _on_animation_finished(anim_name):
 func _on_damage_taken(effects):
 	if not is_dead:
 		on_hit_animation()
+
 	for effect in effects:
-		if effect.effect_name == Effect.EffectName.KNOCKED_UP:
-			transition_to("KnockedUp")
-		elif effect.effect_name == Effect.EffectName.KNOCKED_BACK:
-			transition_to("KnockedBack", effect)
-		elif effect.effect_name == Effect.EffectName.STUNNED:
-			stun_timer.start(effect.duration)
+		match effect.effect_name:
+			Effect.EffectName.KNOCKED_UP:
+				transition_to("KnockedUp")
+			Effect.EffectName.KNOCKED_BACK:
+				transition_to("KnockedBack", effect)
+			Effect.EffectName.STUNNED:
+				stun_timer.start(effect.duration)
 
 func on_hit_animation():
 	color_animation_player.queue("On_hit_white")

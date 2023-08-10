@@ -1,8 +1,10 @@
-[gd_scene load_steps=99 format=3 uid="uid://btje8wwp2nhiu"]
+[gd_scene load_steps=102 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
 [ext_resource type="Texture2D" uid="uid://dgyosk8b1sq5p" path="res://assets/png/player-Sheet-4.png" id="2_g1nij"]
+[ext_resource type="Shader" path="res://scripts/shaders/shoe_water.gdshader" id="3_4uhfg"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_gdfiv"]
+[ext_resource type="Texture2D" uid="uid://d0juyhg8rq2ls" path="res://icon.svg" id="3_j4dwo"]
 [ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
 [ext_resource type="Script" path="res://scripts/player/states/idle.gd" id="4_u1pwq"]
 [ext_resource type="Script" path="res://scripts/player/states/run.gd" id="5_cpovh"]
@@ -695,6 +697,17 @@ _data = {
 "walk_up": SubResource("Animation_3wnlr")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pyqms"]
+shader = ExtResource("3_4uhfg")
+shader_parameter/scroll1 = Vector2(0.02, 0)
+shader_parameter/scroll2 = Vector2(-0.05, 0.02)
+shader_parameter/distortion_strength = 0.01
+shader_parameter/light_start = 0.65
+shader_parameter/light_end = 0.75
+shader_parameter/top_color = Color(1, 1, 1, 0)
+shader_parameter/view_to_local = null
+shader_parameter/transparency = Color(0.654902, 1, 1, 0.580392)
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e3tqw"]
 animation = &"hit_left"
 
@@ -932,15 +945,45 @@ collision_mask = 70
 script = ExtResource("1_81117")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
 position = Vector2(0, -6)
 texture = ExtResource("2_g1nij")
 hframes = 207
-frame = 30
+frame = 45
+region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_ld84v")
 }
+
+[node name="Water" type="Sprite2D" parent="Sprite2D"]
+material = SubResource("ShaderMaterial_pyqms")
+position = Vector2(0, 25)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_j4dwo")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -5
+position = Vector2(0, -7)
+amount = 64
+lifetime = 0.4
+explosiveness = 0.02
+randomness = 0.2
+lifetime_randomness = 0.1
+fixed_fps = 30
+draw_order = 1
+texture = ExtResource("3_j4dwo")
+emission_shape = 4
+emission_points = PackedVector2Array(-2, 10, 2, 10)
+emission_colors = PackedColorArray()
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_hp0up")
@@ -952,7 +995,51 @@ parameters/SandAttack/blend_position = Vector2(0, -0.973799)
 parameters/SandDash/blend_position = Vector2(0, 1)
 parameters/Walk/blend_position = Vector2(0, 0)
 
+[node name="DepthShoreChecker" type="Node2D" parent="."]
+visible = false
+
+[node name="RayCast2D" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(0, 32)
+collision_mask = 32
+
+[node name="RayCast2D2" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(0, -32)
+collision_mask = 32
+
+[node name="RayCast2D3" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(32, 0)
+collision_mask = 32
+
+[node name="RayCast2D4" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(-32, 0)
+collision_mask = 32
+
+[node name="RayCast2D5" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(22.6, 22.6)
+collision_mask = 32
+
+[node name="RayCast2D6" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(22.6, -22.6)
+collision_mask = 32
+
+[node name="RayCast2D7" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(-22.6, 22.6)
+collision_mask = 32
+
+[node name="RayCast2D8" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(-22.6, -22.6)
+collision_mask = 32
+
 [node name="StateMachine" type="Node2D" parent="."]
+visible = false
 script = ExtResource("3_keldo")
 initial_state = NodePath("Idle")
 
@@ -968,13 +1055,13 @@ animation_tree = NodePath("../../AnimationTree")
 
 [node name="Dash" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
 script = ExtResource("6_b1dw8")
-shore_checker = NodePath("../../ShoreChecker")
+shore_checker = NodePath("DashShoreChecker")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 
 [node name="SandDash" type="Node2D" parent="StateMachine/Dash" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
 script = ExtResource("7_pko6c")
-shore_checker = NodePath("../../../ShoreChecker")
+shore_checker = NodePath("../DashShoreChecker")
 character = NodePath("../../..")
 animation_tree = NodePath("../../../AnimationTree")
 
@@ -989,9 +1076,14 @@ disabled = true
 
 [node name="WaterDash" type="Node2D" parent="StateMachine/Dash" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
 script = ExtResource("8_1rdr2")
-shore_checker = NodePath("../../../ShoreChecker")
+shore_checker = NodePath("../DashShoreChecker")
 character = NodePath("../../..")
 animation_tree = NodePath("../../../AnimationTree")
+
+[node name="DashShoreChecker" type="RayCast2D" parent="StateMachine/Dash"]
+position = Vector2(0, 3)
+target_position = Vector2(0, 25)
+collision_mask = 32
 
 [node name="SandAttack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character", "animation_tree")]
 script = ExtResource("9_1pxfy")
@@ -1009,26 +1101,24 @@ animation_tree = NodePath("../../AnimationTree")
 [node name="EffectTimer" type="Timer" parent="StateMachine/Hit"]
 one_shot = true
 
-[node name="ShoreChecker" type="RayCast2D" parent="."]
-position = Vector2(0, 3.23)
-target_position = Vector2(0, 25)
-collision_mask = 32
-
 [node name="NPCDialogueCollider" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -11.77)
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPCDialogueCollider"]
-position = Vector2(0, -0.23)
+position = Vector2(-1, -0.23)
 shape = SubResource("CircleShape2D_0hunl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jc72j")
 
 [node name="ModeChecker" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -11.77)
 collision_layer = 0
 collision_mask = 16
@@ -1037,21 +1127,30 @@ collision_mask = 16
 position = Vector2(0, 15)
 shape = SubResource("CircleShape2D_8c008")
 
-[node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
-position = Vector2(0, 13.23)
-texture = ExtResource("2_g1nij")
-hframes = 207
-sprite_to_reflect = NodePath("../Sprite2D")
+[node name="Sprite2D2" type="Sprite2D" parent="."]
 
 [node name="HealthComponent" parent="." instance=ExtResource("11_mf8l8")]
 max_health = 5.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["player_hurtbox"] instance=ExtResource("12_nrhlb")]
+visible = false
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_cqtmw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ld84v")
+}
+
+[node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
+visible = false
+position = Vector2(0, 14)
+texture = ExtResource("2_g1nij")
+hframes = 207
+sprite_to_reflect = NodePath("../Sprite2D")
 
 [connection signal="area_entered" from="StateMachine/Dash/SandDash/PopUpHitbox" to="StateMachine/Dash/SandDash" method="_on_pop_up_hitbox_area_entered"]
 [connection signal="timeout" from="StateMachine/Timer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
