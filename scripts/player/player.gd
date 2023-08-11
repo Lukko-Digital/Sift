@@ -13,6 +13,10 @@ const RUN_ACCEL = 1000
 
 signal mode_switch(_mode: String)
 
+# Getter method for max/starting health
+func max_hp():
+	return $HealthComponent.max_health
+
 func _on_mode_checker_body_entered(body):
 	mode = "Sand"
 	sprite.offset.y = 0
@@ -34,8 +38,6 @@ func _physics_process(delta):
 				distance = (raycast.get_collision_point() - raycast.global_position).length()
 	
 		sprite.offset.y = distance / 4
-		
-	
 
 func _on_npc_dialogue_collider_area_entered(area):
 	if area.is_in_group("npc"):
