@@ -138,7 +138,8 @@ DIALOGUE_FILE = "test2.json"
 
 [node name="dialogue_ui" parent="." instance=ExtResource("5_36d1q")]
 
-[node name="combat_ui" parent="." instance=ExtResource("6_4b1tk")]
+[node name="combat_ui" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_4b1tk")]
+player = NodePath("../player")
 
 [node name="crab" parent="." instance=ExtResource("8_a7cgk")]
 position = Vector2(-184, -182)

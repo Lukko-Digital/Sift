@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+@export var player: CharacterBody2D
+
 const PLAYER_MAX_HP = 3
 var player_hp = PLAYER_MAX_HP
 
