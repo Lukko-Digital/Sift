@@ -116,7 +116,7 @@ position = Vector2(-148, -277)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2(1, -26)
-zoom = Vector2(3.375, 3.375)
+zoom = Vector2(5, 5)
 process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("3_cktdi")
@@ -133,7 +133,7 @@ texture = SubResource("GradientTexture2D_bxxux")
 texture_scale = 1.49
 
 [node name="npc" parent="." instance=ExtResource("5_ao8yv")]
-position = Vector2(43, -544)
+position = Vector2(-83, -324)
 DIALOGUE_FILE = "test2.json"
 
 [node name="dialogue_ui" parent="." instance=ExtResource("5_36d1q")]
@@ -199,97 +199,52 @@ position = Vector2(-257, -621)
 
 [node name="LIGHTING" type="Node2D" parent="."]
 
-[node name="PointLight2D3" type="PointLight2D" parent="LIGHTING"]
+[node name="CanvasModulate" type="CanvasModulate" parent="LIGHTING"]
+color = Color(0.933333, 0.898039, 0.866667, 1)
+
+[node name="big warm" type="PointLight2D" parent="LIGHTING"]
 modulate = Color(1, 1, 1, 0.858824)
 self_modulate = Color(1, 1, 1, 0.141176)
 position = Vector2(-321, -343)
-color = Color(0.945098, 0.388235, 0, 1)
+color = Color(0.486275, 0.160784, 0.00392157, 1)
 energy = 0.44
 texture = SubResource("GradientTexture2D_bxxux")
 texture_scale = 1.49
 
-[node name="PointLight2D4" type="PointLight2D" parent="LIGHTING"]
+[node name="big warm2" type="PointLight2D" parent="LIGHTING"]
 modulate = Color(1, 1, 1, 0.858824)
 self_modulate = Color(1, 1, 1, 0.141176)
 position = Vector2(173, -333)
-color = Color(0.945098, 0.388235, 0, 1)
+color = Color(0.486275, 0.160784, 0.00392157, 1)
 energy = 0.44
 texture = SubResource("GradientTexture2D_bxxux")
 texture_scale = 1.49
 
-[node name="PointLight2D5" type="PointLight2D" parent="LIGHTING"]
+[node name="big warm3" type="PointLight2D" parent="LIGHTING"]
 modulate = Color(1, 1, 1, 0.858824)
 self_modulate = Color(1, 1, 1, 0.141176)
 position = Vector2(56, -648)
-color = Color(0.945098, 0.388235, 0, 1)
+color = Color(0.486275, 0.160784, 0.00392157, 1)
 energy = 0.44
 texture = SubResource("GradientTexture2D_bxxux")
 texture_scale = 1.49
 
-[node name="PointLight2D2" type="PointLight2D" parent="LIGHTING"]
-visible = false
-modulate = Color(1, 1, 1, 0.858824)
-self_modulate = Color(1, 1, 1, 0.141176)
-position = Vector2(-46, -526)
-scale = Vector2(0.176321, 0.218928)
-color = Color(0, 0.505882, 0.67451, 1)
-energy = 0.11
-range_z_max = 709
-texture = SubResource("GradientTexture2D_bxxux")
-texture_scale = 1.49
-
-[node name="PointLight2D2" type="PointLight2D" parent="LIGHTING/PointLight2D2"]
-modulate = Color(1, 1, 1, 0.858824)
-self_modulate = Color(1, 1, 1, 0.141176)
-position = Vector2(187.159, 283.198)
-scale = Vector2(0.760347, 0.540467)
-color = Color(0, 0.505882, 0.67451, 1)
-energy = 0.11
-range_z_max = 709
-texture = SubResource("GradientTexture2D_bxxux")
-texture_scale = 1.49
-
-[node name="PointLight2D2" type="PointLight2D" parent="LIGHTING/PointLight2D2/PointLight2D2"]
-modulate = Color(1, 1, 1, 0.858824)
-self_modulate = Color(1, 1, 1, 0.141176)
-position = Vector2(693.693, -532.439)
-scale = Vector2(0.760347, 0.540467)
-color = Color(0, 0.505882, 0.67451, 1)
-energy = 0.11
-range_z_max = 709
-texture = SubResource("GradientTexture2D_bxxux")
-texture_scale = 1.49
-
-[node name="PointLight2D2" type="PointLight2D" parent="LIGHTING/PointLight2D2/PointLight2D2/PointLight2D2"]
-modulate = Color(1, 1, 1, 0.858824)
-self_modulate = Color(1, 1, 1, 0.141176)
-position = Vector2(-2815.5, -1094.61)
-scale = Vector2(1.13284, 2.70032)
-color = Color(0, 0.505882, 0.67451, 1)
-energy = 0.11
-range_z_max = 709
-texture = SubResource("GradientTexture2D_bxxux")
-texture_scale = 1.49
-
-[node name="PointLight2D" type="PointLight2D" parent="LIGHTING"]
+[node name="big cool" type="PointLight2D" parent="LIGHTING"]
 modulate = Color(1, 1, 1, 0.858824)
 self_modulate = Color(1, 1, 1, 0.141176)
 position = Vector2(-17, -466)
 scale = Vector2(2.52802, 1.95924)
-color = Color(0.478431, 0.262745, 1, 1)
+color = Color(0.321569, 0.0117647, 0.345098, 1)
 energy = 0.05
 range_z_max = 709
 texture = SubResource("GradientTexture2D_bxxux")
 texture_scale = 1.49
 
-[node name="CanvasModulate" type="CanvasModulate" parent="LIGHTING"]
-color = Color(0.898039, 0.843137, 0.8, 1)
-
-[node name="PointLight2D6" type="PointLight2D" parent="LIGHTING"]
+[node name="big cool2" type="PointLight2D" parent="LIGHTING"]
 modulate = Color(1, 1, 1, 0.858824)
 self_modulate = Color(1, 1, 1, 0.141176)
 position = Vector2(-149, -601)
-color = Color(0.478431, 0.262745, 1, 1)
+color = Color(0.321569, 0.0117647, 0.345098, 1)
 energy = 0.24
 range_z_max = 709
 texture = SubResource("GradientTexture2D_bxxux")
