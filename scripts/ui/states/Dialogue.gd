@@ -1,8 +1,11 @@
 extends State
 
 @export var dialogue_container: MarginContainer
+@export var portrait_rect: TextureRect
+@export var name_label: Label
 @export var dialogue_label: Label
 @export var response_button_container: VBoxContainer
+
 @onready var response_button_scene = preload("res://scenes/ui/response_button.tscn")
 @onready var text_timer: Timer = $TextTimer
 
@@ -67,6 +70,8 @@ func get_interaction_level(branch_id):
 ## 		the second number is the index of the dialogue node in the path
 func update_dialogue_display(dialogue_id):
 	current_dialogue_display = current_dialogue_tree[dialogue_id]
+	portrait_rect.texture = load("res://assets/portraits/%s" % current_dialogue_display["image"])
+	name_label.text = current_dialogue_display["name"]
 	dialogue_label.text = current_dialogue_display["text"]
 	if "responses" in current_dialogue_display:
 		handle_responses()

@@ -114,7 +114,6 @@ text = "Greetings traveller, how has your journey been my little ocelot."
 autowrap_mode = 3
 
 [node name="ResponseButtonContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
-visible = false
 layout_mode = 2
 
 [node name="ResponseButton" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
@@ -181,9 +180,11 @@ interact_prompt_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBo
 script = ExtResource("5_tdsby")
 interact_prompt_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/InteractPromptContainer")
 
-[node name="Dialogue" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_container", "dialogue_label", "response_button_container")]
+[node name="Dialogue" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_container", "portrait_rect", "name_label", "dialogue_label", "response_button_container")]
 script = ExtResource("6_hd7jg")
 dialogue_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer")
+portrait_rect = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/PortraitContainer/Portrait")
+name_label = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/Name")
 dialogue_label = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/Dialogue")
 response_button_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponseButtonContainer")
 
