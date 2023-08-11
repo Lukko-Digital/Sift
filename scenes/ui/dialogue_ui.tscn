@@ -75,7 +75,7 @@ stretch_mode = 4
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 190
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_bottom = 45
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer"]
 custom_minimum_size = Vector2(0, 215)
