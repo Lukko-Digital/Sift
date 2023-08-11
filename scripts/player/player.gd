@@ -9,7 +9,8 @@ const RUN_ACCEL = 1000
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var depth_checker = $DepthShoreChecker
 @onready var water: Sprite2D = $Sprite2D/Water
-@onready var particles: CPUParticles2D = $CPUParticles2D
+@onready var particles: CPUParticles2D = $WaterParticles
+@onready var reflection: Sprite2D = $ReflectionMask/ReflectionComponent
 
 signal mode_switch(_mode: String)
 
@@ -38,6 +39,7 @@ func _physics_process(delta):
 				distance = (raycast.get_collision_point() - raycast.global_position).length()
 	
 		sprite.offset.y = distance / 4
+		reflection.offset.y = -sprite.offset.y
 
 func _on_npc_dialogue_collider_area_entered(area):
 	if area.is_in_group("npc"):
