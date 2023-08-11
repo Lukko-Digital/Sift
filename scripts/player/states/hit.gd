@@ -5,12 +5,12 @@ extends State
 
 var effects: Array[Effect] = []
 var animation_direction: Vector2
-var current_effect: int = 0
+var current_effect_id: int = 0
 signal return_to_idle
 
 func enter():
-	current_effect = 0
-	effect_timer.start(effects[current_effect].duration)
+	current_effect_id = 0
+	effect_timer.start(effects[current_effect_id].duration)
 	
 	animation_tree["parameters/playback"].travel("Hit")
 	
@@ -27,18 +27,22 @@ func recieve_args(effects):
 	self.effects = effects
 
 func handle_physics(delta: float):
-	if effects[current_effect].effect_name == Effect.EffectName.KNOCKED_BACK:
-		character.velocity = KnockedBackEffect.KNOCK_BACK_SPEED * effects[current_effect].direction.normalized()
-	elif effects[current_effect].effect_name == Effect.EffectName.KNOCKED_UP:
-		pass
-	elif effects[current_effect].effect_name == Effect.EffectName.STUNNED:
-		character.velocity = character.velocity.move_toward(Vector2.ZERO, 25)
+	var current_effect = effects[current_effect_id]
+	
+	match current_effect.effect_name:
+		Effect.EffectName.KNOCKED_BACK:
+			character.velocity = KnockedBackEffect.KNOCK_BACK_SPEED * current_effect.direction.normalized()
+		Effect.EffectName.KNOCKED_UP:
+			pass
+		Effect.EffectName.STUNNED:
+			character.velocity = character.velocity.move_toward(Vector2.ZERO, 25)
+
 	character.move_and_slide()
 
 func _on_effect_timer_timeout():
-	if current_effect < effects.size() - 1:
-		current_effect += 1
-		effect_timer.start(effects[current_effect].duration)
+	if current_effect_id < effects.size() - 1:
+		current_effect_id += 1
+		effect_timer.start(effects[current_effect_id].duration)
 	else:
 		emit_signal("return_to_idle")
 

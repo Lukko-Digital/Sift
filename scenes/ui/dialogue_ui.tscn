@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://c83lh8olstfpw"]
 
 [ext_resource type="Texture2D" uid="uid://bvaqvk5trrvei" path="res://assets/portraits/player.png" id="1_3asfl"]
-[ext_resource type="Texture2D" uid="uid://xfi7lhln2g3i" path="res://assets/png/dialogue_box.png" id="2_6oq5h"]
+[ext_resource type="Texture2D" uid="uid://ce7tkx2nd0mh8" path="res://assets/png/dialogue_box.png" id="2_6oq5h"]
 [ext_resource type="Script" path="res://scripts/ui/dialogue_ui_state_machine.gd" id="3_7yrsa"]
 [ext_resource type="PackedScene" uid="uid://cxuxdp2fuyfpx" path="res://scenes/ui/response_button.tscn" id="3_yglai"]
 [ext_resource type="Script" path="res://scripts/ui/states/Idle.gd" id="4_koium"]
-[ext_resource type="Texture2D" uid="uid://dx32mor4tsly1" path="res://assets/png/dialogue_arrow.png" id="4_lj0l7"]
+[ext_resource type="Texture2D" uid="uid://dehhgvci1v0ei" path="res://assets/png/dialogue_arrow.png" id="4_lj0l7"]
 [ext_resource type="Script" path="res://scripts/ui/states/Alert.gd" id="5_tdsby"]
 [ext_resource type="Script" path="res://scripts/ui/states/Dialogue.gd" id="6_hd7jg"]
 
@@ -52,7 +52,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ActiveBox" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(1200, 200)
+custom_minimum_size = Vector2(1000, 200)
 layout_mode = 2
 
 [node name="DialogueContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox"]
@@ -65,7 +65,7 @@ size_flags_vertical = 8
 
 [node name="Portrait" type="TextureRect" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/PortraitContainer"]
 z_index = 10
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 texture = ExtResource("1_3asfl")
 expand_mode = 5
@@ -74,10 +74,11 @@ stretch_mode = 4
 [node name="TextboxContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer"]
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_constants/margin_left = 150
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 190
+theme_override_constants/margin_bottom = 45
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer"]
+custom_minimum_size = Vector2(0, 215)
 layout_mode = 2
 texture = ExtResource("2_6oq5h")
 patch_margin_left = 40
@@ -87,7 +88,7 @@ patch_margin_bottom = 40
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 120
+theme_override_constants/margin_left = 140
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
@@ -102,13 +103,13 @@ size_flags_horizontal = 3
 [node name="Name" type="Label" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.309804, 0.0745098, 0, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 24
 text = "Name"
 
 [node name="Dialogue" type="Label" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.309804, 0.0745098, 0, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 28
 text = "a a a a a a a a a a a a a a a a a a a a a a a a a a a "
 autowrap_mode = 3
 
