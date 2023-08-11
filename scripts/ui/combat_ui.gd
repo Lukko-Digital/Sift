@@ -2,6 +2,9 @@ extends CanvasLayer
 
 @export var player: CharacterBody2D
 
+const HIT_STOP_DELAY = 0.02
+const HIT_STOP_DURATION = 0.1
+
 var player_max_hp: int
 var player_current_hp: int
 
@@ -27,9 +30,8 @@ func _on_player_damaged(damage):
 	screen_color_animation_player.play("on_hit_red")
 	
 func hit_stop():
-	const HIT_STOP_DURATION = 0.1
 	# delay a bit to allow hit animations to play
-	await get_tree().create_timer(0.02).timeout
+	await get_tree().create_timer(HIT_STOP_DELAY).timeout
 	get_tree().paused = true
 	await get_tree().create_timer(HIT_STOP_DURATION).timeout
 	get_tree().paused = false
