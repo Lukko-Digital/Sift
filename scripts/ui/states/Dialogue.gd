@@ -51,9 +51,34 @@ func enter():
 ## Hide dialogue box and reset internal variables
 func exit():
 	dialogue_container.hide()
-	interactable = null
-	dialogue_tree = Dictionary()
-	dialogue_display = Dictionary()
+	
+	interactable = reset(interactable)
+	dialogue_info = reset(dialogue_info)
+	dialogue_tree = reset(dialogue_tree)
+	branch_id = reset(branch_id)
+	branch_interaction_lvl = reset(branch_interaction_lvl)
+	dialogue_idx = reset(dialogue_idx)
+	dialogue_display = reset(dialogue_display)
+	awaiting_response = reset(awaiting_response)
+	display_in_progress = reset(display_in_progress)
+
+## Reset a variable to its type's default
+## USAGE: x = reset(x)
+## Args:
+## 	variable: A variable of any type to be reset
+## Returns: The default of the variable's type
+func reset(variable):
+	match typeof(variable):
+		TYPE_BOOL:
+			return bool()
+		TYPE_INT:
+			return int()
+		TYPE_STRING:
+			return String()
+		TYPE_DICTIONARY:
+			return Dictionary()
+		_:
+			return null 
 
 ## Enter branch and display dialogue based on interaction level
 ## Args:
@@ -61,7 +86,7 @@ func exit():
 func load_branch(next_branch_id):
 	branch_id = next_branch_id
 	branch_interaction_lvl = str(get_interaction_level("%s" % branch_id))
-	dialogue_idx = 0
+	dialogue_idx = reset(dialogue_idx)
 	update_dialogue_display()
 	
 ## Get interaction level of a branch for the current NPC based on the number of past interactions
