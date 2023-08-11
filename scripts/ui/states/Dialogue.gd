@@ -13,6 +13,8 @@ var current_npc
 var dialogue_info: Dictionary
 var current_dialogue_tree: Dictionary
 var current_dialogue_branch: Array
+var current_branch_id: String
+var current_branch_interaction_level: String
 var current_dialogue_idx: int
 var current_dialogue_display: Dictionary
 var awaiting_response: bool = false
@@ -50,8 +52,8 @@ func exit():
 ## Args:
 ## 	branch_id: A character representing the id of the branch, e.g. O is the origin branch
 func load_branch(branch_id):
-	var interaction_level = get_interaction_level("%s" % branch_id)
-	current_dialogue_branch = current_dialogue_tree[branch_id][str(interaction_level)]
+	current_branch_id = branch_id
+	current_branch_interaction_level = str(get_interaction_level("%s" % branch_id))
 	current_dialogue_idx = 0
 	update_dialogue_display()
 
@@ -75,7 +77,7 @@ func get_interaction_level(branch_id):
 ## 		the branch id, the first number represents the interaction level to enter the path, and
 ## 		the second number is the index of the dialogue node in the path
 func update_dialogue_display():
-	current_dialogue_display = current_dialogue_branch[current_dialogue_idx]
+	current_dialogue_display = current_dialogue_tree[current_branch_id][str(current_branch_interaction_level)][current_dialogue_idx]
 	
 	var display_name = dialogue_info["name"] if "name" not in current_dialogue_display else current_dialogue_display["name"]
 	name_label.text = display_name
@@ -122,7 +124,7 @@ func despawn_buttons():
 
 ## Signals to NPC to log a completed interaction for the current branch
 func exit_branch():
-	Events.emit_signal("interaction_complete", current_npc, current_dialogue_display["branch_end"])
+	Events.emit_signal("interaction_complete", current_npc, current_branch_id)
 
 ## Advances dialogue when E is pressed. Does nothing if awaiting response, exits dialogue when
 ## EXIT flag is shown in dialogue tree
@@ -137,10 +139,11 @@ func _on_advance_dialogue():
 	else:
 		# "next" key will either signal the next branch to EXIT
 		if "next" in current_dialogue_display:
+			var next_id = current_dialogue_display["next"]
 			# if not exiting, signal branch end and load next branch
-			if "next" != "EXIT":
+			if next_id != "EXIT":
 				exit_branch()
-				load_branch(current_dialogue_display["next"])
+				load_branch(next_id)
 			# exit dialogue
 			else:
 				Events.emit_signal("dialogue_complete")
