@@ -6,9 +6,8 @@ var mode: String = "Sand"
 const RUN_SPEED = 100
 const RUN_ACCEL = 1000
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: Sprite2D = $WaterMask/Sprite2D
 @onready var depth_checker = $DepthShoreChecker
-@onready var water: Sprite2D = $Sprite2D/Water
 @onready var particles: CPUParticles2D = $WaterParticles
 @onready var reflection: Sprite2D = $ReflectionMask/ReflectionComponent
 
@@ -21,14 +20,10 @@ func max_hp():
 func _on_mode_checker_body_entered(body):
 	mode = "Sand"
 	sprite.offset.y = 0
-	water.visible = false
-#	particles.z_index = -5
 	emit_signal("mode_switch", mode)
 
 func _on_mode_checker_body_exited(body):
 	mode = "Water" 
-	water.visible = true
-#	particles.z_index = 0
 	emit_signal("mode_switch", mode)
 	
 func _physics_process(delta):
@@ -38,7 +33,7 @@ func _physics_process(delta):
 			if (raycast.get_collision_point() - raycast.global_position).length() < distance:
 				distance = (raycast.get_collision_point() - raycast.global_position).length()
 	
-		sprite.offset.y = distance / 4
+		sprite.offset.y = distance / 4 + 1
 		reflection.offset.y = -sprite.offset.y
 
 func _on_npc_dialogue_collider_area_entered(area):
