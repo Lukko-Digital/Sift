@@ -23,12 +23,12 @@ func _ready():
 	animation_player.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
-	if is_dead:
-		transition_to("Dead")
-	elif state.name == "KnockedUp":
+	if state.name == "KnockedUp":
 		transition_to("KnockedUp")
 	elif not knockback_timer.is_stopped():
 		transition_to("KnockedBack")
+	elif is_dead:
+		transition_to("Dead")
 	elif not stun_timer.is_stopped():
 		transition_to("Idle")
 	elif (
@@ -59,18 +59,20 @@ func _on_animation_finished(anim_name):
 	if anim_name == "knocked_up":
 		transition_to("Idle")
 
-func _on_damage_taken(effects):
-	on_hit_animation()
-	for effect in effects:
-		if effect.effect_name == Effect.EffectName.KNOCKED_UP:
-			transition_to("KnockedUp")
-		elif effect.effect_name == Effect.EffectName.KNOCKED_BACK:
-			transition_to("KnockedBack", effect)
-		elif effect.effect_name == Effect.EffectName.STUNNED:
-			stun_timer.start(effect.duration)
+func _on_damage_taken(attack: Attack):
+	if not is_dead:
+		on_hit_animation()
+
+	for effect in attack.effects:
+		match effect.effect_name:
+			Effect.EffectName.KNOCKED_UP:
+				transition_to("KnockedUp")
+			Effect.EffectName.KNOCKED_BACK:
+				transition_to("KnockedBack", effect)
+			Effect.EffectName.STUNNED:
+				stun_timer.start(effect.duration)
 
 func on_hit_animation():
 	color_animation_player.queue("On_hit_white")
-	if not is_dead:
-		for i in range(5):
-			color_animation_player.queue("On_hit_red_flash")
+	for i in range(5):
+		color_animation_player.queue("On_hit_red_flash")

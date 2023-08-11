@@ -14,15 +14,14 @@ func _ready():
 	Events.idle_dialogue.connect(exit_dialogue)
 	Events.dialogue_complete.connect(exit_dialogue)
 	hurtbox_component.damage_taken.connect(_on_damage_taken)
-	knockback_timer.timeout.connect(_return_to_idle)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("escape") and in_dialogue:
 		Events.emit_signal("alert_dialogue")
 		exit_dialogue()
 	
-	if state.name == "KnockedBack":
-		transition_to("KnockedBack")
+	if state.name == "Hit":
+		transition_to("Hit")
 	elif Input.is_action_just_pressed("interact"):
 		if not in_dialogue:
 			for area in get_parent().get_node("NPCDialogueCollider").get_overlapping_areas():
@@ -71,11 +70,10 @@ func _physics_process(delta: float) -> void:
 func exit_dialogue():
 	in_dialogue = false
 	
-func _return_to_idle():
-	transition_to("Idle")
-
-func _on_damage_taken(effects):
+func _on_damage_taken(attack: Attack):
 	Global.camera.shake(0.1, 5)
-	for effect in effects:
-		if effect.effect_name == Effect.EffectName.KNOCKED_BACK:
-			transition_to("KnockedBack", effect)
+	Events.emit_signal("player_damaged", attack.damage)
+	transition_to("Hit", attack.effects)
+
+func _on_hit_return_to_idle():
+	transition_to("Idle")

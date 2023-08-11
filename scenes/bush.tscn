@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dm2qby2s4o0by"]
 
-[ext_resource type="Texture2D" uid="uid://b267ks1n0yqqw" path="res://assets/png/tilemap.png" id="1_jhcya"]
+[ext_resource type="Texture2D" uid="uid://db3stpms1pd3u" path="res://assets/png/tilemap.png" id="1_jhcya"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_65nhv"]
 radius = 7.0
@@ -14,7 +14,7 @@ collision_mask = 2
 position = Vector2(0, -7)
 texture = ExtResource("1_jhcya")
 region_enabled = true
-region_rect = Rect2(591, 696, 48, 28)
+region_rect = Rect2(191, 934, 44, 31)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)

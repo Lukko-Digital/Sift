@@ -22,7 +22,7 @@ func transition_to(target_state_name: String, args = null) -> void:
 		return
 	if state == get_node(target_state_name):
 		return
-		
+
 	state.exit()
 	state = get_node(target_state_name)
 	state.recieve_args(args)

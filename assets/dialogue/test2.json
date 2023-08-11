@@ -1,92 +1,92 @@
 {
-    "branches": ["O", "R", "A", "B", "E"],
-    "O.0.0": {
-        "name": "Guy",
-        "image": "guy.png",
-        "text": "oh hi im guy",
-        "next": "O.0.1"
-        
-    },
-    "O.1.0": {
-        "name": "Guy",
-        "image": "guy.png",
-        "text": "oh it's you again",
-        "next": "O.0.1"
-        
-    },
-    "O.0.1": {
-        "name": "Guy",
-        "image": "guy.png",
-        "text": "any questions comments concerns",
-        "responses": {
-            "1": {
-                "text": "wait who are you again?",
-                "next": "A"
-            },
-            "2": {
-                "text": "what am i doing here?",
-                "next": "B"
-            },
-            "3": {
-                "text": "ja ne",
-                "next": "E"
-            }
-        },
-        "branch_end": "O"
-    },
-    "R.0.0": {
-        "name": "Guy",
-        "image": "guy.png",
-        "text": "anything else?",
-        "responses": {
-            "1": {
-                "text": "wait who are you again?",
-                "next": "A"
-            },
-            "2": {
-                "text": "what am i doing here?",
-                "next": "B"
-            },
-            "3": {
-                "text": "ja ne",
-                "next": "E"
-            }
-        },
-        "branch_end": "R"
-    },
-    "A.0.0": {
-        "name": "Guy",
-        "image": "guy.png",
-        "text": "i'm guy",
-        "next": "R.0.0",
-        "branch_end": "A"
-    },
-    "A.1.0": {
-        "name": "Guy",
-        "image": "guy.png",
-        "text": "cmon you already know",
-        "next": "R.0.0",
-        "branch_end": "A"
-    },
-    "B.0.0": {
-        "name": "Guy",
-        "image": "guy.png",
-        "text": "your guess is as good as mine",
-        "next": "R.0.0",
-        "branch_end": "B"
-    },
-    "B.1.0": {
-        "name": "Guy",
-        "image": "guy.png",
-        "text": "*shrugs*",
-        "next": "R.0.0",
-        "branch_end": "B"
-    },
-    "E.0.0": {
-        "name": "Guy",
-        "image": "guy.png",
-        "text": "mata ne",
-        "next": "EXIT",
-        "branch_end": "E"
-    }
+	"branches": ["O", "R", "A", "B", "E"],
+	"O.0.0": {
+		"name": "Guy",
+		"image": "player.png",
+		"text": "oh hi im guy",
+		"next": "O.0.1"
+		
+	},
+	"O.1.0": {
+		"name": "Guy",
+		"image": "player.png",
+		"text": "oh it's you again",
+		"next": "O.0.1"
+		
+	},
+	"O.0.1": {
+		"name": "Guy",
+		"image": "player.png",
+		"text": "any questions comments concerns",
+		"responses": {
+			"1": {
+				"text": "wait who are you again?",
+				"next": "A"
+			},
+			"2": {
+				"text": "what am i doing here?",
+				"next": "B"
+			},
+			"3": {
+				"text": "ja ne",
+				"next": "E"
+			}
+		},
+		"branch_end": "O"
+	},
+	"R.0.0": {
+		"name": "Guy",
+		"image": "player.png",
+		"text": "anything else?",
+		"responses": {
+			"1": {
+				"text": "wait who are you again?",
+				"next": "A"
+			},
+			"2": {
+				"text": "what am i doing here?",
+				"next": "B"
+			},
+			"3": {
+				"text": "ja ne",
+				"next": "E"
+			}
+		},
+		"branch_end": "R"
+	},
+	"A.0.0": {
+		"name": "Guy",
+		"image": "birdman_npc.png",
+		"text": "i'm guy",
+		"next": "R.0.0",
+		"branch_end": "A"
+	},
+	"A.1.0": {
+		"name": "Guy",
+		"image": "birdman_npc.png",
+		"text": "cmon you already know",
+		"next": "R.0.0",
+		"branch_end": "A"
+	},
+	"B.0.0": {
+		"name": "Guy",
+		"image": "weapondude_npc.png",
+		"text": "your guess is as good as mine",
+		"next": "R.0.0",
+		"branch_end": "B"
+	},
+	"B.1.0": {
+		"name": "Guy",
+		"image": "weapondude_npc.png",
+		"text": "*shrugs*",
+		"next": "R.0.0",
+		"branch_end": "B"
+	},
+	"E.0.0": {
+		"name": "Guy",
+		"image": "player.png",
+		"text": "mata ne",
+		"next": "EXIT",
+		"branch_end": "E"
+	}
 }

@@ -1,9 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccs3flkclj740"]
+[gd_scene load_steps=11 format=3 uid="uid://c83lh8olstfpw"]
 
-[ext_resource type="Script" path="res://scripts/ui/dialogue_ui_state_machine.gd" id="1_k7p84"]
-[ext_resource type="Script" path="res://scripts/ui/states/Idle.gd" id="2_cpfha"]
-[ext_resource type="Script" path="res://scripts/ui/states/Alert.gd" id="3_ni75i"]
-[ext_resource type="Script" path="res://scripts/ui/states/Dialogue.gd" id="4_utkvm"]
+[ext_resource type="Texture2D" uid="uid://bvaqvk5trrvei" path="res://assets/portraits/player.png" id="1_3asfl"]
+[ext_resource type="Texture2D" uid="uid://ce7tkx2nd0mh8" path="res://assets/png/dialogue_box.png" id="2_6oq5h"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_ui_state_machine.gd" id="3_7yrsa"]
+[ext_resource type="PackedScene" uid="uid://cxuxdp2fuyfpx" path="res://scenes/ui/response_button.tscn" id="3_yglai"]
+[ext_resource type="Script" path="res://scripts/ui/states/Idle.gd" id="4_koium"]
+[ext_resource type="Texture2D" uid="uid://dehhgvci1v0ei" path="res://assets/png/dialogue_arrow.png" id="4_lj0l7"]
+[ext_resource type="Script" path="res://scripts/ui/states/Alert.gd" id="5_tdsby"]
+[ext_resource type="Script" path="res://scripts/ui/states/Dialogue.gd" id="6_hd7jg"]
+
+[sub_resource type="Animation" id="Animation_7v4p2"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow:offset")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0nx3x"]
+_data = {
+"idle": SubResource("Animation_7v4p2")
+}
 
 [node name="dialogue_ui" type="CanvasLayer"]
 
@@ -19,81 +45,147 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(1200, 0)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 250)
-layout_mode = 2
-
-[node name="InteractPrompt" type="Control" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer2/InteractPrompt"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -75.5
-offset_top = -13.0
-offset_right = 75.5
-offset_bottom = 13.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "press [E] to interact"
-
-[node name="DialogueBox" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
-layout_mode = 2
-
-[node name="Dialogue" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-autowrap_mode = 2
-clip_text = true
-
-[node name="ResponseButtons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox"]
-layout_mode = 2
-offset_top = 149.0
-offset_right = 1200.0
-offset_bottom = 250.0
-size_flags_vertical = 8
-
-[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="ActiveBox" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1200, 200)
+layout_mode = 2
+
+[node name="DialogueContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox"]
+layout_mode = 2
+
+[node name="PortraitContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="Portrait" type="TextureRect" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/PortraitContainer"]
+z_index = 10
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+texture = ExtResource("1_3asfl")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="TextboxContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 190
+theme_override_constants/margin_bottom = 45
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer"]
+custom_minimum_size = Vector2(0, 215)
+layout_mode = 2
+texture = ExtResource("2_6oq5h")
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 160
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65098, 0.407843, 0.305882, 1)
+theme_override_font_sizes/font_size = 24
+text = "Joe Biden"
+
+[node name="Dialogue" type="Label" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.309804, 0.0745098, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Greetings traveller, how has your journey been my little ocelot."
+autowrap_mode = 3
+
+[node name="ResponseButtonContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResponseButton" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
+layout_mode = 2
+text = "response 1"
+
+[node name="ResponseButton2" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
+layout_mode = 2
+text = "response 2"
+
+[node name="ResponseButton3" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
+layout_mode = 2
+text = "response 3"
+
+[node name="ArrowMargin" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ArrowContainer" type="Control" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/ArrowMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Arrow" type="Sprite2D" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/ArrowMargin/ArrowContainer"]
+position = Vector2(0, -30)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_lj0l7")
+
+[node name="ArrowAnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/ArrowMargin/ArrowContainer"]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_0nx3x")
+}
+
+[node name="InteractPromptContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox"]
+visible = false
+layout_mode = 2
+
+[node name="InteractPrompt" type="Label" parent="HBoxContainer/VBoxContainer/ActiveBox/InteractPromptContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.309804, 0.0745098, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Press [E] to interact"
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="StateMachine" type="Node2D" parent="."]
-script = ExtResource("1_k7p84")
+script = ExtResource("3_7yrsa")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("interact_prompt", "dialogue_box")]
-script = ExtResource("2_cpfha")
-interact_prompt = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/InteractPrompt")
-dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox")
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_container", "interact_prompt_container")]
+script = ExtResource("4_koium")
+dialogue_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer")
+interact_prompt_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/InteractPromptContainer")
 
-[node name="Alert" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("interact_prompt")]
-script = ExtResource("3_ni75i")
-interact_prompt = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/InteractPrompt")
+[node name="Alert" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("interact_prompt_container")]
+script = ExtResource("5_tdsby")
+interact_prompt_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/InteractPromptContainer")
 
-[node name="Dialogue" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_box")]
-script = ExtResource("4_utkvm")
-dialogue_box = NodePath("../../HBoxContainer/VBoxContainer/MarginContainer2/DialogueBox")
+[node name="Dialogue" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("dialogue_container", "portrait_rect", "name_label", "dialogue_label", "response_button_container")]
+script = ExtResource("6_hd7jg")
+dialogue_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer")
+portrait_rect = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/PortraitContainer/Portrait")
+name_label = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/Name")
+dialogue_label = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/Dialogue")
+response_button_container = NodePath("../../HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponseButtonContainer")
 
 [node name="TextTimer" type="Timer" parent="StateMachine/Dialogue"]
