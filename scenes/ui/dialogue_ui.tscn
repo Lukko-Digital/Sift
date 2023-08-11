@@ -52,7 +52,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ActiveBox" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(1000, 200)
+custom_minimum_size = Vector2(1200, 200)
 layout_mode = 2
 
 [node name="DialogueContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox"]
@@ -88,8 +88,8 @@ patch_margin_bottom = 40
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 140
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_left = 160
+theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
@@ -114,6 +114,7 @@ text = "a a a a a a a a a a a a a a a a a a a a a a a a a a a "
 autowrap_mode = 3
 
 [node name="ResponseButtonContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="ResponseButton" parent="HBoxContainer/VBoxContainer/ActiveBox/DialogueContainer/TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResponseButtonContainer" instance=ExtResource("3_yglai")]
