@@ -1,10 +1,9 @@
-[gd_scene load_steps=102 format=3 uid="uid://btje8wwp2nhiu"]
+[gd_scene load_steps=100 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
 [ext_resource type="Texture2D" uid="uid://dgyosk8b1sq5p" path="res://assets/png/player-Sheet-4.png" id="2_g1nij"]
-[ext_resource type="Shader" path="res://scripts/shaders/shoe_water.gdshader" id="3_4uhfg"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_gdfiv"]
-[ext_resource type="Texture2D" uid="uid://d0juyhg8rq2ls" path="res://icon.svg" id="3_j4dwo"]
+[ext_resource type="Texture2D" uid="uid://bwyb8bhvk7xbt" path="res://icon.svg" id="3_j4dwo"]
 [ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
 [ext_resource type="Script" path="res://scripts/player/states/idle.gd" id="4_u1pwq"]
 [ext_resource type="Script" path="res://scripts/player/states/run.gd" id="5_cpovh"]
@@ -697,17 +696,6 @@ _data = {
 "walk_up": SubResource("Animation_3wnlr")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pyqms"]
-shader = ExtResource("3_4uhfg")
-shader_parameter/scroll1 = Vector2(0.02, 0)
-shader_parameter/scroll2 = Vector2(-0.05, 0.02)
-shader_parameter/distortion_strength = 0.01
-shader_parameter/light_start = 0.65
-shader_parameter/light_end = 0.75
-shader_parameter/top_color = Color(1, 1, 1, 0)
-shader_parameter/view_to_local = null
-shader_parameter/transparency = Color(0.654902, 1, 1, 0.580392)
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e3tqw"]
 animation = &"hit_left"
 
@@ -943,27 +931,30 @@ height = 32.0
 [node name="player" type="CharacterBody2D"]
 collision_mask = 70
 script = ExtResource("1_81117")
+metadata/_edit_vertical_guides_ = []
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="WaterMask" type="Sprite2D" parent="."]
+clip_children = 1
+texture = ExtResource("3_j4dwo")
+offset = Vector2(0, -60)
+
+[node name="Sprite2D" type="Sprite2D" parent="WaterMask"]
 clip_children = 2
 position = Vector2(0, -6)
 texture = ExtResource("2_g1nij")
 hframes = 207
-frame = 45
+frame = 53
 region_rect = Rect2(16, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_ld84v")
 }
 
-[node name="Water" type="Sprite2D" parent="Sprite2D"]
-material = SubResource("ShaderMaterial_pyqms")
-position = Vector2(0, 25)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_j4dwo")
+[node name="Sprite2D3" type="Sprite2D" parent="."]
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="WaterParticles" type="CPUParticles2D" parent="."]
+visible = false
 z_index = -5
 position = Vector2(0, -7)
 amount = 64
@@ -987,7 +978,7 @@ scale_amount_max = 0.01
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_hp0up")
-anim_player = NodePath("../Sprite2D/AnimationPlayer")
+anim_player = NodePath("../WaterMask/Sprite2D/AnimationPlayer")
 active = true
 parameters/Hit/blend_position = Vector2(0, 1.02128)
 parameters/Idle/blend_position = Vector2(0, 1)
@@ -1145,12 +1136,18 @@ libraries = {
 "": SubResource("AnimationLibrary_ld84v")
 }
 
-[node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
-visible = false
-position = Vector2(0, 14)
+[node name="ReflectionMask" type="Sprite2D" parent="."]
+clip_children = 1
+z_index = -11
+position = Vector2(0, 67)
+texture = ExtResource("3_j4dwo")
+
+[node name="ReflectionComponent" parent="ReflectionMask" node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
+z_as_relative = false
+position = Vector2(0, -53)
 texture = ExtResource("2_g1nij")
 hframes = 207
-sprite_to_reflect = NodePath("../Sprite2D")
+sprite_to_reflect = NodePath("../../WaterMask/Sprite2D")
 
 [connection signal="area_entered" from="StateMachine/Dash/SandDash/PopUpHitbox" to="StateMachine/Dash/SandDash" method="_on_pop_up_hitbox_area_entered"]
 [connection signal="timeout" from="StateMachine/Timer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]

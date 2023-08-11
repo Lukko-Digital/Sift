@@ -32,5 +32,5 @@ void fragment()
 	
 	vec4 screen_color = texture(screen_texture, SCREEN_UV);
 	
-	COLOR = screen_color * transparency;
+	COLOR = screen_color;
 }

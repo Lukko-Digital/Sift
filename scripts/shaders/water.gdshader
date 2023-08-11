@@ -34,5 +34,5 @@ void fragment()
 	
 	vec4 top_light = smoothstep(light_start, light_end, depth) * top_color;
 	
-	COLOR = screen_color * transparency + top_light; 
+	COLOR = screen_color * transparency;// + top_light; 
 }
