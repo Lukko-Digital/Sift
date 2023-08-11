@@ -2,8 +2,8 @@ extends CanvasLayer
 
 @export var player: CharacterBody2D
 
-const PLAYER_MAX_HP = 3
-var player_hp = PLAYER_MAX_HP
+var player_max_hp: int
+var player_current_hp: int
 
 @onready var empty_hearts: TextureRect = $MarginContainer/Hearts/EmptyHearts
 @onready var full_hearts: TextureRect = $MarginContainer/Hearts/FullHearts
@@ -11,9 +11,15 @@ var player_hp = PLAYER_MAX_HP
 
 func _ready():
 	Events.player_damaged.connect(_on_player_damaged)
-	empty_hearts.size.x = heart_width * PLAYER_MAX_HP
-	full_hearts.size.x = heart_width * PLAYER_MAX_HP
+	initialize_health()
+
+func initialize_health():
+	player_max_hp = player.max_hp()
+	player_current_hp = player_max_hp
+	empty_hearts.size.x = heart_width * player_max_hp
+	full_hearts.size.x = heart_width * player_max_hp
 	
+
 func _on_player_damaged(damage):
-	player_hp -= damage
-	full_hearts.size.x = heart_width * player_hp
+	player_current_hp -= damage
+	full_hearts.size.x = heart_width * player_current_hp
