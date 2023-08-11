@@ -10,7 +10,10 @@ extends State
 @onready var text_timer: Timer = $TextTimer
 
 var current_npc
+var dialogue_info: Dictionary
 var current_dialogue_tree: Dictionary
+var current_dialogue_branch: Array
+var current_dialogue_idx: int
 var current_dialogue_display: Dictionary
 var awaiting_response: bool = false
 var display_in_progress: bool = false
@@ -31,8 +34,9 @@ func enter():
 	dialogue_container.show()
 	despawn_buttons()
 	var dialogue_path = "res://assets/dialogue/%s" % current_npc.DIALOGUE_FILE
-	current_dialogue_tree = JSON.parse_string(FileAccess.open(dialogue_path, FileAccess.READ).get_as_text())
-	
+	var dialogue_json = JSON.parse_string(FileAccess.open(dialogue_path, FileAccess.READ).get_as_text())
+	dialogue_info = dialogue_json["info"]
+	current_dialogue_tree = dialogue_json["branches"]
 	load_branch("O")
 
 ## Hide dialogue box and reset internal variables
@@ -47,7 +51,9 @@ func exit():
 ## 	branch_id: A character representing the id of the branch, e.g. O is the origin branch
 func load_branch(branch_id):
 	var interaction_level = get_interaction_level("%s" % branch_id)
-	update_dialogue_display("%s.%s.0" % [branch_id, interaction_level])
+	current_dialogue_branch = current_dialogue_tree[branch_id][str(interaction_level)]
+	current_dialogue_idx = 0
+	update_dialogue_display()
 
 ## Get interaction level of a branch for the current NPC based on the number of past interactions
 ## Args:
@@ -68,11 +74,16 @@ func get_interaction_level(branch_id):
 ## 	dialogue_id: A string, formatted as CHAR.NUMBER.NUMBER (e.g. A.1.0) the character represents
 ## 		the branch id, the first number represents the interaction level to enter the path, and
 ## 		the second number is the index of the dialogue node in the path
-func update_dialogue_display(dialogue_id):
-	current_dialogue_display = current_dialogue_tree[dialogue_id]
-	portrait_rect.texture = load("res://assets/portraits/%s" % current_dialogue_display["image"])
-	name_label.text = current_dialogue_display["name"]
+func update_dialogue_display():
+	current_dialogue_display = current_dialogue_branch[current_dialogue_idx]
+	
+	var display_name = dialogue_info["name"] if "name" not in current_dialogue_display else current_dialogue_display["name"]
+	name_label.text = display_name
+	var image_file = dialogue_info["image"] if "image" not in current_dialogue_display else current_dialogue_display["image"]
+	portrait_rect.texture = load("res://assets/portraits/%s" % image_file)
+	
 	dialogue_label.text = current_dialogue_display["text"]
+	
 	if "responses" in current_dialogue_display:
 		handle_responses()
 	await animate_display()
@@ -124,18 +135,20 @@ func _on_advance_dialogue():
 		pass
 	# advance to next dialogue
 	else:
-		# signal branch end if applicable
-		if "branch_end" in current_dialogue_display:
-			exit_branch()
-		# check next dialogue id
-		var next_dialogue_id = current_dialogue_display["next"]
-		# if not exiting, display next dialogue
-		if next_dialogue_id != "EXIT":
-			update_dialogue_display(next_dialogue_id)
-		# exit dialogue
+		# "next" key will either signal the next branch to EXIT
+		if "next" in current_dialogue_display:
+			# if not exiting, signal branch end and load next branch
+			if "next" != "EXIT":
+				exit_branch()
+				load_branch(current_dialogue_display["next"])
+			# exit dialogue
+			else:
+				Events.emit_signal("dialogue_complete")
+				Events.emit_signal("alert_dialogue")
+		# tick dialogue idx, display new dialogue
 		else:
-			Events.emit_signal("dialogue_complete")
-			Events.emit_signal("alert_dialogue")
+			current_dialogue_idx += 1
+			update_dialogue_display()
 
 ## Handles response button being pressed
 func _on_response_pressed(destination_branch):
