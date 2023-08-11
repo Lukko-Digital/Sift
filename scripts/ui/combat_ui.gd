@@ -23,11 +23,11 @@ func initialize_health():
 	empty_hearts.size.x = heart_width * player_max_hp
 	full_hearts.size.x = heart_width * player_max_hp
 	
-
 func _on_player_damaged(damage):
 	player_current_hp -= damage
 	full_hearts.size.x = heart_width * player_current_hp
 	screen_color_animation_player.play("on_hit_red")
+	hit_stop()
 	
 func hit_stop():
 	# delay a bit to allow hit animations to play
