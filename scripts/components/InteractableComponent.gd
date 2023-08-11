@@ -29,18 +29,9 @@ func init_iteraction_count(dialogue_json):
 	
 func init_branch_interaction_limits(dialogue_json):
 	for branch in dialogue_json["branches"]:
-		branch_interaction_limits[branch] = []
-		
-	var dialogue_ids = []
-	for id in dialogue_json.keys():
-		if id == "branches":
-			continue
-		var split_id = id.rsplit(".")
-		var branch = split_id[0]
-		var limit = int(split_id[1])
-		if limit not in branch_interaction_limits[branch]:
-			branch_interaction_limits[branch].append(limit)
-
+		branch_interaction_limits[branch] = dialogue_json["branches"][branch].keys().map(
+			func(limit): return int(limit)
+		)
 
 func _on_interaction_complete(npc_node, branch):
 	if npc_node == self:
