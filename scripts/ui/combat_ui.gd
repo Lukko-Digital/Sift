@@ -25,3 +25,11 @@ func _on_player_damaged(damage):
 	player_current_hp -= damage
 	full_hearts.size.x = heart_width * player_current_hp
 	screen_color_animation_player.play("on_hit_red")
+	
+func hit_stop():
+	const HIT_STOP_DURATION = 0.1
+	# delay a bit to allow hit animations to play
+	await get_tree().create_timer(0.02).timeout
+	get_tree().paused = true
+	await get_tree().create_timer(HIT_STOP_DURATION).timeout
+	get_tree().paused = false
