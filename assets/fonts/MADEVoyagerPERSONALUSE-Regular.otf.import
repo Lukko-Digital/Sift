@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://blov7pv27ryku"
-path="res://.godot/imported/AlteHaasGroteskBold.ttf-46d17f46774b1e819fb2bf0e3809a801.fontdata"
+uid="uid://dem0gyfx6nm6n"
+path="res://.godot/imported/MADEVoyagerPERSONALUSE-Regular.otf-c3622dadfc72b5257fe3179285c7eac5.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/AlteHaasGroteskBold.ttf"
-dest_files=["res://.godot/imported/AlteHaasGroteskBold.ttf-46d17f46774b1e819fb2bf0e3809a801.fontdata"]
+source_file="res://assets/fonts/MADEVoyagerPERSONALUSE-Regular.otf"
+dest_files=["res://.godot/imported/MADEVoyagerPERSONALUSE-Regular.otf-c3622dadfc72b5257fe3179285c7eac5.fontdata"]
 
 [params]
 

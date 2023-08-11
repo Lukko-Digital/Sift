@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cth7xu558sebu"
-path="res://.godot/imported/Mont-HeavyDEMO.otf-22485e71928bf18a30ecfc6abfa3a4a6.fontdata"
+uid="uid://cbocdmnxvv8ls"
+path="res://.godot/imported/UniNeue-Trial-Light.ttf-51fc5e531b5910858eebcc8bbe085b7b.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/Mont-HeavyDEMO.otf"
-dest_files=["res://.godot/imported/Mont-HeavyDEMO.otf-22485e71928bf18a30ecfc6abfa3a4a6.fontdata"]
+source_file="res://assets/fonts/UniNeue-Trial-Light.ttf"
+dest_files=["res://.godot/imported/UniNeue-Trial-Light.ttf-51fc5e531b5910858eebcc8bbe085b7b.fontdata"]
 
 [params]
 
