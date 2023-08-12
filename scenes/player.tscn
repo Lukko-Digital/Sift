@@ -922,7 +922,7 @@ radius = 4.77
 height = 10.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8c008"]
-radius = 1.0
+radius = 1.02611
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cqtmw"]
 radius = 5.0
@@ -943,7 +943,7 @@ clip_children = 2
 position = Vector2(0, -6)
 texture = ExtResource("2_g1nij")
 hframes = 207
-frame = 46
+frame = 17
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
@@ -1055,6 +1055,7 @@ character = NodePath("../../..")
 animation_tree = NodePath("../../../AnimationTree")
 
 [node name="PopUpHitbox" type="Area2D" parent="StateMachine/Dash/SandDash"]
+visible = false
 collision_layer = 0
 collision_mask = 4
 
