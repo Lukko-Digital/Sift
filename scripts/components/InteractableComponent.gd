@@ -1,3 +1,4 @@
+class_name InteractableComponent
 extends Area2D
 
 @export var NPC_NAME: String
