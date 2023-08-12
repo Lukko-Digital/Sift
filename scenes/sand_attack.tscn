@@ -175,11 +175,11 @@ _data = {
 "up": SubResource("Animation_ndcpe")
 }
 
-[node name="SandAttack" type="Sprite2D" node_paths=PackedStringArray("animation_player")]
+[node name="Sprite2D" type="Sprite2D" node_paths=PackedStringArray("animation_player")]
 position = Vector2(0, -12)
 texture = ExtResource("1_wcllv")
 hframes = 24
-frame = 7
+frame = 20
 script = ExtResource("2_7c25b")
 animation_player = NodePath("AnimationPlayer")
 
@@ -192,13 +192,15 @@ frame = 4
 sprite_to_reflect = NodePath("..")
 
 [node name="HitBox" type="Area2D" parent="."]
-rotation = 1.5708
+z_index = 1
+rotation = -1.5708
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(43.5, 2.18279e-11)
 shape = SubResource("RectangleShape2D_v4fgb")
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
