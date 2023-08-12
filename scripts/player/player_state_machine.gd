@@ -3,7 +3,6 @@ extends StateMachine
 @onready var timer: Timer = $Timer
 @onready var player: Player = get_parent()
 @onready var hurtbox_component: HurtboxComponent = get_node("../HurtboxComponent")
-@onready var knockback_timer: Timer = $KnockedBack/KnockBackTimer
 
 var in_dialogue: bool = false
 var buffer_dash: bool = false
