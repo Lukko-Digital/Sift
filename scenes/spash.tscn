@@ -1,0 +1,214 @@
+[gd_scene load_steps=23 format=3 uid="uid://ciq83ktvvwibn"]
+
+[ext_resource type="Script" path="res://scenes/componenets/spash.gd" id="1_27gwo"]
+[ext_resource type="Texture2D" uid="uid://bn2ci255pxdvy" path="res://assets/png/splash-Sheet.png" id="1_qaj6j"]
+
+[sub_resource type="Animation" id="Animation_nrv34"]
+resource_name = "sand_down"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Splash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3, 5]
+}
+
+[sub_resource type="Animation" id="Animation_52r3v"]
+resource_name = "sand_left"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Splash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [6, 8]
+}
+
+[sub_resource type="Animation" id="Animation_a7cyp"]
+resource_name = "sand_right"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Splash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [9, 11]
+}
+
+[sub_resource type="Animation" id="Animation_rvnng"]
+resource_name = "sand_up"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Splash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 2]
+}
+
+[sub_resource type="Animation" id="Animation_dkdrx"]
+resource_name = "water_up"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Splash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [12, 14]
+}
+
+[sub_resource type="Animation" id="Animation_dymlh"]
+resource_name = "water_down"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Splash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [15, 17]
+}
+
+[sub_resource type="Animation" id="Animation_oslfg"]
+resource_name = "water_right"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Splash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [18, 20]
+}
+
+[sub_resource type="Animation" id="Animation_22c1a"]
+resource_name = "water_left"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Splash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [21, 23]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_poyhe"]
+_data = {
+"sand_down": SubResource("Animation_nrv34"),
+"sand_left": SubResource("Animation_52r3v"),
+"sand_right": SubResource("Animation_a7cyp"),
+"sand_up": SubResource("Animation_rvnng"),
+"water_down": SubResource("Animation_dymlh"),
+"water_left": SubResource("Animation_22c1a"),
+"water_right": SubResource("Animation_oslfg"),
+"water_up": SubResource("Animation_dkdrx")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sb2dx"]
+animation = &"sand_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4f5h7"]
+animation = &"sand_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8eajh"]
+animation = &"sand_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pvxa3"]
+animation = &"sand_up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_janlw"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_sb2dx")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_4f5h7")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_8eajh")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_pvxa3")
+blend_point_3/pos = Vector2(0, -1)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_61ukx"]
+animation = &"water_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r1an6"]
+animation = &"water_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_asaq8"]
+animation = &"water_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wvi38"]
+animation = &"water_up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_n20af"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_61ukx")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_r1an6")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_asaq8")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_wvi38")
+blend_point_3/pos = Vector2(0, -1)
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_h87fg"]
+states/Sand/node = SubResource("AnimationNodeBlendSpace2D_janlw")
+states/Sand/position = Vector2(350, 91)
+states/Water/node = SubResource("AnimationNodeBlendSpace2D_n20af")
+states/Water/position = Vector2(593, 88)
+
+[node name="Spash" type="Node2D"]
+script = ExtResource("1_27gwo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_poyhe")
+}
+
+[node name="Splash" type="Sprite2D" parent="."]
+position = Vector2(0, 4)
+texture = ExtResource("1_qaj6j")
+hframes = 24
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_h87fg")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/Sand/blend_position = Vector2(0, 0)
+parameters/Water/blend_position = Vector2(0, 0)

@@ -11,6 +11,8 @@ const RUN_ACCEL = 1000
 @onready var particles: CPUParticles2D = $WaterParticles
 @onready var reflection: Sprite2D = $ReflectionMask/ReflectionComponent
 
+@onready var splash_scene = preload("res://scenes/spash.tscn")
+
 signal mode_switch(_mode: String)
 
 # Getter method for max/starting health
@@ -43,3 +45,10 @@ func _on_npc_dialogue_collider_area_entered(area):
 func _on_npc_dialogue_collider_area_exited(area):
 	if area.is_in_group("npc"):
 		Events.emit_signal("idle_dialogue")
+
+
+func _on_splash_timer_timeout():
+	if not velocity.is_zero_approx():
+		var instance = splash_scene.instantiate()
+		instance.start(velocity, mode, position + Vector2(0, -5))
+		get_parent().add_child(instance)

@@ -943,15 +943,13 @@ clip_children = 2
 position = Vector2(0, -6)
 texture = ExtResource("2_g1nij")
 hframes = 207
-frame = 11
+frame = 51
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_ld84v")
 }
-
-[node name="Sprite2D3" type="Sprite2D" parent="."]
 
 [node name="WaterParticles" type="CPUParticles2D" parent="."]
 visible = false
@@ -1144,6 +1142,10 @@ texture = ExtResource("2_g1nij")
 hframes = 207
 sprite_to_reflect = NodePath("../../WaterMask/Sprite2D")
 
+[node name="SplashTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
 [connection signal="area_entered" from="StateMachine/Dash/SandDash/PopUpHitbox" to="StateMachine/Dash/SandDash" method="_on_pop_up_hitbox_area_entered"]
 [connection signal="timeout" from="StateMachine/Timer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
 [connection signal="return_to_idle" from="StateMachine/Hit" to="StateMachine" method="_on_hit_return_to_idle"]
@@ -1153,3 +1155,4 @@ sprite_to_reflect = NodePath("../../WaterMask/Sprite2D")
 [connection signal="body_entered" from="ModeChecker" to="." method="_on_mode_checker_body_entered"]
 [connection signal="body_exited" from="ModeChecker" to="." method="_on_mode_checker_body_exited"]
 [connection signal="damage_taken" from="HurtboxComponent" to="StateMachine" method="_on_hurtbox_component_damage_taken"]
+[connection signal="timeout" from="SplashTimer" to="." method="_on_splash_timer_timeout"]
