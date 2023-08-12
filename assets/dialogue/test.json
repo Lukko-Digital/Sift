@@ -1,32 +1,32 @@
 {
-    "branches": ["O"],
-    "O.0.0": {
-        "name": "Guy",
-        "image": "guy.png",
-        "text": "oh hi im guy",
-        "next": "O.0.1"
-        
-    },
-    "O.0.1": {
-        "name": "Guy",
-        "image": "guy.png",
-        "text": "bye",
-        "next": "EXIT",
-        "branch_end": "O"
-        
-    },
-    "O.1.0": {
-        "name": "Guy",
-        "image": "guy.png",
-        "text": "you already know who i am",
-        "next": "O.1.1"
-        
-    },
-    "O.1.1": {
-        "name": "Guy",
-        "image": "guy.png",
-        "text": "bye bye",
-        "next": "EXIT",
-        "branch_end": "O"
-    }
+	"branches": ["O"],
+	"O.0.0": {
+		"name": "Guy",
+		"image": "guy.png",
+		"text": "oh hi im guy",
+		"next": "O.0.1"
+		
+	},
+	"O.0.1": {
+		"name": "Guy",
+		"image": "guy.png",
+		"text": "bye",
+		"next": "EXIT",
+		"branch_end": "O"
+		
+	},
+	"O.1.0": {
+		"name": "Guy",
+		"image": "guy.png",
+		"text": "you already know who i am",
+		"next": "O.1.1"
+		
+	},
+	"O.1.1": {
+		"name": "Guy",
+		"image": "guy.png",
+		"text": "bye bye",
+		"next": "EXIT",
+		"branch_end": "O"
+	}
 }
