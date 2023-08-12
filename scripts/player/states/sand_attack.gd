@@ -35,7 +35,7 @@ func enter():
 	
 	var instance = sand_attack_scene.instantiate()
 	instance.start(global_position + Vector2(0, -12), anim_name)
-	get_node("../../..").add_child(instance)
+	find_parent("player").get_parent().add_child(instance)
 	Global.camera.shake(0.1, 2)
 	
 func handle_physics(delta):
