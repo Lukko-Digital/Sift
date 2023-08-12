@@ -8,7 +8,6 @@ extends ModeState
 const DASH_SIDE_ACCEL = 100
 const START_LAG = 0.15
 const START_FRAMES = 0.4
-const END_LAG = 0.2
 const END_FRAMES = 0.5
 
 var dig_direction: int
@@ -78,13 +77,14 @@ func handle_physics(delta):
 		animation_tree["parameters/SandDash/" + str(dig_direction) + "/playback"].travel("dig")
 	
 	
-	if parent_state.dash_timer.time_left < time:# and not stopped:
+	if parent_state.dash_timer.time_left <= END_FRAMES:# and not stopped:
+		dash_velocity = dash_velocity.move_toward(direction * character.RUN_SPEED, character.RUN_ACCEL*delta * 0.75)
+		
+	elif parent_state.dash_timer.time_left < time:# and not stopped:
 		dash_velocity = dash_velocity.normalized() * dash_speed
 		dash_velocity = dash_velocity.move_toward(direction * character.RUN_SPEED, DASH_SIDE_ACCEL*delta)
 	
-	if parent_state.dash_timer.time_left <= END_LAG:# and not stopped:
-		dash_velocity = dash_velocity.normalized() * dash_end_speed
-		dash_velocity = dash_velocity.move_toward(direction * dash_end_speed, character.RUN_ACCEL*delta)
+	
 	
 	character.velocity = dash_velocity
 	
