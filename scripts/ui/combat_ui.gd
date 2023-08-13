@@ -2,8 +2,8 @@ extends CanvasLayer
 
 @export var player: CharacterBody2D
 
-const HIT_STOP_DELAY = 0.02
-const HIT_STOP_DURATION = 0.1
+const HIT_STOP_DELAY = 0.0
+const HIT_STOP_DURATION = 0.03
 
 var player_max_hp: int
 var player_current_hp: int
