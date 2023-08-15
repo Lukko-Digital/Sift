@@ -1,40 +1,39 @@
 name: Guy
 image: guy.png
-
-~ branch O
-0:
+~ O
+: 0
 	oh hi im guy
 	any questions comments concerns?
-		- wait who are you again? => branch A
-		- what am i doing here? => branch B
-		- ja ne => branch E
-1:
+		- wait who are you again? > branch A
+		- what am i doing here? > branch B
+		- ja ne > branch E
+: 1
 	oh its you again
 	any questions comments concerns?
-		- wait who are you again? => branch A
-		- what am i doing here? => branch B
-		- ja ne => branch E
-~ branch A
-0:
+		- wait who are you again? > branch A
+		- what am i doing here? > branch B
+		- ja ne > branch E
+~ A
+: 0
 	i'm guy
-	=> branch R
-1:
+	> branch R
+: 1
 	cmon you already know
-	=> branch R
-~ branch B
-0:
+	> branch R
+~ B
+: 0
 	your guess is as good as mine
-	=> branch R
-1:
+	> branch R
+: 1
 	*shrugs*
-	=> branch R
-~ branch E
-0:
+	> branch R
+~ E
+: 0
 	mata ne
-	=> EXIT
-~ branch R
-0:
+	> EXIT
+~ R
+: 0
 	anything else?
-		- wait who are you again? => branch A
-		- what am i doing here? => branch B
-		- ja ne => branch E
+		- wait who are you again? > branch A
+		- what am i doing here? > branch B
+		- ja ne > branch E
