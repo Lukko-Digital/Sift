@@ -12,6 +12,7 @@ var shake_amount: int
 
 @onready var hearts_container: MarginContainer = $HeartsContainer
 @onready var empty_hearts: TextureRect = $HeartsContainer/Hearts/EmptyHearts
+@onready var half_hearts: TextureRect = $HeartsContainer/Hearts/HalfHearts
 @onready var full_hearts: TextureRect = $HeartsContainer/Hearts/FullHearts
 @onready var shake_timer: Timer = $HeartsContainer/Hearts/ShakeTimer
 @onready var heart_width: int = full_hearts.texture.get_size().x
@@ -19,6 +20,7 @@ var shake_amount: int
 
 
 func _ready():
+	print(0%2)
 	Events.player_damaged.connect(_on_player_damaged)
 	heart_container_default_pos = hearts_container.position
 	shake_timer.timeout.connect(_shake_end)
@@ -37,8 +39,9 @@ func shake(time: float, amount: float):
 func initialize_health():
 	player_max_hp = player.max_hp()
 	player_current_hp = player_max_hp
-	empty_hearts.size.x = heart_width * player_max_hp
-	full_hearts.size.x = heart_width * player_max_hp
+	empty_hearts.size.x = heart_width * (floor(player_max_hp / 2) + player_max_hp % 2)
+	half_hearts.size.x = heart_width * (floor(player_max_hp / 2) + player_max_hp % 2)
+	full_hearts.size.x = heart_width * floor(player_max_hp / 2)
 
 func hit_stop():
 	# delay a bit to allow hit animations to play
@@ -49,7 +52,8 @@ func hit_stop():
 
 func _on_player_damaged(damage):
 	player_current_hp -= damage
-	full_hearts.size.x = heart_width * player_current_hp
+	half_hearts.size.x = heart_width * (floor(player_current_hp / 2) + player_current_hp % 2)
+	full_hearts.size.x = heart_width * floor(player_current_hp / 2)
 	screen_color_animation_player.play("on_hit_red")
 	shake(0.1, 15)
 	hit_stop()
