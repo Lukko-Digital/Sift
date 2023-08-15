@@ -29,15 +29,6 @@ _data = {
 [node name="combat_ui" type="CanvasLayer"]
 script = ExtResource("1_jhqvg")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-offset_left = -327.0
-offset_top = 949.0
-offset_right = 1039.0
-offset_bottom = 1093.0
-scale = Vector2(0.523086, 0.523086)
-texture = ExtResource("2_1lrxn")
-
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_left = -25.0
 offset_top = 861.0
@@ -51,14 +42,6 @@ theme_override_constants/margin_top = 50
 
 [node name="Hearts" type="Control" parent="MarginContainer"]
 layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Hearts"]
-offset_left = -276.69
-offset_top = 19.0939
-offset_right = 1089.31
-offset_bottom = 163.094
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_1lrxn")
 
 [node name="EmptyHearts" type="TextureRect" parent="MarginContainer/Hearts"]
 layout_mode = 0
@@ -76,6 +59,14 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_i6p0v")
 expand_mode = 1
 stretch_mode = 1
+
+[node name="Background" type="TextureRect" parent="MarginContainer/Hearts"]
+offset_left = -276.69
+offset_top = 19.0939
+offset_right = 1089.31
+offset_bottom = 163.094
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_1lrxn")
 
 [node name="ScreenColor" type="ColorRect" parent="."]
 visible = false
