@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bb3q3qfbatogk"]
+[gd_scene load_steps=8 format=3 uid="uid://bb3q3qfbatogk"]
 
 [ext_resource type="Script" path="res://scripts/ui/combat_ui.gd" id="1_jhqvg"]
 [ext_resource type="Texture2D" uid="uid://dgre2hq2wfv0p" path="res://assets/png/player_heart_empty.png" id="1_ohfhr"]
 [ext_resource type="Texture2D" uid="uid://c1w84eyrp16e0" path="res://assets/png/health_backing_bar.png" id="2_1lrxn"]
 [ext_resource type="Texture2D" uid="uid://dm6gbqtfdmoy5" path="res://assets/png/player_heart_full.png" id="2_i6p0v"]
+[ext_resource type="Texture2D" uid="uid://bxef67evubctm" path="res://assets/png/player_heart_half_resize.png" id="4_owm54"]
 
 [sub_resource type="Animation" id="Animation_xb08s"]
 resource_name = "on_hit_red"
@@ -57,6 +58,14 @@ offset_right = 1640.0
 offset_bottom = 363.0
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_ohfhr")
+stretch_mode = 1
+
+[node name="HalfHearts" type="TextureRect" parent="HeartsContainer/Hearts"]
+layout_mode = 0
+offset_right = 1640.0
+offset_bottom = 363.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_owm54")
 stretch_mode = 1
 
 [node name="FullHearts" type="TextureRect" parent="HeartsContainer/Hearts"]
