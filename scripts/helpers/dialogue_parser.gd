@@ -7,7 +7,6 @@ static func b(dialogue_file):
 	var lines = FileAccess.open(
 		dialogue_path, FileAccess.READ
 	).get_as_text().split('\n')
-	print(lines)
 
 	var dialogue_dict = {
 		"info": {
@@ -28,3 +27,32 @@ static func b(dialogue_file):
 	)
 	dialogue_dict["info"]["name"] = lines[0].substr(6)
 	dialogue_dict["info"]["image"] = lines[1].substr(7)
+
+	var dialogue_tree: Dictionary
+	var branch: String
+	var interaction: String
+	var dialogue_idx: int = 0
+
+	for line in lines:
+		# Remove tabs
+		line = line.replace("\t","")
+		# Check if new branch begins
+		if line.substr(0,9) == "~ branch ":
+			branch = line.substr(9)
+			dialogue_tree[branch] = {}
+		# If there is no branch, pass
+		elif not branch:
+			continue
+		# Get interaction number if line ends in colon
+		elif line[-1] == ":":
+			interaction = line.substr(0, len(line) - 1)
+			dialogue_tree[branch][interaction] = []
+			dialogue_idx = 0
+		# Check if line is a response option
+		elif line.substr(0,2) == "- ":
+			pass
+		# Else, assume that the line is a dialogue item
+		else:
+			dialogue_tree[branch][interaction] = line
+	
+	print(dialogue_tree)
