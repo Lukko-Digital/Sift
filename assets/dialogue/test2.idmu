@@ -4,29 +4,29 @@ image: guy.png
 : 0
 	oh hi im guy
 	any questions comments concerns?
-		- wait who are you again? > branch A
-		- what am i doing here? > branch B
-		- ja ne > branch E
+		- wait who are you again? > A
+		- what am i doing here? > B
+		- ja ne > E
 : 1
 	oh its you again
 	any questions comments concerns?
-		- wait who are you again? > branch A
-		- what am i doing here? > branch B
-		- ja ne > branch E
+		- wait who are you again? > A
+		- what am i doing here? > B
+		- ja ne > E
 ~ A
 : 0
 	i'm guy
-	> branch R
+	> R
 : 1
 	cmon you already know
-	> branch R
+	> R
 ~ B
 : 0
 	your guess is as good as mine
-	> branch R
+	> R
 : 1
 	*shrugs*
-	> branch R
+	> R
 ~ E
 : 0
 	mata ne
@@ -34,6 +34,6 @@ image: guy.png
 ~ R
 : 0
 	anything else?
-		- wait who are you again? > branch A
-		- what am i doing here? > branch B
-		- ja ne > branch E
+		- wait who are you again? > A
+		- what am i doing here? > B
+		- ja ne > E
