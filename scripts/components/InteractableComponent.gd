@@ -8,6 +8,7 @@ var interaction_count: Dictionary
 var branch_interaction_limits: Dictionary
 
 func _ready():
+	DialogueParser.b("test2.idmu")
 	Events.interaction_complete.connect(_on_interaction_complete)
 	
 	var dialogue_json = load_dialogue_json()
