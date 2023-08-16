@@ -40,50 +40,73 @@ static func b(dialogue_file):
 		match line.substr(0,2):
 			# Branch
 			"~ ":
-				branch = line.substr(2)
-				dialogue_tree[branch] = {}
+				var res = branch_line(dialogue_tree, line)
+				dialogue_tree = res[0]
+				branch = res[1]
 			# Interaction
 			": ":
-				interaction = line.substr(2)
-				assert(
-					dialogue_tree.has(branch),
-					"No branch detected. Branches are denoted `~ [BRANCH_ID]`"
-				)
-				dialogue_tree[branch][interaction] = []
+				var res = interaction_line(dialogue_tree, branch, line)
+				dialogue_tree = res[0]
+				interaction = res[1]
 			# Response
 			"- ":
-				assert(" > " in line, "No next branch detected. Next branch is denoted [DIALOGUE_TEXT] > [BRANCH_ID]")
-				
-				var dialogue = dialogue_tree[branch][interaction][-1]
-				if not dialogue.has("responses"):
-					dialogue["responses"] = {}
-				
-				var split_line = line.substr(2).split(" > ")
-				var text = split_line[0]
-				var next = split_line[1]
-				
-				var response_num = len(dialogue["responses"]) + 1
-				
-				dialogue["responses"][response_num] = {
-					"text": text,
-					"next": next
-				}
+				dialogue_tree = response_line(dialogue_tree, branch, interaction, line)
 			# Switch
 			"> ":
-				var dialogue = dialogue_tree[branch][interaction][-1]
-				var next = line.substr(2)
-				
-				dialogue["next"] = next
+				dialogue_tree = switch_line(dialogue_tree, branch, interaction, line)
 			# Dialogue
 			_:
-				assert(
-					dialogue_tree.has(branch),
-					"No branch detected. Branches are denoted `~ [BRANCH_ID]`"
-				)
-				assert(
-					dialogue_tree[branch].has(interaction),
-					"Interaction path not detected. Interaction paths are denoted `: [MIN_INTERACRTIONS_FOR_PATH]`"
-				)
-				dialogue_tree[branch][interaction].append({"text": line})
+				dialogue_tree = dialogue_line(dialogue_tree, branch, interaction, line)
 	
-	print(dialogue_tree)
+	dialogue_dict["branches"] = dialogue_tree
+	print(JSON.stringify(dialogue_tree, "\t"))
+	return dialogue_dict
+
+static func branch_line(dialogue_tree, line):
+	var branch = line.substr(2)
+	dialogue_tree[branch] = {}
+	return [dialogue_tree, branch]
+
+static func interaction_line(dialogue_tree, branch, line):
+	var interaction = line.substr(2)
+	assert(
+		dialogue_tree.has(branch),
+		"No branch detected. Branches are denoted `~ [BRANCH_ID]`"
+	)
+	dialogue_tree[branch][interaction] = []
+	return [dialogue_tree, interaction]
+
+static func response_line(dialogue_tree, branch, interaction, line):
+	assert(" > " in line, "No next branch detected. Next branch is denoted [DIALOGUE_TEXT] > [BRANCH_ID]")
+	
+	var dialogue = dialogue_tree[branch][interaction][-1]
+	if not dialogue.has("responses"):
+		dialogue["responses"] = {}
+	
+	var split_line = line.substr(2).split(" > ")
+	var text = split_line[0]
+	var next = split_line[1]
+	
+	var response_num = len(dialogue["responses"]) + 1
+	
+	dialogue["responses"][response_num] = {
+		"text": text,
+		"next": next
+	}
+	return dialogue_tree
+
+static func switch_line(dialogue_tree, branch, interaction, line):
+	dialogue_tree[branch][interaction][-1]["next"] = line.substr(2)
+	return dialogue_tree
+
+static func dialogue_line(dialogue_tree, branch, interaction, line):
+	assert(
+		dialogue_tree.has(branch),
+		"No branch detected. Branches are denoted `~ [BRANCH_ID]`"
+	)
+	assert(
+		dialogue_tree[branch].has(interaction),
+		"Interaction path not detected. Interaction paths are denoted `: [MIN_INTERACRTIONS_FOR_PATH]`"
+	)
+	dialogue_tree[branch][interaction].append({"text": line})
+	return dialogue_tree
