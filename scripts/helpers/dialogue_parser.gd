@@ -52,6 +52,8 @@ static func b(dialogue_file):
 				dialogue_tree[branch][interaction] = []
 			# Response
 			"- ":
+				assert(" > " in line, "No next branch detected. Next branch is denoted [DIALOGUE_TEXT] > [BRANCH_ID]")
+				
 				var dialogue = dialogue_tree[branch][interaction][-1]
 				if not dialogue.has("responses"):
 					dialogue["responses"] = {}
