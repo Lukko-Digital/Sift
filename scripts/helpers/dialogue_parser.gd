@@ -70,7 +70,10 @@ static func b(dialogue_file):
 				}
 			# Switch
 			"> ":
-				pass
+				var dialogue = dialogue_tree[branch][interaction][-1]
+				var next = line.substr(2)
+				
+				dialogue["next"] = next
 			# Dialogue
 			_:
 				assert(
