@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://btje8wwp2nhiu"]
+[gd_scene load_steps=134 format=3 uid="uid://btje8wwp2nhiu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
 [ext_resource type="Texture2D" uid="uid://dgyosk8b1sq5p" path="res://assets/png/player-Sheet-4.png" id="2_g1nij"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/player/states/hit.gd" id="11_1pjmu"]
 [ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="11_mf8l8"]
 [ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="12_nrhlb"]
+[ext_resource type="Texture2D" uid="uid://d08cl8q3c4s0s" path="res://assets/png/water_particle.png" id="15_ig7qa"]
 
 [sub_resource type="Animation" id="Animation_86qvn"]
 resource_name = "dig_down"
@@ -664,6 +665,302 @@ tracks/0/keys = {
 "values": [67, 74]
 }
 
+[sub_resource type="Animation" id="Animation_l1uij"]
+resource_name = "water_down"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [248, 251]
+}
+
+[sub_resource type="Animation" id="Animation_ks10m"]
+resource_name = "water_down_end"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [252, 256]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_u5nt2"]
+resource_name = "water_down_start"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [242, 243, 246, 247]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.45),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_0bjx7"]
+resource_name = "water_left"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [231, 234]
+}
+
+[sub_resource type="Animation" id="Animation_skvvb"]
+resource_name = "water_left_end"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [235, 239]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_djil3"]
+resource_name = "water_left_start"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [225, 226, 229, 230]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.45),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7sqxm"]
+resource_name = "water_right"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [214, 217]
+}
+
+[sub_resource type="Animation" id="Animation_bfoba"]
+resource_name = "water_right_end"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [218, 222]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_gby8w"]
+resource_name = "water_right_start"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [208, 209, 212, 213]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.45),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_sk5a8"]
+resource_name = "water_up"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [265, 268]
+}
+
+[sub_resource type="Animation" id="Animation_tpwxw"]
+resource_name = "water_up_end"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [269, 273]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_plh1y"]
+resource_name = "water_up_start"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [259, 260, 263, 264]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.45),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ld84v"]
 _data = {
 "dig_down": SubResource("Animation_86qvn"),
@@ -693,7 +990,19 @@ _data = {
 "walk_down": SubResource("Animation_imr2k"),
 "walk_left": SubResource("Animation_nw3u2"),
 "walk_right": SubResource("Animation_flfuo"),
-"walk_up": SubResource("Animation_3wnlr")
+"walk_up": SubResource("Animation_3wnlr"),
+"water_down": SubResource("Animation_l1uij"),
+"water_down_end": SubResource("Animation_ks10m"),
+"water_down_start": SubResource("Animation_u5nt2"),
+"water_left": SubResource("Animation_0bjx7"),
+"water_left_end": SubResource("Animation_skvvb"),
+"water_left_start": SubResource("Animation_djil3"),
+"water_right": SubResource("Animation_7sqxm"),
+"water_right_end": SubResource("Animation_bfoba"),
+"water_right_start": SubResource("Animation_gby8w"),
+"water_up": SubResource("Animation_sk5a8"),
+"water_up_end": SubResource("Animation_tpwxw"),
+"water_up_start": SubResource("Animation_plh1y")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e3tqw"]
@@ -894,6 +1203,89 @@ blend_point_2/pos = Vector2(0, 1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_vat86")
 blend_point_3/pos = Vector2(0, -1)
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n1r1v"]
+animation = &"water_left_start"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uhubj"]
+animation = &"water_right_start"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n0hk4"]
+animation = &"water_up_start"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_unu85"]
+animation = &"water_down_start"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_ve7kl"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_n1r1v")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_uhubj")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_n0hk4")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_unu85")
+blend_point_3/pos = Vector2(0, 1)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yqs4r"]
+animation = &"water_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_11jgr"]
+animation = &"water_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_05sdf"]
+animation = &"water_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_usmpe"]
+animation = &"water_up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_o8xf4"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_yqs4r")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_11jgr")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_05sdf")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_usmpe")
+blend_point_3/pos = Vector2(0, -1)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e2anu"]
+animation = &"water_left_end"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_if00k"]
+animation = &"water_right_end"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ebmi3"]
+animation = &"water_down_end"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vb3cb"]
+animation = &"water_up_end"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_1eib6"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_e2anu")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_if00k")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_ebmi3")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_vb3cb")
+blend_point_3/pos = Vector2(0, -1)
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d2imr"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s4y8h"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_x17of"]
+states/End/position = Vector2(1068, 87)
+states/Jump/node = SubResource("AnimationNodeBlendSpace2D_ve7kl")
+states/Jump/position = Vector2(369, 96)
+states/Loop/node = SubResource("AnimationNodeBlendSpace2D_o8xf4")
+states/Loop/position = Vector2(560, 98)
+states/Trip/node = SubResource("AnimationNodeBlendSpace2D_1eib6")
+states/Trip/position = Vector2(774, 87)
+transitions = ["Start", "Jump", SubResource("AnimationNodeStateMachineTransition_d2imr"), "Jump", "Loop", SubResource("AnimationNodeStateMachineTransition_s4y8h")]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yf6bb"]
 advance_mode = 2
 
@@ -909,6 +1301,8 @@ states/SandDash/position = Vector2(504, 179)
 states/Start/position = Vector2(176, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_rw12e")
 states/Walk/position = Vector2(576, 100)
+states/WaterDash/node = SubResource("AnimationNodeStateMachine_x17of")
+states/WaterDash/position = Vector2(1110, 79)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_yf6bb")]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pkaem"]
@@ -928,6 +1322,31 @@ radius = 1.02611
 radius = 5.0
 height = 32.0
 
+[sub_resource type="Curve" id="Curve_r2tbi"]
+_data = [Vector2(0, 0.494737), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0hegn"]
+curve = SubResource("Curve_r2tbi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f3ubh"]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 17.0
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+radial_accel_min = -1000.0
+radial_accel_max = -1000.0
+turbulence_noise_strength = 4.14
+turbulence_noise_speed = Vector3(0, -5, 0)
+turbulence_influence_min = 0.4
+turbulence_influence_max = 0.4
+turbulence_influence_over_life = SubResource("CurveTexture_0hegn")
+
 [node name="player" type="CharacterBody2D"]
 collision_mask = 70
 script = ExtResource("1_81117")
@@ -943,36 +1362,13 @@ clip_children = 2
 position = Vector2(0, -9)
 texture = ExtResource("2_g1nij")
 hframes = 275
-frame = 38
+frame = 24
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_ld84v")
 }
-
-[node name="WaterParticles" type="CPUParticles2D" parent="."]
-visible = false
-z_index = -5
-position = Vector2(0, -7)
-amount = 64
-lifetime = 0.4
-explosiveness = 0.02
-randomness = 0.2
-lifetime_randomness = 0.1
-fixed_fps = 30
-draw_order = 1
-texture = ExtResource("3_j4dwo")
-emission_shape = 4
-emission_points = PackedVector2Array(-2, 10, 2, 10)
-emission_colors = PackedColorArray()
-direction = Vector2(0, -1)
-spread = 90.0
-gravity = Vector2(0, 100)
-initial_velocity_min = 20.0
-initial_velocity_max = 30.0
-scale_amount_min = 0.01
-scale_amount_max = 0.01
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_hp0up")
@@ -983,49 +1379,9 @@ parameters/Idle/blend_position = Vector2(0, 1)
 parameters/SandAttack/blend_position = Vector2(0, -0.973799)
 parameters/SandDash/blend_position = Vector2(0, 1)
 parameters/Walk/blend_position = Vector2(0, 0)
-
-[node name="DepthShoreChecker" type="Node2D" parent="."]
-visible = false
-
-[node name="RayCast2D" type="RayCast2D" parent="DepthShoreChecker"]
-position = Vector2(0, 3)
-target_position = Vector2(0, 32)
-collision_mask = 32
-
-[node name="RayCast2D2" type="RayCast2D" parent="DepthShoreChecker"]
-position = Vector2(0, 3)
-target_position = Vector2(0, -32)
-collision_mask = 32
-
-[node name="RayCast2D3" type="RayCast2D" parent="DepthShoreChecker"]
-position = Vector2(0, 3)
-target_position = Vector2(32, 0)
-collision_mask = 32
-
-[node name="RayCast2D4" type="RayCast2D" parent="DepthShoreChecker"]
-position = Vector2(0, 3)
-target_position = Vector2(-32, 0)
-collision_mask = 32
-
-[node name="RayCast2D5" type="RayCast2D" parent="DepthShoreChecker"]
-position = Vector2(0, 3)
-target_position = Vector2(22.6, 22.6)
-collision_mask = 32
-
-[node name="RayCast2D6" type="RayCast2D" parent="DepthShoreChecker"]
-position = Vector2(0, 3)
-target_position = Vector2(22.6, -22.6)
-collision_mask = 32
-
-[node name="RayCast2D7" type="RayCast2D" parent="DepthShoreChecker"]
-position = Vector2(0, 3)
-target_position = Vector2(-22.6, 22.6)
-collision_mask = 32
-
-[node name="RayCast2D8" type="RayCast2D" parent="DepthShoreChecker"]
-position = Vector2(0, 3)
-target_position = Vector2(-22.6, -22.6)
-collision_mask = 32
+parameters/WaterDash/Jump/blend_position = Vector2(-0.990549, 0.0086956)
+parameters/WaterDash/Loop/blend_position = Vector2(0, 0)
+parameters/WaterDash/Trip/blend_position = Vector2(0, 0)
 
 [node name="StateMachine" type="Node2D" parent="."]
 visible = false
@@ -1064,8 +1420,9 @@ position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_pkaem")
 disabled = true
 
-[node name="WaterDash" type="Node2D" parent="StateMachine/Dash" node_paths=PackedStringArray("shore_checker", "character", "animation_tree")]
+[node name="WaterDash" type="Node2D" parent="StateMachine/Dash" node_paths=PackedStringArray("particles", "shore_checker", "character", "animation_tree")]
 script = ExtResource("8_1rdr2")
+particles = NodePath("../../../GPUParticles2D")
 shore_checker = NodePath("../DashShoreChecker")
 character = NodePath("../../..")
 animation_tree = NodePath("../../../AnimationTree")
@@ -1146,6 +1503,59 @@ sprite_to_reflect = NodePath("../../WaterMask/Sprite2D")
 [node name="SplashTimer" type="Timer" parent="."]
 wait_time = 0.3
 autostart = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+emitting = false
+amount = 5000
+process_material = SubResource("ParticleProcessMaterial_f3ubh")
+texture = ExtResource("15_ig7qa")
+lifetime = 0.35
+randomness = 1.0
+interpolate = false
+
+[node name="DepthShoreChecker" type="Node2D" parent="."]
+visible = false
+
+[node name="RayCast2D" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(0, 32)
+collision_mask = 32
+
+[node name="RayCast2D2" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(0, -32)
+collision_mask = 32
+
+[node name="RayCast2D3" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(32, 0)
+collision_mask = 32
+
+[node name="RayCast2D4" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(-32, 0)
+collision_mask = 32
+
+[node name="RayCast2D5" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(22.6, 22.6)
+collision_mask = 32
+
+[node name="RayCast2D6" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(22.6, -22.6)
+collision_mask = 32
+
+[node name="RayCast2D7" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(-22.6, 22.6)
+collision_mask = 32
+
+[node name="RayCast2D8" type="RayCast2D" parent="DepthShoreChecker"]
+position = Vector2(0, 3)
+target_position = Vector2(-22.6, -22.6)
+collision_mask = 32
 
 [connection signal="area_entered" from="StateMachine/Dash/SandDash/PopUpHitbox" to="StateMachine/Dash/SandDash" method="_on_pop_up_hitbox_area_entered"]
 [connection signal="timeout" from="StateMachine/Timer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]

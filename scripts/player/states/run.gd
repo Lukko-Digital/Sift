@@ -16,6 +16,8 @@ func handle_physics(delta: float):
 	else:
 		animation_tree["parameters/Walk/blend_position"] = Vector2(0, direction.y / abs(direction.y))
 	
+	character.sink_in_water()
+	
 	var speed_coeff = 1.0 if character.mode == "Sand" else SPEED_COEFF_WATER
 	
 	character.velocity = character.velocity.move_toward(direction * character.RUN_SPEED * speed_coeff, character.RUN_ACCEL * delta)

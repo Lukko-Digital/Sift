@@ -28,7 +28,7 @@ func _on_mode_checker_body_exited(body):
 	mode = "Water" 
 	emit_signal("mode_switch", mode)
 	
-func _physics_process(delta):
+func sink_in_water():
 	if mode == "Water":
 		var distance = 32.0
 		for raycast in depth_checker.get_children():
@@ -36,7 +36,6 @@ func _physics_process(delta):
 				distance = (raycast.get_collision_point() - raycast.global_position).length()
 	
 		sprite.offset.y = distance / 4 + 1
-		reflection.offset.y = -sprite.offset.y
 
 func _on_npc_dialogue_collider_area_entered(area):
 	if area.is_in_group("npc"):
