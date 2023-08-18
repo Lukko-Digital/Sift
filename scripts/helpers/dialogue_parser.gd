@@ -1,20 +1,14 @@
 class_name DialogueParser
 extends Node
 
-static func b(dialogue_file):
+static func parse(dialogue_file):
 	var dialogue_path = "res://assets/dialogue/%s" % dialogue_file
 	assert(FileAccess.file_exists(dialogue_path), "Dialog file at %s does not exist" % dialogue_path)
 	var lines = FileAccess.open(
 		dialogue_path, FileAccess.READ
 	).get_as_text().split('\n')
 
-	var dialogue_dict = {
-		"info": {
-			"name": "",
-			"image": "",
-		},
-		"branches": {}
-	}
+	var dialogue_info: Dictionary
 
 	# Get name and image from first two lines
 	assert(
@@ -25,8 +19,8 @@ static func b(dialogue_file):
 		lines[1].substr(0,7) == "image: ",
 		"Second line must be in the format: image: [IMAGE FILE PATH]`"
 	)
-	dialogue_dict["info"]["name"] = lines[0].substr(6)
-	dialogue_dict["info"]["image"] = lines[1].substr(7)
+	dialogue_info["name"] = lines[0].substr(6)
+	dialogue_info["image"] = lines[1].substr(7)
 
 	var dialogue_tree: Dictionary
 	var branch: String
@@ -58,9 +52,8 @@ static func b(dialogue_file):
 			_:
 				dialogue_tree = dialogue_line(dialogue_tree, branch, interaction, line)
 	
-	dialogue_dict["branches"] = dialogue_tree
 	print(JSON.stringify(dialogue_tree, "\t"))
-	return dialogue_dict
+	return {"info": dialogue_info, "tree": dialogue_tree}
 
 static func branch_line(dialogue_tree, line):
 	var branch = line.substr(2)
