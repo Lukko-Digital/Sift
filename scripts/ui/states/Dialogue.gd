@@ -42,10 +42,12 @@ func recieve_args(interactable_node):
 func enter():
 	dialogue_container.show()
 	despawn_buttons()
-	var dialogue_path = "res://assets/dialogue/%s" % interactable.DIALOGUE_FILE
-	var dialogue_json = JSON.parse_string(FileAccess.open(dialogue_path, FileAccess.READ).get_as_text())
-	dialogue_info = dialogue_json["info"]
-	dialogue_tree = dialogue_json["branches"]
+	dialogue_info = interactable.dialogue_info
+	dialogue_tree = interactable.dialogue_tree
+#	var dialogue_path = "res://assets/dialogue/%s" % interactable.DIALOGUE_FILE
+#	var dialogue_json = JSON.parse_string(FileAccess.open(dialogue_path, FileAccess.READ).get_as_text())
+#	dialogue_info = dialogue_json["info"]
+#	dialogue_tree = dialogue_json["branches"]
 	load_branch("O")
 
 ## Hide dialogue box and reset internal variables
