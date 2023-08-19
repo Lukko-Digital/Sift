@@ -114,9 +114,7 @@ func end_animation():
 #	animation_tree["parameters/SandDash/" + str(dig_direction) + "/playback"].travel("end")
 	animation_tree["parameters/SandDash/" + str(dig_direction) + "/playback"].start("end")
 	
-func exit():
 	animation_tree["parameters/Idle/blend_position"] = animation_tree["parameters/SandDash/blend_position"]
-
 
 func _on_pop_up_hitbox_area_entered(area):
 	if area.is_in_group("enemy_hurtbox"):

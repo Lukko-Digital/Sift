@@ -1,7 +1,7 @@
 class_name Run
 extends State
 
-const SPEED_COEFF_WATER = 0.85
+const SPEED_COEFF_WATER = 0.80
 
 func enter():
 	animation_tree["parameters/playback"].travel("Walk")

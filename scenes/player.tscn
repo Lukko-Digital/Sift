@@ -1359,10 +1359,10 @@ offset = Vector2(0, -60)
 
 [node name="Sprite2D" type="Sprite2D" parent="WaterMask"]
 clip_children = 2
-position = Vector2(0, -9)
+position = Vector2(1, -9)
 texture = ExtResource("2_g1nij")
 hframes = 275
-frame = 24
+frame = 52
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
@@ -1495,7 +1495,7 @@ texture = ExtResource("3_j4dwo")
 
 [node name="ReflectionComponent" parent="ReflectionMask" node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
 z_as_relative = false
-position = Vector2(0, -51)
+position = Vector2(1, -51)
 texture = ExtResource("2_g1nij")
 hframes = 275
 sprite_to_reflect = NodePath("../../WaterMask/Sprite2D")
@@ -1515,7 +1515,6 @@ randomness = 1.0
 interpolate = false
 
 [node name="DepthShoreChecker" type="Node2D" parent="."]
-visible = false
 
 [node name="RayCast2D" type="RayCast2D" parent="DepthShoreChecker"]
 position = Vector2(0, 3)

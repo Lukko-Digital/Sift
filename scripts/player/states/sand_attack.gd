@@ -34,8 +34,8 @@ func enter():
 	direction = animation_tree["parameters/SandAttack/blend_position"]
 	
 	var instance = sand_attack_scene.instantiate()
-	instance.start(global_position + Vector2(0, -12), anim_name)
-	find_parent("player").get_parent().add_child(instance)
+	instance.start(character.position + Vector2(0, -12), anim_name)
+	character.get_parent().add_child(instance)
 	Global.camera.shake(0.1, 2)
 	
 func handle_physics(delta):

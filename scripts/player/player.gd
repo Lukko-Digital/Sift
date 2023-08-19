@@ -1,15 +1,14 @@
 class_name Player
 extends CharacterBody2D
 
-var mode: String = "Sand"
+var mode: String = "Water"
 
-const RUN_SPEED = 100
+var RUN_SPEED = 100
 const RUN_ACCEL = 1000
 
 @onready var sprite: Sprite2D = $WaterMask/Sprite2D
 @onready var depth_checker = $DepthShoreChecker
 @onready var particles: CPUParticles2D = $WaterParticles
-@onready var reflection: Sprite2D = $ReflectionMask/ReflectionComponent
 
 @onready var splash_scene = preload("res://scenes/spash.tscn")
 
@@ -51,3 +50,4 @@ func _on_splash_timer_timeout():
 		var instance = splash_scene.instantiate()
 		instance.start(velocity, mode, position + Vector2(0, -5))
 		get_parent().add_child(instance)
+
