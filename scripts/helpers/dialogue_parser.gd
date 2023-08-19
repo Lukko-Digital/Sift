@@ -1,6 +1,9 @@
 class_name DialogueParser
 extends Node
 
+const NAME_TAG = "name: "
+const IMAGE_TAG = "image: "
+
 static func load_idmu(dialogue_file):
 	var dialogue_path = "res://assets/dialogue/%s" % dialogue_file
 	assert(FileAccess.file_exists(dialogue_path), "Dialog file at %s does not exist" % dialogue_path)
@@ -15,12 +18,12 @@ static func parse_dialogue_info(dialogue_file):
 
 	# Get name and image from first two lines
 	assert(
-		lines[0].substr(0,6) == "name: ",
-		"First line must be in the format: `name: [NAME]`"
+		lines[0].substr(0, len(NAME_TAG)) == NAME_TAG,
+		"First line must be in the format: `%s [NAME]`" % NAME_TAG
 	)
 	assert(
-		lines[1].substr(0,7) == "image: ",
-		"Second line must be in the format: image: [IMAGE FILE PATH]`"
+		lines[1].substr(0, len(IMAGE_TAG)) == IMAGE_TAG,
+		"Second line must be in the format: `%s [IMAGE FILE PATH]`" % IMAGE_TAG
 	)
 	dialogue_info["name"] = lines[0].substr(6)
 	dialogue_info["image"] = lines[1].substr(7)
