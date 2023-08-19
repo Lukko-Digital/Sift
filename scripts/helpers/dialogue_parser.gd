@@ -1,8 +1,16 @@
 class_name DialogueParser
 extends Node
 
-static func parse(dialogue_file):
+static func load_idmu(dialogue_file):
+	var dialogue_path = "res://assets/dialogue/%s" % dialogue_file
+	assert(FileAccess.file_exists(dialogue_path), "Dialog file at %s does not exist" % dialogue_path)
+	return FileAccess.open(
+		dialogue_path, FileAccess.READ
+	).get_as_text().split('\n')
+
+static func parse_dialogue_info(dialogue_file):
 	var lines = load_idmu(dialogue_file)
+	
 	var dialogue_info: Dictionary
 
 	# Get name and image from first two lines
@@ -16,7 +24,12 @@ static func parse(dialogue_file):
 	)
 	dialogue_info["name"] = lines[0].substr(6)
 	dialogue_info["image"] = lines[1].substr(7)
+	
+	return dialogue_info
 
+static func parse_dialogue_tree(dialogue_file):
+	var lines = load_idmu(dialogue_file)
+	
 	var dialogue_tree: Dictionary
 	var branch: String
 	var interaction: String
@@ -46,14 +59,7 @@ static func parse(dialogue_file):
 			# Dialogue
 			_:
 				dialogue_tree = dialogue_line(dialogue_tree, branch, interaction, line)
-	return {"info": dialogue_info, "tree": dialogue_tree}
-
-static func load_idmu(dialogue_file):
-	var dialogue_path = "res://assets/dialogue/%s" % dialogue_file
-	assert(FileAccess.file_exists(dialogue_path), "Dialog file at %s does not exist" % dialogue_path)
-	return FileAccess.open(
-		dialogue_path, FileAccess.READ
-	).get_as_text().split('\n')
+	return dialogue_tree
 
 static func branch_line(dialogue_tree, line):
 	var branch = line.substr(2)
