@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://pmfyma7kp24l"]
+[gd_scene load_steps=5 format=3 uid="uid://pmfyma7kp24l"]
 
 [ext_resource type="PackedScene" uid="uid://b8md8ehlk518q" path="res://scenes/main.tscn" id="1_1vu6b"]
 [ext_resource type="Script" path="res://scripts/render_camera.gd" id="2_20lf1"]
+[ext_resource type="PackedScene" uid="uid://c83lh8olstfpw" path="res://scenes/ui/dialogue_ui.tscn" id="3_j20hu"]
+[ext_resource type="PackedScene" uid="uid://bb3q3qfbatogk" path="res://scenes/ui/combat_ui.tscn" id="4_l7g74"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -13,10 +15,10 @@ grow_vertical = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
-offset_left = -985.0
-offset_top = -565.0
-offset_right = 985.0
-offset_bottom = 565.0
+offset_left = -1012.0
+offset_top = -592.0
+offset_right = 1012.0
+offset_bottom = 592.0
 stretch = true
 stretch_shrink = 4
 
@@ -24,15 +26,21 @@ stretch_shrink = 4
 handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 canvas_item_default_texture_filter = 0
-size = Vector2i(492, 282)
+size = Vector2i(506, 296)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="main" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_1vu6b")]
-position = Vector2(246, 141)
+position = Vector2(253, 148)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("main_scene")]
+zoom = Vector2(1.1, 1.1)
 position_smoothing_enabled = true
-position_smoothing_speed = 2.0
+position_smoothing_speed = 1.5
 script = ExtResource("2_20lf1")
+main_scene = NodePath("../SubViewportContainer/SubViewport/main")
+
+[node name="dialogue_ui" parent="." instance=ExtResource("3_j20hu")]
+
+[node name="combat_ui" parent="." node_paths=PackedStringArray("main_scene") instance=ExtResource("4_l7g74")]
 main_scene = NodePath("../SubViewportContainer/SubViewport/main")

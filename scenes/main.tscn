@@ -1,10 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8md8ehlk518q"]
+[gd_scene load_steps=12 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
 [ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="3_o4613"]
-[ext_resource type="PackedScene" uid="uid://c83lh8olstfpw" path="res://scenes/ui/dialogue_ui.tscn" id="5_36d1q"]
-[ext_resource type="PackedScene" uid="uid://bb3q3qfbatogk" path="res://scenes/ui/combat_ui.tscn" id="6_4b1tk"]
 [ext_resource type="PackedScene" uid="uid://dyntgekv1adag" path="res://scenes/tree.tscn" id="6_535dw"]
 [ext_resource type="PackedScene" uid="uid://dm2qby2s4o0by" path="res://scenes/bush.tscn" id="7_v5wfo"]
 [ext_resource type="Shader" path="res://scripts/shaders/chromatic_abberation.gdshader" id="8_3owxf"]
@@ -132,13 +130,6 @@ position = Vector2(1, 4)
 energy = 0.03
 texture = SubResource("GradientTexture2D_bxxux")
 texture_scale = 1.49
-
-[node name="dialogue_ui" parent="." instance=ExtResource("5_36d1q")]
-visible = false
-
-[node name="combat_ui" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_4b1tk")]
-visible = false
-player = NodePath("../player")
 
 [node name="Crabs" type="Node2D" parent="."]
 y_sort_enabled = true

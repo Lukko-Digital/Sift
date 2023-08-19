@@ -1362,7 +1362,7 @@ clip_children = 2
 position = Vector2(1, -9)
 texture = ExtResource("2_g1nij")
 hframes = 275
-frame = 52
+frame = 19
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]

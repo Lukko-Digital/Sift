@@ -1,6 +1,7 @@
 extends CanvasLayer
 
-@export var player: CharacterBody2D
+@export var main_scene: Node2D
+@onready var player: CharacterBody2D = main_scene.find_child("player")
 
 const HIT_STOP_DELAY = 0.0
 const HIT_STOP_DURATION = 0.03
