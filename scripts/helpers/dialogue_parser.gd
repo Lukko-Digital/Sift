@@ -5,7 +5,7 @@ const NAME_TAG = "name: "
 const IMAGE_TAG = "image: "
 
 const BRANCH_CHAR = "~ "
-const INTERACTION_CHAR = ": "
+const PATH_CHAR = ": "
 const RESPONSE_CHAR = "- "
 const SWITCH_CHAR = "> "
 
@@ -40,7 +40,7 @@ static func parse_dialogue_tree(dialogue_file):
 	
 	var dialogue_tree: Dictionary
 	var branch: String
-	var interaction: String
+	var path: String
 
 	# Loop through lines starting on the 3rd
 	for line in lines.slice(2):
@@ -53,20 +53,20 @@ static func parse_dialogue_tree(dialogue_file):
 				var res = branch_line(dialogue_tree, line)
 				dialogue_tree = res[0]
 				branch = res[1]
-			# Interaction
-			INTERACTION_CHAR:
-				var res = interaction_line(dialogue_tree, branch, line)
+			# path
+			PATH_CHAR:
+				var res = path_line(dialogue_tree, branch, line)
 				dialogue_tree = res[0]
-				interaction = res[1]
+				path = res[1]
 			# Response
 			RESPONSE_CHAR:
-				dialogue_tree = response_line(dialogue_tree, branch, interaction, line)
+				dialogue_tree = response_line(dialogue_tree, branch, path, line)
 			# Switch
 			SWITCH_CHAR:
-				dialogue_tree = switch_line(dialogue_tree, branch, interaction, line)
+				dialogue_tree = switch_line(dialogue_tree, branch, path, line)
 			# Dialogue
 			_:
-				dialogue_tree = dialogue_line(dialogue_tree, branch, interaction, line)
+				dialogue_tree = dialogue_line(dialogue_tree, branch, path, line)
 	return dialogue_tree
 
 static func branch_line(dialogue_tree, line):
@@ -74,19 +74,19 @@ static func branch_line(dialogue_tree, line):
 	dialogue_tree[branch] = {}
 	return [dialogue_tree, branch]
 
-static func interaction_line(dialogue_tree, branch, line):
-	var interaction = line.substr(2)
+static func path_line(dialogue_tree, branch, line):
+	var path = line.substr(2)
 	assert(
 		dialogue_tree.has(branch),
 		"No branch detected. Branches are denoted `~ [BRANCH_ID]`"
 	)
-	dialogue_tree[branch][interaction] = []
-	return [dialogue_tree, interaction]
+	dialogue_tree[branch][path] = []
+	return [dialogue_tree, path]
 
-static func response_line(dialogue_tree, branch, interaction, line):
+static func response_line(dialogue_tree, branch, path, line):
 	assert(" > " in line, "No next branch detected. Next branch is denoted [DIALOGUE_TEXT] > [BRANCH_ID]")
 	
-	var dialogue = dialogue_tree[branch][interaction][-1]
+	var dialogue = dialogue_tree[branch][path][-1]
 	if not dialogue.has("responses"):
 		dialogue["responses"] = {}
 	
@@ -102,18 +102,18 @@ static func response_line(dialogue_tree, branch, interaction, line):
 	}
 	return dialogue_tree
 
-static func switch_line(dialogue_tree, branch, interaction, line):
-	dialogue_tree[branch][interaction][-1]["next"] = line.substr(2)
+static func switch_line(dialogue_tree, branch, path, line):
+	dialogue_tree[branch][path][-1]["next"] = line.substr(2)
 	return dialogue_tree
 
-static func dialogue_line(dialogue_tree, branch, interaction, line):
+static func dialogue_line(dialogue_tree, branch, path, line):
 	assert(
 		dialogue_tree.has(branch),
 		"No branch detected. Branches are denoted `~ [BRANCH_ID]`"
 	)
 	assert(
-		dialogue_tree[branch].has(interaction),
-		"Interaction path not detected. Interaction paths are denoted `: [MIN_INTERACRTIONS_FOR_PATH]`"
+		dialogue_tree[branch].has(path),
+		"Path not detected. Paths are denoted `: [PATH_ENTRACE_CONDITIONS]`"
 	)
-	dialogue_tree[branch][interaction].append({"text": line})
+	dialogue_tree[branch][path].append({"text": line})
 	return dialogue_tree
