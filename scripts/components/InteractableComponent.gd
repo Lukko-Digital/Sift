@@ -10,16 +10,12 @@ var interaction_count: Dictionary
 var branch_interaction_limits: Dictionary
 
 func _ready():
-	var dialogue_dict = DialogueParser.parse("test2.idmu")
+	var dialogue_dict = DialogueParser.parse(DIALOGUE_FILE)
 	dialogue_info = dialogue_dict["info"]
 	dialogue_tree = dialogue_dict["tree"]
 	Events.interaction_complete.connect(_on_interaction_complete)
-	
-#	var dialogue_json = load_dialogue_json()
 	init_iteraction_count(dialogue_tree)
 	init_branch_interaction_limits(dialogue_tree)
-	print(interaction_count)
-	print(branch_interaction_limits)
 
 func load_dialogue_json():
 	var dialogue_path = "res://assets/dialogue/%s" % DIALOGUE_FILE

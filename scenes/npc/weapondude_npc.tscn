@@ -52,7 +52,7 @@ libraries = {
 }
 
 [node name="InteractableComponent" parent="." instance=ExtResource("2_dsahg")]
-DIALOGUE_FILE = "test2v2.json"
+DIALOGUE_FILE = "test2.idmu"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
 position = Vector2(0, -12)
