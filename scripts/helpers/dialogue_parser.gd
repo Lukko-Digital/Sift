@@ -4,6 +4,11 @@ extends Node
 const NAME_TAG = "name: "
 const IMAGE_TAG = "image: "
 
+const BRANCH_CHAR = "~ "
+const INTERACTION_CHAR = ": "
+const RESPONSE_CHAR = "- "
+const SWITCH_CHAR = "> "
+
 static func load_idmu(dialogue_file):
 	var dialogue_path = "res://assets/dialogue/%s" % dialogue_file
 	assert(FileAccess.file_exists(dialogue_path), "Dialog file at %s does not exist" % dialogue_path)
@@ -44,20 +49,20 @@ static func parse_dialogue_tree(dialogue_file):
 		# Match the first 2 characters, the second should always be a space
 		match line.substr(0,2):
 			# Branch
-			"~ ":
+			BRANCH_CHAR:
 				var res = branch_line(dialogue_tree, line)
 				dialogue_tree = res[0]
 				branch = res[1]
 			# Interaction
-			": ":
+			INTERACTION_CHAR:
 				var res = interaction_line(dialogue_tree, branch, line)
 				dialogue_tree = res[0]
 				interaction = res[1]
 			# Response
-			"- ":
+			RESPONSE_CHAR:
 				dialogue_tree = response_line(dialogue_tree, branch, interaction, line)
 			# Switch
-			"> ":
+			SWITCH_CHAR:
 				dialogue_tree = switch_line(dialogue_tree, branch, interaction, line)
 			# Dialogue
 			_:
