@@ -51,8 +51,6 @@ static func parse(dialogue_file):
 			# Dialogue
 			_:
 				dialogue_tree = dialogue_line(dialogue_tree, branch, interaction, line)
-	
-	print(JSON.stringify(dialogue_tree, "\t"))
 	return {"info": dialogue_info, "tree": dialogue_tree}
 
 static func branch_line(dialogue_tree, line):
