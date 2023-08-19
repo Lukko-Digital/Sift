@@ -1,14 +1,19 @@
+## Functions for parsing .idmu files (Ian Dialogue MarkUp)
 class_name DialogueParser
 extends Node
 
+# idmu format constants
 const NAME_TAG = "name: "
 const IMAGE_TAG = "image: "
-
 const BRANCH_CHAR = "~ "
 const PATH_CHAR = ": "
 const RESPONSE_CHAR = "- "
 const SWITCH_CHAR = "> "
 
+## Load idmu file, throws an error if file doesn't exist
+## Args:
+## 	dialogue_file: A string representing the .imdu file name, must be in the res://assets/dialogue/
+## Returns: A PackedStringArray, representing each line of the .imdu as a new element
 static func load_idmu(dialogue_file):
 	var dialogue_path = "res://assets/dialogue/%s" % dialogue_file
 	assert(FileAccess.file_exists(dialogue_path), "Dialog file at %s does not exist" % dialogue_path)
@@ -16,11 +21,15 @@ static func load_idmu(dialogue_file):
 		dialogue_path, FileAccess.READ
 	).get_as_text().split('\n')
 
+## Parse the name and image from the first two lines of the idmu
+## Args:
+## 	dialogue_file: A string representing the .imdu file name, must be in the res://assets/dialogue/
+## Returns: A dictionary with the name of the interactable stored under "name" and the image for
+## 	the interactable sotred under "image"
 static func parse_dialogue_info(dialogue_file):
 	var lines = load_idmu(dialogue_file)
 	
 	var dialogue_info: Dictionary
-
 	# Get name and image from first two lines
 	assert(
 		lines[0].substr(0, len(NAME_TAG)) == NAME_TAG,
@@ -35,6 +44,15 @@ static func parse_dialogue_info(dialogue_file):
 	
 	return dialogue_info
 
+## Parse the dialogue tree of the idmu line by line
+## Args:
+##	dialogue_file: A string representing the .imdu file name, must be in the res://assets/dialogue/
+## Returns: A dictionary representing the dialogue tree, structured as:
+##	dialogue tree: A dict of branches
+##	branch: A dict of paths
+##	path: A list of dialogue line dicts
+## dialogue line dict: A dictionary with the line stored under "text" and optional "response" and
+##	"next" keys
 static func parse_dialogue_tree(dialogue_file):
 	var lines = load_idmu(dialogue_file)
 	
@@ -69,11 +87,24 @@ static func parse_dialogue_tree(dialogue_file):
 				dialogue_tree = dialogue_line(dialogue_tree, branch, path, line)
 	return dialogue_tree
 
+## Parse a line tagged with the branch character
+## Args:
+##	 dialogue_tree: A dictionary representing the working dialogue tree
+##	 line: A string representing the current line
+## Returns: A list, with the first element being the dialogue tree with the branch added,
+##	 and the second item being a string representing the current branch
 static func branch_line(dialogue_tree, line):
 	var branch = line.substr(2)
 	dialogue_tree[branch] = {}
 	return [dialogue_tree, branch]
 
+## Parse a line tagged with the path character
+## Args:
+##	 dialogue_tree: A dictionary representing the working dialogue tree
+##	 line: A string representing the current line
+##	 branch: A string representing the current branch
+## Returns: A list, with the first element being the dialogue tree with the path added,
+##	 and the second item being a string representing the current path
 static func path_line(dialogue_tree, branch, line):
 	var path = line.substr(2)
 	assert(
@@ -83,6 +114,13 @@ static func path_line(dialogue_tree, branch, line):
 	dialogue_tree[branch][path] = []
 	return [dialogue_tree, path]
 
+## Parse a line tagged with the response character
+## Args:
+##	 dialogue_tree: A dictionary representing the working dialogue tree
+##	 line: A string representing the current line
+##	 branch: A string representing the current branch
+##	 path: A string representing the current path
+## Returns: The dialogue tree with the response added to the last dialogue line under "responses"
 static func response_line(dialogue_tree, branch, path, line):
 	assert(" > " in line, "No next branch detected. Next branch is denoted [DIALOGUE_TEXT] > [BRANCH_ID]")
 	
@@ -102,10 +140,24 @@ static func response_line(dialogue_tree, branch, path, line):
 	}
 	return dialogue_tree
 
+## Parse a line tagged with the switch character
+## Args:
+##	 dialogue_tree: A dictionary representing the working dialogue tree
+##	 line: A string representing the current line
+##	 branch: A string representing the current branch
+##	 path: A string representing the current path
+## Returns: The dialogue tree with the branch to switch to added to the last dialogue line under "next"
 static func switch_line(dialogue_tree, branch, path, line):
 	dialogue_tree[branch][path][-1]["next"] = line.substr(2)
 	return dialogue_tree
 
+## Parse a dialogue line
+## Args:
+##	 dialogue_tree: A dictionary representing the working dialogue tree
+##	 line: A string representing the current line
+##	 branch: A string representing the current branch
+##	 path: A string representing the current path
+## Returns: The dialogue tree with the dialogue line added to the respective path
 static func dialogue_line(dialogue_tree, branch, path, line):
 	assert(
 		dialogue_tree.has(branch),
