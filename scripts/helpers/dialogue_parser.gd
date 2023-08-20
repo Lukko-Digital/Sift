@@ -9,6 +9,7 @@ const BRANCH_CHAR = "~ "
 const PATH_CHAR = ": "
 const RESPONSE_CHAR = "- "
 const SWITCH_CHAR = "> "
+const IN_LINE_INFO_CHAR = "[ "
 
 ## Load idmu file, throws an error if file doesn't exist
 ## Args:
@@ -39,8 +40,8 @@ static func parse_dialogue_info(dialogue_file):
 		lines[1].substr(0, len(IMAGE_TAG)) == IMAGE_TAG,
 		"Second line must be in the format: `%s [IMAGE FILE PATH]`" % IMAGE_TAG
 	)
-	dialogue_info["name"] = lines[0].substr(6)
-	dialogue_info["image"] = lines[1].substr(7)
+	dialogue_info["name"] = lines[0].substr(len(NAME_TAG))
+	dialogue_info["image"] = lines[1].substr(len(IMAGE_TAG))
 	
 	return dialogue_info
 
@@ -82,6 +83,9 @@ static func parse_dialogue_tree(dialogue_file):
 			# Switch
 			SWITCH_CHAR:
 				dialogue_tree = switch_line(dialogue_tree, branch, path, line)
+			# Dialogue with in-line info
+			IN_LINE_INFO_CHAR:
+				dialogue_tree = inline_info_dialogue_line(dialogue_tree, branch, path, line)
 			# Dialogue
 			_:
 				dialogue_tree = dialogue_line(dialogue_tree, branch, path, line)
@@ -149,6 +153,50 @@ static func response_line(dialogue_tree, branch, path, line):
 ## Returns: The dialogue tree with the branch to switch to added to the last dialogue line under "next"
 static func switch_line(dialogue_tree, branch, path, line):
 	dialogue_tree[branch][path][-1]["next"] = line.substr(2)
+	return dialogue_tree
+
+## Parse a dialogue line with in-line info: name and/or image that differs from the default.
+## 	 If both name and image are specified, name is expected to come before image.
+## Args:
+##	 dialogue_tree: A dictionary representing the working dialogue tree
+##	 line: A string representing the current line
+##	 branch: A string representing the current branch
+##	 path: A string representing the current path
+## Returns: The dialogue tree with the dialogue line and in-line info added to the respective path
+static func inline_info_dialogue_line(dialogue_tree, branch, path, line):
+	assert(
+		" ] " in line,
+		"In-line info close bracket not detected."
+	)
+	var split_line = line.substr(2).split(" ] ")
+	var info = split_line[0]
+	var dialogue = split_line[1]
+	
+	dialogue_tree = dialogue_line(dialogue_tree, branch, path, dialogue)
+	
+	if NAME_TAG in info and IMAGE_TAG in info:
+		assert(
+			", " in info,
+			"Name and branch must be separated with a comma and space (`, `)"
+			)
+		var split_info = info.split(", ")
+		assert(
+			NAME_TAG in split_info[0],
+			"Name tag `name: ` not detected in first half of in-line info"
+		)
+		assert(
+			IMAGE_TAG in split_info[1],
+			"Image tag `image: ` not detected in second half of in-line info"
+		)
+		dialogue_tree[branch][path][-1]["name"] = split_info[0].substr(len(NAME_TAG))
+		dialogue_tree[branch][path][-1]["image"] = split_info[1].substr(len(IMAGE_TAG))
+	elif NAME_TAG in info:
+		dialogue_tree[branch][path][-1]["name"] = info.substr(len(NAME_TAG))
+	elif IMAGE_TAG in info:
+		dialogue_tree[branch][path][-1]["image"] = info.substr(len(IMAGE_TAG))
+	else:
+		assert(false, "In-line info must contain the name tag `name: ` or the image tag `image: `")
+	
 	return dialogue_tree
 
 ## Parse a dialogue line

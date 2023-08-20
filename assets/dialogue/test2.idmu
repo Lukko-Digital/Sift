@@ -1,8 +1,8 @@
 name: Guy
-image: guy.png
+image: player.png
 ~ O
 : 0
-	oh hi im guy
+	[ name: ???, image: birdman_npc.png ] oh hi im guy
 	any questions comments concerns?
 		- wait who are you again? > A
 		- what am i doing here? > B
