@@ -98,6 +98,26 @@ Every subsequent time the NPC responds to this question, they say, "cmon you alr
 
 After either reponses, they switch to the re-response (R) branch.
 
+### In-line Info
+If you wish to use a different name or image than the default defined in the header, you can do so with in-line info. In-line info is denoted in square brackets before the dialogue line, with a space after the open bracket, and both before and after the close bracket.
+
+The same tags (`name: ` and `image: `) that are used in the header are used in in-line info.
+
+Changing the name:
+```
+[ name: ??? ] oh hi im guy
+```
+Changing the image:
+```
+[ image: guy_shocked.png ] woah that's crazy
+```
+Changing both:
+```
+[ name: ???, image: unknown.png ] *a mysterious figure approaches*
+```
+
+NOTE: If both name and image are changed, name must come before image. The two are separated by a comma and a space.
+
 ---
 
 ## `sample.idmu`
