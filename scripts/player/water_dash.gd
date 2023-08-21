@@ -22,7 +22,6 @@ func enter():
 		direction = animation_tree["parameters/Idle/blend_position"]
 		
 	character.velocity = direction.normalized() * dash_speed
-	print(character.velocity)
 	
 	animation_tree["parameters/playback"].travel("WaterDash")
 	
