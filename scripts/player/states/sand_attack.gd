@@ -2,7 +2,7 @@ class_name SandAttack
 extends State
 
 @onready var timer: Timer = get_node("../Timer")
-@onready var sand_attack_scene = preload("res://scenes/sand_attack.tscn")
+@onready var sand_attack_scene = preload("res://scenes/player/sand_attack.tscn")
 
 const START_LAG = 0.05
 const END_LAG = 0.2
