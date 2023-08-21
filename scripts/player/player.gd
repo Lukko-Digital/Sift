@@ -10,7 +10,7 @@ const RUN_ACCEL = 1000
 @onready var depth_checker = $DepthShoreChecker
 @onready var particles: CPUParticles2D = $WaterParticles
 
-@onready var splash_scene = preload("res://scenes/spash.tscn")
+@onready var splash_scene = preload("res://scenes/player/spash.tscn")
 
 signal mode_switch(_mode: String)
 
