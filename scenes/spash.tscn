@@ -1,6 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://ciq83ktvvwibn"]
+[gd_scene load_steps=23 format=3 uid="uid://bse886c84a28m"]
 
-[ext_resource type="Script" path="res://scenes/componenets/spash.gd" id="1_27gwo"]
+[ext_resource type="Script" path="res://scripts/player/spash.gd" id="1_ipl7p"]
 [ext_resource type="Texture2D" uid="uid://bn2ci255pxdvy" path="res://assets/png/splash-Sheet.png" id="1_qaj6j"]
 
 [sub_resource type="Animation" id="Animation_nrv34"]
@@ -194,7 +194,7 @@ states/Water/node = SubResource("AnimationNodeBlendSpace2D_n20af")
 states/Water/position = Vector2(593, 88)
 
 [node name="Spash" type="Node2D"]
-script = ExtResource("1_27gwo")
+script = ExtResource("1_ipl7p")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
