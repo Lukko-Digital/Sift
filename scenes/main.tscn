@@ -1,10 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8md8ehlk518q"]
+[gd_scene load_steps=12 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
 [ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
-[ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="3_cktdi"]
-[ext_resource type="PackedScene" uid="uid://c83lh8olstfpw" path="res://scenes/ui/dialogue_ui.tscn" id="5_36d1q"]
-[ext_resource type="PackedScene" uid="uid://bb3q3qfbatogk" path="res://scenes/ui/combat_ui.tscn" id="6_4b1tk"]
+[ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="3_o4613"]
 [ext_resource type="PackedScene" uid="uid://dyntgekv1adag" path="res://scenes/tree.tscn" id="6_535dw"]
 [ext_resource type="PackedScene" uid="uid://dm2qby2s4o0by" path="res://scenes/bush.tscn" id="7_v5wfo"]
 [ext_resource type="Shader" path="res://scripts/shaders/chromatic_abberation.gdshader" id="8_3owxf"]
@@ -112,89 +110,93 @@ layer_10/z_index = -5
 layer_10/tile_data = PackedInt32Array(-917510, 131072, 20, -851974, 131072, 21, -983038, 131072, 20, -917502, 131072, 21, -851969, 131072, 20, -786433, 131072, 21, -1114118, 327680, 20, -1048582, 524288, 21, -983046, 524288, 21, -917509, 196608, 21, -1048583, 65536, 22, -917501, 196608, 20, -983037, 262144, 20, -1114117, 393216, 20, -1114116, 458752, 20, -1114115, 524288, 20, -1048581, 393216, 21, -1048580, 458752, 21, -851970, 524288, 21, -917504, 262144, 21, -983039, 65536, 20, -917503, 65536, 21, -1245184, 131072, 20, -1179648, 131072, 21, -1310722, 393216, 20, -1245186, 65536, 20, -1310723, 327680, 20, -1310721, 458752, 20, -1376256, 524288, 20, -1245183, 65536, 22, -1179650, 65536, 21, -1114113, 524288, 21, -1179649, 524288, 21, -1245182, 262144, 22, -1179646, 262144, 23, -1376259, 131072, 22, -1507328, 131072, 22, -1310720, 393216, 21, -1310719, 458752, 21, -1179652, 131072, 22, -1245190, 131072, 22, -1179655, 196608, 22, -1441793, 196608, 22)
 
 [node name="player" parent="." instance=ExtResource("1_6t2e7")]
-position = Vector2(-148, -277)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
-position = Vector2(1, -26)
-zoom = Vector2(5, 5)
 process_callback = 0
-position_smoothing_enabled = true
-script = ExtResource("3_cktdi")
+position_smoothing_speed = 10.0
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+script = ExtResource("3_o4613")
 
 [node name="ShakeTimer" type="Timer" parent="player/Camera2D"]
 one_shot = true
 
-[node name="PointLight2D3" type="PointLight2D" parent="player/Camera2D"]
+[node name="PointLight2D3" type="PointLight2D" parent="player"]
 modulate = Color(1, 1, 1, 0.858824)
 self_modulate = Color(1, 1, 1, 0.141176)
-position = Vector2(0, 30)
+position = Vector2(1, 4)
 energy = 0.03
 texture = SubResource("GradientTexture2D_bxxux")
 texture_scale = 1.49
 
-[node name="dialogue_ui" parent="." instance=ExtResource("5_36d1q")]
+[node name="Crabs" type="Node2D" parent="."]
+y_sort_enabled = true
 
-[node name="combat_ui" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_4b1tk")]
-player = NodePath("../player")
-
-[node name="crab" parent="." instance=ExtResource("8_a7cgk")]
+[node name="crab" parent="Crabs" instance=ExtResource("8_a7cgk")]
 position = Vector2(-184, -182)
+
+[node name="crab2" parent="Crabs" instance=ExtResource("8_a7cgk")]
+position = Vector2(-68, -188)
+
+[node name="crab3" parent="Crabs" instance=ExtResource("8_a7cgk")]
+position = Vector2(-189, -118)
+
+[node name="crab4" parent="Crabs" instance=ExtResource("8_a7cgk")]
+position = Vector2(-125, -152)
+
+[node name="crab5" parent="Crabs" instance=ExtResource("8_a7cgk")]
+position = Vector2(6, -175)
+
+[node name="Environment" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="StaticBody2D" parent="Environment" instance=ExtResource("6_535dw")]
+position = Vector2(-129, 31)
+
+[node name="Bush" parent="Environment" instance=ExtResource("7_v5wfo")]
+position = Vector2(-194, 41)
+
+[node name="Bush2" parent="Environment" instance=ExtResource("7_v5wfo")]
+position = Vector2(99, -90)
+
+[node name="Bush3" parent="Environment" instance=ExtResource("7_v5wfo")]
+position = Vector2(-78, -142)
+
+[node name="Tree" parent="Environment" instance=ExtResource("6_535dw")]
+position = Vector2(71, -153)
+
+[node name="Tree2" parent="Environment" instance=ExtResource("6_535dw")]
+position = Vector2(-253, -101)
+
+[node name="Tree3" parent="Environment" instance=ExtResource("6_535dw")]
+position = Vector2(80, 177)
+rotation = 0.694641
+
+[node name="Tree4" parent="Environment" instance=ExtResource("6_535dw")]
+position = Vector2(210, -535)
+
+[node name="Tree5" parent="Environment" instance=ExtResource("6_535dw")]
+position = Vector2(-255, -408)
+
+[node name="Bush4" parent="Environment" instance=ExtResource("7_v5wfo")]
+position = Vector2(145, -406)
+
+[node name="Bush5" parent="Environment" instance=ExtResource("7_v5wfo")]
+position = Vector2(-257, -621)
 
 [node name="weapondude_npc" parent="." instance=ExtResource("10_5m7qi")]
 position = Vector2(-76, -342)
 
-[node name="StaticBody2D" parent="." instance=ExtResource("6_535dw")]
-position = Vector2(-131, 34)
-
-[node name="Bush" parent="." instance=ExtResource("7_v5wfo")]
-position = Vector2(-180, 40)
-
-[node name="Bush2" parent="." instance=ExtResource("7_v5wfo")]
-position = Vector2(99, -90)
-
-[node name="Bush3" parent="." instance=ExtResource("7_v5wfo")]
-position = Vector2(-78, -142)
-
-[node name="Tree" parent="." instance=ExtResource("6_535dw")]
-position = Vector2(71, -153)
-
-[node name="Tree2" parent="." instance=ExtResource("6_535dw")]
-position = Vector2(-253, -101)
-
-[node name="Tree3" parent="." instance=ExtResource("6_535dw")]
-position = Vector2(80, 177)
-
 [node name="ChromaticAbberation" type="ColorRect" parent="."]
+visible = false
 z_index = 100
 material = SubResource("ShaderMaterial_fieh2")
 offset_left = -1842.0
 offset_top = -1593.0
 offset_right = 2075.0
 offset_bottom = 1003.0
-
-[node name="crab2" parent="." instance=ExtResource("8_a7cgk")]
-position = Vector2(-68, -188)
-
-[node name="crab3" parent="." instance=ExtResource("8_a7cgk")]
-position = Vector2(-189, -118)
-
-[node name="crab4" parent="." instance=ExtResource("8_a7cgk")]
-position = Vector2(-124, -152)
-
-[node name="crab5" parent="." instance=ExtResource("8_a7cgk")]
-position = Vector2(6, -175)
-
-[node name="Tree4" parent="." instance=ExtResource("6_535dw")]
-position = Vector2(210, -535)
-
-[node name="Tree5" parent="." instance=ExtResource("6_535dw")]
-position = Vector2(-255, -408)
-
-[node name="Bush4" parent="." instance=ExtResource("7_v5wfo")]
-position = Vector2(145, -406)
-
-[node name="Bush5" parent="." instance=ExtResource("7_v5wfo")]
-position = Vector2(-257, -621)
 
 [node name="LIGHTING" type="Node2D" parent="."]
 
@@ -231,7 +233,7 @@ texture_scale = 1.49
 [node name="big cool" type="PointLight2D" parent="LIGHTING"]
 modulate = Color(1, 1, 1, 0.858824)
 self_modulate = Color(1, 1, 1, 0.141176)
-position = Vector2(-17, -466)
+position = Vector2(-14, -466)
 scale = Vector2(2.52802, 1.95924)
 color = Color(0.321569, 0.0117647, 0.345098, 1)
 energy = 0.05

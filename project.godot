@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Desert_Game"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
+run/max_fps=60
 config/icon="res://icon.svg"
+run/quality/msaa_2d=0
+run/physics_engine="DEFAULT"
+run/snap/snap_2d_vertices_to_pixel=false
+run/snap/snap_2d_transforms_to_pixel=true
 
 [autoload]
 
@@ -123,3 +128,4 @@ attack={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_transforms_to_pixel=true

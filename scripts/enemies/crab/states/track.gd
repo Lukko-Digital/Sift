@@ -6,7 +6,7 @@ const RE_NAV_TIME = 0.5
 @export var animation_player: AnimationPlayer
 
 @onready var state_machine: StateMachine = get_parent()
-@onready var player: CharacterBody2D = get_node("/root/main/player")
+@onready var player: CharacterBody2D = find_parent("main").get_node("player")
 @onready var nav_agent: NavigationAgent2D = get_node("../../NavigationAgent2D")
 @onready var re_nav_timer: Timer = nav_agent.get_node("ReNavTimer")
 
@@ -39,3 +39,4 @@ func handle_animation():
 
 func _on_timer_timeout():
 	find_path()
+	pass

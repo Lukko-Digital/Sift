@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://cng7ubenq2o6u"]
 
-[ext_resource type="Texture2D" uid="uid://dak6kc3mpiui2" path="res://assets/png/sand_attack-Sheet.png" id="1_wcllv"]
+[ext_resource type="Texture2D" uid="uid://b7hw7x4xbwh8l" path="res://assets/png/sand_attack-Sheet.png" id="1_wcllv"]
 [ext_resource type="Script" path="res://scripts/player/sand_attack_scene.gd" id="2_7c25b"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_cxjsa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4fgb"]
-size = Vector2(63, 68.0003)
+size = Vector2(53, 42)
 
 [sub_resource type="Animation" id="Animation_e47jn"]
 resource_name = "down"
@@ -175,11 +175,11 @@ _data = {
 "up": SubResource("Animation_ndcpe")
 }
 
-[node name="SandAttack" type="Sprite2D" node_paths=PackedStringArray("animation_player")]
+[node name="Sprite2D" type="Sprite2D" node_paths=PackedStringArray("animation_player")]
 position = Vector2(0, -12)
 texture = ExtResource("1_wcllv")
 hframes = 24
-frame = 7
+frame = 23
 script = ExtResource("2_7c25b")
 animation_player = NodePath("AnimationPlayer")
 
@@ -192,18 +192,20 @@ frame = 4
 sprite_to_reflect = NodePath("..")
 
 [node name="HitBox" type="Area2D" parent="."]
-rotation = 1.5708
+z_index = 1
+rotation = -1.5708
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(43.5, 2.18279e-11)
+position = Vector2(38.5, 0.000152852)
 shape = SubResource("RectangleShape2D_v4fgb")
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_g1om1")
 }
 
-[connection signal="body_entered" from="HitBox" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

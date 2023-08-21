@@ -1,7 +1,7 @@
 class_name Run
 extends State
 
-const SPEED_COEFF_WATER = 0.85
+const SPEED_COEFF_WATER = 0.80
 
 func enter():
 	animation_tree["parameters/playback"].travel("Walk")
@@ -15,6 +15,8 @@ func handle_physics(delta: float):
 		animation_tree["parameters/Walk/blend_position"] = Vector2(direction.x / abs(direction.x), 0)
 	else:
 		animation_tree["parameters/Walk/blend_position"] = Vector2(0, direction.y / abs(direction.y))
+	
+	character.sink_in_water()
 	
 	var speed_coeff = 1.0 if character.mode == "Sand" else SPEED_COEFF_WATER
 	
