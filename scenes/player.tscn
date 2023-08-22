@@ -1461,7 +1461,7 @@ offset = Vector2(0, -60)
 position = Vector2(1, -8)
 texture = ExtResource("2_g1nij")
 hframes = 275
-frame = 12
+frame = 42
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
@@ -1483,7 +1483,6 @@ parameters/WaterDash/Loop/blend_position = Vector2(0, 0)
 parameters/WaterDash/Trip/blend_position = Vector2(0, 0)
 
 [node name="StateMachine" type="Node2D" parent="."]
-visible = false
 script = ExtResource("3_keldo")
 initial_state = NodePath("Idle")
 
