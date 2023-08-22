@@ -1224,6 +1224,7 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_n0hk4")
 blend_point_2/pos = Vector2(0, -1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_unu85")
 blend_point_3/pos = Vector2(0, 1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yqs4r"]
 animation = &"water_left"
@@ -1246,6 +1247,7 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_05sdf")
 blend_point_2/pos = Vector2(0, 1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_usmpe")
 blend_point_3/pos = Vector2(0, -1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e2anu"]
 animation = &"water_left_end"
@@ -1268,6 +1270,7 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_ebmi3")
 blend_point_2/pos = Vector2(0, 1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_vb3cb")
 blend_point_3/pos = Vector2(0, -1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d2imr"]
 advance_mode = 2
@@ -1358,11 +1361,10 @@ texture = ExtResource("3_j4dwo")
 offset = Vector2(0, -60)
 
 [node name="Sprite2D" type="Sprite2D" parent="WaterMask"]
-clip_children = 2
-position = Vector2(1, -9)
+position = Vector2(1, -8)
 texture = ExtResource("2_g1nij")
 hframes = 275
-frame = 19
+frame = 12
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
@@ -1420,10 +1422,11 @@ position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_pkaem")
 disabled = true
 
-[node name="WaterDash" type="Node2D" parent="StateMachine/Dash" node_paths=PackedStringArray("particles", "shore_checker", "character", "animation_tree")]
+[node name="WaterDash" type="Node2D" parent="StateMachine/Dash" node_paths=PackedStringArray("particles", "shore_checker", "water_mask", "character", "animation_tree")]
 script = ExtResource("8_1rdr2")
 particles = NodePath("../../../GPUParticles2D")
 shore_checker = NodePath("../DashShoreChecker")
+water_mask = NodePath("../../../WaterMask")
 character = NodePath("../../..")
 animation_tree = NodePath("../../../AnimationTree")
 
@@ -1495,7 +1498,7 @@ texture = ExtResource("3_j4dwo")
 
 [node name="ReflectionComponent" parent="ReflectionMask" node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("3_gdfiv")]
 z_as_relative = false
-position = Vector2(1, -51)
+position = Vector2(1, -50)
 texture = ExtResource("2_g1nij")
 hframes = 275
 sprite_to_reflect = NodePath("../../WaterMask/Sprite2D")
@@ -1515,6 +1518,7 @@ randomness = 1.0
 interpolate = false
 
 [node name="DepthShoreChecker" type="Node2D" parent="."]
+visible = false
 
 [node name="RayCast2D" type="RayCast2D" parent="DepthShoreChecker"]
 position = Vector2(0, 3)

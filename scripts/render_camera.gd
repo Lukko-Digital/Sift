@@ -4,12 +4,7 @@ extends Camera2D
 @onready var player: CharacterBody2D = main_scene.find_child("player")
 @onready var resolution = get_viewport().get_visible_rect().size
 
-
-
 var last_dir: Vector2 = Vector2.ZERO
-
-func _ready():
-	pass 
 
 func _process(delta):
 	offset = lerp(Vector2.ZERO, (player.position - floor(player.position)) * 4, 0.6)

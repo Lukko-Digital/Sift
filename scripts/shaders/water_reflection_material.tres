@@ -6,11 +6,11 @@
 [resource]
 shader = ExtResource("1_oqx83")
 shader_parameter/scroll1 = Vector2(0.02, 0)
-shader_parameter/scroll2 = Vector2(-0.05, 0.02)
-shader_parameter/distortion_strength = 0.0002
-shader_parameter/light_start = 0.0
-shader_parameter/light_end = 0.0
-shader_parameter/top_color = Color(0, 0, 0, 0)
+shader_parameter/scroll2 = Vector2(-0.01, 0.05)
+shader_parameter/distortion_strength = 4.0
+shader_parameter/light_start = 0.65
+shader_parameter/light_end = 0.75
+shader_parameter/top_color = Color(1, 1, 1, 1)
 shader_parameter/view_to_local = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 shader_parameter/transparency = Color(0.611765, 1, 1, 0.647059)
 shader_parameter/noise1 = ExtResource("2_hpl2i")

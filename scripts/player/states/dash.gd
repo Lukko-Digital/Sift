@@ -14,6 +14,9 @@ func enter():
 	
 	dash_mode.enter()
 	dash_timer.start(dash_mode.time)
+	
+func exit():
+	dash_mode.exit()
 
 func handle_physics(delta):
 	dash_mode.handle_physics(delta)

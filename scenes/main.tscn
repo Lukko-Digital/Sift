@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8md8ehlk518q"]
+[gd_scene load_steps=13 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
 [ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dm2qby2s4o0by" path="res://scenes/bush.tscn" id="7_v5wfo"]
 [ext_resource type="Shader" path="res://scripts/shaders/chromatic_abberation.gdshader" id="8_3owxf"]
 [ext_resource type="PackedScene" uid="uid://dxblb7s0p3c5n" path="res://scenes/enemies/crab.tscn" id="8_a7cgk"]
+[ext_resource type="Material" uid="uid://cuo8oe7uaeecu" path="res://scripts/shaders/water_shader_material.tres" id="9_sn0nu"]
 [ext_resource type="PackedScene" uid="uid://bv2de2s6bsqyx" path="res://scenes/npc/weapondude_npc.tscn" id="10_5m7qi"]
 
 [sub_resource type="Gradient" id="Gradient_kukn0"]
@@ -250,3 +251,13 @@ energy = 0.24
 range_z_max = 709
 texture = SubResource("GradientTexture2D_bxxux")
 texture_scale = 1.49
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = -10
+texture_filter = 1
+material = ExtResource("9_sn0nu")
+offset_left = -1485.0
+offset_top = -1239.0
+offset_right = 2510.0
+offset_bottom = 1439.0

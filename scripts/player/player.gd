@@ -35,6 +35,10 @@ func sink_in_water():
 				distance = (raycast.get_collision_point() - raycast.global_position).length()
 	
 		sprite.offset.y = distance / 4 + 1
+	else:
+		sprite.offset.y = 0
+		
+	return sprite.offset.y
 
 func _on_npc_dialogue_collider_area_entered(area):
 	if area.is_in_group("npc"):
