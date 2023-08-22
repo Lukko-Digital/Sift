@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
 [ext_resource type="Texture2D" uid="uid://dgyosk8b1sq5p" path="res://assets/png/player-Sheet-4.png" id="2_g1nij"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_gdfiv"]
-[ext_resource type="Texture2D" uid="uid://bwyb8bhvk7xbt" path="res://icon.svg" id="3_j4dwo"]
+[ext_resource type="Texture2D" uid="uid://d0juyhg8rq2ls" path="res://icon.svg" id="3_j4dwo"]
 [ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
 [ext_resource type="Script" path="res://scripts/player/states/idle.gd" id="4_u1pwq"]
 [ext_resource type="Script" path="res://scripts/player/states/run.gd" id="5_cpovh"]
@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="11_mf8l8"]
 [ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="12_nrhlb"]
 [ext_resource type="Texture2D" uid="uid://d08cl8q3c4s0s" path="res://assets/png/water_particle.png" id="15_ig7qa"]
-[ext_resource type="Texture2D" uid="uid://cu1ru7c7yrfip" path="res://assets/png/player-shadow.png" id="16_1oqfh"]
+[ext_resource type="Texture2D" uid="uid://bcmv04vo5krqs" path="res://assets/png/player-shadow.png" id="16_1oqfh"]
 
 [sub_resource type="Animation" id="Animation_86qvn"]
 resource_name = "dig_down"
@@ -1461,7 +1461,7 @@ offset = Vector2(0, -60)
 position = Vector2(1, -8)
 texture = ExtResource("2_g1nij")
 hframes = 275
-frame = 42
+frame = 35
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
@@ -1576,7 +1576,7 @@ shape = SubResource("CircleShape2D_8c008")
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 
 [node name="HealthComponent" parent="." instance=ExtResource("11_mf8l8")]
-max_health = 5.0
+max_health = 6.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["player_hurtbox"] instance=ExtResource("12_nrhlb")]
 visible = false
