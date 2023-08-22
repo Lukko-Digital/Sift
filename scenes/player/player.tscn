@@ -1362,9 +1362,9 @@ offset = Vector2(0, -60)
 
 [node name="Sprite2D" type="Sprite2D" parent="WaterMask"]
 position = Vector2(1, -8)
-texture = ExtResource("2_g1nij")
+texture = ExtResource("3_ob3ag")
 hframes = 275
-frame = 12
+frame = 43
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
@@ -1423,7 +1423,7 @@ shape = SubResource("CircleShape2D_pkaem")
 disabled = true
 
 [node name="WaterDash" type="Node2D" parent="StateMachine/Dash" node_paths=PackedStringArray("particles", "shore_checker", "water_mask", "character", "animation_tree")]
-script = ExtResource("8_1rdr2")
+script = ExtResource("9_1irmy")
 particles = NodePath("../../../GPUParticles2D")
 shore_checker = NodePath("../DashShoreChecker")
 water_mask = NodePath("../../../WaterMask")
@@ -1499,7 +1499,7 @@ texture = ExtResource("2_d0mic")
 [node name="ReflectionComponent" parent="ReflectionMask" node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("14_2kd7e")]
 z_as_relative = false
 position = Vector2(1, -50)
-texture = ExtResource("2_g1nij")
+texture = ExtResource("3_ob3ag")
 hframes = 275
 sprite_to_reflect = NodePath("../../WaterMask/Sprite2D")
 
