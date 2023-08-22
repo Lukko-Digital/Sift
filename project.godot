@@ -124,6 +124,8 @@ attack={
 2d_physics/layer_5="SAND"
 2d_physics/layer_6="SHORE"
 2d_physics/layer_7="DEEP_WATER"
+2d_physics/layer_8="BUILDING"
+2d_physics/layer_9="WALLS"
 
 [rendering]
 

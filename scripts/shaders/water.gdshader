@@ -27,7 +27,7 @@ void fragment()
 {
 	vec2 depth = texture(noise1, world_position + scroll1 * TIME).rg * texture(noise2, world_position + scroll2 * TIME).rg;
 	
-	vec2 distortion_uv = UV + distortion_strength * ((depth - vec2(0.5,0.5)) / vec2(textureSize(TEXTURE, 0)));
+	vec2 distortion_uv = UV + distortion_strength * ((depth - vec2(0.25,0.5)) / vec2(textureSize(TEXTURE, 0)));
 	
 	vec4 screen_color = texture(TEXTURE, distortion_uv);
 	
