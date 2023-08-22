@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
-[ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player.tscn" id="1_6t2e7"]
+[ext_resource type="PackedScene" uid="uid://btje8wwp2nhiu" path="res://scenes/player/player.tscn" id="1_6t2e7"]
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="3_o4613"]
-[ext_resource type="PackedScene" uid="uid://dyntgekv1adag" path="res://scenes/tree.tscn" id="6_535dw"]
-[ext_resource type="PackedScene" uid="uid://dm2qby2s4o0by" path="res://scenes/bush.tscn" id="7_v5wfo"]
+[ext_resource type="PackedScene" uid="uid://dyntgekv1adag" path="res://scenes/environment/tree.tscn" id="6_535dw"]
+[ext_resource type="PackedScene" uid="uid://dm2qby2s4o0by" path="res://scenes/environment/bush.tscn" id="7_v5wfo"]
 [ext_resource type="Shader" path="res://scripts/shaders/chromatic_abberation.gdshader" id="8_3owxf"]
 [ext_resource type="PackedScene" uid="uid://dxblb7s0p3c5n" path="res://scenes/enemies/crab.tscn" id="8_a7cgk"]
 [ext_resource type="Material" uid="uid://cuo8oe7uaeecu" path="res://scripts/shaders/water_shader_material.tres" id="9_sn0nu"]
