@@ -53,7 +53,7 @@ func handle_physics(delta):
 	if character.velocity.length() < character.RUN_SPEED * 1.2 and parent_state.dash_timer.time_left <= 0.6:
 		end_animation()
 	
-	if Input.is_action_just_pressed("dash") and parent_state.dash_timer.time_left <= 0.5 and not character.mode == "Sand":
+	if Input.is_action_just_pressed("dash") and parent_state.dash_timer.time_left <= 0.5 and not character.mode == "Sand" and not animation_tree["parameters/WaterDash/playback"].get_current_node() == "Jump":
 		character.velocity = direction*dash_speed
 		animation_tree["parameters/WaterDash/playback"].start("Jump")
 		if abs(character.velocity.x) > abs(character.velocity.y):
@@ -62,11 +62,11 @@ func handle_physics(delta):
 			animation_tree["parameters/WaterDash/Jump/blend_position"] = Vector2(0, character.velocity.y / abs(character.velocity.y))
 	
 	if (shore_checker.is_colliding() or character.mode == "Sand") and not animation_tree["parameters/WaterDash/playback"].get_current_node() == "Jump":
-		character.velocity = character.velocity.normalized() * character.RUN_SPEED / 1.5
 		end_animation()
 	
 	if stopping:
-		character.velocity = character.velocity.move_toward(character.velocity.normalized()*character.RUN_SPEED / 2, character.RUN_ACCEL*delta)
+		var speed = min(character.RUN_SPEED, character.velocity.length()) if direction.is_zero_approx() else character.RUN_SPEED
+		character.velocity = character.velocity.move_toward(direction.normalized() * speed, character.RUN_ACCEL*delta)
 	elif parent_state.dash_timer.time_left < 0.5:
 		parent_state.dash_timer.start(0.5)
 		character.velocity = character.velocity.move_toward(direction*dash_speed, dash_end_decel*delta)
