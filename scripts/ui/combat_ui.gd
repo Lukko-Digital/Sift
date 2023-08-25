@@ -21,7 +21,6 @@ var shake_amount: int
 
 
 func _ready():
-	print(0%2)
 	Events.player_damaged.connect(_on_player_damaged)
 	heart_container_default_pos = hearts_container.position
 	shake_timer.timeout.connect(_shake_end)

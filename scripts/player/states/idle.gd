@@ -5,6 +5,7 @@ const DECEL = 1000.0
 
 func enter():
 	animation_tree["parameters/playback"].travel("Idle")
+	animation_tree["parameters/playback"].start("Idle")
 
 func handle_physics(delta: float):
 	character.sink_in_water()

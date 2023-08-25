@@ -1,14 +1,14 @@
 extends ModeState
 
-@onready var dash_speed: float = character.RUN_SPEED * 1.2
+@onready var dash_speed: float = character.RUN_SPEED * 2
 @onready var dash_end_speed: float = character.RUN_SPEED
 
 @export var shore_checker: RayCast2D
 
-const DASH_SIDE_ACCEL = 100
+const DASH_SIDE_ACCEL = 500
 const START_LAG = 0.15
-const START_FRAMES = 0.4
-const END_FRAMES = 0.5
+const START_FRAMES = 0.25
+const END_FRAMES = 0.4
 
 var dig_direction: int
 var stopped: bool = false
@@ -21,7 +21,7 @@ func enter():
 	stopped = false
 	buffer_stop = false
 	
-	time = 1.3
+	time = 0.8
 	
 	dash_velocity = Vector2(
 		Input.get_axis("left", "right"), Input.get_axis("up", "down")
@@ -43,6 +43,8 @@ func enter():
 			dig_direction = 1
 		else:
 			dig_direction = 2
+			
+	dash_velocity = dash_velocity.normalized() * dash_speed
 
 func handle_physics(delta):
 	shore_checker.target_position = dash_velocity.normalized() * 30
@@ -78,11 +80,10 @@ func handle_physics(delta):
 	
 	
 	if parent_state.dash_timer.time_left <= END_FRAMES:# and not stopped:
-		dash_velocity = dash_velocity.move_toward(direction * character.RUN_SPEED, character.RUN_ACCEL*delta * 0.75)
+		dash_velocity = direction.normalized() * character.RUN_SPEED * 1.5
 		
 	elif parent_state.dash_timer.time_left < time:# and not stopped:
-		dash_velocity = dash_velocity.normalized() * dash_speed
-		dash_velocity = dash_velocity.move_toward(direction * character.RUN_SPEED, DASH_SIDE_ACCEL*delta)
+		dash_velocity = dash_velocity.move_toward(direction * dash_speed, DASH_SIDE_ACCEL*delta)
 	
 	
 	
