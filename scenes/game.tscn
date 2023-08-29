@@ -55,6 +55,7 @@ main_scene = NodePath("../SubViewportContainer/SubViewport/main")
 [node name="ChromaticAbberation" type="ColorRect" parent="."]
 z_index = 1
 material = SubResource("ShaderMaterial_vu1gm")
+layout_mode = 0
 offset_left = -1842.0
 offset_top = -1593.0
 offset_right = 2075.0
