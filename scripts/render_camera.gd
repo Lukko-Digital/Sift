@@ -10,7 +10,7 @@ func _process(delta):
 	offset = lerp(Vector2.ZERO, (player.position - floor(player.position)) * 4, 0.6)
 	
 	if not player.velocity.is_zero_approx():
-		last_dir = player.velocity.normalized() * 50
+		last_dir = player.velocity.normalized() * 100
 	
 	var mouse_offset = lerp(Vector2.ZERO, get_viewport().get_mouse_position() - position - resolution/2, 0.1)
 	

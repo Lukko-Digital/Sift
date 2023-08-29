@@ -106,6 +106,7 @@ layer_10/tile_data = PackedInt32Array(-917510, 131072, 20, -851974, 131072, 21, 
 [node name="player" parent="." instance=ExtResource("1_6t2e7")]
 
 [node name="Camera2D" type="Camera2D" parent="player"]
+position = Vector2(0, -10)
 process_callback = 0
 position_smoothing_speed = 10.0
 drag_left_margin = 0.1
