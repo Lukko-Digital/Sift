@@ -52,6 +52,6 @@ func _on_npc_dialogue_collider_area_exited(area):
 func _on_splash_timer_timeout():
 	if not velocity.is_zero_approx():
 		var instance = splash_scene.instantiate()
-		instance.start(velocity, mode, position + Vector2(0, -5))
 		get_parent().add_child(instance)
+		instance.start(velocity, mode, position + Vector2(0, -5))
 
