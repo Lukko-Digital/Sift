@@ -1,66 +1,79 @@
-[gd_scene load_steps=7 format=3 uid="uid://siyv31md8s0w"]
+[gd_scene load_steps=9 format=3 uid="uid://siyv31md8s0w"]
 
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="1_3hwf0"]
-[ext_resource type="Texture2D" uid="uid://b20fyt72h6huk" path="res://assets/png/structures/shack1_ref-sheet.png" id="2_gl7bd"]
-[ext_resource type="Texture2D" uid="uid://o0o8cvsgilcb" path="res://assets/png/structures/shack1-sheet.png" id="3_xsu4u"]
+[ext_resource type="Texture2D" uid="uid://bjwmrjspsvxud" path="res://assets/png/structures/shack1_ref-sheet.png" id="2_gl7bd"]
+[ext_resource type="Texture2D" uid="uid://fu5vtg3vusf0" path="res://assets/png/structures/shack1-sheet.png" id="3_xsu4u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3qp6t"]
-radius = 26.0
+radius = 28.0
 height = 98.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rv2ie"]
+size = Vector2(20.5002, 98)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tvmo2"]
-radius = 20.0
-height = 42.0
+radius = 4.99999
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dy1ct"]
+radius = 8.24621
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cyx8m"]
+radius = 4.99998
+height = 18.0
 
 [node name="Shack1" type="Node2D"]
-y_sort_enabled = true
-
-[node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("1_3hwf0")]
-position = Vector2(-5, 44)
-sprite_to_reflect = NodePath("Sprite2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="ReflectionComponent"]
-texture = ExtResource("2_gl7bd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, -15)
 texture = ExtResource("3_xsu4u")
-offset = Vector2(-5.11, -25.235)
+offset = Vector2(0, -45)
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(0, -38)
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(0, 24)
-rotation = -1.5708
-shape = SubResource("CapsuleShape2D_3qp6t")
+[node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("1_3hwf0")]
+texture = ExtResource("2_gl7bd")
+offset = Vector2(0, 40)
+flip_v = false
+sprite_to_reflect = NodePath("../Sprite2D")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, -38)
-collision_layer = 2
+visible = false
+position = Vector2(0, -23)
+collision_layer = 384
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 35)
+position = Vector2(4, 12)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_3qp6t")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(4, -7)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_3qp6t")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(4.99999, 2.74992)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_rv2ie")
+
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(0, -38)
+visible = false
+position = Vector2(0, -23)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(-49, 27)
+position = Vector2(-56, 10)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_tvmo2")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(-48, 20)
+shape = SubResource("CircleShape2D_dy1ct")
+
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(0, -38)
+visible = false
+position = Vector2(0, -23)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2(45, 35)
+position = Vector2(60, 18)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_cyx8m")

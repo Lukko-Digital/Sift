@@ -4,13 +4,11 @@
 [ext_resource type="Script" path="res://scripts/render_camera.gd" id="2_20lf1"]
 [ext_resource type="PackedScene" uid="uid://c83lh8olstfpw" path="res://scenes/ui/dialogue_ui.tscn" id="3_j20hu"]
 [ext_resource type="PackedScene" uid="uid://bb3q3qfbatogk" path="res://scenes/ui/combat_ui.tscn" id="4_l7g74"]
-[ext_resource type="Shader" path="res://scripts/shaders/chromatic_abberation.gdshader" id="5_xu36h"]
+[ext_resource type="Shader" path="res://scripts/shaders/render_fog.gdshader" id="5_7obaj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vu1gm"]
-shader = ExtResource("5_xu36h")
-shader_parameter/r_displacement = Vector2(5, 0)
-shader_parameter/g_displacement = Vector2(-5, 0)
-shader_parameter/b_displacement = Vector2(0, 0)
+shader = ExtResource("5_7obaj")
+shader_parameter/fog_color = Color(0.603922, 0.603922, 0.603922, 1)
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -52,11 +50,20 @@ main_scene = NodePath("../SubViewportContainer/SubViewport/main")
 [node name="combat_ui" parent="." node_paths=PackedStringArray("main_scene") instance=ExtResource("4_l7g74")]
 main_scene = NodePath("../SubViewportContainer/SubViewport/main")
 
+[node name="DistanceFog" type="ColorRect" parent="."]
+z_index = 2
+material = SubResource("ShaderMaterial_vu1gm")
+layout_mode = 0
+offset_left = -1039.0
+offset_top = -604.0
+offset_right = 1038.0
+offset_bottom = 601.0
+
 [node name="ChromaticAbberation" type="ColorRect" parent="."]
 z_index = 1
 material = SubResource("ShaderMaterial_vu1gm")
 layout_mode = 0
-offset_left = -1842.0
-offset_top = -1593.0
-offset_right = 2075.0
-offset_bottom = 1003.0
+offset_left = -1033.0
+offset_top = -604.0
+offset_right = 1038.0
+offset_bottom = 613.0
