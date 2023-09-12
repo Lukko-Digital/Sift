@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c88orqepj1afi"]
+
+[ext_resource type="Script" path="res://scripts/level_building/scene_change_collider.gd" id="1_o2c50"]
+
+[node name="SceneChangeCollider" type="Area2D"]
+script = ExtResource("1_o2c50")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
