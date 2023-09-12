@@ -10,10 +10,12 @@ func start(direction: Vector2, mode: String, start_position: Vector2):
 	self.mode = mode
 	
 	if abs(direction.x) > abs(direction.y):
-		animation_tree["parameters/" + mode + "/blend_position"] = Vector2(direction.x / abs(direction.x), 0)
+		animation_tree["parameters/" + mode + "/blend_position"] = Vector2(sign(direction.x), 0)
 	else:
-		animation_tree["parameters/" + mode + "/blend_position"] = Vector2(0, direction.y / abs(direction.y))
+		animation_tree["parameters/" + mode + "/blend_position"] = Vector2(0, sign(direction.y))
 		
+	print(animation_tree["parameters/" + mode + "/blend_position"])
+	
 	animation_tree["parameters/playback"].start(mode)
 	
 	visible = true

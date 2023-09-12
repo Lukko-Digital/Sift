@@ -1462,7 +1462,7 @@ offset = Vector2(0, -60)
 position = Vector2(1, -8)
 texture = ExtResource("2_g1nij")
 hframes = 275
-frame = 9
+frame = 37
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]

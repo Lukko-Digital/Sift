@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://siyv31md8s0w"]
 
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="1_3hwf0"]
-[ext_resource type="Texture2D" uid="uid://bjwmrjspsvxud" path="res://assets/png/structures/shack1_ref-sheet.png" id="2_gl7bd"]
-[ext_resource type="Texture2D" uid="uid://fu5vtg3vusf0" path="res://assets/png/structures/shack1-sheet.png" id="3_xsu4u"]
+[ext_resource type="Texture2D" uid="uid://b20fyt72h6huk" path="res://assets/png/structures/shack1_ref-sheet.png" id="2_gl7bd"]
+[ext_resource type="Texture2D" uid="uid://o0o8cvsgilcb" path="res://assets/png/structures/shack1-sheet.png" id="3_xsu4u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3qp6t"]
 radius = 28.0

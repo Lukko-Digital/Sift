@@ -168,7 +168,6 @@ position = Vector2(-253, -101)
 
 [node name="Tree3" parent="Environment" instance=ExtResource("6_535dw")]
 position = Vector2(80, 177)
-rotation = 0.694641
 
 [node name="Tree4" parent="Environment" instance=ExtResource("6_535dw")]
 position = Vector2(210, -535)

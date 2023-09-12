@@ -54,4 +54,5 @@ func _on_splash_timer_timeout():
 		var instance = splash_scene.instantiate()
 		get_parent().add_child(instance)
 		instance.start(velocity, mode, position + Vector2(0, -5))
+		
 
