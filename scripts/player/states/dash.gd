@@ -23,3 +23,4 @@ func handle_physics(delta):
 
 func _on_dash_timer_timeout():
 	dash_timer.stop()
+

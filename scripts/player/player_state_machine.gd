@@ -2,7 +2,7 @@ extends StateMachine
 
 @onready var timer: Timer = $Timer
 @onready var player: Player = get_parent()
-@onready var hurtbox_component: HurtboxComponent = get_node("../HurtboxComponent")
+@onready var health_component: HealthComponent = get_node("../HealthComponent")
 
 var in_dialogue: bool = false
 var buffer_dash: bool = false
@@ -12,7 +12,7 @@ func _ready():
 	transition_to("Idle")
 	Events.idle_dialogue.connect(exit_dialogue)
 	Events.dialogue_complete.connect(exit_dialogue)
-	hurtbox_component.damage_taken.connect(_on_damage_taken)
+	health_component.damage_taken.connect(_on_damage_taken)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("escape") and in_dialogue:
@@ -33,6 +33,10 @@ func _physics_process(delta: float) -> void:
 		if timer.time_left < 0.15 and state == get_node("Dash"):
 			buffer_dash = true
 		transition_to("Dash")
+	elif (Input.is_action_just_pressed("attack") and player.mode == "Sand" and state.name == "Dash" and timer.time_left < 0.3):
+		if timer.time_left < 0.15 and state == get_node("SandAttack"):
+			buffer_attack = true
+		transition_to("SandAttack")
 	elif (state == get_node("Dash") and not timer.is_stopped()) or (buffer_dash and not state == get_node("Dash")):
 		if timer.time_left > 0.15:
 			buffer_dash = false
@@ -72,7 +76,8 @@ func exit_dialogue():
 func _on_damage_taken(attack: Attack):
 	Global.camera.shake(0.1, 5)
 	Events.emit_signal("player_damaged", attack.damage)
-	transition_to("Hit", attack.effects)
+	if attack.effects:
+		transition_to("Hit", attack.effects)
 
 func _on_hit_return_to_idle():
 	transition_to("Idle")

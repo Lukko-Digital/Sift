@@ -19,7 +19,7 @@ func _ready():
 	super._ready()
 	attack_timer.timeout.connect(_return_to_idle)
 	health_component.died.connect(_on_death)
-	hurtbox_component.damage_taken.connect(_on_damage_taken)
+	health_component.damage_taken.connect(_on_damage_taken)
 	animation_player.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:

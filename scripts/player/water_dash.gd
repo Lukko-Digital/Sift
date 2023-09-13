@@ -61,12 +61,13 @@ func handle_physics(delta):
 		else:
 			animation_tree["parameters/WaterDash/Jump/blend_position"] = Vector2(0, character.velocity.y / abs(character.velocity.y))
 	
-	if (shore_checker.is_colliding() or character.mode == "Sand") and not animation_tree["parameters/WaterDash/playback"].get_current_node() == "Jump":
+	if (shore_checker.is_colliding() or character.mode == "Sand" or character.check_drown()) and not animation_tree["parameters/WaterDash/playback"].get_current_node() == "Jump":
 		end_animation()
 	
 	if stopping:
 		var speed = min(character.RUN_SPEED, character.velocity.length()) if direction.is_zero_approx() else character.RUN_SPEED
 		character.velocity = character.velocity.move_toward(direction.normalized() * speed, character.RUN_ACCEL*delta)
+		character.drown()
 	elif parent_state.dash_timer.time_left < 0.5:
 		parent_state.dash_timer.start(0.5)
 		character.velocity = character.velocity.move_toward(direction*dash_speed, dash_end_decel*delta)
@@ -76,20 +77,24 @@ func handle_physics(delta):
 func end_animation():
 	stopping = true
 	
-	var tween = get_tree().create_tween()
-	var depth = character.sink_in_water()
-	character.sprite.offset.y = 0
-
-	tween.tween_property(character.sprite, "offset", Vector2(0, depth), 0.25)
+	if not character.check_drown():
+		var tween = get_tree().create_tween()
+		var depth = character.sink_in_water()
+		
+		character.sprite.offset.y = 0
+		tween.tween_property(character.sprite, "offset", Vector2(0, depth), 0.25)
+	else:
+		water_mask.offset.y = -60
 	
 	animation_tree["parameters/WaterDash/playback"].travel("Trip")
-	if abs(character.velocity.x) > abs(character.velocity.y):
-		animation_tree["parameters/WaterDash/Trip/blend_position"] = Vector2(character.velocity.x / abs(character.velocity.x), 0)
-	else:
-		animation_tree["parameters/WaterDash/Trip/blend_position"] = Vector2(0, character.velocity.y / abs(character.velocity.y) + 0.1)
-		
-	animation_tree["parameters/Idle/blend_position"] = animation_tree["parameters/WaterDash/Trip/blend_position"]
+	
+	if not character.velocity.is_zero_approx():
+		if abs(character.velocity.x) > abs(character.velocity.y):
+			animation_tree["parameters/WaterDash/Trip/blend_position"] = Vector2(character.velocity.x / abs(character.velocity.x), 0)
+		else:
+			animation_tree["parameters/WaterDash/Trip/blend_position"] = Vector2(0, character.velocity.y / abs(character.velocity.y))
+			
+		animation_tree["parameters/Idle/blend_position"] = animation_tree["parameters/WaterDash/Trip/blend_position"]
 
 func exit():
 	water_mask.offset.y = -60
-	animation_tree["parameters/Idle/blend_position"] = animation_tree["parameters/WaterDash/Trip/blend_position"]

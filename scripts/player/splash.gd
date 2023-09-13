@@ -13,8 +13,6 @@ func start(direction: Vector2, mode: String, start_position: Vector2):
 		animation_tree["parameters/" + mode + "/blend_position"] = Vector2(sign(direction.x), 0)
 	else:
 		animation_tree["parameters/" + mode + "/blend_position"] = Vector2(0, sign(direction.y))
-		
-	print(animation_tree["parameters/" + mode + "/blend_position"])
 	
 	animation_tree["parameters/playback"].start(mode)
 	
