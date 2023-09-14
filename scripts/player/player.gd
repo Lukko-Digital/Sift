@@ -35,12 +35,12 @@ func check_drown():
 	
 func drown():
 	if check_drown():
-		if sinking_timer.is_stopped():
+		if sinking_timer.is_stopped() and sprite.offset.y > 15:
 			sinking_timer.start(0.5)
 		if sprite.offset.y < 0:
-			sprite.offset.y -= 5
+			sprite.offset.y -= 2
 		elif sprite.offset.y < 40:
-			sprite.offset.y += 1
+			sprite.offset.y += 0.5
 	
 func sink_in_water():
 	if mode == "Water":
@@ -82,7 +82,7 @@ func _on_deep_water_sink_timer_timeout():
 
 
 func _on_deep_water_checker_body_exited(body):
-	sinking_timer.start(0.25)
+	sinking_timer.start(0.5)
 	var tween = get_tree().create_tween()
 	
-	tween.tween_property(sprite, "offset", Vector2(0, 9), 0.25)
+	tween.tween_property(sprite, "offset", Vector2(0, 9), 0.5)
