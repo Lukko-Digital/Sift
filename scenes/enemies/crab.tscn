@@ -1,10 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://dxblb7s0p3c5n"]
+[gd_scene load_steps=36 format=3 uid="uid://dxblb7s0p3c5n"]
 
 [ext_resource type="Texture2D" uid="uid://in1qktimkaap" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
 [ext_resource type="Script" path="res://scripts/enemies/state_machines/crab_state_machine.gd" id="2_aye52"]
 [ext_resource type="Script" path="res://scripts/enemies/states/idle.gd" id="3_acchv"]
 [ext_resource type="Script" path="res://scripts/enemies/states/track.gd" id="4_k3pfn"]
-[ext_resource type="Script" path="res://scripts/enemies/attacks/crab_attack_aoe.gd" id="5_qbgx0"]
+[ext_resource type="Script" path="res://scripts/enemies/attacks/crab_attack_directional.gd" id="5_1p4xo"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="6_76mvh"]
 [ext_resource type="Script" path="res://scripts/enemies/states/dead.gd" id="6_nu6pc"]
 [ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="7_0uixo"]
@@ -12,46 +12,6 @@
 [ext_resource type="Script" path="res://scripts/enemies/states/knocked_back.gd" id="8_cjekx"]
 [ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="8_hofra"]
 [ext_resource type="Script" path="res://scripts/player/states/hit.gd" id="9_7qexf"]
-
-[sub_resource type="Animation" id="Animation_eth1l"]
-resource_name = "Attack_front"
-length = 0.8
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [8, 8, 12]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../StateMachine/Attack/AttackBox:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
 
 [sub_resource type="Animation" id="Animation_1jrft"]
 resource_name = "Dead_1"
@@ -184,9 +144,268 @@ tracks/1/keys = {
 "values": [Vector2(0, -3), Vector2(0, -15), Vector2(0, -3)]
 }
 
+[sub_resource type="Animation" id="Animation_n4g5y"]
+resource_name = "Attack_left"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [8, 8, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Attack/AttackBox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../StateMachine/Attack/AttackBox:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../StateMachine/Attack/AttackBox:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_bywbu"]
+resource_name = "Attack_up"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [8, 8, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Attack/AttackBox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../StateMachine/Attack/AttackBox:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../StateMachine/Attack/AttackBox:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
+}
+
+[sub_resource type="Animation" id="Animation_4vf8f"]
+resource_name = "Attack_right"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [8, 8, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Attack/AttackBox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../StateMachine/Attack/AttackBox:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../StateMachine/Attack/AttackBox:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4.71239]
+}
+
+[sub_resource type="Animation" id="Animation_8rdgg"]
+resource_name = "Attack_down"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [8, 8, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Attack/AttackBox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../StateMachine/Attack/AttackBox:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../StateMachine/Attack/AttackBox:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_du8fy"]
 _data = {
-"Attack_front": SubResource("Animation_eth1l"),
+"Attack_down": SubResource("Animation_8rdgg"),
+"Attack_left": SubResource("Animation_n4g5y"),
+"Attack_right": SubResource("Animation_4vf8f"),
+"Attack_up": SubResource("Animation_bywbu"),
 "Dead_1": SubResource("Animation_1jrft"),
 "Dead_2": SubResource("Animation_ok4x2"),
 "Idle_back": SubResource("Animation_dkcx4"),
@@ -269,6 +488,9 @@ height = 32.0
 radius = 11.0
 height = 44.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52tcg"]
+size = Vector2(24, 18)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nh7s"]
 size = Vector2(24, 8)
 
@@ -277,10 +499,10 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -2)
+position = Vector2(0, -3)
 texture = ExtResource("1_65ej8")
 hframes = 15
-frame = 14
+frame = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -300,7 +522,6 @@ shape = SubResource("RectangleShape2D_2f18y")
 [node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "color_animation_player")]
-visible = false
 script = ExtResource("2_aye52")
 animation_player = NodePath("../Sprite2D/AnimationPlayer")
 color_animation_player = NodePath("../Sprite2D/ColorAnimationPlayer")
@@ -330,7 +551,7 @@ monitoring = false
 shape = SubResource("CircleShape2D_0ufsb")
 
 [node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
-script = ExtResource("5_qbgx0")
+script = ExtResource("5_1p4xo")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
@@ -341,12 +562,22 @@ collision_layer = 0
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_h26ny")
 
+[node name="AttackBoxOLD" type="Area2D" parent="StateMachine/Attack"]
+visible = false
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBoxOLD"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_5it8r")
+
 [node name="AttackBox" type="Area2D" parent="StateMachine/Attack"]
+position = Vector2(-8, 0)
+rotation = 1.5708
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBox"]
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_5it8r")
+position = Vector2(0, 13)
+shape = SubResource("RectangleShape2D_52tcg")
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
 one_shot = true
