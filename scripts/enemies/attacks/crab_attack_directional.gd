@@ -35,7 +35,7 @@ func exit():
 	animation_player.stop()
 
 func _on_animation_end(anim_name: StringName):
-	if anim_name == "Attack_down":
+	if anim_name in ["Attack_up", "Attack_right", "Attack_down", "Attack_left"]:
 		animation_player.play("Idle_front")
 		attack_timer.start(END_LAG)
 	

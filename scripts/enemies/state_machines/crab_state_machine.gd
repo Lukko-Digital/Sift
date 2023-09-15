@@ -23,6 +23,7 @@ func _ready():
 	animation_player.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
+	print(state)
 	if state.name == "KnockedUp":
 		transition_to("KnockedUp")
 	elif not knockback_timer.is_stopped():
@@ -33,7 +34,9 @@ func _physics_process(delta: float) -> void:
 		transition_to("Idle")
 	elif (
 		not attack_radius.get_overlapping_bodies().is_empty() or 
-		animation_player.current_animation == "Attack_front" or
+		animation_player.current_animation in [
+			"Attack_up", "Attack_right", "Attack_down", "Attack_left"
+			] or
 		not attack_timer.is_stopped()
 	):
 		transition_to("Attack")

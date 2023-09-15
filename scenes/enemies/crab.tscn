@@ -502,7 +502,7 @@ collision_mask = 3
 position = Vector2(0, -3)
 texture = ExtResource("1_65ej8")
 hframes = 15
-frame = 12
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
