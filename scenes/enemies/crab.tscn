@@ -1,16 +1,16 @@
 [gd_scene load_steps=32 format=3 uid="uid://dxblb7s0p3c5n"]
 
 [ext_resource type="Texture2D" uid="uid://in1qktimkaap" path="res://assets/png/crab-Sheet.png" id="1_65ej8"]
-[ext_resource type="Script" path="res://scripts/enemies/crab/crab_state_machine.gd" id="2_ka2el"]
-[ext_resource type="Script" path="res://scripts/enemies/crab/states/idle.gd" id="3_7bnq2"]
-[ext_resource type="Script" path="res://scripts/enemies/crab/states/track.gd" id="4_dlb10"]
-[ext_resource type="Script" path="res://scripts/enemies/crab/states/attack.gd" id="5_qmlcd"]
-[ext_resource type="Script" path="res://scripts/enemies/crab/states/dead.gd" id="6_0obea"]
+[ext_resource type="Script" path="res://scripts/enemies/state_machines/crab_state_machine.gd" id="2_aye52"]
+[ext_resource type="Script" path="res://scripts/enemies/states/idle.gd" id="3_acchv"]
+[ext_resource type="Script" path="res://scripts/enemies/states/track.gd" id="4_k3pfn"]
+[ext_resource type="Script" path="res://scripts/enemies/attacks/attack.gd" id="5_g0802"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="6_76mvh"]
+[ext_resource type="Script" path="res://scripts/enemies/states/dead.gd" id="6_nu6pc"]
 [ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="7_0uixo"]
-[ext_resource type="Script" path="res://scripts/enemies/crab/states/knocked_up.gd" id="7_6j2xk"]
+[ext_resource type="Script" path="res://scripts/enemies/states/knocked_up.gd" id="7_qjkxm"]
+[ext_resource type="Script" path="res://scripts/enemies/states/knocked_back.gd" id="8_cjekx"]
 [ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="8_hofra"]
-[ext_resource type="Script" path="res://scripts/enemies/crab/states/knocked_back.gd" id="8_vu64y"]
 [ext_resource type="Script" path="res://scripts/player/states/hit.gd" id="9_7qexf"]
 
 [sub_resource type="Animation" id="Animation_eth1l"]
@@ -301,18 +301,18 @@ shape = SubResource("RectangleShape2D_2f18y")
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "color_animation_player")]
 visible = false
-script = ExtResource("2_ka2el")
+script = ExtResource("2_aye52")
 animation_player = NodePath("../Sprite2D/AnimationPlayer")
 color_animation_player = NodePath("../Sprite2D/ColorAnimationPlayer")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("3_7bnq2")
+script = ExtResource("3_acchv")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 
 [node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
 visible = false
-script = ExtResource("4_dlb10")
+script = ExtResource("4_k3pfn")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
@@ -330,7 +330,7 @@ monitoring = false
 shape = SubResource("CircleShape2D_0ufsb")
 
 [node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
-script = ExtResource("5_qmlcd")
+script = ExtResource("5_g0802")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
@@ -352,18 +352,18 @@ shape = SubResource("CapsuleShape2D_5it8r")
 one_shot = true
 
 [node name="Dead" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "color_animation_player", "character")]
-script = ExtResource("6_0obea")
+script = ExtResource("6_nu6pc")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 color_animation_player = NodePath("../../Sprite2D/ColorAnimationPlayer")
 character = NodePath("../..")
 
 [node name="KnockedUp" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
-script = ExtResource("7_6j2xk")
+script = ExtResource("7_qjkxm")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
 [node name="KnockedBack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
-script = ExtResource("8_vu64y")
+script = ExtResource("8_cjekx")
 character = NodePath("../..")
 
 [node name="KnockBackTimer" type="Timer" parent="StateMachine/KnockedBack"]
