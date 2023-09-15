@@ -2,8 +2,8 @@ extends State
 
 @export var animation_player: AnimationPlayer
 @export var color_animation_player: AnimationPlayer
+@export var NUM_DEAD_ANIMATIONS: int
 
-const NUM_DEAD_ANIMATIONS = 2
 const DEAD_Z_LAYER = -5
 
 func enter():

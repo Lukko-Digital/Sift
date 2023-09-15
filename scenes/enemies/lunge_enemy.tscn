@@ -201,6 +201,7 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.6)
 scale = Vector2(0.265625, 0.265625)
 texture = ExtResource("1_ld1ax")
 
@@ -267,6 +268,7 @@ one_shot = true
 script = ExtResource("6_7olow")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 color_animation_player = NodePath("../../Sprite2D/ColorAnimationPlayer")
+NUM_DEAD_ANIMATIONS = 1
 character = NodePath("../..")
 
 [node name="KnockedBack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]

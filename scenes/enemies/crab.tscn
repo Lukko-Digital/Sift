@@ -574,6 +574,7 @@ one_shot = true
 script = ExtResource("6_nu6pc")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 color_animation_player = NodePath("../../Sprite2D/ColorAnimationPlayer")
+NUM_DEAD_ANIMATIONS = 2
 character = NodePath("../..")
 
 [node name="KnockedUp" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
