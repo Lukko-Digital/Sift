@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/enemies/state_machines/crab_state_machine.gd" id="2_aye52"]
 [ext_resource type="Script" path="res://scripts/enemies/states/idle.gd" id="3_acchv"]
 [ext_resource type="Script" path="res://scripts/enemies/states/track.gd" id="4_k3pfn"]
-[ext_resource type="Script" path="res://scripts/enemies/attacks/attack.gd" id="5_g0802"]
+[ext_resource type="Script" path="res://scripts/enemies/attacks/crab_attack_aoe.gd" id="5_qbgx0"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="6_76mvh"]
 [ext_resource type="Script" path="res://scripts/enemies/states/dead.gd" id="6_nu6pc"]
 [ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="7_0uixo"]
@@ -330,7 +330,7 @@ monitoring = false
 shape = SubResource("CircleShape2D_0ufsb")
 
 [node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
-script = ExtResource("5_g0802")
+script = ExtResource("5_qbgx0")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
