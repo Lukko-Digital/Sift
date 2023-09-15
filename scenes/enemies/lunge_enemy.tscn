@@ -221,13 +221,17 @@ shape = SubResource("RectangleShape2D_2f18y")
 
 [node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
 
-[node name="StateMachine" type="Node2D" parent="."]
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "color_animation_player")]
 visible = false
 script = ExtResource("2_dclk0")
+animation_player = NodePath("../Sprite2D/AnimationPlayer")
+color_animation_player = NodePath("../Sprite2D/ColorAnimationPlayer")
+initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
 script = ExtResource("3_asvmf")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+character = NodePath("../..")
 
 [node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
 script = ExtResource("4_nx5nt")
