@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://b5fdonr32rsmf"]
+[gd_scene load_steps=28 format=3 uid="uid://b5fdonr32rsmf"]
 
 [ext_resource type="Texture2D" uid="uid://cgwr0dv8vtqde" path="res://icon.svg" id="1_ld1ax"]
 [ext_resource type="Script" path="res://scripts/enemies/state_machines/lunge_enemy_state_machine.gd" id="2_dclk0"]
 [ext_resource type="Script" path="res://scripts/enemies/states/idle.gd" id="3_asvmf"]
 [ext_resource type="Script" path="res://scripts/enemies/states/track.gd" id="4_nx5nt"]
+[ext_resource type="Script" path="res://scripts/enemies/attacks/lunge_attack.gd" id="5_fbafk"]
 [ext_resource type="Script" path="res://scripts/enemies/states/dead.gd" id="6_7olow"]
 [ext_resource type="Script" path="res://scripts/enemies/states/knocked_back.gd" id="8_35jkl"]
 [ext_resource type="Script" path="res://scripts/player/states/hit.gd" id="9_mce0y"]
@@ -189,9 +190,8 @@ radius = 123.037
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ufsb"]
 radius = 277.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h26ny"]
-radius = 8.0
-height = 32.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_jbqi6"]
+radius = 87.0976
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nh7s"]
 size = Vector2(32, 32)
@@ -222,7 +222,6 @@ shape = SubResource("RectangleShape2D_2f18y")
 [node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "color_animation_player")]
-visible = false
 script = ExtResource("2_dclk0")
 animation_player = NodePath("../Sprite2D/AnimationPlayer")
 color_animation_player = NodePath("../Sprite2D/ColorAnimationPlayer")
@@ -252,13 +251,14 @@ monitoring = false
 shape = SubResource("CircleShape2D_0ufsb")
 
 [node name="Attack" type="Node2D" parent="StateMachine"]
+script = ExtResource("5_fbafk")
 
 [node name="AttackRadius" type="Area2D" parent="StateMachine/Attack"]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_h26ny")
+shape = SubResource("CircleShape2D_jbqi6")
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/Attack"]
 one_shot = true
