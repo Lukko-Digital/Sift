@@ -23,7 +23,6 @@ func _ready():
 	animation_player.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
-	print(state)
 	if state.name == "KnockedUp":
 		transition_to("KnockedUp")
 	elif not knockback_timer.is_stopped():
