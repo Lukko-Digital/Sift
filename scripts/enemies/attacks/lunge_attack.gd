@@ -2,7 +2,7 @@ extends State
 
 @export var animation_player: AnimationPlayer
 
-const LUNGE_SPEED = 200.
+const LUNGE_SPEED = 400.
 const LUNGE_DISTANCE = 100.
 const END_LAG = 0.9
 
