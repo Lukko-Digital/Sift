@@ -129,13 +129,13 @@ _data = {
 size = Vector2(32, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_knnf7"]
-radius = 123.037
+radius = 137.004
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ufsb"]
 radius = 277.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jbqi6"]
-radius = 87.0976
+radius = 104.005
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8h6q7"]
 size = Vector2(38, 38)
@@ -180,7 +180,6 @@ animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
 [node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
-visible = false
 script = ExtResource("4_nx5nt")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
@@ -193,7 +192,6 @@ shape = SubResource("CircleShape2D_knnf7")
 
 [node name="TrackingRadius" type="Area2D" parent="StateMachine/Track"]
 collision_layer = 0
-monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Track/TrackingRadius"]
 shape = SubResource("CircleShape2D_0ufsb")
@@ -204,7 +202,6 @@ animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
 [node name="AttackRadius" type="Area2D" parent="StateMachine/Attack"]
-visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]

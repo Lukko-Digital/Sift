@@ -541,7 +541,6 @@ shape = SubResource("CircleShape2D_knnf7")
 
 [node name="TrackingRadius" type="Area2D" parent="StateMachine/Track"]
 collision_layer = 0
-monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Track/TrackingRadius"]
 shape = SubResource("CircleShape2D_0ufsb")
