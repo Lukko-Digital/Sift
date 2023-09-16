@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b5fdonr32rsmf"]
+[gd_scene load_steps=30 format=3 uid="uid://b5fdonr32rsmf"]
 
 [ext_resource type="Texture2D" uid="uid://cgwr0dv8vtqde" path="res://icon.svg" id="1_ld1ax"]
 [ext_resource type="Script" path="res://scripts/enemies/state_machines/lunge_enemy_state_machine.gd" id="2_dclk0"]
@@ -55,8 +55,12 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_bjnma"]
+resource_name = "Attack"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_du8fy"]
 _data = {
+"Attack": SubResource("Animation_bjnma"),
 "Attack_windup": SubResource("Animation_e2k6a"),
 "Dead_1": SubResource("Animation_1jrft"),
 "Idle_back": SubResource("Animation_dkcx4"),
@@ -133,6 +137,9 @@ radius = 277.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_jbqi6"]
 radius = 87.0976
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8h6q7"]
+size = Vector2(38, 38)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nh7s"]
 size = Vector2(32, 32)
 
@@ -162,7 +169,6 @@ shape = SubResource("RectangleShape2D_2f18y")
 [node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "color_animation_player")]
-visible = false
 script = ExtResource("2_dclk0")
 animation_player = NodePath("../Sprite2D/AnimationPlayer")
 color_animation_player = NodePath("../Sprite2D/ColorAnimationPlayer")
@@ -174,6 +180,7 @@ animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
 [node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
+visible = false
 script = ExtResource("4_nx5nt")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
@@ -197,11 +204,17 @@ animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
 [node name="AttackRadius" type="Area2D" parent="StateMachine/Attack"]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]
 rotation = 1.5708
 shape = SubResource("CircleShape2D_jbqi6")
+
+[node name="AttackBox" type="Area2D" parent="StateMachine/Attack"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBox"]
+shape = SubResource("RectangleShape2D_8h6q7")
 
 [node name="LungeTimer" type="Timer" parent="StateMachine/Attack"]
 one_shot = true
