@@ -7,7 +7,6 @@ const END_LAG = 0.8
 @onready var attack_radius: Area2D = $AttackRadius
 @onready var end_lag_timer: Timer = $EndLag
 @onready var attack_box: Area2D = $AttackBox
-@onready var attack_collider: CollisionShape2D
 
 var crab_attack: Attack = Attack.new("crab slam", 1)
 
