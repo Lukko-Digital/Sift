@@ -2,8 +2,8 @@ extends State
 
 @export var animation_player: AnimationPlayer
 
-const LUNGE_SPEED = 200
-const LUNGE_DURATION = 0.2
+const LUNGE_SPEED = 200.
+const LUNGE_DISTANCE = 100.
 const END_LAG = 0.9
 
 @onready var attack_radius: Area2D = $AttackRadius
@@ -29,7 +29,7 @@ func exit():
 
 func _on_animation_end(anim_name: StringName):
 	if anim_name == "Attack_windup":
-		lunge_timer.start(LUNGE_DURATION)
+		lunge_timer.start(LUNGE_DISTANCE / LUNGE_SPEED)
 		character.velocity = vec_to_player * LUNGE_SPEED
 
 func _on_lunge_end():
