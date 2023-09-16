@@ -5,7 +5,7 @@ extends State
 const END_LAG = 0.8
 
 @onready var attack_radius: Area2D = $AttackRadius
-@onready var attack_timer: Timer = $AttackTimer
+@onready var end_lag_timer: Timer = $EndLag
 @onready var attack_box: Area2D = $AttackBox
 @onready var attack_collider: CollisionShape2D
 
@@ -16,7 +16,7 @@ func _ready():
 	animation_player.animation_finished.connect(_on_animation_end)
 
 func enter():
-	attack_timer.one_shot = true
+	end_lag_timer.one_shot = true
 	var vec_to_player: Vector2 = get_direction_to_player()
 	if abs(vec_to_player.x) > abs(vec_to_player.y):
 		# Left Right
@@ -37,7 +37,7 @@ func exit():
 func _on_animation_end(anim_name: StringName):
 	if anim_name in ["Attack_up", "Attack_right", "Attack_down", "Attack_left"]:
 		animation_player.play("Idle_front")
-		attack_timer.start(END_LAG)
+		end_lag_timer.start(END_LAG)
 	
 func get_direction_to_player():
 	for body in attack_radius.get_overlapping_bodies():
