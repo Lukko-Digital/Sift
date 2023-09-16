@@ -18,7 +18,7 @@ var is_dead = false
 
 func _ready():
 	super._ready()
-	end_lag_timer.timeout.connect(_return_to_idle)
+	end_lag_timer.timeout.connect(_attack_end)
 	health_component.died.connect(_on_death)
 	health_component.damage_taken.connect(_on_damage_taken)
 	animation_player.animation_finished.connect(_on_animation_finished)
@@ -49,8 +49,8 @@ func _physics_process(delta: float) -> void:
 
 	state.handle_physics(delta)
 
-func _return_to_idle():
-	transition_to("Idle")
+func _attack_end():
+	transition_to("Track")
 
 func _on_death():
 	is_dead = true
