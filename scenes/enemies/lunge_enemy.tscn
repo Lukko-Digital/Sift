@@ -357,7 +357,6 @@ character = NodePath("../..")
 
 [node name="AttackRadius" type="Area2D" parent="StateMachine/Attack"]
 collision_layer = 0
-monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]
 rotation = 1.5708

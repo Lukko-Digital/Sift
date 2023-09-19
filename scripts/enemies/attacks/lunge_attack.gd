@@ -19,7 +19,9 @@ func _ready():
 func enter():
 	character.velocity = Vector2()
 	vec_to_player = get_direction_to_player()
-	animation_player.play("Attack_windup")
+	match Directions.direction_horizontal(vec_to_player):
+		Directions.Direction.RIGHT: animation_player.play("Attack_windup_right")
+		Directions.Direction.LEFT: animation_player.play("Attack_windup_left")
 	
 func handle_physics(delta: float):
 	character.move_and_slide()
@@ -29,7 +31,7 @@ func exit():
 
 func _on_animation_end(anim_name: StringName):
 	match anim_name:
-		"Attack_windup":
+		"Attack_windup_right", "Attack_windup_left":
 			animation_player.play("Attack")
 			character.velocity = vec_to_player * LUNGE_SPEED
 		"Attack":
