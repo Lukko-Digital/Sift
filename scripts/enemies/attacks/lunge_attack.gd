@@ -8,7 +8,6 @@ const END_LAG = 0.9
 
 @onready var attack_radius: Area2D = $AttackRadius
 @onready var attack_box: Area2D = $AttackBox
-@onready var lunge_timer: Timer = $LungeTimer
 @onready var end_lag_timer: Timer = $EndLag
 
 var vec_to_player: Vector2
@@ -17,7 +16,6 @@ var lunge_attack: Attack = Attack.new("lunge", 1)
 func _ready():
 	attack_box.area_entered.connect(_on_hit)
 	animation_player.animation_finished.connect(_on_animation_end)
-	lunge_timer.timeout.connect(on_lunge_end)
 
 func enter():
 	character.velocity = Vector2()
@@ -31,9 +29,12 @@ func exit():
 	pass
 
 func _on_animation_end(anim_name: StringName):
-	if anim_name == "Attack_windup":
-		lunge_timer.start(LUNGE_DISTANCE / LUNGE_SPEED)
-		character.velocity = vec_to_player * LUNGE_SPEED
+	match anim_name:
+		"Attack_windup":
+			animation_player.play("Attack")
+			character.velocity = vec_to_player * LUNGE_SPEED
+		"Attack":
+			on_lunge_end()
 
 func on_lunge_end():
 	end_lag_timer.start(END_LAG)
