@@ -24,6 +24,7 @@ run/snap/snap_2d_transforms_to_pixel=true
 
 Events="*res://scripts/autoload/events.gd"
 Global="*res://scripts/autoload/global.gd"
+Directions="*res://scripts/helpers/directions.gd"
 
 [display]
 
