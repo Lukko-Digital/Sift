@@ -32,10 +32,17 @@ func find_path():
 	nav_agent.target_position = player.global_position
 	
 func handle_animation():
-	if state_machine.facing_direction.y > 0:
-		animation_player.play("Run_front")
-	else:
-		animation_player.play("Run_back")
+	if animation_player.has_animation("Run_front") and animation_player.has_animation("Run_back"):
+		if state_machine.facing_direction.y > 0:
+			animation_player.play("Run_front")
+		else:
+			animation_player.play("Run_back")
+	
+	if animation_player.has_animation("Run_right") and animation_player.has_animation("Run_left"):
+		if state_machine.facing_direction.x > 0:
+			animation_player.play("Run_right")
+		else:
+			animation_player.play("Run_left")
 
 func _on_timer_timeout():
 	find_path()
