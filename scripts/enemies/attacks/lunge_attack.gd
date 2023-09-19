@@ -32,9 +32,11 @@ func exit():
 func _on_animation_end(anim_name: StringName):
 	match anim_name:
 		"Attack_windup_right", "Attack_windup_left":
-			animation_player.play("Attack")
+			match Directions.direction_horizontal(vec_to_player):
+				Directions.Direction.RIGHT: animation_player.play("Attack_right")
+				Directions.Direction.LEFT: animation_player.play("Attack_left")
 			character.velocity = vec_to_player * LUNGE_SPEED
-		"Attack":
+		"Attack_right", "Attack_left":
 			on_lunge_end()
 
 func on_lunge_end():
