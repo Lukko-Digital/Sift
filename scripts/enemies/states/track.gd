@@ -33,16 +33,14 @@ func find_path():
 	
 func handle_animation():
 	if animation_player.has_animation("Run_front") and animation_player.has_animation("Run_back"):
-		if state_machine.facing_direction.y > 0:
-			animation_player.play("Run_front")
-		else:
-			animation_player.play("Run_back")
+		match Directions.direction_vertical(state_machine.facing_direction):
+			Directions.Direction.DOWN: animation_player.play("Run_front")
+			Directions.Direction.UP: animation_player.play("Run_back")
 	
 	if animation_player.has_animation("Run_right") and animation_player.has_animation("Run_left"):
-		if state_machine.facing_direction.x > 0:
-			animation_player.play("Run_right")
-		else:
-			animation_player.play("Run_left")
+		match Directions.direction_horizontal(state_machine.facing_direction):
+			Directions.Direction.RIGHT: animation_player.play("Run_right")
+			Directions.Direction.LEFT: animation_player.play("Run_left")
 
 func _on_timer_timeout():
 	find_path()
