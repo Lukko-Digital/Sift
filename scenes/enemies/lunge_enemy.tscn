@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b5fdonr32rsmf"]
+[gd_scene load_steps=36 format=3 uid="uid://b5fdonr32rsmf"]
 
 [ext_resource type="Texture2D" uid="uid://csll6si8knrcd" path="res://assets/png/sand_golem-Sheet.png" id="1_jgg0h"]
 [ext_resource type="Script" path="res://scripts/enemies/state_machines/lunge_enemy_state_machine.gd" id="2_dclk0"]
@@ -48,16 +48,6 @@ tracks/0/keys = {
 resource_name = "Dead_1"
 length = 0.1
 step = 0.01
-
-[sub_resource type="Animation" id="Animation_dkcx4"]
-resource_name = "Idle_back"
-length = 0.6
-loop_mode = 1
-
-[sub_resource type="Animation" id="Animation_t3wjl"]
-resource_name = "Idle_front"
-length = 0.6
-loop_mode = 1
 
 [sub_resource type="Animation" id="Animation_afljr"]
 resource_name = "Run_back"
@@ -210,8 +200,6 @@ _data = {
 "Attack_right": SubResource("Animation_nepj2"),
 "Attack_windup": SubResource("Animation_e2k6a"),
 "Dead_1": SubResource("Animation_1jrft"),
-"Idle_back": SubResource("Animation_dkcx4"),
-"Idle_front": SubResource("Animation_t3wjl"),
 "Idle_left": SubResource("Animation_x8c8y"),
 "Idle_right": SubResource("Animation_yxgkp"),
 "Run_back": SubResource("Animation_afljr"),
@@ -303,7 +291,7 @@ collision_mask = 3
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_jgg0h")
 hframes = 78
-frame = 77
+frame = 58
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
