@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b5fdonr32rsmf"]
+[gd_scene load_steps=33 format=3 uid="uid://b5fdonr32rsmf"]
 
 [ext_resource type="Texture2D" uid="uid://csll6si8knrcd" path="res://assets/png/sand_golem-Sheet.png" id="1_jgg0h"]
 [ext_resource type="Script" path="res://scripts/enemies/state_machines/lunge_enemy_state_machine.gd" id="2_dclk0"]
@@ -11,6 +11,22 @@
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="10_sp026"]
 [ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="11_snq0j"]
 [ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="12_luc8l"]
+
+[sub_resource type="Animation" id="Animation_e2k6a"]
+resource_name = "Attack_windup"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_1jrft"]
 resource_name = "Dead_1"
@@ -87,7 +103,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_nepj2"]
 resource_name = "Attack_right"
-length = 1.5
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -95,10 +111,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.4),
+"times": PackedFloat32Array(0, 1.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [43, 57]
+"values": [38, 57]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -107,7 +123,7 @@ tracks/1/path = NodePath("../StateMachine/Attack/AttackBox:monitoring")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.4),
+"times": PackedFloat32Array(0.5, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -115,7 +131,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_u6ttv"]
 resource_name = "Attack_left"
-length = 1.5
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -123,10 +139,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.4),
+"times": PackedFloat32Array(0, 1.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [63, 77]
+"values": [58, 77]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -135,15 +151,15 @@ tracks/1/path = NodePath("../StateMachine/Attack/AttackBox:monitoring")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5),
+"times": PackedFloat32Array(0.5, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_uiyw7"]
-resource_name = "Attack_windup_left"
-length = 0.7
+[sub_resource type="Animation" id="Animation_eleak"]
+resource_name = "Attack_windup_right"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -151,7 +167,7 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.5),
+"times": PackedFloat32Array(0.4, 0.7, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
@@ -163,15 +179,15 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 0.6),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [58, 62]
+"values": [32, 34]
 }
 
 [sub_resource type="Animation" id="Animation_wi3qj"]
-resource_name = "Attack_windup_right"
-length = 0.7
+resource_name = "Attack_windup_left"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -179,7 +195,7 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.5),
+"times": PackedFloat32Array(0.4, 0.7, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
@@ -191,18 +207,19 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 0.6),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [38, 42]
+"values": [35, 37]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_du8fy"]
 _data = {
 "Attack_left": SubResource("Animation_u6ttv"),
 "Attack_right": SubResource("Animation_nepj2"),
-"Attack_windup_left": SubResource("Animation_uiyw7"),
-"Attack_windup_right": SubResource("Animation_wi3qj"),
+"Attack_windup": SubResource("Animation_e2k6a"),
+"Attack_windup_left": SubResource("Animation_wi3qj"),
+"Attack_windup_right": SubResource("Animation_eleak"),
 "Dead_1": SubResource("Animation_1jrft"),
 "Idle_left": SubResource("Animation_x8c8y"),
 "Idle_right": SubResource("Animation_yxgkp"),
@@ -291,7 +308,7 @@ collision_mask = 3
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_jgg0h")
 hframes = 78
-frame = 42
+frame = 77
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
