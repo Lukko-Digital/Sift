@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://b5fdonr32rsmf"]
+[gd_scene load_steps=48 format=3 uid="uid://b5fdonr32rsmf"]
 
 [ext_resource type="Texture2D" uid="uid://cogpchbdww1h0" path="res://assets/png/driller-Sheet.png" id="1_gnpkk"]
 [ext_resource type="Script" path="res://scripts/enemies/state_machines/lunge_enemy_state_machine.gd" id="2_dclk0"]
@@ -489,6 +489,70 @@ tracks/1/keys = {
 "values": [88, 91]
 }
 
+[sub_resource type="Animation" id="Animation_wxbsj"]
+resource_name = "Getup_down_right"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [100, 114]
+}
+
+[sub_resource type="Animation" id="Animation_tsrct"]
+resource_name = "Getup_down_left"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [115, 129]
+}
+
+[sub_resource type="Animation" id="Animation_cnepy"]
+resource_name = "Getup_up_right"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [130, 144]
+}
+
+[sub_resource type="Animation" id="Animation_udeti"]
+resource_name = "Getup_up_left"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [145, 159]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_du8fy"]
 _data = {
 "Attack_down_left": SubResource("Animation_u6ttv"),
@@ -500,6 +564,10 @@ _data = {
 "Attack_windup_up_left": SubResource("Animation_fbjot"),
 "Attack_windup_up_right": SubResource("Animation_tij45"),
 "Dead_1": SubResource("Animation_1jrft"),
+"Getup_down_left": SubResource("Animation_tsrct"),
+"Getup_down_right": SubResource("Animation_wxbsj"),
+"Getup_up_left": SubResource("Animation_udeti"),
+"Getup_up_right": SubResource("Animation_cnepy"),
 "Idle_down_left": SubResource("Animation_x8c8y"),
 "Idle_down_right": SubResource("Animation_yxgkp"),
 "Idle_up_left": SubResource("Animation_7ueoc"),
@@ -595,7 +663,7 @@ collision_mask = 3
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_gnpkk")
 hframes = 160
-frame = 91
+frame = 159
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
