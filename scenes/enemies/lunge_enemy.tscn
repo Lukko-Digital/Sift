@@ -1,6 +1,6 @@
-[gd_scene load_steps=32 format=3 uid="uid://b5fdonr32rsmf"]
+[gd_scene load_steps=48 format=3 uid="uid://b5fdonr32rsmf"]
 
-[ext_resource type="Texture2D" uid="uid://csll6si8knrcd" path="res://assets/png/sand_golem-Sheet.png" id="1_jgg0h"]
+[ext_resource type="Texture2D" uid="uid://cogpchbdww1h0" path="res://assets/png/driller-Sheet.png" id="1_gnpkk"]
 [ext_resource type="Script" path="res://scripts/enemies/state_machines/lunge_enemy_state_machine.gd" id="2_dclk0"]
 [ext_resource type="Script" path="res://scripts/enemies/states/idle.gd" id="3_asvmf"]
 [ext_resource type="Script" path="res://scripts/enemies/states/track.gd" id="4_nx5nt"]
@@ -18,7 +18,7 @@ length = 0.1
 step = 0.01
 
 [sub_resource type="Animation" id="Animation_yxgkp"]
-resource_name = "Idle_right"
+resource_name = "Idle_down_right"
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,14 +28,65 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0, 7]
+"values": [0, 1]
 }
 
 [sub_resource type="Animation" id="Animation_x8c8y"]
-resource_name = "Idle_left"
+resource_name = "Idle_down_left"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_7ueoc"]
+resource_name = "Idle_up_left"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_idraf"]
+resource_name = "Idle_up_right"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_dmdsu"]
+resource_name = "Run_down_right"
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
@@ -51,8 +102,8 @@ tracks/0/keys = {
 "values": [8, 15]
 }
 
-[sub_resource type="Animation" id="Animation_dmdsu"]
-resource_name = "Run_right"
+[sub_resource type="Animation" id="Animation_1igao"]
+resource_name = "Run_down_left"
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
@@ -68,8 +119,8 @@ tracks/0/keys = {
 "values": [16, 23]
 }
 
-[sub_resource type="Animation" id="Animation_1igao"]
-resource_name = "Run_left"
+[sub_resource type="Animation" id="Animation_j4b03"]
+resource_name = "Run_up_right"
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
@@ -85,9 +136,90 @@ tracks/0/keys = {
 "values": [24, 31]
 }
 
+[sub_resource type="Animation" id="Animation_ni257"]
+resource_name = "Run_up_left"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [32, 39]
+}
+
+[sub_resource type="Animation" id="Animation_6ctb2"]
+resource_name = "Stop_down_right"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [40, 42]
+}
+
+[sub_resource type="Animation" id="Animation_s3m42"]
+resource_name = "Stop_down_left"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [43, 45]
+}
+
+[sub_resource type="Animation" id="Animation_38231"]
+resource_name = "Stop_up_right"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [46, 48]
+}
+
+[sub_resource type="Animation" id="Animation_3ksqp"]
+resource_name = "Stop_up_left"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [49, 51]
+}
+
 [sub_resource type="Animation" id="Animation_nepj2"]
-resource_name = "Attack_right"
-length = 1.5
+resource_name = "Attack_down_right"
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -95,10 +227,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.4),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [43, 57]
+"values": [56, 63]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -107,70 +239,26 @@ tracks/1/path = NodePath("../StateMachine/Attack/AttackBox:monitoring")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.4),
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-
-[sub_resource type="Animation" id="Animation_u6ttv"]
-resource_name = "Attack_left"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.4),
-"transitions": PackedFloat32Array(1, 1),
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Attack/AttackBox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [63, 77]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../StateMachine/Attack/AttackBox:monitoring")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_uiyw7"]
-resource_name = "Attack_windup_left"
-length = 0.7
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = false
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [58, 62]
+"values": [Vector2(8, 6)]
 }
 
 [sub_resource type="Animation" id="Animation_wi3qj"]
-resource_name = "Attack_windup_right"
+resource_name = "Attack_windup_down_right"
 length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -191,23 +279,307 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 0.6),
+"times": PackedFloat32Array(0.3, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [38, 42]
+"values": [52, 55]
+}
+
+[sub_resource type="Animation" id="Animation_uiyw7"]
+resource_name = "Attack_windup_down_left"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [64, 67]
+}
+
+[sub_resource type="Animation" id="Animation_u6ttv"]
+resource_name = "Attack_down_left"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [68, 75]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/Attack/AttackBox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Attack/AttackBox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_40n2v"]
+resource_name = "Attack_up_right"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [80, 87]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/Attack/AttackBox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Attack/AttackBox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, -6)]
+}
+
+[sub_resource type="Animation" id="Animation_jayjr"]
+resource_name = "Attack_up_left"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [92, 99]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/Attack/AttackBox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Attack/AttackBox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, -6)]
+}
+
+[sub_resource type="Animation" id="Animation_tij45"]
+resource_name = "Attack_windup_up_right"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [76, 79]
+}
+
+[sub_resource type="Animation" id="Animation_fbjot"]
+resource_name = "Attack_windup_up_left"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [88, 91]
+}
+
+[sub_resource type="Animation" id="Animation_wxbsj"]
+resource_name = "Getup_down_right"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [100, 114]
+}
+
+[sub_resource type="Animation" id="Animation_tsrct"]
+resource_name = "Getup_down_left"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [115, 129]
+}
+
+[sub_resource type="Animation" id="Animation_cnepy"]
+resource_name = "Getup_up_right"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [130, 144]
+}
+
+[sub_resource type="Animation" id="Animation_udeti"]
+resource_name = "Getup_up_left"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [145, 159]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_du8fy"]
 _data = {
-"Attack_left": SubResource("Animation_u6ttv"),
-"Attack_right": SubResource("Animation_nepj2"),
-"Attack_windup_left": SubResource("Animation_uiyw7"),
-"Attack_windup_right": SubResource("Animation_wi3qj"),
+"Attack_down_left": SubResource("Animation_u6ttv"),
+"Attack_down_right": SubResource("Animation_nepj2"),
+"Attack_up_left": SubResource("Animation_jayjr"),
+"Attack_up_right": SubResource("Animation_40n2v"),
+"Attack_windup_down_left": SubResource("Animation_uiyw7"),
+"Attack_windup_down_right": SubResource("Animation_wi3qj"),
+"Attack_windup_up_left": SubResource("Animation_fbjot"),
+"Attack_windup_up_right": SubResource("Animation_tij45"),
 "Dead_1": SubResource("Animation_1jrft"),
-"Idle_left": SubResource("Animation_x8c8y"),
-"Idle_right": SubResource("Animation_yxgkp"),
-"Run_left": SubResource("Animation_1igao"),
-"Run_right": SubResource("Animation_dmdsu")
+"Getup_down_left": SubResource("Animation_tsrct"),
+"Getup_down_right": SubResource("Animation_wxbsj"),
+"Getup_up_left": SubResource("Animation_udeti"),
+"Getup_up_right": SubResource("Animation_cnepy"),
+"Idle_down_left": SubResource("Animation_x8c8y"),
+"Idle_down_right": SubResource("Animation_yxgkp"),
+"Idle_up_left": SubResource("Animation_7ueoc"),
+"Idle_up_right": SubResource("Animation_idraf"),
+"Run_down_left": SubResource("Animation_1igao"),
+"Run_down_right": SubResource("Animation_dmdsu"),
+"Run_up_left": SubResource("Animation_ni257"),
+"Run_up_right": SubResource("Animation_j4b03"),
+"Stop_down_left": SubResource("Animation_s3m42"),
+"Stop_down_right": SubResource("Animation_6ctb2"),
+"Stop_up_left": SubResource("Animation_3ksqp"),
+"Stop_up_right": SubResource("Animation_38231")
 }
 
 [sub_resource type="Animation" id="Animation_vpurs"]
@@ -278,8 +650,8 @@ radius = 277.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_jbqi6"]
 radius = 104.005
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8h6q7"]
-size = Vector2(38, 38)
+[sub_resource type="CircleShape2D" id="CircleShape2D_wahrd"]
+radius = 12.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nh7s"]
 size = Vector2(32, 32)
@@ -289,9 +661,9 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_jgg0h")
-hframes = 78
-frame = 42
+texture = ExtResource("1_gnpkk")
+hframes = 160
+frame = 159
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -312,7 +684,6 @@ shape = SubResource("RectangleShape2D_2f18y")
 [node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "color_animation_player")]
-visible = false
 script = ExtResource("2_dclk0")
 animation_player = NodePath("../Sprite2D/AnimationPlayer")
 color_animation_player = NodePath("../Sprite2D/ColorAnimationPlayer")
@@ -324,6 +695,7 @@ animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
 [node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
+visible = false
 script = ExtResource("4_nx5nt")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
@@ -346,6 +718,7 @@ animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
 [node name="AttackRadius" type="Area2D" parent="StateMachine/Attack"]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]
@@ -353,9 +726,10 @@ rotation = 1.5708
 shape = SubResource("CircleShape2D_jbqi6")
 
 [node name="AttackBox" type="Area2D" parent="StateMachine/Attack"]
+position = Vector2(-8, 6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBox"]
-shape = SubResource("RectangleShape2D_8h6q7")
+shape = SubResource("CircleShape2D_wahrd")
 
 [node name="EndLag" type="Timer" parent="StateMachine/Attack"]
 one_shot = true
