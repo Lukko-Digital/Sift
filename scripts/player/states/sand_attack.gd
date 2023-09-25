@@ -3,15 +3,23 @@ extends State
 
 @onready var timer: Timer = get_node("../Timer")
 @onready var sand_attack_scene = preload("res://scenes/player/sand_attack.tscn")
+@onready var continuation_timer: Timer = $ContinuationTimer
+@onready var cooldown_timer: Timer = $CooldownTimer
 
 const START_LAG = 0.05
 const END_LAG = 0.2
 
+const COOLDOWN = 0.75
+const MULTI_ATTCK_TIMING = 0.5
+
 var time = 0.35
 var direction: Vector2
 
+var multi_attack = 0
+
 func enter():
 	timer.start(time)
+	continuation_timer.stop()
 	
 	animation_tree["parameters/playback"].travel("SandAttack")
 	
@@ -34,13 +42,17 @@ func enter():
 	direction = animation_tree["parameters/SandAttack/blend_position"]
 	
 	var instance = sand_attack_scene.instantiate()
-	instance.start(character.position + Vector2(0, -12), anim_name)
+	instance.start(character.position + Vector2(0, -12), anim_name, multi_attack)
 	character.get_parent().add_child(instance)
 	Global.camera.shake(0.1, 2)
 	
+	if multi_attack == 2:
+		multi_attack = -1
+		cooldown_timer.start(COOLDOWN)
+	
 func handle_physics(delta):
 	if time - timer.time_left > START_LAG and timer.time_left > END_LAG:
-		character.velocity = -animation_tree["parameters/SandAttack/blend_position"] * character.RUN_SPEED
+		character.velocity = animation_tree["parameters/SandAttack/blend_position"] * character.RUN_SPEED
 	elif timer.time_left < END_LAG - 0.05:
 		var direction = Vector2(
 			Input.get_axis("left", "right"), Input.get_axis("up", "down")
@@ -53,3 +65,11 @@ func handle_physics(delta):
 	
 func exit():
 	animation_tree["parameters/Idle/blend_position"] = animation_tree["parameters/SandAttack/blend_position"]
+	continuation_timer.start(MULTI_ATTCK_TIMING)
+	multi_attack += 1
+
+func _on_continuation_timer_timeout():
+	multi_attack = 0
+
+func _on_cooldown_timer_timeout():
+	cooldown_timer.stop()

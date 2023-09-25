@@ -1,6 +1,8 @@
 extends StateMachine
 
 @onready var timer: Timer = $Timer
+@onready var sand_attack_cooldown_timer: Timer = $SandAttack/CooldownTimer
+
 @onready var player: Player = get_parent()
 @onready var health_component: HealthComponent = get_node("../HealthComponent")
 
@@ -33,7 +35,7 @@ func _physics_process(delta: float) -> void:
 		if timer.time_left < 0.15 and state == get_node("Dash"):
 			buffer_dash = true
 		transition_to("Dash")
-	elif (Input.is_action_just_pressed("attack") and player.mode == "Sand" and state.name == "Dash" and timer.time_left < 0.3):
+	elif (Input.is_action_just_pressed("attack") and player.mode == "Sand" and state.name == "Dash" and timer.time_left < 0.3 and sand_attack_cooldown_timer.is_stopped()):
 		if timer.time_left < 0.15 and state == get_node("SandAttack"):
 			buffer_attack = true
 		transition_to("SandAttack")
@@ -41,11 +43,11 @@ func _physics_process(delta: float) -> void:
 		if timer.time_left > 0.15:
 			buffer_dash = false
 		transition_to("Dash")
-	elif (Input.is_action_just_pressed("attack") and player.mode == "Sand"):
+	elif (Input.is_action_just_pressed("attack") and player.mode == "Sand" and sand_attack_cooldown_timer.is_stopped()):
 		if timer.time_left < 0.15 and state == get_node("SandAttack"):
 			buffer_attack = true
 		transition_to("SandAttack")
-	elif (state == get_node("SandAttack") and not timer.is_stopped()) or (buffer_attack and not state == get_node("SandAttack")):
+	elif ((state == get_node("SandAttack") and not timer.is_stopped()) or (buffer_attack and not state == get_node("SandAttack")) and sand_attack_cooldown_timer.is_stopped()):
 		if timer.time_left > 0.15:
 			buffer_attack = false
 		transition_to("SandAttack")
