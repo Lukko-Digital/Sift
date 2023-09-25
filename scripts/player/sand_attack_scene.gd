@@ -6,9 +6,14 @@ extends Sprite2D
 
 var sand_attack: Attack = Attack.new("Sand Attack", 1)
 	
-func start(start_position: Vector2, anim_name: String):
+func start(start_position: Vector2, anim_name: String, multi_attack: int):
 	global_position = start_position
 	animation_player.play(anim_name)
+	
+	if multi_attack == 1:
+		set_modulate(Color(0,1,1))
+	if multi_attack == 2:
+		set_modulate(Color(1,0,1))
 
 func _on_animation_player_animation_finished(anim_name):
 	queue_free()
