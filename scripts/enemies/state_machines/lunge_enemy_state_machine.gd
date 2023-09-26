@@ -31,7 +31,10 @@ func _physics_process(delta: float) -> void:
 		transition_to("Idle")
 	elif (
 		not attack_radius.get_overlapping_bodies().is_empty() or 
-		animation_player.current_animation in ["Attack_windup_right", "Attack_windup_left", "Attack_right", "Attack_left"] or
+		animation_player.current_animation in [
+			"Attack_windup_down_right", "Attack_windup_down_left", "Attack_windup_up_right", "Attack_windup_up_left",
+			"Attack_down_right", "Attack_down_left", "Attack_up_right", "Attack_up_left"
+		] or
 		not end_lag_timer.is_stopped()
 	):
 		transition_to("Attack")
