@@ -3,11 +3,9 @@ extends State
 @export var animation_player: AnimationPlayer
 
 const LUNGE_SPEED = 400.
-const END_LAG = 0.9
 
 @onready var attack_radius: Area2D = $AttackRadius
 @onready var attack_box: Area2D = $AttackBox
-@onready var end_lag_timer: Timer = $EndLag
 
 var vec_to_player: Vector2
 var attack_dir: Directions.Direction
@@ -46,8 +44,12 @@ func _on_animation_end(anim_name: StringName):
 			on_lunge_end()
 
 func on_lunge_end():
-	end_lag_timer.start(END_LAG)
 	character.velocity = Vector2()
+	match attack_dir:
+		Directions.Direction.DOWN_RIGHT: animation_player.play("Getup_down_right")
+		Directions.Direction.DOWN_LEFT: animation_player.play("Getup_down_left")
+		Directions.Direction.UP_RIGHT: animation_player.play("Getup_up_right")
+		Directions.Direction.UP_LEFT: animation_player.play("Getup_up_left")
 
 func _on_hit(area):
 	on_lunge_end()
