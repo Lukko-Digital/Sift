@@ -9,10 +9,12 @@ func enter():
 			Directions.Direction.DOWN: animation_player.play("Idle_front")
 			Directions.Direction.UP: animation_player.play("Idle_back")
 	
-	if animation_player.has_animation("Idle_right") and animation_player.has_animation("Idle_left"):
-		match Directions.direction_horizontal(state_machine.facing_direction):
-			Directions.Direction.RIGHT: animation_player.play("Idle_right")
-			Directions.Direction.LEFT: animation_player.play("Idle_left")
+	if animation_player.has_animation("Idle_down_right"):
+		match Directions.direction_four_diagonal(state_machine.facing_direction):
+			Directions.Direction.DOWN_RIGHT: animation_player.play("Idle_down_right")
+			Directions.Direction.DOWN_LEFT: animation_player.play("Idle_down_left")
+			Directions.Direction.UP_RIGHT: animation_player.play("Idle_up_right")
+			Directions.Direction.UP_LEFT: animation_player.play("Idle_up_left")
 
 func exit():
 	animation_player.stop()
