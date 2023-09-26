@@ -19,24 +19,28 @@ func _ready():
 func enter():
 	character.velocity = Vector2()
 	vec_to_player = get_direction_to_player()
-	match Directions.direction_horizontal(vec_to_player):
-		Directions.Direction.RIGHT: animation_player.play("Attack_windup_right")
-		Directions.Direction.LEFT: animation_player.play("Attack_windup_left")
+	match Directions.direction_four_diagonal(vec_to_player):
+		Directions.Direction.DOWN_RIGHT: animation_player.play("Attack_windup_down_right")
+		Directions.Direction.DOWN_LEFT: animation_player.play("Attack_windup_down_left")
+		Directions.Direction.UP_RIGHT: animation_player.play("Attack_windup_up_right")
+		Directions.Direction.UP_LEFT: animation_player.play("Attack_windup_up_left")
 	
 func handle_physics(delta: float):
 	character.move_and_slide()
 
 func exit():
-	pass
+	attack_box.monitoring = false
 
 func _on_animation_end(anim_name: StringName):
 	match anim_name:
-		"Attack_windup_right", "Attack_windup_left":
-			match Directions.direction_horizontal(vec_to_player):
-				Directions.Direction.RIGHT: animation_player.play("Attack_right")
-				Directions.Direction.LEFT: animation_player.play("Attack_left")
+		"Attack_windup_down_right", "Attack_windup_down_left", "Attack_windup_up_right", "Attack_windup_up_left":
+			match Directions.direction_four_diagonal(vec_to_player):
+				Directions.Direction.DOWN_RIGHT: animation_player.play("Attack_down_right")
+				Directions.Direction.DOWN_LEFT: animation_player.play("Attack_down_left")
+				Directions.Direction.UP_RIGHT: animation_player.play("Attack_up_right")
+				Directions.Direction.UP_LEFT: animation_player.play("Attack_up_left")
 			character.velocity = vec_to_player * LUNGE_SPEED
-		"Attack_right", "Attack_left":
+		"Attack_down_right", "Attack_down_left", "Attack_up_right", "Attack_up_left":
 			on_lunge_end()
 
 func on_lunge_end():
