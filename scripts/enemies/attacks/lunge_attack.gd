@@ -10,6 +10,7 @@ const END_LAG = 0.9
 @onready var end_lag_timer: Timer = $EndLag
 
 var vec_to_player: Vector2
+var attack_dir: Directions.Direction
 var lunge_attack: Attack = Attack.new("lunge", 1)
 
 func _ready():
@@ -19,7 +20,8 @@ func _ready():
 func enter():
 	character.velocity = Vector2()
 	vec_to_player = get_direction_to_player()
-	match Directions.direction_four_diagonal(vec_to_player):
+	attack_dir = Directions.direction_four_diagonal(vec_to_player)
+	match attack_dir:
 		Directions.Direction.DOWN_RIGHT: animation_player.play("Attack_windup_down_right")
 		Directions.Direction.DOWN_LEFT: animation_player.play("Attack_windup_down_left")
 		Directions.Direction.UP_RIGHT: animation_player.play("Attack_windup_up_right")
@@ -34,7 +36,7 @@ func exit():
 func _on_animation_end(anim_name: StringName):
 	match anim_name:
 		"Attack_windup_down_right", "Attack_windup_down_left", "Attack_windup_up_right", "Attack_windup_up_left":
-			match Directions.direction_four_diagonal(vec_to_player):
+			match attack_dir:
 				Directions.Direction.DOWN_RIGHT: animation_player.play("Attack_down_right")
 				Directions.Direction.DOWN_LEFT: animation_player.play("Attack_down_left")
 				Directions.Direction.UP_RIGHT: animation_player.play("Attack_up_right")
