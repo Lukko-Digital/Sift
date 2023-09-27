@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cbwnw66tib2sb"]
+[gd_scene load_steps=25 format=3 uid="uid://cbwnw66tib2sb"]
 
 [ext_resource type="Texture2D" uid="uid://cpwirfcwfkpcy" path="res://assets/png/bomber-Sheet.png" id="1_3bg2y"]
 [ext_resource type="Script" path="res://scripts/enemies/state_machines/bomber_state_machine.gd" id="2_o2fni"]
@@ -17,9 +17,81 @@ resource_name = "Dead_1"
 length = 0.1
 step = 0.01
 
+[sub_resource type="Animation" id="Animation_i7s5d"]
+resource_name = "Idle_down_right"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_f0qt8"]
+resource_name = "Idle_down_left"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4, 7]
+}
+
+[sub_resource type="Animation" id="Animation_xi8nh"]
+resource_name = "Idle_up_right"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [8, 11]
+}
+
+[sub_resource type="Animation" id="Animation_d2has"]
+resource_name = "Idle_up_left"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [12, 15]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_du8fy"]
 _data = {
-"Dead_1": SubResource("Animation_1jrft")
+"Dead_1": SubResource("Animation_1jrft"),
+"Idle_down_left": SubResource("Animation_f0qt8"),
+"Idle_down_right": SubResource("Animation_i7s5d"),
+"Idle_up_left": SubResource("Animation_d2has"),
+"Idle_up_right": SubResource("Animation_xi8nh")
 }
 
 [sub_resource type="Animation" id="Animation_vpurs"]
@@ -94,6 +166,7 @@ collision_mask = 3
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3bg2y")
 hframes = 120
+frame = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
