@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cbwnw66tib2sb"]
+[gd_scene load_steps=33 format=3 uid="uid://cbwnw66tib2sb"]
 
 [ext_resource type="Texture2D" uid="uid://cpwirfcwfkpcy" path="res://assets/png/bomber-Sheet.png" id="1_3bg2y"]
 [ext_resource type="Script" path="res://scripts/enemies/state_machines/bomber_state_machine.gd" id="2_o2fni"]
@@ -153,8 +153,76 @@ tracks/0/keys = {
 "values": [40, 47]
 }
 
+[sub_resource type="Animation" id="Animation_vpll2"]
+resource_name = "Attack_down_right"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [48, 65]
+}
+
+[sub_resource type="Animation" id="Animation_u8b2o"]
+resource_name = "Attack_down_left"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [66, 83]
+}
+
+[sub_resource type="Animation" id="Animation_iqiq7"]
+resource_name = "Attack_up_right"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [84, 101]
+}
+
+[sub_resource type="Animation" id="Animation_6na3t"]
+resource_name = "Attack_up_left"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [102, 119]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_du8fy"]
 _data = {
+"Attack_down_left": SubResource("Animation_u8b2o"),
+"Attack_down_right": SubResource("Animation_vpll2"),
+"Attack_up_left": SubResource("Animation_6na3t"),
+"Attack_up_right": SubResource("Animation_iqiq7"),
 "Dead_1": SubResource("Animation_1jrft"),
 "Idle_down_left": SubResource("Animation_f0qt8"),
 "Idle_down_right": SubResource("Animation_i7s5d"),
@@ -238,7 +306,7 @@ collision_mask = 3
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3bg2y")
 hframes = 120
-frame = 42
+frame = 119
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
