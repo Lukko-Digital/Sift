@@ -6,6 +6,7 @@ const LUNGE_SPEED = 400.
 
 @onready var attack_radius: Area2D = $AttackRadius
 @onready var attack_box: Area2D = $AttackBox
+@onready var attack_collider: CollisionShape2D = $AttackBox/CollisionShape2D
 
 var vec_to_player: Vector2
 var attack_dir: Directions.Direction
@@ -29,7 +30,7 @@ func handle_physics(delta: float):
 	character.move_and_slide()
 
 func exit():
-	attack_box.monitoring = false
+	pass
 
 func _on_animation_end(anim_name: StringName):
 	match anim_name:
@@ -44,6 +45,7 @@ func _on_animation_end(anim_name: StringName):
 			on_lunge_end()
 
 func on_lunge_end():
+	attack_collider.set_deferred("disabled", true)
 	character.velocity = Vector2()
 	match attack_dir:
 		Directions.Direction.DOWN_RIGHT: animation_player.play("Getup_down_right")
