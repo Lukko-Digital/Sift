@@ -2,7 +2,7 @@ extends State
 
 @export var animation_player: AnimationPlayer
 
-const LUNGE_SPEED = 400.
+const LUNGE_SPEED = 300.
 
 @onready var attack_radius: Area2D = $AttackRadius
 @onready var attack_box: Area2D = $AttackBox
@@ -27,7 +27,10 @@ func enter():
 		Directions.Direction.UP_LEFT: animation_player.play("Attack_windup_up_left")
 	
 func handle_physics(delta: float):
-	character.move_and_slide()
+	if animation_player.current_animation in [
+		"Attack_down_right", "Attack_down_left", "Attack_up_right", "Attack_up_left"
+	]:
+		character.move_and_slide()
 
 func exit():
 	pass
