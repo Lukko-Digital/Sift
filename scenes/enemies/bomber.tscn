@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cbwnw66tib2sb"]
+[gd_scene load_steps=34 format=3 uid="uid://cbwnw66tib2sb"]
 
 [ext_resource type="Texture2D" uid="uid://cpwirfcwfkpcy" path="res://assets/png/bomber-Sheet.png" id="1_3bg2y"]
 [ext_resource type="Script" path="res://scripts/enemies/state_machines/bomber_state_machine.gd" id="2_o2fni"]
@@ -168,6 +168,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [48, 65]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/Attack/AttackBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_u8b2o"]
 resource_name = "Attack_down_left"
@@ -183,6 +195,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [66, 83]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/Attack/AttackBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_iqiq7"]
@@ -200,6 +224,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [84, 101]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/Attack/AttackBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_6na3t"]
 resource_name = "Attack_up_left"
@@ -215,6 +251,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [102, 119]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/Attack/AttackBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_du8fy"]
@@ -299,6 +347,9 @@ radius = 277.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_jbqi6"]
 radius = 104.005
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_b12qt"]
+radius = 29.0
+
 [node name="bomber" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 3
@@ -306,7 +357,7 @@ collision_mask = 3
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3bg2y")
 hframes = 120
-frame = 119
+frame = 97
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -360,6 +411,12 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]
 rotation = 1.5708
 shape = SubResource("CircleShape2D_jbqi6")
+
+[node name="AttackBox" type="Area2D" parent="StateMachine/Attack"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBox"]
+shape = SubResource("CircleShape2D_b12qt")
+disabled = true
 
 [node name="Dead" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "color_animation_player", "character")]
 script = ExtResource("4_0gkfl")
