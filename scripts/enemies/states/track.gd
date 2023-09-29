@@ -1,8 +1,8 @@
 extends State
 
-const SPEED = 50
 const RE_NAV_TIME = 0.5
 
+@export var SPEED: int
 @export var animation_player: AnimationPlayer
 
 @onready var state_machine: StateMachine = get_parent()

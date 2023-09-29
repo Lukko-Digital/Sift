@@ -530,6 +530,7 @@ animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 [node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
 visible = false
 script = ExtResource("4_k3pfn")
+SPEED = 50
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
