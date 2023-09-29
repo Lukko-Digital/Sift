@@ -14,7 +14,13 @@ func _ready():
 	animation_player.animation_finished.connect(_on_animation_end)
 
 func enter():
-	pass
+	find_player()
+	character.velocity = Vector2()
+	match Directions.direction_four_diagonal(direction_to_player()):
+		Directions.Direction.DOWN_RIGHT: animation_player.play("Attack_down_right")
+		Directions.Direction.DOWN_LEFT: animation_player.play("Attack_down_left")
+		Directions.Direction.UP_RIGHT: animation_player.play("Attack_up_right")
+		Directions.Direction.UP_LEFT: animation_player.play("Attack_up_left")
 	
 func handle_physics(delta: float):
 	pass
