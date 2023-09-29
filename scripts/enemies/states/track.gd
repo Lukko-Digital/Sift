@@ -1,7 +1,6 @@
 extends State
 
-const RE_NAV_TIME = 0.5
-
+@export var RE_NAV_TIME: float
 @export var SPEED: int
 @export var animation_player: AnimationPlayer
 
