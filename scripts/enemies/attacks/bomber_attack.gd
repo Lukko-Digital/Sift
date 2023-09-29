@@ -6,7 +6,7 @@ extends State
 @onready var attack_box: Area2D = $AttackBox
 @onready var attack_collider: CollisionShape2D = $AttackBox/CollisionShape2D
 
-var lunge_attack: Attack = Attack.new("lunge", 1)
+var bomber_attack: Attack = Attack.new("bomber attack", 1)
 var player: CharacterBody2D
 
 func _ready():
@@ -37,11 +37,11 @@ func on_lunge_end(anim_name: StringName):
 func _on_hit(area):
 	on_lunge_end(animation_player.current_animation)
 	if area.is_in_group("player_hurtbox"):
-		lunge_attack.effects = [
+		bomber_attack.effects = [
 			KnockedBackEffect.new(0.1, area.global_position-self.global_position),
 			StunnedEffect.new(0.25),
 		]
-		area.damage(lunge_attack)
+		area.damage(bomber_attack)
 
 func find_player():
 	for body in attack_radius.get_overlapping_bodies():
