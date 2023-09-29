@@ -30,9 +30,7 @@ func _physics_process(delta: float) -> void:
 	elif (
 		not attack_radius.get_overlapping_bodies().is_empty() or 
 		animation_player.current_animation in [
-			"Attack_windup_down_right", "Attack_windup_down_left", "Attack_windup_up_right", "Attack_windup_up_left",
-			"Attack_down_right", "Attack_down_left", "Attack_up_right", "Attack_up_left",
-			"Getup_down_right", "Getup_down_left", "Getup_up_right", "Getup_up_left"
+			"Attack_down_right", "Attack_down_left", "Attack_up_right", "Attack_up_left"
 		]
 	):
 		transition_to("Attack")

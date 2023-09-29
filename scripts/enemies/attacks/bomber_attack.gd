@@ -11,7 +11,6 @@ var player: CharacterBody2D
 
 func _ready():
 	attack_box.area_entered.connect(_on_hit)
-	animation_player.animation_finished.connect(_on_animation_end)
 
 func enter():
 	find_player()
@@ -21,21 +20,11 @@ func enter():
 		Directions.Direction.DOWN_LEFT: animation_player.play("Attack_down_left")
 		Directions.Direction.UP_RIGHT: animation_player.play("Attack_up_right")
 		Directions.Direction.UP_LEFT: animation_player.play("Attack_up_left")
-	
-func handle_physics(delta: float):
-	pass
 
 func exit():
 	pass
 
-func _on_animation_end(anim_name: StringName):
-	pass
-
-func on_lunge_end(anim_name: StringName):
-	pass
-
 func _on_hit(area):
-	on_lunge_end(animation_player.current_animation)
 	if area.is_in_group("player_hurtbox"):
 		bomber_attack.effects = [
 			KnockedBackEffect.new(0.1, area.global_position-self.global_position),
