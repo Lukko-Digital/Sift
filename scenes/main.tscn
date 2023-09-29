@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b8md8ehlk518q"]
+[gd_scene load_steps=16 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
 [ext_resource type="PackedScene" uid="uid://1dmsp3osd16i" path="res://scenes/player/player.tscn" id="1_6t2e7"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bv2de2s6bsqyx" path="res://scenes/npc/weapondude_npc.tscn" id="10_5m7qi"]
 [ext_resource type="PackedScene" uid="uid://c88orqepj1afi" path="res://scenes/level_building/scene_change_collider.tscn" id="10_tip00"]
 [ext_resource type="PackedScene" uid="uid://b5fdonr32rsmf" path="res://scenes/enemies/lunge_enemy.tscn" id="11_pnxbw"]
+[ext_resource type="PackedScene" uid="uid://cbwnw66tib2sb" path="res://scenes/enemies/bomber.tscn" id="12_4mdh1"]
 
 [sub_resource type="Gradient" id="Gradient_45jg6"]
 interpolation_mode = 2
@@ -265,3 +266,6 @@ shape = SubResource("SegmentShape2D_ej0wm")
 
 [node name="lunge enemy" parent="." instance=ExtResource("11_pnxbw")]
 position = Vector2(-59, 169)
+
+[node name="bomber" parent="." instance=ExtResource("12_4mdh1")]
+position = Vector2(129, 13)
