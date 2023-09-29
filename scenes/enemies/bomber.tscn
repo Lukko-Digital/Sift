@@ -364,7 +364,7 @@ collision_mask = 3
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3bg2y")
 hframes = 120
-frame = 43
+frame = 40
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -429,6 +429,7 @@ rotation = 1.5708
 shape = SubResource("CircleShape2D_jbqi6")
 
 [node name="AttackBox" type="Area2D" parent="StateMachine/Attack"]
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBox"]
 shape = SubResource("CircleShape2D_b12qt")
@@ -461,7 +462,7 @@ hframes = 120
 sprite_to_reflect = NodePath("../Sprite2D")
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_rafxc")]
-max_health = 1.0
+max_health = 10.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["enemy_hurtbox"] instance=ExtResource("9_brddd")]
 collision_layer = 4
