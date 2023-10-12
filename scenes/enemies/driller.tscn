@@ -1,10 +1,10 @@
 [gd_scene load_steps=48 format=3 uid="uid://b5fdonr32rsmf"]
 
 [ext_resource type="Texture2D" uid="uid://cogpchbdww1h0" path="res://assets/png/driller-Sheet.png" id="1_gnpkk"]
-[ext_resource type="Script" path="res://scripts/enemies/state_machines/lunge_enemy_state_machine.gd" id="2_dclk0"]
+[ext_resource type="Script" path="res://scripts/enemies/state_machines/driller_state_machine.gd" id="2_m1nhk"]
 [ext_resource type="Script" path="res://scripts/enemies/states/idle.gd" id="3_asvmf"]
 [ext_resource type="Script" path="res://scripts/enemies/states/track.gd" id="4_nx5nt"]
-[ext_resource type="Script" path="res://scripts/enemies/attacks/lunge_attack.gd" id="5_fbafk"]
+[ext_resource type="Script" path="res://scripts/enemies/attacks/driller_attack.gd" id="5_cc6h6"]
 [ext_resource type="Script" path="res://scripts/enemies/states/dead.gd" id="6_7olow"]
 [ext_resource type="Script" path="res://scripts/enemies/states/knocked_back.gd" id="8_35jkl"]
 [ext_resource type="Script" path="res://scripts/player/states/hit.gd" id="9_mce0y"]
@@ -661,7 +661,7 @@ radius = 13.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nh7s"]
 size = Vector2(32, 32)
 
-[node name="lunge enemy" type="CharacterBody2D" groups=["enemy"]]
+[node name="driller" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 3
 
@@ -688,7 +688,7 @@ shape = SubResource("CircleShape2D_uku3f")
 [node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "color_animation_player")]
-script = ExtResource("2_dclk0")
+script = ExtResource("2_m1nhk")
 animation_player = NodePath("../Sprite2D/AnimationPlayer")
 color_animation_player = NodePath("../Sprite2D/ColorAnimationPlayer")
 initial_state = NodePath("Idle")
@@ -719,7 +719,7 @@ collision_layer = 0
 shape = SubResource("CircleShape2D_0ufsb")
 
 [node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
-script = ExtResource("5_fbafk")
+script = ExtResource("5_cc6h6")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 

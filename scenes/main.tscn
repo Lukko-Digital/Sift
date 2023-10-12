@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://siyv31md8s0w" path="res://scenes/structures/shack1.tscn" id="9_xue8y"]
 [ext_resource type="PackedScene" uid="uid://bv2de2s6bsqyx" path="res://scenes/npc/weapondude_npc.tscn" id="10_5m7qi"]
 [ext_resource type="PackedScene" uid="uid://c88orqepj1afi" path="res://scenes/level_building/scene_change_collider.tscn" id="10_tip00"]
-[ext_resource type="PackedScene" uid="uid://b5fdonr32rsmf" path="res://scenes/enemies/lunge_enemy.tscn" id="11_pnxbw"]
+[ext_resource type="PackedScene" uid="uid://b5fdonr32rsmf" path="res://scenes/enemies/driller.tscn" id="11_pnxbw"]
 [ext_resource type="PackedScene" uid="uid://cbwnw66tib2sb" path="res://scenes/enemies/bomber.tscn" id="12_4mdh1"]
 
 [sub_resource type="Gradient" id="Gradient_45jg6"]
