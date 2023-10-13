@@ -668,7 +668,7 @@ collision_mask = 3
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_gnpkk")
 hframes = 160
-frame = 79
+frame = 75
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -737,6 +737,9 @@ shape = SubResource("CircleShape2D_jbqi6")
 position = Vector2(-2, 2)
 shape = SubResource("CircleShape2D_wahrd")
 disabled = true
+
+[node name="SlideTimer" type="Timer" parent="StateMachine/Attack"]
+one_shot = true
 
 [node name="Dead" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "color_animation_player", "character")]
 script = ExtResource("6_7olow")
