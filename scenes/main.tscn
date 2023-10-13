@@ -268,4 +268,4 @@ shape = SubResource("SegmentShape2D_ej0wm")
 position = Vector2(-59, 169)
 
 [node name="bomber" parent="." instance=ExtResource("12_4mdh1")]
-position = Vector2(129, 13)
+position = Vector2(217, 11)
