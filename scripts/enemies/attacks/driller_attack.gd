@@ -66,7 +66,7 @@ func _on_hit(area):
 	get_up()
 	if area.is_in_group("player_hurtbox"):
 		driller_attack.effects = [
-			KnockedBackEffect.new(0.1, area.global_position-self.global_position),
+			KnockedBackEffect.new(0.1, 200, area.global_position-self.global_position),
 			StunnedEffect.new(0.25),
 		]
 		area.damage(driller_attack)

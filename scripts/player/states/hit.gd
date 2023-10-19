@@ -31,7 +31,7 @@ func handle_physics(delta: float):
 	
 	match current_effect.effect_name:
 		Effect.EffectName.KNOCKED_BACK:
-			character.velocity = KnockedBackEffect.KNOCK_BACK_SPEED * current_effect.direction.normalized()
+			character.velocity = current_effect.speed * current_effect.direction.normalized()
 		Effect.EffectName.KNOCKED_UP:
 			pass
 		Effect.EffectName.STUNNED:

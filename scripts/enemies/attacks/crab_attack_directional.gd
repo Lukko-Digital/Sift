@@ -47,7 +47,7 @@ func get_direction_to_player():
 func _on_hit(area):
 	if area.is_in_group("player_hurtbox"):
 		crab_attack.effects = [
-			KnockedBackEffect.new(0.05, area.global_position-self.global_position),
+			KnockedBackEffect.new(0.05, 200, area.global_position-self.global_position),
 			StunnedEffect.new(0.25),
 		]
 		area.damage(crab_attack)
