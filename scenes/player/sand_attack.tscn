@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cng7ubenq2o6u"]
+[gd_scene load_steps=10 format=3 uid="uid://bbfs7ht5wcffv"]
 
 [ext_resource type="Texture2D" uid="uid://b7hw7x4xbwh8l" path="res://assets/png/sand_attack-Sheet.png" id="1_wcllv"]
 [ext_resource type="Script" path="res://scripts/player/sand_attack_scene.gd" id="2_7c25b"]
