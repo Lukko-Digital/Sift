@@ -120,7 +120,7 @@ func update_dialogue_display():
 	if "emit" in dialogue_display:
 		var e = Expression.new()
 		e.parse("emit_signal(%s)" % dialogue_display["emit"])
-		e.execute([], WorldVars)
+		e.execute([], Events)
 	# check for and display responses
 	if "responses" in dialogue_display:
 		handle_responses()
