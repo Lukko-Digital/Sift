@@ -101,21 +101,27 @@ func get_interaction_level(branch_id):
 		if interactable.interaction_count[branch_id] >= limit:
 			return limit
 
-## Update ui dialogue display based on current dialogue id, also displays responses if available
+## Update ui dialogue display based on current dialogue id, also and emits signals
+## 	and displays responses if available
 ## Args:
 ## 	dialogue_id: A string, formatted as CHAR.NUMBER.NUMBER (e.g. A.1.0) the character represents
 ## 		the branch id, the first number represents the interaction level to enter the path, and
 ## 		the second number is the index of the dialogue node in the path
 func update_dialogue_display():
 	dialogue_display = dialogue_tree[branch_id][str(branch_interaction_lvl)][dialogue_idx]
-	
+	# set name and image
 	var display_name = dialogue_info["name"] if "name" not in dialogue_display else dialogue_display["name"]
 	name_label.text = display_name
 	var image_file = dialogue_info["image"] if "image" not in dialogue_display else dialogue_display["image"]
 	portrait_rect.texture = load("res://assets/portraits/%s" % image_file)
-	
+	# set text
 	dialogue_label.text = dialogue_display["text"]
-	
+	# check for and emit signals
+	if "emit" in dialogue_display:
+		var e = Expression.new()
+		e.parse("emit_signal(%s)" % dialogue_display["emit"])
+		e.execute([], WorldVars)
+	# check for and display responses
 	if "responses" in dialogue_display:
 		handle_responses()
 	await animate_display()
