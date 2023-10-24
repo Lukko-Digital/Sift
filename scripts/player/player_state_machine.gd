@@ -31,6 +31,8 @@ func _physics_process(delta: float) -> void:
 					in_dialogue = true
 		else:
 			Events.emit_signal("advance_dialogue")
+	elif in_dialogue:
+		transition_to("Idle")
 	elif Input.is_action_just_pressed("dash"):# and not in_dialogue:
 		if timer.time_left < 0.15 and state == get_node("Dash"):
 			buffer_dash = true
@@ -57,8 +59,7 @@ func _physics_process(delta: float) -> void:
 			Input.is_action_pressed("down") or
 			Input.is_action_pressed("left") or
 			Input.is_action_pressed("right")
-		) and
-		not in_dialogue
+		)
 	):
 		var direction = Vector2(
 			Input.get_axis("left", "right"), Input.get_axis("up", "down")

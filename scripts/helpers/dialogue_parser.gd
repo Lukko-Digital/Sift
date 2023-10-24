@@ -5,6 +5,7 @@ extends Node
 # idmu format constants
 const NAME_TAG = "name: "
 const IMAGE_TAG = "image: "
+const SIGNAL_TAG = "emit: "
 const BRANCH_CHAR = "~ "
 const PATH_CHAR = ": "
 const RESPONSE_CHAR = "- "
@@ -155,8 +156,8 @@ static func switch_line(dialogue_tree, branch, path, line):
 	dialogue_tree[branch][path][-1]["next"] = line.substr(2)
 	return dialogue_tree
 
-## Parse a dialogue line with in-line info: name and/or image that differs from the default.
-## 	 If both name and image are specified, name is expected to come before image.
+## Parse a dialogue line with in-line info: name and/or image that differs from the default,
+## 	 and signals to emit. Emitted signals should match the exact syntax of what is passed into `emit_signal`.
 ## Args:
 ##	 dialogue_tree: A dictionary representing the working dialogue tree
 ##	 line: A string representing the current line
@@ -174,29 +175,14 @@ static func inline_info_dialogue_line(dialogue_tree, branch, path, line):
 	
 	dialogue_tree = dialogue_line(dialogue_tree, branch, path, dialogue)
 	
-	if NAME_TAG in info and IMAGE_TAG in info:
-		assert(
-			", " in info,
-			"Name and branch must be separated with a comma and space (`, `)"
-			)
-		var split_info = info.split(", ")
-		assert(
-			NAME_TAG in split_info[0],
-			"Name tag `name: ` not detected in first half of in-line info"
-		)
-		assert(
-			IMAGE_TAG in split_info[1],
-			"Image tag `image: ` not detected in second half of in-line info"
-		)
-		dialogue_tree[branch][path][-1]["name"] = split_info[0].substr(len(NAME_TAG))
-		dialogue_tree[branch][path][-1]["image"] = split_info[1].substr(len(IMAGE_TAG))
-	elif NAME_TAG in info:
-		dialogue_tree[branch][path][-1]["name"] = info.substr(len(NAME_TAG))
-	elif IMAGE_TAG in info:
-		dialogue_tree[branch][path][-1]["image"] = info.substr(len(IMAGE_TAG))
-	else:
-		assert(false, "In-line info must contain the name tag `name: ` or the image tag `image: `")
-	
+	var split_info = info.split(", ")
+	for item in split_info:
+		if NAME_TAG in item:
+			dialogue_tree[branch][path][-1]["name"] = item.substr(len(NAME_TAG))
+		elif IMAGE_TAG in item:
+			dialogue_tree[branch][path][-1]["image"] = item.substr(len(IMAGE_TAG))
+		elif SIGNAL_TAG in item:
+			dialogue_tree[branch][path][-1]["emit"] = item.substr(len(SIGNAL_TAG))
 	return dialogue_tree
 
 ## Parse a dialogue line

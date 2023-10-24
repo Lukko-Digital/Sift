@@ -10,6 +10,7 @@ extends StateMachine
 @onready var hurtbox_component: HurtboxComponent = get_node("../HurtboxComponent")
 @onready var knockback_timer: Timer = $KnockedBack/KnockBackTimer
 @onready var stun_timer: Timer = $StunTimer
+@onready var slide_timer: Timer = $Attack/SlideTimer
 
 var facing_direction: Vector2 = Vector2(0, 1)
 var is_dead = false
@@ -33,7 +34,8 @@ func _physics_process(delta: float) -> void:
 			"Attack_windup_down_right", "Attack_windup_down_left", "Attack_windup_up_right", "Attack_windup_up_left",
 			"Attack_down_right", "Attack_down_left", "Attack_up_right", "Attack_up_left",
 			"Getup_down_right", "Getup_down_left", "Getup_up_right", "Getup_up_left"
-		]
+		] or
+		not slide_timer.is_stopped()
 	):
 		transition_to("Attack")
 	elif (

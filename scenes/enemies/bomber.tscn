@@ -1,13 +1,11 @@
-[gd_scene load_steps=36 format=3 uid="uid://cbwnw66tib2sb"]
+[gd_scene load_steps=31 format=3 uid="uid://cbwnw66tib2sb"]
 
 [ext_resource type="Texture2D" uid="uid://cpwirfcwfkpcy" path="res://assets/png/bomber-Sheet.png" id="1_3bg2y"]
 [ext_resource type="Script" path="res://scripts/enemies/state_machines/bomber_state_machine.gd" id="2_o2fni"]
 [ext_resource type="Script" path="res://scripts/enemies/states/idle.gd" id="2_s4fbc"]
 [ext_resource type="Script" path="res://scripts/enemies/states/track.gd" id="3_7ls2f"]
-[ext_resource type="Script" path="res://scripts/enemies/states/dead.gd" id="4_0gkfl"]
-[ext_resource type="Script" path="res://scripts/enemies/states/knocked_back.gd" id="5_dex7r"]
 [ext_resource type="Script" path="res://scripts/enemies/attacks/bomber_attack.gd" id="5_frlv8"]
-[ext_resource type="Script" path="res://scripts/player/states/hit.gd" id="6_02hvg"]
+[ext_resource type="Script" path="res://scripts/enemies/states/knocked_back.gd" id="6_vwchi"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="7_cg5sm"]
 [ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="8_rafxc"]
 [ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="9_brddd"]
@@ -63,6 +61,34 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_b8inu"]
+resource_name = "Attack_insta"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [79, 83]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/Attack/AttackBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -269,6 +295,7 @@ tracks/0/keys = {
 _data = {
 "Attack_down_left": SubResource("Animation_u8b2o"),
 "Attack_down_right": SubResource("Animation_vpll2"),
+"Attack_insta": SubResource("Animation_b8inu"),
 "Attack_up_left": SubResource("Animation_6na3t"),
 "Attack_up_right": SubResource("Animation_iqiq7"),
 "Dead_1": SubResource("Animation_1jrft"),
@@ -280,62 +307,6 @@ _data = {
 "Run_down_right": SubResource("Animation_iymfs"),
 "Run_up_left": SubResource("Animation_3gat0"),
 "Run_up_right": SubResource("Animation_wcspw")
-}
-
-[sub_resource type="Animation" id="Animation_vpurs"]
-resource_name = "Dead_transparent"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.6)]
-}
-
-[sub_resource type="Animation" id="Animation_87a45"]
-resource_name = "On_hit_red_flash"
-length = 0.04
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.0003, 0.02),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_tuuhe"]
-resource_name = "On_hit_white"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(10, 10, 10, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5yxb6"]
-_data = {
-"Dead_transparent": SubResource("Animation_vpurs"),
-"On_hit_red_flash": SubResource("Animation_87a45"),
-"On_hit_white": SubResource("Animation_tuuhe")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b5dm6"]
@@ -364,16 +335,11 @@ collision_mask = 3
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3bg2y")
 hframes = 120
-frame = 40
+frame = 83
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_du8fy")
-}
-
-[node name="ColorAnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-"": SubResource("AnimationLibrary_5yxb6")
 }
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
@@ -384,11 +350,10 @@ shape = SubResource("CircleShape2D_b5dm6")
 
 [node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
 
-[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "color_animation_player")]
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("animation_player")]
 visible = false
 script = ExtResource("2_o2fni")
 animation_player = NodePath("../Sprite2D/AnimationPlayer")
-color_animation_player = NodePath("../Sprite2D/ColorAnimationPlayer")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
@@ -435,25 +400,12 @@ collision_mask = 5
 shape = SubResource("CircleShape2D_b12qt")
 disabled = true
 
-[node name="Dead" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "color_animation_player", "character")]
-script = ExtResource("4_0gkfl")
-animation_player = NodePath("../../Sprite2D/AnimationPlayer")
-color_animation_player = NodePath("../../Sprite2D/ColorAnimationPlayer")
-NUM_DEAD_ANIMATIONS = 1
-character = NodePath("../..")
-
 [node name="KnockedBack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
-script = ExtResource("5_dex7r")
+script = ExtResource("6_vwchi")
 character = NodePath("../..")
 
 [node name="KnockBackTimer" type="Timer" parent="StateMachine/KnockedBack"]
 one_shot = true
-
-[node name="StunTimer" type="Timer" parent="StateMachine"]
-one_shot = true
-
-[node name="Hit" type="Node2D" parent="StateMachine"]
-script = ExtResource("6_02hvg")
 
 [node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("7_cg5sm")]
 position = Vector2(0, 16)
@@ -462,7 +414,7 @@ hframes = 120
 sprite_to_reflect = NodePath("../Sprite2D")
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_rafxc")]
-max_health = 10.0
+max_health = 2.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["enemy_hurtbox"] instance=ExtResource("9_brddd")]
 collision_layer = 4

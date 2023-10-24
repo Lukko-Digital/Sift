@@ -8,7 +8,7 @@ image: player.png
 		- what am i doing here? > B
 		- ja ne > E
 : 1
-	oh its you again
+	[ emit: "set_world_var","A",10 ] oh its you again
 	any questions comments concerns?
 		- wait who are you again? > A
 		- what am i doing here? > B
