@@ -7,10 +7,10 @@ extends State
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var instance_timer: Timer = $InstanceTimer
 
-@export var attack_lengths = [0.15,0.15,0.35]
+@export var attack_lengths = [0.2,0.2,0.4]
 @export var initial_movement_delays = [0.01,0.01,0.1]
 @export var startups = [0.01,0.01,0.2]
-@export var end_lags = [0.05,0.05,0.1]
+@export var end_lags = [0.1,0.1,0.1]
 
 const END_SPEED_COEFF = 0.5
 
@@ -57,10 +57,8 @@ func handle_physics(delta):
 		var walk_direction = Vector2(
 			Input.get_axis("left", "right"), Input.get_axis("up", "down")
 		).normalized()
-		print(walk_direction)
 		character.velocity = character.velocity.move_toward(walk_direction * character.RUN_SPEED * END_SPEED_COEFF, character.RUN_ACCEL * delta)
 	else:
-		print(direction)
 		character.velocity = direction * character.RUN_SPEED
 	
 #	else:
