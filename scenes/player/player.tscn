@@ -1466,7 +1466,7 @@ offset = Vector2(0, -60)
 position = Vector2(1, -8)
 texture = ExtResource("2_g1nij")
 hframes = 275
-frame = 9
+frame = 22
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
@@ -1536,6 +1536,9 @@ position = Vector2(0, 3)
 target_position = Vector2(0, 25)
 collision_mask = 32
 
+[node name="DashTimer" type="Timer" parent="StateMachine/Dash"]
+one_shot = true
+
 [node name="SandAttack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character", "animation_tree")]
 script = ExtResource("9_1pxfy")
 character = NodePath("../..")
@@ -1545,7 +1548,10 @@ animation_tree = NodePath("../../AnimationTree")
 
 [node name="CooldownTimer" type="Timer" parent="StateMachine/SandAttack"]
 
-[node name="Timer" type="Timer" parent="StateMachine"]
+[node name="InstanceTimer" type="Timer" parent="StateMachine/SandAttack"]
+one_shot = true
+
+[node name="Timer" type="Timer" parent="StateMachine/SandAttack"]
 one_shot = true
 
 [node name="Hit" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character", "animation_tree")]
@@ -1685,9 +1691,10 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_1oqfh")
 
 [connection signal="area_entered" from="StateMachine/Dash/SandDash/PopUpHitbox" to="StateMachine/Dash/SandDash" method="_on_pop_up_hitbox_area_entered"]
+[connection signal="timeout" from="StateMachine/Dash/DashTimer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="StateMachine/SandAttack/ContinuationTimer" to="StateMachine/SandAttack" method="_on_continuation_timer_timeout"]
 [connection signal="timeout" from="StateMachine/SandAttack/CooldownTimer" to="StateMachine/SandAttack" method="_on_cooldown_timer_timeout"]
-[connection signal="timeout" from="StateMachine/Timer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="StateMachine/SandAttack/InstanceTimer" to="StateMachine/SandAttack" method="_on_instance_timer_timeout"]
 [connection signal="return_to_idle" from="StateMachine/Hit" to="StateMachine" method="_on_hit_return_to_idle"]
 [connection signal="timeout" from="StateMachine/Hit/EffectTimer" to="StateMachine/Hit" method="_on_effect_timer_timeout"]
 [connection signal="area_entered" from="NPCDialogueCollider" to="." method="_on_npc_dialogue_collider_area_entered"]

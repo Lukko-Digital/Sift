@@ -6,9 +6,12 @@ extends Sprite2D
 
 var sand_attack: Attack = Attack.new("Sand Attack", 1)
 	
-func start(start_position: Vector2, anim_name: String, multi_attack: int):
+func start(start_position: Vector2, direction: Vector2, multi_attack: int):
 	global_position = start_position
-	animation_player.play(anim_name)
+	animation_player.play("down")
+	
+	look_at(direction)
+	rotate(-PI/2)
 	
 	if multi_attack == 1:
 		set_modulate(Color(0,1,1))
