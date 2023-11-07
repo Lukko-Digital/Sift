@@ -3,7 +3,7 @@ extends State
 @export var animation_player: AnimationPlayer
 
 const LUNGE_SPEED = 300.
-const SLIDE_TIME = 0.7
+const SLIDE_TIME = 0.3
 
 @onready var attack_radius: Area2D = $AttackRadius
 @onready var attack_box: Area2D = $AttackBox
