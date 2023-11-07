@@ -179,7 +179,7 @@ _data = {
 position = Vector2(0, -12)
 texture = ExtResource("1_wcllv")
 hframes = 24
-frame = 23
+frame = 6
 script = ExtResource("2_7c25b")
 animation_player = NodePath("AnimationPlayer")
 
@@ -193,7 +193,7 @@ sprite_to_reflect = NodePath("..")
 
 [node name="HitBox" type="Area2D" parent="."]
 z_index = 1
-rotation = -1.5708
+rotation = 1.5708
 collision_layer = 0
 collision_mask = 4
 

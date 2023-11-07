@@ -1,6 +1,7 @@
 extends StateMachine
 
-@onready var timer: Timer = $Timer
+@onready var dash_timer: Timer = $Dash/DashTimer
+@onready var sand_attack_timer: Timer = $SandAttack/Timer
 @onready var sand_attack_cooldown_timer: Timer = $SandAttack/CooldownTimer
 
 @onready var player: Player = get_parent()
@@ -34,23 +35,23 @@ func _physics_process(delta: float) -> void:
 	elif in_dialogue:
 		transition_to("Idle")
 	elif Input.is_action_just_pressed("dash"):# and not in_dialogue:
-		if timer.time_left < 0.15 and state == get_node("Dash"):
+		if dash_timer.time_left < 0.15 and state.name == "Dash":
 			buffer_dash = true
 		transition_to("Dash")
-	elif (Input.is_action_just_pressed("attack") and player.mode == "Sand" and state.name == "Dash" and timer.time_left < 0.3 and sand_attack_cooldown_timer.is_stopped()):
-		if timer.time_left < 0.15 and state == get_node("SandAttack"):
-			buffer_attack = true
-		transition_to("SandAttack")
-	elif (state == get_node("Dash") and not timer.is_stopped()) or (buffer_dash and not state == get_node("Dash")):
-		if timer.time_left > 0.15:
+#	elif (Input.is_action_just_pressed("attack") and player.mode == "Sand" and state.name == "Dash" and dash_timer.time_left < 0.3 and sand_attack_cooldown_timer.is_stopped()):
+#		if sand_attack_timer.time_left < 0.15 and state == get_node("SandAttack"):
+#			buffer_attack = true
+#		transition_to("SandAttack")
+	elif (state == get_node("Dash") and not dash_timer.is_stopped()) or (buffer_dash and not state == get_node("Dash")):
+		if dash_timer.time_left > 0.15:
 			buffer_dash = false
 		transition_to("Dash")
 	elif (Input.is_action_just_pressed("attack") and player.mode == "Sand" and sand_attack_cooldown_timer.is_stopped()):
-		if timer.time_left < 0.15 and state == get_node("SandAttack"):
+		if sand_attack_timer.time_left < 0.15 and state == get_node("SandAttack"):
 			buffer_attack = true
 		transition_to("SandAttack")
-	elif ((state == get_node("SandAttack") and not timer.is_stopped()) or (buffer_attack and not state == get_node("SandAttack")) and sand_attack_cooldown_timer.is_stopped()):
-		if timer.time_left > 0.15:
+	elif ((state == get_node("SandAttack") and not sand_attack_timer.is_stopped()) or (buffer_attack and not state == get_node("SandAttack"))) and sand_attack_cooldown_timer.is_stopped():
+		if sand_attack_timer.time_left > 0.15:
 			buffer_attack = false
 		transition_to("SandAttack")
 	elif (

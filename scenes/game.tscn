@@ -8,7 +8,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vu1gm"]
 shader = ExtResource("5_7obaj")
-shader_parameter/fog_color = Color(0.603922, 0.603922, 0.603922, 1)
+shader_parameter/fog_color = Color(0.309804, 0.741176, 1, 1)
 
 [node name="Game" type="Control"]
 layout_mode = 3

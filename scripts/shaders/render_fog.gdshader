@@ -18,8 +18,8 @@ uniform vec4 fog_color: source_color;
 
 void fragment()
 {
-	vec2 center_offset = SCREEN_UV - vec2(0.5,0.5);
-	float centerdist = pow(max(abs(center_offset.x), abs(center_offset.y)) * 1.7, 7.0);
 
-	COLOR = texture(screen_texture, SCREEN_UV) + centerdist * fog_color;// * (texture(noise1, SCREEN_UV + scroll1 * TIME) + texture(noise2, SCREEN_UV + scroll2 * TIME));// + top_light; 
+	float fog_strength = pow(1.0 - SCREEN_UV.y, 10.0) / 4.0;
+
+	COLOR = texture(screen_texture, SCREEN_UV) + fog_strength * fog_color;// * (texture(noise1, SCREEN_UV + scroll1 * TIME) + texture(noise2, SCREEN_UV + scroll2 * TIME));// + top_light; 
 }
