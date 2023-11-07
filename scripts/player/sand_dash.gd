@@ -1,6 +1,6 @@
 extends ModeState
 
-@onready var dash_speed: float = character.RUN_SPEED * 2
+@onready var dash_speed: float = character.RUN_SPEED * 4
 @onready var dash_end_speed: float = character.RUN_SPEED
 
 @export var shore_checker: RayCast2D
@@ -8,7 +8,7 @@ extends ModeState
 const DASH_SIDE_ACCEL = 500
 const START_LAG = 0.15
 const START_FRAMES = 0.25
-const END_FRAMES = 0.4
+const END_FRAMES = 0.1
 
 var dig_direction: int
 var stopped: bool = false
@@ -21,7 +21,7 @@ func enter():
 	stopped = false
 	buffer_stop = false
 	
-	time = 0.8
+	time = 0.5
 	
 	dash_velocity = Vector2(
 		Input.get_axis("left", "right"), Input.get_axis("up", "down")
