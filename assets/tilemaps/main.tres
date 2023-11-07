@@ -1,6 +1,9 @@
-[gd_resource type="TileSet" load_steps=22 format=3 uid="uid://lopijjupr2li"]
+[gd_resource type="TileSet" load_steps=23 format=3 uid="uid://lopijjupr2li"]
 
 [ext_resource type="Texture2D" uid="uid://db3stpms1pd3u" path="res://assets/png/tilemap.png" id="1_vkfkd"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_pp715"]
+tile_data = PackedInt32Array(0, 720896, 1, 65536, 720896, 2, 131072, 720896, 131073, 1, 720896, 131074, 131073, 720896, 196610, 2, 720896, 65537, 65538, 720896, 65538, 131074, 720896, 196609)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2xoht"]
 vertices = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
@@ -5663,3 +5666,4 @@ navigation_layer_0/layers = 1
 custom_data_layer_0/name = "Stair Direction"
 custom_data_layer_0/type = 5
 sources/0 = SubResource("TileSetAtlasSource_81ukl")
+pattern_0 = SubResource("TileMapPattern_pp715")
