@@ -20,10 +20,10 @@ grow_vertical = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
-offset_left = -1012.0
-offset_top = -592.0
-offset_right = 1012.0
-offset_bottom = 592.0
+offset_left = -1349.0
+offset_top = -789.0
+offset_right = 1349.0
+offset_bottom = 789.0
 stretch = true
 stretch_shrink = 4
 
@@ -31,7 +31,7 @@ stretch_shrink = 4
 handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 canvas_item_default_texture_filter = 0
-size = Vector2i(506, 296)
+size = Vector2i(674, 394)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
@@ -39,7 +39,7 @@ render_target_update_mode = 4
 position = Vector2(253, 148)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("main_scene")]
-zoom = Vector2(1.1, 1.1)
+zoom = Vector2(0.75, 0.75)
 position_smoothing_enabled = true
 position_smoothing_speed = 1.5
 script = ExtResource("2_20lf1")
