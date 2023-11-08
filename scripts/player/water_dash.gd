@@ -1,7 +1,9 @@
-extends ModeState
+extends State
 
 @onready var dash_speed: float = character.RUN_SPEED * 2.5
 @onready var dash_end_decel: float = character.RUN_ACCEL / 2
+
+@onready var dash_timer: Timer = $DashTimer
 
 @export var particles: GPUParticles2D
 @export var shore_checker: RayCast2D
@@ -9,6 +11,7 @@ extends ModeState
 @export var water_mask: Sprite2D
 
 var stopping: bool = false
+var time = 0.6
 
 #var dig_direction: int
 
@@ -18,7 +21,6 @@ func enter():
 	
 	water_mask.offset.y = -50
 	
-	time = 0.6
 	stopping = false
 	
 	var direction = Vector2(
@@ -36,7 +38,7 @@ func enter():
 	else:
 		animation_tree["parameters/WaterDash/Jump/blend_position"] = Vector2(0, character.velocity.y / abs(character.velocity.y))
 	
-	
+	dash_timer.start(time)
 
 func handle_physics(delta):
 	#Set direction of the raycast that checks for running into the shore
@@ -54,11 +56,11 @@ func handle_physics(delta):
 		animation_tree["parameters/WaterDash/Loop/blend_position"] = Vector2(0, character.velocity.y / abs(character.velocity.y))
 	
 	#Move to end state if speed slows
-	if character.velocity.length() < character.RUN_SPEED * 1.2 and parent_state.dash_timer.time_left <= 0.6:
+	if character.velocity.length() < character.RUN_SPEED * 1.2 and dash_timer.time_left <= 0.6:
 		end_animation()
 	
 	#Rejump if player presses dash
-	if Input.is_action_just_pressed("dash") and parent_state.dash_timer.time_left <= 0.5 and not character.mode == "Sand" and not animation_tree["parameters/WaterDash/playback"].get_current_node() == "Jump":
+	if Input.is_action_just_pressed("dash") and dash_timer.time_left <= 0.5 and not character.mode == "Sand" and not animation_tree["parameters/WaterDash/playback"].get_current_node() == "Jump":
 		character.velocity = direction*dash_speed
 		animation_tree["parameters/WaterDash/playback"].start("Jump")
 		if abs(character.velocity.x) > abs(character.velocity.y):
@@ -76,8 +78,8 @@ func handle_physics(delta):
 		character.velocity = character.velocity.move_toward(direction.normalized() * speed, character.RUN_ACCEL*delta)
 		character.drown()
 	#Otherwise restart loop timer and set dash speed
-	elif parent_state.dash_timer.time_left < 0.5:
-		parent_state.dash_timer.start(0.5)
+	elif dash_timer.time_left < 0.5:
+		dash_timer.start(0.5)
 		character.velocity = character.velocity.move_toward(direction*dash_speed, dash_end_decel*delta)
 	
 	character.move_and_slide()
@@ -109,3 +111,6 @@ func end_animation():
 func exit():
 	#Reset water mask
 	water_mask.offset.y = -60
+	
+func _on_dash_timer_timeout():
+	dash_timer.stop()
