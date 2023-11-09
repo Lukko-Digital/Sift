@@ -6,7 +6,6 @@ extends State
 @onready var dash_timer: Timer = $DashTimer
 
 @export var particles: GPUParticles2D
-@export var shore_checker: RayCast2D
 
 @export var water_mask: Sprite2D
 
@@ -22,6 +21,7 @@ func enter():
 	water_mask.offset.y = -50
 	
 	stopping = false
+	
 	
 	var direction = Vector2(
 		Input.get_axis("left", "right"), Input.get_axis("up", "down")
@@ -41,8 +41,6 @@ func enter():
 	dash_timer.start(time)
 
 func handle_physics(delta):
-	#Set direction of the raycast that checks for running into the shore
-	shore_checker.target_position = character.velocity.normalized() * 10
 	
 	#Get player input
 	var direction = Vector2(
@@ -60,7 +58,7 @@ func handle_physics(delta):
 		end_animation()
 	
 	#Rejump if player presses dash
-	if Input.is_action_just_pressed("dash") and dash_timer.time_left <= 0.5 and not character.mode == "Sand" and not animation_tree["parameters/WaterDash/playback"].get_current_node() == "Jump":
+	if Input.is_action_just_pressed("dash") and dash_timer.time_left <= 0.5 and character.on_water and not animation_tree["parameters/WaterDash/playback"].get_current_node() == "Jump":
 		character.velocity = direction*dash_speed
 		animation_tree["parameters/WaterDash/playback"].start("Jump")
 		if abs(character.velocity.x) > abs(character.velocity.y):
@@ -69,7 +67,7 @@ func handle_physics(delta):
 			animation_tree["parameters/WaterDash/Jump/blend_position"] = Vector2(0, character.velocity.y / abs(character.velocity.y))
 	
 	#Move to end state if on sand, running into the shore, or drowning
-	if (shore_checker.is_colliding() or character.mode == "Sand" or character.check_drown()) and not animation_tree["parameters/WaterDash/playback"].get_current_node() == "Jump":
+	if (not character.on_water or character.check_drown()) and not animation_tree["parameters/WaterDash/playback"].get_current_node() == "Jump":
 		end_animation()
 	
 	#If in end state decelerate and check drowning

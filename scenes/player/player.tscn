@@ -1364,9 +1364,6 @@ radius = 22.0227
 radius = 4.77
 height = 10.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8c008"]
-radius = 1.02611
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cqtmw"]
 radius = 5.0
 height = 32.0
@@ -1399,6 +1396,9 @@ turbulence_influence_over_life = SubResource("CurveTexture_0hegn")
 [sub_resource type="CircleShape2D" id="CircleShape2D_fhgxc"]
 radius = 2.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dfumn"]
+radius = 1.0
+
 [node name="player" type="CharacterBody2D"]
 collision_mask = 262
 script = ExtResource("1_81117")
@@ -1413,7 +1413,7 @@ offset = Vector2(0, -60)
 position = Vector2(1, -8)
 texture = ExtResource("2_g1nij")
 hframes = 275
-frame = 45
+frame = 33
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
@@ -1471,10 +1471,9 @@ animation_tree = NodePath("../../AnimationTree")
 [node name="EffectTimer" type="Timer" parent="StateMachine/Hit"]
 one_shot = true
 
-[node name="WaterDash" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("particles", "shore_checker", "water_mask", "character", "animation_tree")]
+[node name="WaterDash" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("particles", "water_mask", "character", "animation_tree")]
 script = ExtResource("8_1rdr2")
 particles = NodePath("../../GPUParticles2D")
-shore_checker = NodePath("DashShoreChecker")
 water_mask = NodePath("../../WaterMask")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
@@ -1485,7 +1484,7 @@ one_shot = true
 [node name="DashShoreChecker" type="RayCast2D" parent="StateMachine/WaterDash"]
 position = Vector2(0, 3)
 target_position = Vector2(0, 25)
-collision_mask = 32
+collision_mask = 16
 
 [node name="NPCDialogueCollider" type="Area2D" parent="."]
 visible = false
@@ -1502,16 +1501,6 @@ visible = false
 position = Vector2(0, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jc72j")
-
-[node name="ModeChecker" type="Area2D" parent="."]
-visible = false
-position = Vector2(0, -11.77)
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ModeChecker"]
-position = Vector2(0, 15)
-shape = SubResource("CircleShape2D_8c008")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 
@@ -1559,42 +1548,50 @@ visible = false
 [node name="RayCast2D" type="RayCast2D" parent="DepthShoreChecker"]
 position = Vector2(0, 3)
 target_position = Vector2(0, 32)
-collision_mask = 32
+collision_mask = 16
+hit_from_inside = true
 
 [node name="RayCast2D2" type="RayCast2D" parent="DepthShoreChecker"]
 position = Vector2(0, 3)
 target_position = Vector2(0, -32)
-collision_mask = 32
+collision_mask = 16
+hit_from_inside = true
 
 [node name="RayCast2D3" type="RayCast2D" parent="DepthShoreChecker"]
 position = Vector2(0, 3)
 target_position = Vector2(32, 0)
-collision_mask = 32
+collision_mask = 16
+hit_from_inside = true
 
 [node name="RayCast2D4" type="RayCast2D" parent="DepthShoreChecker"]
 position = Vector2(0, 3)
 target_position = Vector2(-32, 0)
-collision_mask = 32
+collision_mask = 16
+hit_from_inside = true
 
 [node name="RayCast2D5" type="RayCast2D" parent="DepthShoreChecker"]
 position = Vector2(0, 3)
 target_position = Vector2(22.6, 22.6)
-collision_mask = 32
+collision_mask = 16
+hit_from_inside = true
 
 [node name="RayCast2D6" type="RayCast2D" parent="DepthShoreChecker"]
 position = Vector2(0, 3)
 target_position = Vector2(22.6, -22.6)
-collision_mask = 32
+collision_mask = 16
+hit_from_inside = true
 
 [node name="RayCast2D7" type="RayCast2D" parent="DepthShoreChecker"]
 position = Vector2(0, 3)
 target_position = Vector2(-22.6, 22.6)
-collision_mask = 32
+collision_mask = 16
+hit_from_inside = true
 
 [node name="RayCast2D8" type="RayCast2D" parent="DepthShoreChecker"]
 position = Vector2(0, 3)
 target_position = Vector2(-22.6, -22.6)
-collision_mask = 32
+collision_mask = 16
+hit_from_inside = true
 
 [node name="DeepWaterSinkTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -1615,6 +1612,22 @@ position = Vector2(0, -10)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_1oqfh")
 
+[node name="SandChecker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SandChecker"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_dfumn")
+
+[node name="WaterChecker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterChecker"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_dfumn")
+
 [connection signal="timeout" from="StateMachine/SandAttack/ContinuationTimer" to="StateMachine/SandAttack" method="_on_continuation_timer_timeout"]
 [connection signal="timeout" from="StateMachine/SandAttack/CooldownTimer" to="StateMachine/SandAttack" method="_on_cooldown_timer_timeout"]
 [connection signal="timeout" from="StateMachine/SandAttack/InstanceTimer" to="StateMachine/SandAttack" method="_on_instance_timer_timeout"]
@@ -1623,8 +1636,10 @@ texture = ExtResource("16_1oqfh")
 [connection signal="timeout" from="StateMachine/WaterDash/DashTimer" to="StateMachine/WaterDash" method="_on_dash_timer_timeout"]
 [connection signal="area_entered" from="NPCDialogueCollider" to="." method="_on_npc_dialogue_collider_area_entered"]
 [connection signal="area_exited" from="NPCDialogueCollider" to="." method="_on_npc_dialogue_collider_area_exited"]
-[connection signal="body_entered" from="ModeChecker" to="." method="_on_mode_checker_body_entered"]
-[connection signal="body_exited" from="ModeChecker" to="." method="_on_mode_checker_body_exited"]
 [connection signal="timeout" from="SplashTimer" to="." method="_on_splash_timer_timeout"]
 [connection signal="timeout" from="DeepWaterSinkTimer" to="." method="_on_deep_water_sink_timer_timeout"]
 [connection signal="body_exited" from="DeepWaterChecker" to="." method="_on_deep_water_checker_body_exited"]
+[connection signal="body_entered" from="SandChecker" to="." method="_on_sand_checker_body_entered"]
+[connection signal="body_exited" from="SandChecker" to="." method="_on_sand_checker_body_exited"]
+[connection signal="body_entered" from="WaterChecker" to="." method="_on_water_checker_body_entered"]
+[connection signal="body_exited" from="WaterChecker" to="." method="_on_water_checker_body_exited"]

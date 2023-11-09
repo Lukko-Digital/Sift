@@ -18,7 +18,7 @@ func handle_physics(delta: float):
 	
 	character.sink_in_water()
 	
-	var speed_coeff = 1.0 if character.mode == "Sand" else SPEED_COEFF_WATER
+	var speed_coeff = 1.0 if character.on_sand else SPEED_COEFF_WATER
 	
 	character.velocity = character.velocity.move_toward(direction * character.RUN_SPEED * speed_coeff, character.RUN_ACCEL * delta)
 	character.move_and_slide()

@@ -1,7 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
-var mode: String = "Water"
+var on_sand: bool = false
+var on_water: bool = false
 
 var RUN_SPEED = 100
 const RUN_ACCEL = 1000
@@ -15,20 +16,9 @@ const RUN_ACCEL = 1000
 
 @onready var splash_scene = preload("res://scenes/player/splash.tscn")
 
-signal mode_switch(_mode: String)
-
 # Getter method for max/starting health
 func max_hp():
 	return $HealthComponent.max_health
-
-func _on_mode_checker_body_entered(body):
-	mode = "Sand"
-	sprite.offset.y = 0
-	emit_signal("mode_switch", mode)
-
-func _on_mode_checker_body_exited(body):
-	mode = "Water" 
-	emit_signal("mode_switch", mode)
 	
 func check_drown():
 	return deep_water_checker.has_overlapping_bodies()
@@ -43,7 +33,7 @@ func drown():
 			sprite.offset.y += 0.5
 	
 func sink_in_water():
-	if mode == "Water":
+	if on_water:
 		drown()
 		if not check_drown() and sinking_timer.is_stopped():
 			var distance = 32.0
@@ -68,10 +58,11 @@ func _on_npc_dialogue_collider_area_exited(area):
 
 
 func _on_splash_timer_timeout():
-	if not velocity.is_zero_approx():
-		var instance = splash_scene.instantiate()
-		get_parent().add_child(instance)
-		instance.start(velocity, mode, position + Vector2(0, -5))
+	pass
+#	if not velocity.is_zero_approx():
+#		var instance = splash_scene.instantiate()
+#		get_parent().add_child(instance)
+#		instance.start(velocity, mode, position + Vector2(0, -5))
 		
 
 func _on_deep_water_sink_timer_timeout():
@@ -86,3 +77,20 @@ func _on_deep_water_checker_body_exited(body):
 	var tween = get_tree().create_tween()
 	
 	tween.tween_property(sprite, "offset", Vector2(0, 9), 0.5)
+
+
+func _on_sand_checker_body_entered(body):
+	on_sand = true
+	print("sand")
+
+func _on_sand_checker_body_exited(body):
+	on_sand = false
+	print("no sand")
+
+func _on_water_checker_body_entered(body):
+	on_water = true
+	print("water")
+
+func _on_water_checker_body_exited(body):
+	on_water = false
+	print("no water")
