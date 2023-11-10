@@ -1,0 +1,189 @@
+[gd_scene load_steps=21 format=3 uid="uid://dhxuvts2ttkcy"]
+
+[ext_resource type="Texture2D" uid="uid://d0juyhg8rq2ls" path="res://icon.svg" id="1_5x7kx"]
+[ext_resource type="Script" path="res://scripts/enemies/state_machines/ranged_enemy_state_machine.gd" id="2_h2ta5"]
+[ext_resource type="Script" path="res://scripts/enemies/states/idle.gd" id="3_c5opo"]
+[ext_resource type="Script" path="res://scripts/enemies/states/track.gd" id="4_q32wk"]
+[ext_resource type="Script" path="res://scripts/enemies/attacks/ranged_enemy_attack.gd" id="5_hdn4e"]
+[ext_resource type="Script" path="res://scripts/enemies/states/dead.gd" id="6_x46hg"]
+[ext_resource type="Script" path="res://scripts/enemies/states/knocked_back.gd" id="7_dqg5p"]
+[ext_resource type="Script" path="res://scripts/player/states/hit.gd" id="8_5nfve"]
+[ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="9_kr2j1"]
+[ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="10_8qclc"]
+[ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="11_wr1qg"]
+
+[sub_resource type="Animation" id="Animation_vpurs"]
+resource_name = "Dead_transparent"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.6)]
+}
+
+[sub_resource type="Animation" id="Animation_87a45"]
+resource_name = "On_hit_red_flash"
+length = 0.04
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.0003, 0.02),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tuuhe"]
+resource_name = "On_hit_white"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(10, 10, 10, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5yxb6"]
+_data = {
+"Dead_transparent": SubResource("Animation_vpurs"),
+"On_hit_red_flash": SubResource("Animation_87a45"),
+"On_hit_white": SubResource("Animation_tuuhe")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_llu8t"]
+size = Vector2(22, 22)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_knnf7"]
+radius = 137.004
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ufsb"]
+radius = 277.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jbqi6"]
+radius = 129.19
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5nh7s"]
+size = Vector2(32, 32)
+
+[node name="ranged_enemy" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.6)
+scale = Vector2(0.1875, 0.1875)
+texture = ExtResource("1_5x7kx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+
+[node name="ColorAnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_5yxb6")
+}
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_llu8t")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="ReNavTimer" type="Timer" parent="NavigationAgent2D"]
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("animation_player", "color_animation_player")]
+script = ExtResource("2_h2ta5")
+animation_player = NodePath("../Sprite2D/AnimationPlayer")
+color_animation_player = NodePath("../Sprite2D/ColorAnimationPlayer")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
+script = ExtResource("3_c5opo")
+animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+character = NodePath("../..")
+
+[node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
+visible = false
+script = ExtResource("4_q32wk")
+RE_NAV_TIME = 0.5
+SPEED = 50
+animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+character = NodePath("../..")
+
+[node name="AggroRadius" type="Area2D" parent="StateMachine/Track"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Track/AggroRadius"]
+shape = SubResource("CircleShape2D_knnf7")
+
+[node name="TrackingRadius" type="Area2D" parent="StateMachine/Track"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Track/TrackingRadius"]
+shape = SubResource("CircleShape2D_0ufsb")
+
+[node name="Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("5_hdn4e")
+animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+
+[node name="AttackRadius" type="Area2D" parent="StateMachine/Attack"]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]
+rotation = 1.5708
+shape = SubResource("CircleShape2D_jbqi6")
+
+[node name="Dead" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "color_animation_player", "character")]
+script = ExtResource("6_x46hg")
+animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+color_animation_player = NodePath("../../Sprite2D/ColorAnimationPlayer")
+NUM_DEAD_ANIMATIONS = 1
+character = NodePath("../..")
+
+[node name="KnockedBack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("7_dqg5p")
+character = NodePath("../..")
+
+[node name="KnockBackTimer" type="Timer" parent="StateMachine/KnockedBack"]
+one_shot = true
+
+[node name="StunTimer" type="Timer" parent="StateMachine"]
+one_shot = true
+
+[node name="Hit" type="Node2D" parent="StateMachine"]
+script = ExtResource("8_5nfve")
+
+[node name="ReflectionComponent" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("9_kr2j1")]
+position = Vector2(0, 36)
+hframes = 160
+sprite_to_reflect = NodePath("../Sprite2D")
+
+[node name="HealthComponent" parent="." instance=ExtResource("10_8qclc")]
+max_health = 10.0
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["enemy_hurtbox"] instance=ExtResource("11_wr1qg")]
+visible = false
+collision_layer = 4
+collision_mask = 0
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_5nh7s")
+
+[connection signal="died" from="HealthComponent" to="StateMachine" method="_on_health_component_died"]
