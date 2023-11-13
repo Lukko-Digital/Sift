@@ -17,3 +17,5 @@ texture = ExtResource("1_538n5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("RectangleShape2D_j2ugs")
+
+[node name="DespawnTimer" type="Timer" parent="."]
