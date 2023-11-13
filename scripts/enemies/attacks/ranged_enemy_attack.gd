@@ -2,6 +2,8 @@ extends State
 
 @export var animation_player: AnimationPlayer
 
+@onready var projectile_scene = preload("res://scenes/enemies/projectile.tscn")
+
 @onready var attack_radius: Area2D = $AttackRadius
 @onready var attack_collider: CollisionShape2D = $AttackBox/CollisionShape2D
 @onready var slide_timer: Timer = $SlideTimer
@@ -14,6 +16,9 @@ func _ready():
 
 func enter():
 	find_player()
+	var instance = projectile_scene.instantiate()
+	instance.start(character.position, direction_to_player())
+	character.get_parent().add_child(instance)
 	
 func handle_physics(delta: float):
 	pass
