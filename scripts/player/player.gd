@@ -81,16 +81,12 @@ func _on_deep_water_checker_body_exited(body):
 
 func _on_sand_checker_body_entered(body):
 	on_sand = true
-	print("sand")
 
 func _on_sand_checker_body_exited(body):
 	on_sand = false
-	print("no sand")
 
 func _on_water_checker_body_entered(body):
 	on_water = true
-	print("water")
 
 func _on_water_checker_body_exited(body):
 	on_water = false
-	print("no water")
