@@ -1461,6 +1461,7 @@ offset = Vector2(0, -60)
 position = Vector2(1, -8)
 texture = ExtResource("2_g1nij")
 hframes = 275
+frame = 3
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
@@ -1653,7 +1654,6 @@ collision_mask = 64
 shape = SubResource("CircleShape2D_fhgxc")
 
 [node name="Shadow" type="Sprite2D" parent="."]
-visible = false
 z_index = -1
 position = Vector2(0, -10)
 scale = Vector2(0.1, 0.1)
