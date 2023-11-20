@@ -1,6 +1,6 @@
 extends State
 
-const END_LAG = 1.0
+const END_LAG = 2.0
 
 @export var animation_player: AnimationPlayer
 
