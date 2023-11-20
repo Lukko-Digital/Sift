@@ -3,6 +3,8 @@ extends StateMachine
 @export var animation_player: AnimationPlayer
 @export var color_animation_player: AnimationPlayer
 
+@onready var aggro_radius: Area2D = $Track/AggroRadius
+@onready var tracking_radius: Area2D = $Track/TrackingRadius
 @onready var attack_radius: Area2D = $Attack/AttackRadius
 @onready var end_lag_timer: Timer = $Attack/EndLag
 @onready var health_component: HealthComponent = get_node("../HealthComponent")
@@ -10,6 +12,7 @@ extends StateMachine
 @onready var knockback_timer: Timer = $KnockedBack/KnockBackTimer
 @onready var stun_timer: Timer = $StunTimer
 
+var facing_direction: Vector2 = Vector2(0, 1)
 var is_dead = false
 
 func _ready():
@@ -31,6 +34,13 @@ func _physics_process(delta: float) -> void:
 		animation_player.current_animation in []
 	):
 		transition_to("Attack")
+	elif (
+		not aggro_radius.get_overlapping_bodies().is_empty() or (
+			state.name in ["Track", "Attack"] and
+			not tracking_radius.get_overlapping_bodies().is_empty()
+		)
+	):
+		transition_to("Track")
 	else:
 		transition_to("Idle")
 
