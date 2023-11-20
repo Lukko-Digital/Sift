@@ -1,13 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8md8ehlk518q"]
+[gd_scene load_steps=14 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
 [ext_resource type="PackedScene" uid="uid://1dmsp3osd16i" path="res://scenes/player/player.tscn" id="1_6t2e7"]
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="3_o4613"]
 [ext_resource type="PackedScene" uid="uid://dxblb7s0p3c5n" path="res://scenes/enemies/crab.tscn" id="5_5473s"]
-[ext_resource type="PackedScene" uid="uid://dhxuvts2ttkcy" path="res://scenes/enemies/ranged_enemy.tscn" id="8_veoqe"]
 [ext_resource type="Material" uid="uid://cuo8oe7uaeecu" path="res://scripts/shaders/water_shader_material.tres" id="9_sn0nu"]
+[ext_resource type="PackedScene" uid="uid://ww2gnky7bvf7" path="res://scenes/environment/tree.tscn" id="9_ur6fa"]
+[ext_resource type="PackedScene" uid="uid://c11pdhijyyan7" path="res://scenes/environment/bush.tscn" id="10_wyn37"]
 [ext_resource type="PackedScene" uid="uid://b5fdonr32rsmf" path="res://scenes/enemies/driller.tscn" id="11_pnxbw"]
+[ext_resource type="PackedScene" uid="uid://bv2de2s6bsqyx" path="res://scenes/npc/weapondude_npc.tscn" id="11_w845e"]
 [ext_resource type="PackedScene" uid="uid://cbwnw66tib2sb" path="res://scenes/enemies/bomber.tscn" id="12_4mdh1"]
+[ext_resource type="PackedScene" uid="uid://siyv31md8s0w" path="res://scenes/structures/shack1.tscn" id="12_qn7et"]
 
 [sub_resource type="Gradient" id="Gradient_45jg6"]
 interpolation_mode = 2
@@ -60,21 +63,21 @@ layer_4/modulate = Color(1, 1, 1, 1)
 layer_4/y_sort_enabled = false
 layer_4/y_sort_origin = 0
 layer_4/z_index = -9
-layer_4/tile_data = PackedInt32Array()
+layer_4/tile_data = PackedInt32Array(196602, 393216, 12, 262138, 393216, 13, 196603, 458752, 12, 262139, 458752, 13, 2, 393216, 12, 65538, 393216, 13, 3, 458752, 12, 65539, 458752, 13, -524292, 393216, 12, -458756, 393216, 13, -524291, 458752, 12, -458755, 458752, 13, 262149, 393216, 12, 327685, 393216, 13, 262150, 458752, 12, 327686, 458752, 13, 589829, 393216, 12, 655365, 393216, 13, 589830, 458752, 12, 655366, 458752, 13, 196588, 524288, 10, 262124, 524288, 11, 196589, 589824, 10, 262125, 589824, 11, 458729, 524288, 10, 524265, 524288, 11, 458730, 589824, 10, 524266, 589824, 11, -131081, 524288, 10, -65545, 524288, 11, -131080, 589824, 10, -65544, 589824, 11, 262154, 524288, 10, 327690, 524288, 11, 262155, 589824, 10, 327691, 589824, 11, 524312, 524288, 10, 589848, 524288, 11, 524313, 589824, 10, 589849, 589824, 11, -720885, 524288, 10, -655349, 524288, 11, -720884, 589824, 10, -655348, 589824, 11, -1376260, 524288, 10, -1310724, 524288, 11, -1376259, 589824, 10, -1310723, 589824, 11, -196615, 655360, 8, -131079, 655360, 9, -196614, 720896, 8, -131078, 720896, 9, 131069, 655360, 8, 196605, 655360, 9, 131070, 720896, 8, 196606, 720896, 9, -589823, 655360, 8, -524287, 655360, 9, -589822, 720896, 8, -524286, 720896, 9, -589833, 655360, 8, -524297, 655360, 9, -589832, 720896, 8, -524296, 720896, 9, 393222, 786432, 8, 458758, 786432, 9, 393223, 851968, 8, 458759, 851968, 9, -1310722, 786432, 8, -1245186, 786432, 9, -1310721, 851968, 8, -1245185, 851968, 9, -983042, 786432, 8, -917506, 786432, 9, -983041, 851968, 8, -917505, 851968, 9, 589846, 786432, 8, 655382, 786432, 9, 589847, 851968, 8, 655383, 851968, 9, 393239, 786432, 6, 458775, 786432, 7, 393240, 851968, 6, 458776, 851968, 7, 196626, 589824, 7)
 layer_5/name = "Rocks"
 layer_5/enabled = true
 layer_5/modulate = Color(1, 1, 1, 1)
 layer_5/y_sort_enabled = false
 layer_5/y_sort_origin = 0
 layer_5/z_index = -8
-layer_5/tile_data = PackedInt32Array()
+layer_5/tile_data = PackedInt32Array(131068, 131072, 4, 65537, 131072, 2, -65535, 65536, 4, -131080, 65536, 4, -7, 131072, 2, -458756, 131072, 3, -327684, 65536, 3, -589833, 65536, 3, -524295, 131072, 4, -589822, 131072, 3, -458751, 262144, 2, -458752, 262144, 4, 131074, 262144, 3, 393223, 131072, 3, 589828, 262144, 3, 262149, 131072, 3, 327691, 196608, 1, 524298, 65536, 4, 589829, 131072, 3, 458758, 262144, 4, 589832, 131072, 4, 983037, 196608, 2, 327660, 196608, 2, 458730, 65536, 1, 196585, 65536, 2, 196592, 65536, 1, 393196, 196608, 3, -1245188, 65536, 3, -1441793, 65536, 1, -1441794, 262144, 3, -1441796, 196608, 1, -1376260, 131072, 3, -1376259, 196608, 3, -1245185, 65536, 4, -917516, 196608, 1, -589841, 196608, 3, -458769, 262144, 3, 589847, 65536, 2, 393241, 262144, 2, 458777, 131072, 3, 589849, 196608, 1, 655385, 65536, 2, 458774, 131072, 3)
 layer_6/name = "Plants"
 layer_6/enabled = true
 layer_6/modulate = Color(1, 1, 1, 1)
 layer_6/y_sort_enabled = false
 layer_6/y_sort_origin = 0
 layer_6/z_index = -7
-layer_6/tile_data = PackedInt32Array()
+layer_6/tile_data = PackedInt32Array(131071, 524288, 3, 196602, 524288, 4, -458756, 393216, 3, -65544, 393216, 1, 131075, 458752, 1, -131072, 458752, 1, 65538, 393216, 2, 393223, 393216, 4, 393226, 458752, 4, 655367, 458752, 4, 655364, 589824, 3, 262154, 524288, 3, 589848, 524288, 4, 458778, 589824, 4, 524309, 458752, 4, 589850, 458752, 4, 327698, 393216, 1, 18, 589824, 1, -327667, 393216, 2, 917498, 589824, 3, 196589, 524288, 3, 524266, 458752, 1, 393201, 589824, 2, -589833, 393216, 4, -917516, 524288, 4, -1245186, 393216, 1, -1310717, 393216, 1)
 
 [node name="player" parent="." instance=ExtResource("1_6t2e7")]
 
@@ -208,5 +211,44 @@ position = Vector2(174, -498)
 [node name="bomber4" parent="." instance=ExtResource("12_4mdh1")]
 position = Vector2(202, -541)
 
-[node name="ranged_enemy" parent="." instance=ExtResource("8_veoqe")]
-position = Vector2(11, 154)
+[node name="Tree" parent="." instance=ExtResource("9_ur6fa")]
+position = Vector2(-177, 71)
+
+[node name="Tree2" parent="." instance=ExtResource("9_ur6fa")]
+position = Vector2(46, -151)
+
+[node name="Tree3" parent="." instance=ExtResource("9_ur6fa")]
+position = Vector2(337, 95)
+
+[node name="Bush" parent="." instance=ExtResource("10_wyn37")]
+position = Vector2(-6, -134)
+
+[node name="Bush2" parent="." instance=ExtResource("10_wyn37")]
+position = Vector2(-231, -107)
+
+[node name="Bush3" parent="." instance=ExtResource("10_wyn37")]
+position = Vector2(-663, 79)
+
+[node name="Tree4" parent="." instance=ExtResource("9_ur6fa")]
+position = Vector2(-462, 221)
+
+[node name="Tree5" parent="." instance=ExtResource("9_ur6fa")]
+position = Vector2(202, 329)
+
+[node name="Tree6" parent="." instance=ExtResource("9_ur6fa")]
+position = Vector2(-169, -546)
+
+[node name="Tree7" parent="." instance=ExtResource("9_ur6fa")]
+position = Vector2(420, -437)
+
+[node name="weapondude_npc" parent="." instance=ExtResource("11_w845e")]
+position = Vector2(373, 220)
+
+[node name="Shack1" parent="." instance=ExtResource("12_qn7et")]
+position = Vector2(443, 337)
+
+[node name="Shack2" parent="." instance=ExtResource("12_qn7et")]
+position = Vector2(221, -177)
+
+[node name="Shack3" parent="." instance=ExtResource("12_qn7et")]
+position = Vector2(-675, 195)
