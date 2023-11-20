@@ -19,17 +19,25 @@ func _ready():
 
 func enter():
 	find_player()
-	shoot()
-	end_lag_timer.start(END_LAG)
+	match Directions.direction_horizontal(direction_to_player()):
+		Directions.Direction.RIGHT: animation_player.play("Attack_windup_down_right")
+		Directions.Direction.LEFT: animation_player.play("Attack_windup_down_left")
 	
-func handle_physics(delta: float):
-	pass
+#	shoot()
+#	end_lag_timer.start(END_LAG)
 
 func exit():
 	pass
 
 func _on_animation_end(anim_name: StringName):
-	pass
+	match anim_name:
+		"Attack_windup_down_right", "Attack_windup_down_left":
+			attack_dir = Directions.direction_horizontal(direction_to_player())
+			match attack_dir:
+				Directions.Direction.RIGHT: animation_player.play("Attack_down_right")
+				Directions.Direction.LEFT: animation_player.play("Attack_down_left")
+			shoot()
+			end_lag_timer.start(END_LAG)
 
 func shoot():
 	var instance = projectile_scene.instantiate()
