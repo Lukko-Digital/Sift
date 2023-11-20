@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dhxuvts2ttkcy"]
+[gd_scene load_steps=30 format=3 uid="uid://dhxuvts2ttkcy"]
 
 [ext_resource type="Texture2D" uid="uid://cds16gayh5p3s" path="res://assets/png/soldier-Sheet.png" id="1_l1kmd"]
 [ext_resource type="Script" path="res://scripts/enemies/state_machines/ranged_enemy_state_machine.gd" id="2_h2ta5"]
@@ -180,10 +180,66 @@ tracks/1/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_8fwah"]
+resource_name = "Attack_end_down_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [12, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_p1506"]
+resource_name = "Attack_end_down_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [12, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3ufib"]
 _data = {
 "Attack_down_left": SubResource("Animation_c1aoy"),
 "Attack_down_right": SubResource("Animation_iacbg"),
+"Attack_end_down_left": SubResource("Animation_8fwah"),
+"Attack_end_down_right": SubResource("Animation_p1506"),
 "Attack_windup_down_left": SubResource("Animation_hg208"),
 "Attack_windup_down_right": SubResource("Animation_bd4eb"),
 "Idle_down_left": SubResource("Animation_526vb"),
@@ -267,8 +323,9 @@ collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_l1kmd")
+flip_h = true
 hframes = 14
-frame = 12
+frame = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -300,7 +357,6 @@ animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
 [node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
-visible = false
 script = ExtResource("4_q32wk")
 RE_NAV_TIME = 0.5
 SPEED = 50
@@ -330,9 +386,6 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]
 rotation = 1.5708
 shape = SubResource("CircleShape2D_jbqi6")
-
-[node name="EndLag" type="Timer" parent="StateMachine/Attack"]
-one_shot = true
 
 [node name="Dead" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "color_animation_player", "character")]
 script = ExtResource("6_x46hg")

@@ -6,7 +6,6 @@ extends StateMachine
 @onready var aggro_radius: Area2D = $Track/AggroRadius
 @onready var tracking_radius: Area2D = $Track/TrackingRadius
 @onready var attack_radius: Area2D = $Attack/AttackRadius
-@onready var end_lag_timer: Timer = $Attack/EndLag
 @onready var health_component: HealthComponent = get_node("../HealthComponent")
 @onready var hurtbox_component: HurtboxComponent = get_node("../HurtboxComponent")
 @onready var knockback_timer: Timer = $KnockedBack/KnockBackTimer
@@ -20,7 +19,6 @@ func _ready():
 	health_component.died.connect(_on_death)
 	health_component.damage_taken.connect(_on_damage_taken)
 	animation_player.animation_finished.connect(_on_animation_finished)
-	end_lag_timer.timeout.connect(_attack_end)
 
 func _physics_process(delta: float) -> void:
 	if not knockback_timer.is_stopped():
@@ -31,7 +29,10 @@ func _physics_process(delta: float) -> void:
 		transition_to("Idle")
 	elif (
 		not attack_radius.get_overlapping_bodies().is_empty() or 
-		animation_player.current_animation in []
+		animation_player.current_animation in [
+			"Attack_windup_down_right", "Attack_windup_down_left",
+			"Attack_down_right", "Attack_down_left",
+			"Attack_end_down_right", "Attack_end_down_left"]
 	):
 		transition_to("Attack")
 	elif (
@@ -46,9 +47,6 @@ func _physics_process(delta: float) -> void:
 
 	state.handle_physics(delta)
 
-func _attack_end():
-	transition_to("Track")
-
 func _on_death():
 	is_dead = true
 
@@ -56,7 +54,7 @@ func _on_animation_finished(anim_name):
 	match anim_name:
 		"knocked_up":
 			transition_to("Idle")
-		"Getup_down_right", "Getup_down_left", "Getup_up_right", "Getup_up_left":
+		"Attack_end_down_right", "Attack_end_down_left":
 			transition_to("Track")
 
 func _on_damage_taken(attack: Attack):

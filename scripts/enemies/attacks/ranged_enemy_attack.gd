@@ -1,13 +1,10 @@
 extends State
 
-const END_LAG = 2.0
-
 @export var animation_player: AnimationPlayer
 
 @onready var projectile_scene = preload("res://scenes/enemies/projectile.tscn")
 
 @onready var attack_radius: Area2D = $AttackRadius
-@onready var end_lag_timer: Timer = $EndLag
 @onready var attack_collider: CollisionShape2D = $AttackBox/CollisionShape2D
 @onready var slide_timer: Timer = $SlideTimer
 
@@ -22,9 +19,6 @@ func enter():
 	match Directions.direction_horizontal(direction_to_player()):
 		Directions.Direction.RIGHT: animation_player.play("Attack_windup_down_right")
 		Directions.Direction.LEFT: animation_player.play("Attack_windup_down_left")
-	
-#	shoot()
-#	end_lag_timer.start(END_LAG)
 
 func exit():
 	pass
@@ -32,12 +26,17 @@ func exit():
 func _on_animation_end(anim_name: StringName):
 	match anim_name:
 		"Attack_windup_down_right", "Attack_windup_down_left":
-			attack_dir = Directions.direction_horizontal(direction_to_player())
-			match attack_dir:
-				Directions.Direction.RIGHT: animation_player.play("Attack_down_right")
-				Directions.Direction.LEFT: animation_player.play("Attack_down_left")
-			shoot()
-			end_lag_timer.start(END_LAG)
+			attack()
+		"Attack_down_right": animation_player.play("Attack_end_down_right")
+		"Attack_down_left": animation_player.play("Attack_end_down_left")
+
+
+func attack():
+	attack_dir = Directions.direction_horizontal(direction_to_player())
+	match attack_dir:
+		Directions.Direction.RIGHT: animation_player.play("Attack_down_right")
+		Directions.Direction.LEFT: animation_player.play("Attack_down_left")
+	shoot()
 
 func shoot():
 	var instance = projectile_scene.instantiate()
