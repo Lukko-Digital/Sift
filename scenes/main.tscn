@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8md8ehlk518q"]
+[gd_scene load_steps=15 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
 [ext_resource type="PackedScene" uid="uid://1dmsp3osd16i" path="res://scenes/player/player.tscn" id="1_6t2e7"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b5fdonr32rsmf" path="res://scenes/enemies/driller.tscn" id="11_pnxbw"]
 [ext_resource type="PackedScene" uid="uid://bv2de2s6bsqyx" path="res://scenes/npc/weapondude_npc.tscn" id="11_w845e"]
 [ext_resource type="PackedScene" uid="uid://cbwnw66tib2sb" path="res://scenes/enemies/bomber.tscn" id="12_4mdh1"]
+[ext_resource type="PackedScene" uid="uid://dhxuvts2ttkcy" path="res://scenes/enemies/ranged_enemy.tscn" id="12_ijp71"]
 [ext_resource type="PackedScene" uid="uid://siyv31md8s0w" path="res://scenes/structures/shack1.tscn" id="12_qn7et"]
 
 [sub_resource type="Gradient" id="Gradient_45jg6"]
@@ -252,3 +253,6 @@ position = Vector2(221, -177)
 
 [node name="Shack3" parent="." instance=ExtResource("12_qn7et")]
 position = Vector2(-675, 195)
+
+[node name="ranged_enemy" parent="." instance=ExtResource("12_ijp71")]
+position = Vector2(196, 186)
