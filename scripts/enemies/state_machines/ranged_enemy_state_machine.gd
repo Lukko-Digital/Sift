@@ -5,6 +5,7 @@ extends StateMachine
 
 @onready var aggro_radius: Area2D = $Track/AggroRadius
 @onready var tracking_radius: Area2D = $Track/TrackingRadius
+@onready var retreat_radius: Area2D = $Retreat/RetreatRadius
 @onready var attack_radius: Area2D = $Attack/AttackRadius
 @onready var health_component: HealthComponent = get_node("../HealthComponent")
 @onready var hurtbox_component: HurtboxComponent = get_node("../HurtboxComponent")
@@ -19,6 +20,7 @@ func _ready():
 	health_component.died.connect(_on_death)
 	health_component.damage_taken.connect(_on_damage_taken)
 	animation_player.animation_finished.connect(_on_animation_finished)
+	$Retreat.retreat_finished.connect(_retreat_finished)
 
 func _physics_process(delta: float) -> void:
 	if not knockback_timer.is_stopped():
@@ -27,6 +29,11 @@ func _physics_process(delta: float) -> void:
 		transition_to("Dead")
 	elif not stun_timer.is_stopped():
 		transition_to("Idle")
+	elif (
+		not retreat_radius.get_overlapping_bodies().is_empty() and
+		state.name != "Attack"
+	):
+		transition_to("Retreat")
 	elif (
 		not attack_radius.get_overlapping_bodies().is_empty() or 
 		animation_player.current_animation in [
@@ -49,6 +56,9 @@ func _physics_process(delta: float) -> void:
 
 func _on_death():
 	is_dead = true
+
+func _retreat_finished():
+	transition_to("Attack")
 
 func _on_animation_finished(anim_name):
 	match anim_name:
