@@ -45,4 +45,3 @@ func handle_animation():
 
 func _on_timer_timeout():
 	find_path()
-	pass

@@ -20,9 +20,6 @@ func enter():
 		Directions.Direction.RIGHT: animation_player.play("Attack_windup_down_right")
 		Directions.Direction.LEFT: animation_player.play("Attack_windup_down_left")
 
-func exit():
-	pass
-
 func _on_animation_end(anim_name: StringName):
 	match anim_name:
 		"Attack_windup_down_right", "Attack_windup_down_left":
