@@ -40,7 +40,8 @@ func attack():
 
 func shoot():
 	var instance = projectile_scene.instantiate()
-	instance.start(character.position, direction_to_player())
+	var offset = Vector2(10, -6) if attack_dir == Directions.Direction.RIGHT else Vector2(-10, -6)
+	instance.start(character.position + offset, direction_to_player())
 	character.get_parent().add_child(instance)
 
 func find_player():
