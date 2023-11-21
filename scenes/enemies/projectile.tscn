@@ -1,17 +1,63 @@
-[gd_scene load_steps=4 format=3 uid="uid://dr3ainkyuap4f"]
+[gd_scene load_steps=7 format=3 uid="uid://dr3ainkyuap4f"]
 
-[ext_resource type="Texture2D" uid="uid://d0juyhg8rq2ls" path="res://icon.svg" id="1_538n5"]
 [ext_resource type="Script" path="res://scripts/enemies/attacks/projectile.gd" id="1_pml1i"]
+[ext_resource type="Texture2D" uid="uid://cectdlun0f53c" path="res://assets/png/bullet-Sheet.png" id="2_vootk"]
+
+[sub_resource type="Animation" id="Animation_wr8iu"]
+resource_name = "fly"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+
+[sub_resource type="Animation" id="Animation_smbd7"]
+resource_name = "pop"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4oybq"]
+_data = {
+"fly": SubResource("Animation_wr8iu"),
+"pop": SubResource("Animation_smbd7")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j2ugs"]
 size = Vector2(10, 10)
 
-[node name="projectile" type="Node2D"]
+[node name="projectile" type="Node2D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_pml1i")
+animation_player = NodePath("Sprite2D/AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.09375, 0.09375)
-texture = ExtResource("1_538n5")
+texture = ExtResource("2_vootk")
+hframes = 7
+frame = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_4oybq")
+}
 
 [node name="HitBox" type="Area2D" parent="."]
 
