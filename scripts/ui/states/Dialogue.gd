@@ -182,6 +182,7 @@ func _on_advance_dialogue():
 				load_branch(next_id)
 			# exit dialogue
 			else:
+				exit_branch()
 				Events.emit_signal("dialogue_complete")
 				Events.emit_signal("alert_dialogue")
 		# tick dialogue idx, display new dialogue
