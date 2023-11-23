@@ -1,4 +1,5 @@
 extends Sprite2D
+class_name ReflectionComponent
 
 @export var sprite_to_reflect: Sprite2D
 
