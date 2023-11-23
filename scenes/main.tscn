@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bv2de2s6bsqyx" path="res://scenes/npc/weapondude_npc.tscn" id="11_w845e"]
 [ext_resource type="PackedScene" uid="uid://cbwnw66tib2sb" path="res://scenes/enemies/bomber.tscn" id="12_4mdh1"]
 [ext_resource type="PackedScene" uid="uid://dhxuvts2ttkcy" path="res://scenes/enemies/ranged_enemy.tscn" id="12_ijp71"]
-[ext_resource type="PackedScene" uid="uid://siyv31md8s0w" path="res://scenes/structures/shack1.tscn" id="12_qn7et"]
+[ext_resource type="PackedScene" uid="uid://siyv31md8s0w" path="res://scenes/environment/shack1.tscn" id="12_qn7et"]
 
 [sub_resource type="Gradient" id="Gradient_45jg6"]
 interpolation_mode = 2
