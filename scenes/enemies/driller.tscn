@@ -14,7 +14,7 @@
 
 [sub_resource type="Animation" id="Animation_u6ttv"]
 resource_name = "Attack_down_left"
-length = 0.6
+length = 0.3
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -23,7 +23,7 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [68, 75]
@@ -35,7 +35,7 @@ tracks/1/path = NodePath("../StateMachine/Attack/AttackBox/CollisionShape2D:disa
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.5),
+"times": PackedFloat32Array(0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -55,7 +55,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_a1raf"]
 resource_name = "Attack_down_right"
-length = 0.6
+length = 0.3
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -64,7 +64,7 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [56, 63]
@@ -76,7 +76,7 @@ tracks/1/path = NodePath("../StateMachine/Attack/AttackBox/CollisionShape2D:disa
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.5),
+"times": PackedFloat32Array(0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -96,7 +96,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_o17em"]
 resource_name = "Attack_up_left"
-length = 0.6
+length = 0.3
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -105,7 +105,7 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [92, 99]
@@ -117,7 +117,7 @@ tracks/1/path = NodePath("../StateMachine/Attack/AttackBox/CollisionShape2D:disa
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.5),
+"times": PackedFloat32Array(0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -137,7 +137,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_blea8"]
 resource_name = "Attack_up_right"
-length = 0.6
+length = 0.3
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -146,7 +146,7 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [80, 87]
@@ -158,7 +158,7 @@ tracks/1/path = NodePath("../StateMachine/Attack/AttackBox/CollisionShape2D:disa
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.5),
+"times": PackedFloat32Array(0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -653,7 +653,7 @@ radius = 137.004
 radius = 277.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jbqi6"]
-radius = 104.005
+radius = 75.0067
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wahrd"]
 radius = 13.0
@@ -668,7 +668,7 @@ collision_mask = 3
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_gnpkk")
 hframes = 160
-frame = 75
+frame = 87
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -699,7 +699,6 @@ animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
 [node name="Track" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animation_player", "character")]
-visible = false
 script = ExtResource("4_nx5nt")
 RE_NAV_TIME = 0.5
 SPEED = 50
@@ -724,7 +723,6 @@ animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 
 [node name="AttackRadius" type="Area2D" parent="StateMachine/Attack"]
-visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackRadius"]
@@ -734,9 +732,8 @@ shape = SubResource("CircleShape2D_jbqi6")
 [node name="AttackBox" type="Area2D" parent="StateMachine/Attack"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Attack/AttackBox"]
-position = Vector2(-2, 2)
+position = Vector2(2, -2)
 shape = SubResource("CircleShape2D_wahrd")
-disabled = true
 
 [node name="SlideTimer" type="Timer" parent="StateMachine/Attack"]
 one_shot = true
