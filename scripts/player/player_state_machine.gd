@@ -11,18 +11,23 @@ var in_dialogue: bool = false
 var buffer_dash: bool = false
 var buffer_attack: bool = false
 
+var is_dead = false
+
 func _ready():
 	transition_to("Idle")
 	Events.idle_dialogue.connect(exit_dialogue)
 	Events.dialogue_complete.connect(exit_dialogue)
 	health_component.damage_taken.connect(_on_damage_taken)
+	health_component.died.connect(_on_death)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("escape") and in_dialogue:
 		Events.emit_signal("alert_dialogue")
 		exit_dialogue()
 	
-	if state.name == "Hit":
+	if is_dead:
+		transition_to("Dead")
+	elif state.name == "Hit":
 		transition_to("Hit")
 	elif Input.is_action_just_pressed("interact"):
 		if not in_dialogue:
@@ -71,7 +76,7 @@ func _physics_process(delta: float) -> void:
 			transition_to("Idle")
 	else:
 		transition_to("Idle")
-		
+	
 	state.handle_physics(delta)
 
 func exit_dialogue():
@@ -85,3 +90,6 @@ func _on_damage_taken(attack: Attack):
 
 func _on_hit_return_to_idle():
 	transition_to("Idle")
+
+func _on_death():
+	is_dead = true
