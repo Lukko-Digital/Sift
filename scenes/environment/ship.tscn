@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://qkayauboagn2"]
+[gd_scene load_steps=12 format=3 uid="uid://qkayauboagn2"]
 
 [ext_resource type="Texture2D" uid="uid://crj2kmutgt4dp" path="res://assets/png/ship.png" id="1_j75x4"]
 [ext_resource type="Texture2D" uid="uid://caimi2bxbe36j" path="res://assets/png/ship_navigator.png" id="2_srch6"]
 [ext_resource type="PackedScene" uid="uid://d4a5sxntmq8xf" path="res://scenes/componenets/interactable_component.tscn" id="3_75nwq"]
+[ext_resource type="Texture2D" uid="uid://xddtxsh77vwc" path="res://assets/png/ship_idle_water_foam_sheet.png" id="4_mly1h"]
+[ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="5_krpeu"]
+[ext_resource type="Texture2D" uid="uid://ds24cy1i3mkdd" path="res://assets/png/ship_reflection.png" id="6_cvs8q"]
+[ext_resource type="Texture2D" uid="uid://bse3h1pfccl2r" path="res://assets/png/navigator_reflection.png" id="7_urlc1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u1y86"]
 radius = 7.0
@@ -11,6 +15,28 @@ height = 118.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wyo1s"]
 radius = 8.0
 height = 22.0
+
+[sub_resource type="Animation" id="Animation_20yca"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cne0h"]
+_data = {
+"idle": SubResource("Animation_20yca")
+}
 
 [node name="ship" type="Node2D"]
 
@@ -34,3 +60,27 @@ DIALOGUE_FILE = "boat.idmu"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GuySprite/InteractableComponent"]
 position = Vector2(9, 22)
 shape = SubResource("CapsuleShape2D_wyo1s")
+
+[node name="WaterFoamSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(-11, 51)
+texture = ExtResource("4_mly1h")
+hframes = 4
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WaterFoamSprite"]
+autoplay = "idle"
+speed_scale = 3.0
+libraries = {
+"": SubResource("AnimationLibrary_cne0h")
+}
+
+[node name="ShipReflection" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("5_krpeu")]
+texture = ExtResource("6_cvs8q")
+flip_v = false
+sprite_to_reflect = NodePath("../ShipSprite")
+
+[node name="GuyReflection" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("5_krpeu")]
+texture = ExtResource("7_urlc1")
+flip_v = false
+sprite_to_reflect = NodePath("../GuySprite")
