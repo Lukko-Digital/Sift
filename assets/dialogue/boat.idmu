@@ -1,0 +1,9 @@
+name: Boat Guy
+image: weapondude_npc.png
+~ O
+: 0
+	YUHHHH WE'RE ON A BOAT
+	> EXIT
+: 1
+	WEEEEEEEEEEEEEEEEEEEEEE
+	> EXIT
