@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b8md8ehlk518q"]
+[gd_scene load_steps=16 format=3 uid="uid://b8md8ehlk518q"]
 
 [ext_resource type="TileSet" uid="uid://lopijjupr2li" path="res://assets/tilemaps/main.tres" id="1_3rde8"]
 [ext_resource type="PackedScene" uid="uid://1dmsp3osd16i" path="res://scenes/player/player.tscn" id="1_6t2e7"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cbwnw66tib2sb" path="res://scenes/enemies/bomber.tscn" id="12_4mdh1"]
 [ext_resource type="PackedScene" uid="uid://dhxuvts2ttkcy" path="res://scenes/enemies/ranged_enemy.tscn" id="12_ijp71"]
 [ext_resource type="PackedScene" uid="uid://siyv31md8s0w" path="res://scenes/environment/shack1.tscn" id="12_qn7et"]
+[ext_resource type="PackedScene" uid="uid://qkayauboagn2" path="res://scenes/environment/ship.tscn" id="13_4tfsb"]
 
 [sub_resource type="Gradient" id="Gradient_45jg6"]
 interpolation_mode = 2
@@ -194,9 +195,6 @@ position = Vector2(-92, -293)
 [node name="driller2" parent="." instance=ExtResource("11_pnxbw")]
 position = Vector2(-579, 154)
 
-[node name="driller3" parent="." instance=ExtResource("11_pnxbw")]
-position = Vector2(846, 298)
-
 [node name="crab4" parent="." instance=ExtResource("5_5473s")]
 position = Vector2(-51, -568)
 
@@ -256,3 +254,6 @@ position = Vector2(-675, 195)
 
 [node name="ranged_enemy" parent="." instance=ExtResource("12_ijp71")]
 position = Vector2(196, 186)
+
+[node name="ship" parent="." instance=ExtResource("13_4tfsb")]
+position = Vector2(1048, 249)

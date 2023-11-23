@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://qkayauboagn2"]
+
+[ext_resource type="Texture2D" uid="uid://crj2kmutgt4dp" path="res://assets/png/ship.png" id="1_j75x4"]
+[ext_resource type="Texture2D" uid="uid://caimi2bxbe36j" path="res://assets/png/ship_navigator.png" id="2_srch6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u1y86"]
+radius = 7.0
+height = 118.0
+
+[node name="ship" type="Node2D"]
+
+[node name="ShipSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_j75x4")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ShipSprite"]
+collision_layer = 384
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipSprite/StaticBody2D"]
+position = Vector2(-9, 41)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_u1y86")
+
+[node name="GuySprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_srch6")
