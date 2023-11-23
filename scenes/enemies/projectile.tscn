@@ -43,7 +43,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j2ugs"]
-size = Vector2(10, 10)
+size = Vector2(6, 4)
 
 [node name="projectile" type="Node2D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_pml1i")
@@ -52,7 +52,7 @@ animation_player = NodePath("Sprite2D/AnimationPlayer")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_vootk")
 hframes = 7
-frame = 6
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
