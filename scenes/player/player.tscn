@@ -1460,8 +1460,9 @@ offset = Vector2(0, -60)
 [node name="Sprite2D" type="Sprite2D" parent="WaterMask"]
 position = Vector2(1, -8)
 texture = ExtResource("2_g1nij")
-hframes = 275
-frame = 3
+hframes = 15
+vframes = 20
+frame = 44
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
@@ -1573,7 +1574,8 @@ texture = ExtResource("3_j4dwo")
 z_as_relative = false
 position = Vector2(1, -50)
 texture = ExtResource("2_g1nij")
-hframes = 275
+hframes = 15
+vframes = 20
 sprite_to_reflect = NodePath("../../WaterMask/Sprite2D")
 
 [node name="SplashTimer" type="Timer" parent="."]
