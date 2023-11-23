@@ -10,6 +10,7 @@ signal dialogue_complete
 
 # Combat UI
 signal player_damaged(damage)
+signal enemy_damaged
 
 # World Vars
 signal set_world_var(key, val)

@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var player: CharacterBody2D = main_scene.find_child("player")
 
 const HIT_STOP_DELAY = 0.0
-const HIT_STOP_DURATION = 0.03
+const HIT_STOP_DURATION = 0.07
 
 var player_max_hp: int
 var player_current_hp: int
@@ -22,6 +22,7 @@ var shake_amount: int
 
 func _ready():
 	Events.player_damaged.connect(_on_player_damaged)
+	Events.enemy_damaged.connect(_on_enemy_damaged)
 	heart_container_default_pos = hearts_container.position
 	shake_timer.timeout.connect(_shake_end)
 	initialize_health()
@@ -55,6 +56,10 @@ func _on_player_damaged(damage):
 	half_hearts.size.x = heart_width * (floor(player_current_hp / 2) + player_current_hp % 2)
 	full_hearts.size.x = heart_width * floor(player_current_hp / 2)
 	screen_color_animation_player.play("on_hit_red")
+	shake(0.1, 15)
+	hit_stop()
+
+func _on_enemy_damaged():
 	shake(0.1, 15)
 	hit_stop()
 

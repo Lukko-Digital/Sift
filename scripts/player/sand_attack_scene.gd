@@ -28,3 +28,4 @@ func _on_hit(area):
 			StunnedEffect.new(0.2)
 		]
 		area.damage(sand_attack)
+		Events.emit_signal("enemy_damaged")
