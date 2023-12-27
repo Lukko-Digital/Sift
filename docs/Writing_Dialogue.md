@@ -1,5 +1,7 @@
 # Overview
 Dialogue for Sift is written and stored in `.idmu` (Ian Dialogue MarkUp) files. This document will walk you through how to write and format `.idmu` files. If you haven't already, it is suggested to familiarize yourself with Sift's dialogue architecture by reading `dialogue_architecture.md`.
+
+NOTE: The dialogue system is very character sensitive, so make sure to set your `.idmu` to `LF` and not `CRLF` to make sure the carriage return character is not added.
 # Header
 The first two lines of each dialogue file is the info header. The header denotes the name of the interactable and the image of the interactable. The image is assumed to be the filename of an image in `res://assets/portraits/`.
 
@@ -99,9 +101,16 @@ Every subsequent time the NPC responds to this question, they say, "cmon you alr
 After either reponses, they switch to the re-response (R) branch.
 
 ### In-line Info
-If you wish to use a different name or image than the default defined in the header, you can do so with in-line info. In-line info is denoted in square brackets before the dialogue line, with a space after the open bracket, and both before and after the close bracket.
+If you wish to use a different name or image than the default defined in the header, or emit a signal via dialogue, you can do so with in-line info. In-line info is denoted in square brackets before the dialogue line, with a space after the open bracket, and both before and after the close bracket.
 
-The same tags (`name: ` and `image: `) that are used in the header are used in in-line info.
+The following tags are used in in-line info
+- `name: `
+- `image: `
+- `emit: `
+
+#### Examples
+
+stuff: YOU NEED COMMA SPACE BETWEEN EACH TAG, EMIT NEEDS TO NOT HAVE SPACES AFTER COMMAS, EMIT NEEDS TO BE IN THE EXACT SYNTAX OF THE CODE
 
 Changing the name:
 ```
@@ -111,12 +120,16 @@ Changing the image:
 ```
 [ image: guy_shocked.png ] woah that's crazy
 ```
-Changing both:
+Emitting a signal:
+```
+[ emit: "set_world_var","quest_accepted",true ] thank you for accepting my quest
+```
+
+Using Multiple Tags:
 ```
 [ name: ???, image: unknown.png ] *a mysterious figure approaches*
 ```
 
-NOTE: If both name and image are changed, name must come before image. The two are separated by a comma and a space.
 
 ---
 
