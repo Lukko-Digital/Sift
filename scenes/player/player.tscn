@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=3 uid="uid://1dmsp3osd16i"]
+[gd_scene load_steps=139 format=3 uid="uid://1dmsp3osd16i"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
 [ext_resource type="Texture2D" uid="uid://dgyosk8b1sq5p" path="res://assets/png/player-Sheet-4.png" id="2_g1nij"]
@@ -1136,6 +1136,18 @@ _data = {
 "water_up_start": SubResource("Animation_plh1y")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y30hp"]
+animation = &"die_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7muom"]
+animation = &"die_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_7x6aq"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_y30hp")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_7muom")
+blend_point_1/pos = 1.0
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e3tqw"]
 animation = &"hit_left"
 
@@ -1425,6 +1437,8 @@ transitions = ["Start", "Jump", SubResource("AnimationNodeStateMachineTransition
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hp0up"]
+states/Die/node = SubResource("AnimationNodeBlendSpace1D_7x6aq")
+states/Die/position = Vector2(1086, 198)
 states/Hit/node = SubResource("AnimationNodeBlendSpace2D_448ef")
 states/Hit/position = Vector2(940, 188)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_qv8qx")
@@ -1439,6 +1453,7 @@ states/Walk/position = Vector2(576, 100)
 states/WaterDash/node = SubResource("AnimationNodeStateMachine_x17of")
 states/WaterDash/position = Vector2(1110, 79)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_yf6bb")]
+graph_offset = Vector2(62, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0hunl"]
 radius = 22.0227
@@ -1497,7 +1512,7 @@ position = Vector2(1, -8)
 texture = ExtResource("2_g1nij")
 hframes = 15
 vframes = 20
-frame = 6
+frame = 19
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
@@ -1509,6 +1524,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_hp0up")
 anim_player = NodePath("../WaterMask/Sprite2D/AnimationPlayer")
 active = true
+parameters/Die/blend_position = -0.00332779
 parameters/Hit/blend_position = Vector2(0, 1.02128)
 parameters/Idle/blend_position = Vector2(0, 1)
 parameters/SandAttack/blend_position = Vector2(0, -0.973799)
@@ -1594,7 +1610,7 @@ shape = SubResource("CapsuleShape2D_jc72j")
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 
 [node name="HealthComponent" parent="." instance=ExtResource("11_mf8l8")]
-max_health = 6.0
+max_health = 2.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["player_hurtbox"] instance=ExtResource("12_nrhlb")]
 visible = false
