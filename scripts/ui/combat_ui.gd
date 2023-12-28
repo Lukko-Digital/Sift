@@ -21,8 +21,10 @@ var shake_amount: int
 
 
 func _ready():
+	Events.enter_scene.connect(_enter_scene)
 	Events.player_damaged.connect(_on_player_damaged)
 	Events.enemy_damaged.connect(_on_enemy_damaged)
+	Events.player_dead.connect(_on_player_death)
 	heart_container_default_pos = hearts_container.position
 	shake_timer.timeout.connect(_shake_end)
 	initialize_health()
@@ -51,6 +53,9 @@ func hit_stop():
 	await get_tree().create_timer(HIT_STOP_DURATION).timeout
 	get_tree().paused = false
 
+func _enter_scene():
+	screen_color_animation_player.play_backwards("fade_to_black")
+
 func _on_player_damaged(damage):
 	player_current_hp -= damage
 	half_hearts.size.x = heart_width * (floor(player_current_hp / 2) + player_current_hp % 2)
@@ -62,6 +67,11 @@ func _on_player_damaged(damage):
 func _on_enemy_damaged():
 	shake(0.1, 15)
 	hit_stop()
+
+func _on_player_death():
+	screen_color_animation_player.play("fade_to_black")
+	await screen_color_animation_player.animation_finished
+	Events.emit_signal("respawn")
 
 func _shake_end():
 	hearts_container.position = heart_container_default_pos
