@@ -9,8 +9,11 @@ signal interaction_complete(npc_node, branch)
 signal dialogue_complete
 
 # Combat UI
+signal enter_scene
 signal player_damaged(damage)
 signal enemy_damaged
+signal player_dead
+signal respawn
 
 # World Vars
 signal set_world_var(key, val)
