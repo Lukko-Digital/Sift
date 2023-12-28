@@ -7,31 +7,33 @@ extends State
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var instance_timer: Timer = $InstanceTimer
 
-@export var attack_lengths = [0.2,0.2,0.4]
-@export var initial_movement_delays = [0.01,0.01,0.1]
-@export var startups = [0.01,0.01,0.2]
-@export var end_lags = [0.1,0.1,0.1]
+@export var attack_lengths = [0.5]
+@export var initial_movement_delays = [0.001]
+@export var startups = [0.001]
+@export var end_lags = [0.35]
 
 const END_SPEED_COEFF = 0.5
 
-const COOLDOWN = 0.2
-const MULTI_ATTCK_TIMING = 0.25
+const COOLDOWN = 0.001
+const MULTI_ATTCK_TIMING = 0.001
 
 var direction: Vector2
 
 var multi_attack = 0
+var num_attacks = 1
 
 func enter():
 	timer.start(attack_lengths[multi_attack])
 	instance_timer.start(startups[multi_attack])
 	continuation_timer.stop()
 	
-	if multi_attack == 0:
-		direction = (get_global_mouse_position() - character.global_position).normalized()
-	else:
-		var angle = direction.angle_to(get_global_mouse_position() - character.global_position)
-		angle = sign(angle) * min(abs(angle), PI/4)
-		direction = direction.rotated(angle)
+	direction = (get_global_mouse_position() - character.global_position).normalized()
+#	if multi_attack == 0:
+#		direction = (get_global_mouse_position() - character.global_position).normalized()
+#	else:
+#		var angle = direction.angle_to(get_global_mouse_position() - character.global_position)
+#		angle = sign(angle) * min(abs(angle), PI/4)
+#		direction = direction.rotated(angle)
 	
 #	var anim_name: String
 	
@@ -57,7 +59,7 @@ func handle_physics(delta):
 		var walk_direction = Vector2(
 			Input.get_axis("left", "right"), Input.get_axis("up", "down")
 		).normalized()
-		character.velocity = character.velocity.move_toward(walk_direction * character.RUN_SPEED * END_SPEED_COEFF, character.RUN_ACCEL * delta)
+		character.velocity = character.velocity.move_toward((walk_direction * END_SPEED_COEFF) * character.RUN_SPEED , character.RUN_ACCEL * delta)
 	else:
 		character.velocity = direction * character.RUN_SPEED
 	
@@ -71,7 +73,7 @@ func exit():
 	continuation_timer.start(MULTI_ATTCK_TIMING)
 	multi_attack += 1
 	
-	if multi_attack == 3:
+	if multi_attack == num_attacks:
 		multi_attack = 0
 		cooldown_timer.start(COOLDOWN)
 

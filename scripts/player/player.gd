@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-var on_sand: bool = false
+var on_sand: bool = true
 var on_water: bool = false
 
 var RUN_SPEED = 100
@@ -9,10 +9,15 @@ const RUN_ACCEL = 1000
 
 @onready var sprite: Sprite2D = $WaterMask/Sprite2D
 @onready var depth_checker = $DepthShoreChecker
-@onready var deep_water_checker: Area2D = $DeepWaterChecker
 @onready var sinking_timer: Timer = $DeepWaterSinkTimer
 @onready var particles: CPUParticles2D = $WaterParticles
 @onready var health_component: HealthComponent = $HealthComponent
+
+@onready var deep_water_checker: Area2D = $DeepWaterChecker
+@onready var water_checker: Area2D = $WaterChecker
+@onready var sand_checker: Area2D = $SandChecker
+
+@onready var buffer_timer: Timer = $SandWaterBufferTimer
 
 @onready var splash_scene = preload("res://scenes/player/splash.tscn")
 
@@ -21,7 +26,7 @@ func max_hp():
 	return $HealthComponent.max_health
 	
 func check_drown():
-	return deep_water_checker.has_overlapping_bodies()
+	return deep_water_checker.has_overlapping_bodies() and not water_checker.has_overlapping_bodies()
 	
 func drown():
 	if check_drown():
@@ -33,7 +38,7 @@ func drown():
 			sprite.offset.y += 0.5
 	
 func sink_in_water():
-	if on_water:
+	if on_water or check_drown():
 		drown()
 		if not check_drown() and sinking_timer.is_stopped():
 			var distance = 32.0
@@ -42,7 +47,6 @@ func sink_in_water():
 					distance = (raycast.get_collision_point() - raycast.global_position).length()
 		
 			sprite.offset.y = distance / 4 + 1
-		
 	else:
 		sprite.offset.y = 0
 		
@@ -77,16 +81,20 @@ func _on_deep_water_checker_body_exited(body):
 	var tween = get_tree().create_tween()
 	
 	tween.tween_property(sprite, "offset", Vector2(0, 9), 0.5)
+	
+func _process(delta):
+	if (not buffer_timer.is_stopped()):
+		on_sand = true
+		on_water = true
+	else:
+		if (on_sand and not sand_checker.has_overlapping_bodies()):
+			buffer_timer.start(0.1)
+		elif (on_water and (not water_checker.has_overlapping_bodies() or sand_checker.has_overlapping_bodies())):
+			buffer_timer.start(0.1)
+		else:
+			on_sand = sand_checker.has_overlapping_bodies()
+			on_water = water_checker.has_overlapping_bodies() and not sand_checker.has_overlapping_bodies()
 
-
-func _on_sand_checker_body_entered(body):
-	on_sand = true
-
-func _on_sand_checker_body_exited(body):
-	on_sand = false
-
-func _on_water_checker_body_entered(body):
-	on_water = true
-
-func _on_water_checker_body_exited(body):
-	on_water = false
+func _on_sand_water_buffer_timer_timeout():
+	on_sand = sand_checker.has_overlapping_bodies()
+	on_water = water_checker.has_overlapping_bodies() and not sand_checker.has_overlapping_bodies()
