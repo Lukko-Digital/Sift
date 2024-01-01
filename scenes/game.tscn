@@ -1,14 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://pmfyma7kp24l"]
+[gd_scene load_steps=9 format=3 uid="uid://pmfyma7kp24l"]
 
 [ext_resource type="PackedScene" uid="uid://b8md8ehlk518q" path="res://scenes/main.tscn" id="1_1vu6b"]
 [ext_resource type="Script" path="res://scripts/render_camera.gd" id="2_20lf1"]
 [ext_resource type="PackedScene" uid="uid://c83lh8olstfpw" path="res://scenes/ui/dialogue_ui.tscn" id="3_j20hu"]
 [ext_resource type="PackedScene" uid="uid://bb3q3qfbatogk" path="res://scenes/ui/combat_ui.tscn" id="4_l7g74"]
 [ext_resource type="Shader" path="res://scripts/shaders/render_fog.gdshader" id="5_7obaj"]
+[ext_resource type="Shader" path="res://scripts/shaders/chromatic_abberation.gdshader" id="5_lh3lp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vu1gm"]
+shader = ExtResource("5_lh3lp")
+shader_parameter/r_displacement = Vector2(3, 0)
+shader_parameter/g_displacement = Vector2(-3, 0)
+shader_parameter/b_displacement = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s8u6t"]
 shader = ExtResource("5_7obaj")
-shader_parameter/fog_color = Color(0.309804, 0.741176, 1, 1)
+shader_parameter/fog_color = Color(0.431373, 0.752941, 0.827451, 1)
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -20,10 +27,10 @@ grow_vertical = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
-offset_left = -1349.0
-offset_top = -789.0
-offset_right = 1349.0
-offset_bottom = 789.0
+offset_left = -1920.0
+offset_top = -1080.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 stretch = true
 stretch_shrink = 4
 
@@ -31,7 +38,7 @@ stretch_shrink = 4
 handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 canvas_item_default_texture_filter = 0
-size = Vector2i(674, 394)
+size = Vector2i(960, 540)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
@@ -50,20 +57,21 @@ main_scene = NodePath("../SubViewportContainer/SubViewport/main")
 [node name="combat_ui" parent="." node_paths=PackedStringArray("main_scene") instance=ExtResource("4_l7g74")]
 main_scene = NodePath("../SubViewportContainer/SubViewport/main")
 
-[node name="DistanceFog" type="ColorRect" parent="."]
-z_index = 2
-material = SubResource("ShaderMaterial_vu1gm")
-layout_mode = 0
-offset_left = -1039.0
-offset_top = -604.0
-offset_right = 1038.0
-offset_bottom = 601.0
-
 [node name="ChromaticAbberation" type="ColorRect" parent="."]
-z_index = 1
+z_index = 3
 material = SubResource("ShaderMaterial_vu1gm")
 layout_mode = 0
-offset_left = -1377.0
-offset_top = -805.0
-offset_right = 1384.0
-offset_bottom = 817.0
+offset_left = -1920.0
+offset_top = -1080.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="DistanceFog" type="ColorRect" parent="."]
+visible = false
+z_index = 2
+material = SubResource("ShaderMaterial_s8u6t")
+layout_mode = 0
+offset_left = -1920.0
+offset_top = -1080.0
+offset_right = 1920.0
+offset_bottom = 1080.0
