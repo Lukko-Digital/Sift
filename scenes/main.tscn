@@ -112,7 +112,6 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="LIGHTING" type="Node2D" parent="."]
-visible = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="LIGHTING"]
 color = Color(0.933333, 0.898039, 0.866667, 1)

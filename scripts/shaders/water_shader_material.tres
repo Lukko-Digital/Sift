@@ -7,11 +7,12 @@
 shader = ExtResource("1_agdo8")
 shader_parameter/scroll1 = Vector2(0.02, 0)
 shader_parameter/scroll2 = Vector2(-0.05, 0.02)
-shader_parameter/distortion_strength = 0.0135
-shader_parameter/light_start = 0.637
-shader_parameter/light_end = 1.0
+shader_parameter/distortion_strength = 4.0
+shader_parameter/light_start = 0.65
+shader_parameter/light_end = 0.75
 shader_parameter/top_color = Color(1, 1, 1, 1)
 shader_parameter/view_to_local = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 shader_parameter/transparency = Color(1, 1, 1, 1)
+shader_parameter/tileset_size = 32.0
 shader_parameter/noise1 = ExtResource("2_tmwg8")
 shader_parameter/noise2 = ExtResource("2_tmwg8")
