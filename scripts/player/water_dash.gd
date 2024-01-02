@@ -12,8 +12,6 @@ extends State
 var stopping: bool = false
 var time = 0.6
 
-#var dig_direction: int
-
 func enter():
 	var tween = get_tree().create_tween()
 	tween.tween_property(character.sprite, "offset", Vector2.ZERO, 0.25)
@@ -39,6 +37,8 @@ func enter():
 		animation_tree["parameters/WaterDash/Jump/blend_position"] = Vector2(0, character.velocity.y / abs(character.velocity.y))
 	
 	dash_timer.start(time)
+	
+	particles.process_material.color = Color.WHITE;
 
 func handle_physics(delta):
 	

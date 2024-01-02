@@ -1,16 +1,18 @@
-[gd_scene load_steps=139 format=3 uid="uid://1dmsp3osd16i"]
+[gd_scene load_steps=121 format=3 uid="uid://1dmsp3osd16i"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_81117"]
 [ext_resource type="Texture2D" uid="uid://dgyosk8b1sq5p" path="res://assets/png/player-Sheet-4.png" id="2_g1nij"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="3_gdfiv"]
 [ext_resource type="Texture2D" uid="uid://d0juyhg8rq2ls" path="res://icon.svg" id="3_j4dwo"]
 [ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_keldo"]
+[ext_resource type="Texture2D" uid="uid://cxtfdeh8wnlgh" path="res://assets/png/player-Sheet.png" id="3_knv6c"]
 [ext_resource type="Script" path="res://scripts/player/states/idle.gd" id="4_u1pwq"]
 [ext_resource type="Script" path="res://scripts/player/states/run.gd" id="5_cpovh"]
 [ext_resource type="Script" path="res://scripts/player/water_dash.gd" id="8_1rdr2"]
 [ext_resource type="Script" path="res://scripts/player/states/sand_attack.gd" id="9_1pxfy"]
 [ext_resource type="Script" path="res://scripts/player/states/player_dead.gd" id="10_u3x7s"]
 [ext_resource type="Script" path="res://scripts/player/states/hit.gd" id="11_1pjmu"]
+[ext_resource type="Script" path="res://scripts/player/sand_dash.gd" id="11_e4uw6"]
 [ext_resource type="PackedScene" uid="uid://bmkrvevual04s" path="res://scenes/componenets/health_component.tscn" id="11_mf8l8"]
 [ext_resource type="PackedScene" uid="uid://cohr7yk3m5ban" path="res://scenes/componenets/hurtbox_component.tscn" id="12_nrhlb"]
 [ext_resource type="Texture2D" uid="uid://d08cl8q3c4s0s" path="res://assets/png/water_particle.png" id="15_ig7qa"]
@@ -798,6 +800,7 @@ tracks/0/keys = {
 resource_name = "water_down"
 length = 0.4
 loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -809,6 +812,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [248, 251]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_ks10m"]
@@ -862,16 +877,17 @@ tracks/1/path = NodePath("../../GPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.45),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_0bjx7"]
 resource_name = "water_left"
 length = 0.4
 loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -883,6 +899,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [231, 234]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_skvvb"]
@@ -936,10 +964,10 @@ tracks/1/path = NodePath("../../GPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.45),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_7sqxm"]
@@ -957,6 +985,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [214, 217]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_bfoba"]
@@ -1010,10 +1050,10 @@ tracks/1/path = NodePath("../../GPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.45),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_sk5a8"]
@@ -1031,6 +1071,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [265, 268]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_tpwxw"]
@@ -1084,10 +1136,74 @@ tracks/1/path = NodePath("../../GPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.45),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true]
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4b0k0"]
+resource_name = "sand_dash_right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [294, 298]
+}
+
+[sub_resource type="Animation" id="Animation_f1j4v"]
+resource_name = "sand_dash_left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [301, 305]
+}
+
+[sub_resource type="Animation" id="Animation_b7kan"]
+resource_name = "sand_dash_down"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [308, 312]
+}
+
+[sub_resource type="Animation" id="Animation_rlcg7"]
+resource_name = "sand_dash_up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [315, 319]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ld84v"]
@@ -1118,6 +1234,10 @@ _data = {
 "sand_attack_left": SubResource("Animation_vvxtw"),
 "sand_attack_right": SubResource("Animation_s4bjf"),
 "sand_attack_up": SubResource("Animation_f6wn8"),
+"sand_dash_down": SubResource("Animation_b7kan"),
+"sand_dash_left": SubResource("Animation_f1j4v"),
+"sand_dash_right": SubResource("Animation_4b0k0"),
+"sand_dash_up": SubResource("Animation_rlcg7"),
 "walk_down": SubResource("Animation_imr2k"),
 "walk_left": SubResource("Animation_nw3u2"),
 "walk_right": SubResource("Animation_flfuo"),
@@ -1215,115 +1335,27 @@ blend_point_2/pos = Vector2(0, -1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_mm3gm")
 blend_point_3/pos = Vector2(0, 1)
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w5dog"]
-animation = &"dig_left"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ebaq"]
+animation = &"sand_dash_left"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_degho"]
-animation = &"dig_left_start"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s3ni8"]
+animation = &"sand_dash_right"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2vpp5"]
-animation = &"dig_left_end"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v8p74"]
+animation = &"sand_dash_down"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1xpfr"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_10g3q"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8edv1"]
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_04lb2"]
-states/dig/node = SubResource("AnimationNodeAnimation_w5dog")
-states/dig/position = Vector2(553, 100)
-states/dig_left_start/node = SubResource("AnimationNodeAnimation_degho")
-states/dig_left_start/position = Vector2(376, 108)
-states/end/node = SubResource("AnimationNodeAnimation_2vpp5")
-states/end/position = Vector2(727, 86)
-transitions = ["Start", "dig_left_start", SubResource("AnimationNodeStateMachineTransition_1xpfr"), "dig_left_start", "dig", SubResource("AnimationNodeStateMachineTransition_10g3q"), "dig", "end", SubResource("AnimationNodeStateMachineTransition_8edv1")]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_daq7u"]
-animation = &"dig_down"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r1x1c"]
-animation = &"dig_down_start"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2400d"]
-animation = &"dig_down_end"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3t7pw"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p8wrt"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_og5u5"]
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_526t5"]
-states/dig/node = SubResource("AnimationNodeAnimation_daq7u")
-states/dig/position = Vector2(512, 137)
-states/dig_down_start/node = SubResource("AnimationNodeAnimation_r1x1c")
-states/dig_down_start/position = Vector2(399, 69)
-states/end/node = SubResource("AnimationNodeAnimation_2400d")
-states/end/position = Vector2(689, 69)
-transitions = ["Start", "dig_down_start", SubResource("AnimationNodeStateMachineTransition_3t7pw"), "dig_down_start", "dig", SubResource("AnimationNodeStateMachineTransition_p8wrt"), "dig", "end", SubResource("AnimationNodeStateMachineTransition_og5u5")]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vwpe2"]
-animation = &"dig_up"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3c1mt"]
-animation = &"dig_up_start"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lr652"]
-animation = &"dig_up_end"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8k2tv"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8of5k"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jaow2"]
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7dl56"]
-states/dig/node = SubResource("AnimationNodeAnimation_vwpe2")
-states/dig/position = Vector2(584, 100)
-states/dig_up_start/node = SubResource("AnimationNodeAnimation_3c1mt")
-states/dig_up_start/position = Vector2(372, 112)
-states/end/node = SubResource("AnimationNodeAnimation_lr652")
-states/end/position = Vector2(754, 100)
-transitions = ["Start", "dig_up_start", SubResource("AnimationNodeStateMachineTransition_8k2tv"), "dig_up_start", "dig", SubResource("AnimationNodeStateMachineTransition_8of5k"), "dig", "end", SubResource("AnimationNodeStateMachineTransition_jaow2")]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7h2y8"]
-animation = &"dig_right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gwrpm"]
-animation = &"dig_right_start"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n5psj"]
-animation = &"dig_right_end"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mrxsj"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xjlhi"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_go25l"]
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_h3ous"]
-states/dig/node = SubResource("AnimationNodeAnimation_7h2y8")
-states/dig/position = Vector2(520, 107)
-states/dig_right_start/node = SubResource("AnimationNodeAnimation_gwrpm")
-states/dig_right_start/position = Vector2(352, 168)
-states/end/node = SubResource("AnimationNodeAnimation_n5psj")
-states/end/position = Vector2(714, 118)
-transitions = ["Start", "dig_right_start", SubResource("AnimationNodeStateMachineTransition_mrxsj"), "dig_right_start", "dig", SubResource("AnimationNodeStateMachineTransition_xjlhi"), "dig", "end", SubResource("AnimationNodeStateMachineTransition_go25l")]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4ou5f"]
+animation = &"sand_dash_up"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_vo0da"]
-blend_point_0/node = SubResource("AnimationNodeStateMachine_04lb2")
+blend_point_0/node = SubResource("AnimationNodeAnimation_5ebaq")
 blend_point_0/pos = Vector2(-1, 0)
-blend_point_1/node = SubResource("AnimationNodeStateMachine_526t5")
-blend_point_1/pos = Vector2(0, 1)
-blend_point_2/node = SubResource("AnimationNodeStateMachine_7dl56")
-blend_point_2/pos = Vector2(0, -1)
-blend_point_3/node = SubResource("AnimationNodeStateMachine_h3ous")
-blend_point_3/pos = Vector2(1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_s3ni8")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_v8p74")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_4ou5f")
+blend_point_3/pos = Vector2(0, -1)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qrt4c"]
 animation = &"walk_left"
@@ -1508,11 +1540,11 @@ texture = ExtResource("3_j4dwo")
 offset = Vector2(0, -60)
 
 [node name="Sprite2D" type="Sprite2D" parent="WaterMask"]
-position = Vector2(1, -8)
-texture = ExtResource("2_g1nij")
-hframes = 15
-vframes = 20
-frame = 27
+position = Vector2(11, -1)
+texture = ExtResource("3_knv6c")
+hframes = 17
+vframes = 19
+frame = 48
 region_rect = Rect2(16, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WaterMask/Sprite2D"]
@@ -1528,7 +1560,7 @@ parameters/Die/blend_position = -0.00332779
 parameters/Hit/blend_position = Vector2(0, 1.02128)
 parameters/Idle/blend_position = Vector2(0, 1)
 parameters/SandAttack/blend_position = Vector2(0, -0.973799)
-parameters/SandDash/blend_position = Vector2(0, 1)
+parameters/SandDash/blend_position = Vector2(-0.991896, -0.0131004)
 parameters/Walk/blend_position = Vector2(0, 0)
 parameters/WaterDash/Jump/blend_position = Vector2(-0.990549, 0.0086956)
 parameters/WaterDash/Loop/blend_position = Vector2(0, 0)
@@ -1591,6 +1623,14 @@ script = ExtResource("10_u3x7s")
 animation_player = NodePath("../../WaterMask/Sprite2D/AnimationPlayer")
 character = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
+
+[node name="SandDash" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("character", "animation_tree")]
+script = ExtResource("11_e4uw6")
+character = NodePath("../..")
+animation_tree = NodePath("../../AnimationTree")
+
+[node name="DashTimer" type="Timer" parent="StateMachine/SandDash"]
+one_shot = true
 
 [node name="NPCDialogueCollider" type="Area2D" parent="."]
 visible = false
@@ -1742,6 +1782,7 @@ one_shot = true
 [connection signal="return_to_idle" from="StateMachine/Hit" to="StateMachine" method="_on_hit_return_to_idle"]
 [connection signal="timeout" from="StateMachine/Hit/EffectTimer" to="StateMachine/Hit" method="_on_effect_timer_timeout"]
 [connection signal="timeout" from="StateMachine/WaterDash/DashTimer" to="StateMachine/WaterDash" method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="StateMachine/SandDash/DashTimer" to="StateMachine/WaterDash" method="_on_dash_timer_timeout"]
 [connection signal="area_entered" from="NPCDialogueCollider" to="." method="_on_npc_dialogue_collider_area_entered"]
 [connection signal="area_exited" from="NPCDialogueCollider" to="." method="_on_npc_dialogue_collider_area_exited"]
 [connection signal="timeout" from="SplashTimer" to="." method="_on_splash_timer_timeout"]

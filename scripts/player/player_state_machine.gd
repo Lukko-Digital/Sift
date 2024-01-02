@@ -1,6 +1,7 @@
 extends StateMachine
 
-@onready var dash_timer: Timer = $WaterDash/DashTimer
+@onready var water_dash_timer: Timer = $WaterDash/DashTimer
+@onready var sand_dash_timer: Timer = $SandDash/DashTimer
 @onready var sand_attack_timer: Timer = $SandAttack/Timer
 @onready var sand_attack_cooldown_timer: Timer = $SandAttack/CooldownTimer
 
@@ -40,17 +41,25 @@ func _physics_process(delta: float) -> void:
 	elif in_dialogue:
 		transition_to("Idle")
 	elif Input.is_action_just_pressed("dash") and player.on_water:# and not in_dialogue:
-		if dash_timer.time_left < 0.15 and state.name == "WaterDash":
+		if water_dash_timer.time_left < 0.15 and state.name == "WaterDash":
 			buffer_dash = true
 		transition_to("WaterDash")
+	elif Input.is_action_just_pressed("dash") and not player.on_water:
+		if sand_dash_timer.time_left < 0.15 and state.name == "SandDash":
+			buffer_dash = true
+		transition_to("SandDash")
 #	elif (Input.is_action_just_pressed("attack") and player.mode == "Sand" and state.name == "Dash" and dash_timer.time_left < 0.3 and sand_attack_cooldown_timer.is_stopped()):
 #		if sand_attack_timer.time_left < 0.15 and state == get_node("SandAttack"):
 #			buffer_attack = true
 #		transition_to("SandAttack")
-	elif ((state.name == "WaterDash" and not dash_timer.is_stopped()) or (buffer_dash and not state.name == "WaterDash")):
-		if dash_timer.time_left > 0.15:
+	elif ((state.name == "WaterDash" and not water_dash_timer.is_stopped()) or (buffer_dash and not state.name == "WaterDash")):
+		if water_dash_timer.time_left > 0.15:
 			buffer_dash = false
 		transition_to("WaterDash")
+	elif ((state.name == "SandDash" and not sand_dash_timer.is_stopped()) or (buffer_dash and not state.name == "SandDash")):
+		if sand_dash_timer.time_left > 0.15:
+			buffer_dash = false
+		transition_to("SandDash")
 	elif (Input.is_action_just_pressed("attack") and player.on_sand and sand_attack_cooldown_timer.is_stopped()):
 		if sand_attack_timer.time_left < 0.15 and state == get_node("SandAttack"):
 			buffer_attack = true
