@@ -3,10 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://crj2kmutgt4dp" path="res://assets/png/ship.png" id="1_j75x4"]
 [ext_resource type="Texture2D" uid="uid://caimi2bxbe36j" path="res://assets/png/ship_navigator.png" id="2_srch6"]
 [ext_resource type="PackedScene" uid="uid://d4a5sxntmq8xf" path="res://scenes/componenets/interactable_component.tscn" id="3_75nwq"]
-[ext_resource type="Texture2D" uid="uid://xddtxsh77vwc" path="res://assets/png/ship_idle_water_foam_sheet.png" id="4_mly1h"]
+[ext_resource type="Texture2D" uid="uid://b0gxvq646ekch" path="res://assets/png/ship_idle_water_foam_sheet.png" id="4_mly1h"]
 [ext_resource type="PackedScene" uid="uid://b6wdlj0183mmi" path="res://scenes/componenets/reflection_component.tscn" id="5_krpeu"]
-[ext_resource type="Texture2D" uid="uid://ds24cy1i3mkdd" path="res://assets/png/ship_reflection.png" id="6_cvs8q"]
-[ext_resource type="Texture2D" uid="uid://bse3h1pfccl2r" path="res://assets/png/navigator_reflection.png" id="7_urlc1"]
+[ext_resource type="Texture2D" uid="uid://bmssuoy33vpcp" path="res://assets/png/ship_reflection.png" id="6_cvs8q"]
+[ext_resource type="Texture2D" uid="uid://bxfnitbkoohb1" path="res://assets/png/navigator_reflection.png" id="7_urlc1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u1y86"]
 radius = 7.0
@@ -41,6 +41,7 @@ _data = {
 [node name="ship" type="Node2D"]
 
 [node name="ShipSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -45)
 texture = ExtResource("1_j75x4")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ShipSprite"]
@@ -52,6 +53,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_u1y86")
 
 [node name="GuySprite" type="Sprite2D" parent="."]
+position = Vector2(0, -45)
 texture = ExtResource("2_srch6")
 
 [node name="InteractableComponent" parent="GuySprite" instance=ExtResource("3_75nwq")]
@@ -63,7 +65,7 @@ shape = SubResource("CapsuleShape2D_wyo1s")
 
 [node name="WaterFoamSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.501961)
-position = Vector2(-11, 51)
+position = Vector2(-11, 6)
 texture = ExtResource("4_mly1h")
 hframes = 4
 frame = 2
@@ -76,11 +78,13 @@ libraries = {
 }
 
 [node name="ShipReflection" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("5_krpeu")]
+position = Vector2(0, -45)
 texture = ExtResource("6_cvs8q")
 flip_v = false
 sprite_to_reflect = NodePath("../ShipSprite")
 
 [node name="GuyReflection" parent="." node_paths=PackedStringArray("sprite_to_reflect") instance=ExtResource("5_krpeu")]
+position = Vector2(0, -45)
 texture = ExtResource("7_urlc1")
 flip_v = false
 sprite_to_reflect = NodePath("../GuySprite")
