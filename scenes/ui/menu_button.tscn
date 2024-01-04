@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://6b5srhl05ns1"]
+[gd_scene load_steps=9 format=3 uid="uid://dl8t7nbnwl4f4"]
 
 [ext_resource type="Script" path="res://scripts/ui/menu_button.gd" id="1_fcgyu"]
-[ext_resource type="Texture2D" uid="uid://chergyoisknnj" path="res://assets/png/ui/button_start-sheet.png" id="2_rtd1l"]
+[ext_resource type="Texture2D" uid="uid://dguxvfic6n8xy" path="res://assets/png/ui/button_quit-sheet.png" id="3_a5hbn"]
+[ext_resource type="Texture2D" uid="uid://o2rq861hodko" path="res://assets/png/ui/button_settings-sheet.png" id="3_iy7g4"]
 
 [sub_resource type="Animation" id="Animation_33uve"]
 resource_name = "enter"
@@ -38,22 +39,6 @@ tracks/0/keys = {
 "values": [8, 13]
 }
 
-[sub_resource type="Animation" id="Animation_lrmxa"]
-resource_name = "released"
-length = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [15]
-}
-
 [sub_resource type="Animation" id="Animation_us42j"]
 resource_name = "pressed"
 length = 0.15
@@ -70,6 +55,22 @@ tracks/0/keys = {
 "values": [14]
 }
 
+[sub_resource type="Animation" id="Animation_lrmxa"]
+resource_name = "released"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dhakk"]
 _data = {
 "enter": SubResource("Animation_33uve"),
@@ -84,22 +85,25 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -26.0
-offset_bottom = -6.0
+offset_left = -26.5
+offset_top = -8.5
+offset_right = 26.5
+offset_bottom = 8.5
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("2_rtd1l")
+scale = Vector2(4, 4)
 script = ExtResource("1_fcgyu")
-texture = ExtResource("2_rtd1l")
+texture = ExtResource("3_a5hbn")
 
 [node name="ButtonSprite" type="Sprite2D" parent="."]
+position = Vector2(-33, 8)
+texture = ExtResource("3_iy7g4")
 hframes = 3
 vframes = 6
-frame = 15
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../ButtonSprite")
+autoplay = "enter"
 libraries = {
 "": SubResource("AnimationLibrary_dhakk")
 }

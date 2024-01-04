@@ -7,7 +7,6 @@ extends TextureButton
 
 func _ready():
 	button_sprite.texture = texture
-	animation_player.play("enter")
 
 
 func _process(delta):
