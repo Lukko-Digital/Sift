@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtcc3v8n30cct"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/button_box.tscn" id="1_7tqqk"]
+[ext_resource type="Script" path="res://scripts/ui/pause_ui.gd" id="1_i5elm"]
+
+[node name="pause_ui" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_i5elm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.745098, 0, 0, 0.219608)
+
+[node name="button_box" parent="." instance=ExtResource("1_7tqqk")]
+offset_left = 728.0
+offset_top = 197.0
+offset_right = -680.0
+offset_bottom = -203.0

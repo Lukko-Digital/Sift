@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwgcceemvan66"]
+[gd_scene load_steps=3 format=3 uid="uid://4xljbipnien1"]
 
 [ext_resource type="Texture2D" uid="uid://dhtpu1l1xrj31" path="res://assets/png/ui/sift_logo.png" id="1_6csfe"]
-[ext_resource type="PackedScene" uid="uid://ccdey1qbks175" path="res://scenes/ui/button_box.tscn" id="2_ybld2"]
+[ext_resource type="PackedScene" path="res://scenes/ui/button_box.tscn" id="2_ybld2"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
