@@ -11,11 +11,11 @@ var player_current_hp: int
 var heart_container_default_pos: Vector2
 var shake_amount: int
 
-@onready var hearts_container: MarginContainer = $HeartsContainer
-@onready var empty_hearts: TextureRect = $HeartsContainer/Hearts/EmptyHearts
-@onready var half_hearts: TextureRect = $HeartsContainer/Hearts/HalfHearts
-@onready var full_hearts: TextureRect = $HeartsContainer/Hearts/FullHearts
-@onready var shake_timer: Timer = $HeartsContainer/Hearts/ShakeTimer
+@onready var hearts_container: Control = $TopLeft
+@onready var empty_hearts: TextureRect = $TopLeft/Hearts/EmptyHearts
+@onready var half_hearts: TextureRect = $TopLeft/Hearts/HalfHearts
+@onready var full_hearts: TextureRect = $TopLeft/Hearts/FullHearts
+@onready var shake_timer: Timer = $TopLeft/ShakeTimer
 @onready var heart_width: int = full_hearts.texture.get_size().x
 @onready var screen_color_animation_player: AnimationPlayer = $ScreenColor/ScreenColorAnimationPlayer
 

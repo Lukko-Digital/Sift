@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://bb3q3qfbatogk"]
 
 [ext_resource type="Script" path="res://scripts/ui/combat_ui.gd" id="1_jhqvg"]
-[ext_resource type="Texture2D" uid="uid://dgre2hq2wfv0p" path="res://assets/png/player_heart_empty.png" id="1_ohfhr"]
-[ext_resource type="Texture2D" uid="uid://c1w84eyrp16e0" path="res://assets/png/health_backing_bar.png" id="2_1lrxn"]
-[ext_resource type="Texture2D" uid="uid://dm6gbqtfdmoy5" path="res://assets/png/player_heart_full.png" id="2_i6p0v"]
-[ext_resource type="Texture2D" uid="uid://bxef67evubctm" path="res://assets/png/player_heart_half_resize.png" id="4_owm54"]
+[ext_resource type="Texture2D" uid="uid://diru108vtinqj" path="res://assets/png/ui/ui_border.png" id="2_0ebio"]
+[ext_resource type="Texture2D" uid="uid://b78ppds7xslkk" path="res://assets/png/ui/heart_empty.png" id="3_73j1d"]
+[ext_resource type="Texture2D" uid="uid://dshjcqxnvr876" path="res://assets/png/ui/heart_half.png" id="4_f170t"]
+[ext_resource type="Texture2D" uid="uid://cw0dsykjmwobx" path="res://assets/png/ui/heart_full.png" id="5_ibgrs"]
 
 [sub_resource type="Animation" id="Animation_mapyn"]
 resource_name = "fade_to_black"
@@ -46,56 +46,54 @@ _data = {
 [node name="combat_ui" type="CanvasLayer"]
 script = ExtResource("1_jhqvg")
 
-[node name="HeartsContainer" type="MarginContainer" parent="."]
-offset_left = -25.0
-offset_top = 861.0
-offset_right = 25.0
-offset_bottom = 911.0
-scale = Vector2(1.2881, 1.2881)
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
+[node name="TopLeft" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 50.0
+offset_bottom = 50.0
+scale = Vector2(4, 4)
 
-[node name="Hearts" type="Control" parent="HeartsContainer"]
+[node name="Background" type="TextureRect" parent="TopLeft"]
 layout_mode = 2
+offset_right = 103.0
+offset_bottom = 39.0
+texture = ExtResource("2_0ebio")
 
-[node name="Background" type="TextureRect" parent="HeartsContainer/Hearts"]
-layout_mode = 0
-offset_left = -276.69
-offset_top = 19.0939
-offset_right = 1089.31
-offset_bottom = 163.094
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_1lrxn")
+[node name="Hearts" type="Control" parent="TopLeft"]
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 9.5
+offset_right = 70.0
+offset_bottom = 49.5
 
-[node name="EmptyHearts" type="TextureRect" parent="HeartsContainer/Hearts"]
-layout_mode = 0
-offset_right = 1640.0
-offset_bottom = 363.0
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_ohfhr")
-stretch_mode = 1
-
-[node name="HalfHearts" type="TextureRect" parent="HeartsContainer/Hearts"]
-layout_mode = 0
-offset_right = 338.0
-offset_bottom = 363.0
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_owm54")
+[node name="EmptyHearts" type="TextureRect" parent="TopLeft/Hearts"]
+layout_direction = 1
+layout_mode = 2
+offset_right = 42.0
+offset_bottom = 14.0
+texture = ExtResource("3_73j1d")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="FullHearts" type="TextureRect" parent="HeartsContainer/Hearts"]
-layout_mode = 2
-offset_right = 1636.0
-offset_bottom = 364.0
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_i6p0v")
+[node name="HalfHearts" type="TextureRect" parent="TopLeft/Hearts"]
+layout_direction = 1
+offset_right = 42.0
+offset_bottom = 14.0
+texture = ExtResource("4_f170t")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="ShakeTimer" type="Timer" parent="HeartsContainer/Hearts"]
+[node name="FullHearts" type="TextureRect" parent="TopLeft/Hearts"]
+layout_direction = 1
+offset_right = 42.0
+offset_bottom = 14.0
+texture = ExtResource("5_ibgrs")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="ShakeTimer" type="Timer" parent="TopLeft"]
 one_shot = true
 
 [node name="ScreenColor" type="ColorRect" parent="."]
