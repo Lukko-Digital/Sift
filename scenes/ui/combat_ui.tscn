@@ -6,6 +6,21 @@
 [ext_resource type="Texture2D" uid="uid://dm6gbqtfdmoy5" path="res://assets/png/player_heart_full.png" id="2_i6p0v"]
 [ext_resource type="Texture2D" uid="uid://bxef67evubctm" path="res://assets/png/player_heart_half_resize.png" id="4_owm54"]
 
+[sub_resource type="Animation" id="Animation_mapyn"]
+resource_name = "fade_to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_xb08s"]
 resource_name = "on_hit_red"
 length = 0.5
@@ -20,21 +35,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 0, 0, 0.2), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_mapyn"]
-resource_name = "fade_to_black"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iwfg3"]

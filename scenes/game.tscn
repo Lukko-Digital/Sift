@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://pmfyma7kp24l"]
+[gd_scene load_steps=10 format=3 uid="uid://pmfyma7kp24l"]
 
 [ext_resource type="PackedScene" uid="uid://b8md8ehlk518q" path="res://scenes/main.tscn" id="1_1vu6b"]
 [ext_resource type="Script" path="res://scripts/render_camera.gd" id="2_20lf1"]
 [ext_resource type="PackedScene" uid="uid://c83lh8olstfpw" path="res://scenes/ui/dialogue_ui.tscn" id="3_j20hu"]
 [ext_resource type="PackedScene" uid="uid://bb3q3qfbatogk" path="res://scenes/ui/combat_ui.tscn" id="4_l7g74"]
 [ext_resource type="Shader" path="res://scripts/shaders/render_fog.gdshader" id="5_7obaj"]
+[ext_resource type="PackedScene" uid="uid://dtcc3v8n30cct" path="res://scenes/ui/pause_ui.tscn" id="5_da3w5"]
 [ext_resource type="Shader" path="res://scripts/shaders/chromatic_abberation.gdshader" id="5_lh3lp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vu1gm"]
@@ -56,6 +57,8 @@ main_scene = NodePath("../SubViewportContainer/SubViewport/main")
 
 [node name="combat_ui" parent="." node_paths=PackedStringArray("main_scene") instance=ExtResource("4_l7g74")]
 main_scene = NodePath("../SubViewportContainer/SubViewport/main")
+
+[node name="pause_ui" parent="." instance=ExtResource("5_da3w5")]
 
 [node name="ChromaticAbberation" type="ColorRect" parent="."]
 z_index = 3
