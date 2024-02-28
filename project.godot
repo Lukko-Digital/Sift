@@ -10,11 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Desert_Game"
+config/name="Sift"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 run/max_fps=60
-config/icon="res://icon.svg"
+config/icon="res://assets/icon.png"
 run/quality/msaa_2d=0
 run/physics_engine="DEFAULT"
 run/snap/snap_2d_vertices_to_pixel=false
